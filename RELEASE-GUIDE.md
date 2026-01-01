@@ -99,7 +99,39 @@ chmod +x create-release.sh
 
 ## Membuat GitHub Release
 
-### Method 1: Via GitHub CLI
+### Method 1: Automatic via GitHub Actions (Recommended)
+
+**Cara Tercepat dan Terotomasi!**
+
+1. **Update version di style.css**
+2. **Update CHANGELOG.md**
+3. **Commit dan push:**
+   ```bash
+   git add style.css CHANGELOG.md
+   git commit -m "Bump version to 4.1.2"
+   git push origin main
+   ```
+
+4. **Create dan push tag:**
+   ```bash
+   git tag v4.1.2
+   git push origin v4.1.2
+   ```
+
+**GitHub Actions akan otomatis:**
+- ✅ Compile SCSS menjadi CSS
+- ✅ Buat folder distribusi (exclude .git, node_modules, scss, dll)
+- ✅ Create ZIP dengan nama `makhadane-4.1.2.zip`
+- ✅ Buat GitHub Release dengan tag `v4.1.2`
+- ✅ Upload ZIP sebagai release asset
+- ✅ Link ke CHANGELOG.md
+
+**Lihat progress di:**
+```
+https://github.com/webaneid/makhadane/actions
+```
+
+### Method 2: Via GitHub CLI
 
 ```bash
 # Create release with ZIP
