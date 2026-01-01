@@ -1,0 +1,146 @@
+.ane-sosmed {
+    @include DisplayBlock;
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        justify-content: flex-end;
+        @include mobile {
+            justify-content: center;
+        }
+
+        li {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            margin-right: 5px;
+
+            a {
+                overflow: hidden;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                line-height: 45px;
+                display: block;
+                font-size: 14px;
+                background: rgba(var(--ane-warna-putih-rgb),0.2);
+                color: rgba(var(--ane-warna-putih-rgb),0.5);
+
+                i {
+                    line-height: 45px;
+                }
+
+                &:hover.whatsapp {
+                    color: var(--ane-warna-putih);
+                    background-color: #04b33e;
+                }
+                &:hover.twitter {
+                    color: var(--ane-warna-putih);
+                    background-color: #1DA1F2;
+                }
+                &:hover.facebook {
+                    color: var(--ane-warna-putih);
+                    background-color: #4867AA;
+                }
+                &:hover.youtube {
+                    color: var(--ane-warna-putih);background-color: #ff0000;
+                }
+                &:hover.instagram {
+                    color: var(--ane-warna-putih);background-color: #d23095;
+                }
+                &:hover.linkedin {
+                    color: var(--ane-warna-putih);background-color: #0077b0;
+                }
+                &:hover.tiktok {
+                    color: var(--ane-warna-putih);background-color: #454545;
+                }
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.share-this {
+    width: 100%;
+    padding: 0;
+
+    .social-share-buttons {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 30px;
+        position: relative;
+
+        @include mobile {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+
+            li {
+                padding: 0;
+                margin-right: 5px;
+                line-height: 1;
+                text-decoration: none;
+                transition: all .3s ease;
+                width: 60px;
+                list-style: none;
+
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &:before {
+                    content: '';
+                }
+
+                a {
+                    background-color: var(--ane-warna-utama);
+                    padding: 5px;
+                    border-radius: 5px;
+                    text-align: left;
+                    display: block;
+                    color: var(--ane-warna-putih);
+                    transition: all 1s;
+                }
+                a.facebook {
+                    background-color: #4867AA;
+                }
+                a.twitter-x {
+                    background-color: #28a6e3;
+                }
+                a.whatsapp {
+                    background-color: #1ebea5;
+                }
+                a.linkedin {
+                    background-color: #0077b5;
+                }
+                a {
+                    &:hover {
+                        background-color: var(--ane-warna-utama);
+                        padding-left: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

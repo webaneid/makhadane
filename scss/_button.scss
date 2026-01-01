@@ -1,0 +1,137 @@
+.btn {
+    transition: background-color .5s;
+    border-radius: 30px;
+    padding: 15px 30px;
+    text-transform: capitalize;
+    font-size: 14px;
+    line-height: 1;
+    box-shadow: 0 2px 30px 2px rgba(var(--ane-warna-gelap-rgb),0.2);
+    border: 0;
+    width: max-content;
+
+    @include tablet {
+        font-size: 15px;
+        padding: 14px 27px;
+    }
+
+    @include mobile {
+        font-size: 15px;
+        padding: 14px 27px;
+    }
+}
+.btn-primary {
+    transition: all .5s ease-in;
+    background: var(--ane-warna-utama);
+    color: var(--ane-warna-terang);
+    border: 1px solid var(--ane-warna-utama);
+
+    &:hover {
+        color: var(--ane-warna-utama);
+        background-color: var(--ane-warna-terang);
+        background-image: linear-gradient(to right, var(--ane-warna-terang), var(--ane-warna-putih));
+        border: 1px solid var(--ane-warna-terang);
+    }
+}
+.wp-block-button__link {
+    border-radius: 30px;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease-in;
+    background-image: linear-gradient(to right, var(--ane-warna-utama), var(--ane-warna-utama-2));
+    color: var(--ane-warna-terang);
+    border: 1px solid var(--ane-warna-utama);
+
+    &:hover {
+        color: var(--ane-warna-utama);
+        background-color: var(--ane-warna-terang);
+        background-image: linear-gradient(to right, var(--ane-warna-terang), var(--ane-warna-putih));
+        border: 1px solid var(--ane-warna-terang);
+    }
+
+    @include mobile {
+        border-radius: 20px;
+        padding: 8px 25px;
+        font-size: 13px;
+    }
+}
+
+.btn-alternatif {
+    transition: all .5s ease-in;
+    background-color: var(--ane-warna-alternatif);
+    color: var(--ane-warna-gelap);
+    border: 0;
+
+    &:hover {
+        color: var(--ane-warna-utama);
+        background-color: var(--ane-warna-terang);
+    }
+}
+.btn-default {
+    transition: all .5s ease-in;
+    background-color: var(--ane-warna-utama);
+    color: var(--ane-warna-terang);
+
+    &:hover {
+        color: var(--ane-warna-utama);
+        background-color: var(--ane-warna-terang);
+    }
+}
+.btn-putih {
+    transition: all .5s ease-in;
+    background-color: var(--ane-warna-terang);
+    color: var(--ane-warna-alternatif);
+
+    &:hover {
+        color: var(--ane-warna-utama);
+        background-color: var(--ane-warna-terang);
+    }
+}
+.btn-outline {
+    transition: all .5s ease-in;
+    background-color: transparent;
+    color: var(--ane-warna-alternatif);
+    border: 1px solid var(--ane-warna-alternatif);
+
+    &:hover {
+        color: var(--ane-warna-utama);
+        background-color: var(--ane-warna-terang);
+    }
+}
+.btn-top {
+    color: var(--ane-warna-putih);
+    background-color: rgba(var(--ane-warna-putih-rgb), 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 14px 60px 14px 30px;
+    border-radius: 33px;
+    font-size: 15px;
+    line-height: 16px;
+    line-height: 1;
+    transition: all .8s;
+    position: relative;
+    backdrop-filter: blur(5px);
+
+    i {
+        background-color: rgba(var(--ane-warna-putih-rgb), 0.3);
+        border-radius: 50%;
+        font-size: 10px;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        bottom: 5px;
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        text-align: center;
+        line-height: 30px;
+        color: var(--ane-warna-utama);
+        transition: all .8s;
+    }
+    &:hover {
+        background-color: var(--ane-warna-utama);
+        color: var(--ane-warna-putih);
+        i {
+            background-color: rgba(var(--ane-warna-putih-rgb), 0.7);
+        }
+    }
+}

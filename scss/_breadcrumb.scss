@@ -1,0 +1,70 @@
+.ane-breadcrumb {
+    @include DisplayBlock;
+    margin-bottom: 40px;
+    background: var(--ane-warna-putih);
+    border-bottom: 1px solid rgba(var(--ane-warna-gelap-rgb),0.1);
+    font-size: 15px;
+    @include mobile {
+        margin-bottom: 20px;
+        background-color: var(--ane-warna-terang)
+    }
+
+    ul {
+        @include  DisplayBlock;
+        padding: 15px 0;
+        margin: 0;
+        list-style: none;
+        background-color: var(--ane-warna-putih);
+
+        @include mobile {
+            padding: 10px 15px;
+        }
+
+
+        li {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-right: 10px;
+
+            a {
+                color: var(--ane-warna-gelap);
+            }
+
+            &:first-child {
+                color: var(--ane-warna-utama);
+
+                a {
+                    color: var(--ane-warna-terang);
+                    padding: 3px 5px;
+                    border-radius: 3px;
+                    font-size: 13px;
+                    background: var(--ane-warna-utama);
+                    position: relative;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        width: 0;
+                        height: 0;
+                        border: 6px solid transparent;
+                        border-left-color: var(--ane-warna-utama);
+                        border-right: 0;
+                        margin-top: -6px;
+                        margin-right: -6px;
+                    }
+
+                    &:hover {
+                        background: var(--ane-warna-gelap);
+                        color: var(--ane-warna-putih);
+                    }
+                }
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+}

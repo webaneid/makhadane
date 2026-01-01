@@ -1,0 +1,54 @@
+.ane-konten-guru {
+    @include DisplayBlock;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 30px;
+
+    .entry-header {
+        @include DisplayBlock;
+    }
+
+    .entry-content {
+        @include DisplayBlock;
+        padding: 20px;
+        background: var(--ane-warna-terang);
+        h3,
+        h2 {
+            font-size: 18px;
+            line-height: 16px;
+            color: var(--ane-warna-gelap);
+            margin-bottom: 3px;
+        }
+        p {
+            font-size: 13px;
+            color: var(--ane-warna-gelap);
+            line-height: 1.2;
+            margin-bottom: 0;
+            font-weight: normal;
+            font-style: italic;
+        }
+    }
+}
+.ane-single-ustadz {
+
+    .entry-content {
+        .ane-image {
+            width: 30%;
+            border-radius: 15px;
+            border: 3px solid var(--ane-warna-utama);
+            background: var(--ane-warna-terang);
+            overflow: hidden;
+            margin: auto;
+            margin-bottom: 40px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+    }
+    .author_bio_section {
+        display: none;
+    }
+
+}

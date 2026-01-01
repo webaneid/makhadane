@@ -1,0 +1,660 @@
+# Copyright (C) 2026 Makhadane
+# This file is distributed under the same license as the Makhadane package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Makhadane 4.1.1\n"
+"Report-Msgid-Bugs-To: https://webane.com\n"
+"POT-Creation-Date: 2026-01-01 12:00+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webane Indonesia <hello@webane.com>\n"
+"Language-Team: Webane Indonesia\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Claude Code\n"
+"X-Domain: makhadane\n"
+
+#: functions.php:43
+msgid "Menu Utama"
+msgstr ""
+
+#: functions.php:44
+msgid "Menu Footer"
+msgstr ""
+
+#: inc/widgets.php:36
+msgid "Makhadane: Posts"
+msgstr ""
+
+#: inc/widgets.php:38
+msgid "Display posts by recent post, category, tagged or most comment post as widget items, order by date, id. you can customize"
+msgstr ""
+
+#: inc/widgets.php:122
+msgid "No post found"
+msgstr ""
+
+#: inc/makhadane.php:326
+msgid "Previous Page"
+msgstr ""
+
+#: inc/makhadane.php:327
+msgid "Next Page"
+msgstr ""
+
+#: inc/makhadane.php:352
+msgid "Posts Navigation"
+msgstr ""
+
+#: inc/makhadane.php:414
+msgid "No related posts"
+msgstr ""
+
+#: inc/makhadane.php:421
+msgid "Related Posts"
+msgstr ""
+
+#: inc/makhadane.php:448
+msgid "Newest Posts"
+msgstr ""
+
+#: inc/makhadane.php:476
+msgid "Prev Post"
+msgstr ""
+
+#: inc/makhadane.php:494
+msgid "Next Post"
+msgstr ""
+
+#: inc/makhadane.php:551
+#: inc/makhadane.php:575
+msgid "Just now"
+msgstr ""
+
+#: inc/makhadane.php:557
+#, php-format
+msgid "%s year ago"
+msgid_plural "%s years ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/makhadane.php:558
+#, php-format
+msgid "%s month ago"
+msgid_plural "%s months ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/makhadane.php:559
+#, php-format
+msgid "%s week ago"
+msgid_plural "%s weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/makhadane.php:560
+#, php-format
+msgid "%s day ago"
+msgid_plural "%s days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/makhadane.php:561
+#, php-format
+msgid "%s hour ago"
+msgid_plural "%s hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/makhadane.php:562
+#, php-format
+msgid "%s minute ago"
+msgid_plural "%s minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/makhadane.php:607
+#, php-format
+msgid "Share on %s"
+msgstr ""
+
+#: inc/makhadane.php:637
+msgid "WhatsApp"
+msgstr ""
+
+#: inc/makhadane.php:643
+msgid "Facebook"
+msgstr ""
+
+#: inc/makhadane.php:649
+msgid "Twitter/X"
+msgstr ""
+
+#: inc/makhadane.php:655
+msgid "YouTube"
+msgstr ""
+
+#: inc/makhadane.php:661
+msgid "Instagram"
+msgstr ""
+
+#: inc/makhadane.php:667
+msgid "TikTok"
+msgstr ""
+
+#: inc/makhadane.php:765
+msgid "Visit website"
+msgstr ""
+
+#: inc/makhadane.php:873
+msgid "Written By:"
+msgstr ""
+
+#: inc/makhadane.php:890
+msgid "Posts"
+msgstr ""
+
+#: inc/makhadane.php:897
+msgid "Website"
+msgstr ""
+
+#: inc/makhadane.php:933
+msgid "Home"
+msgstr ""
+
+#: inc/makhadane.php:1089
+#, php-format
+msgid "Wakaf digital %s, kolaborasi dengan %s"
+msgstr ""
+
+#: inc/makhadane.php:1093
+msgid "Yakaafi - Yayasan Amal Wakaf Indonesia"
+msgstr ""
+
+#: inc/makhadane.php:1094
+msgid "Yakaafi Foundation"
+msgstr ""
+
+#: inc/makhadane.php:1099
+msgid "Web Design Webane Indonesia"
+msgstr ""
+
+#: inc/makhadane.php:1100
+msgid "Webane Indonesia"
+msgstr ""
+
+#: inc/makhadane.php:1291
+#: inc/post.php:165
+msgid "0 views"
+msgstr ""
+
+#: inc/makhadane.php:1394
+msgid "Views"
+msgstr ""
+
+#: inc/post.php:175
+#, php-format
+msgid "%1$s - %2$s %3$s"
+msgstr ""
+
+#: inc/post.php:178
+msgid "WIB"
+msgstr ""
+
+#: inc/post.php:186
+#, php-format
+msgid "- Reading Time: %s"
+msgstr ""
+
+#: inc/post.php:194
+msgid "- "
+msgstr ""
+
+#: inc/admin.php:14
+#: inc/admin.php:15
+#: inc/admin.php:148
+#: inc/admin.php:149
+#: inc/admin.php:183
+msgid "Makhad Ane"
+msgstr ""
+
+#: inc/admin.php:16
+msgid "Control Center"
+msgstr ""
+
+#: inc/admin.php:17
+msgid "Main panel to configure identity, colors, and Makhad Ane theme utilities."
+msgstr ""
+
+#: inc/admin.php:18
+msgid "Use this page as a summary and shortcut to ACF sub-menus."
+msgstr ""
+
+#: inc/admin.php:21
+msgid "Workflow"
+msgstr ""
+
+#: inc/admin.php:22
+#: inc/admin.php:64
+#: inc/admin.php:65
+msgid "Customer Care"
+msgstr ""
+
+#: inc/admin.php:23
+msgid "Manage editorial contact data, CS, WhatsApp, and help CTA."
+msgstr ""
+
+#: inc/admin.php:25
+msgid "Open Customer Care"
+msgstr ""
+
+#: inc/admin.php:28
+msgid "SEO & News"
+msgstr ""
+
+#: inc/admin.php:29
+#: inc/admin.php:51
+#: inc/admin.php:52
+msgid "SEO & News Setup"
+msgstr ""
+
+#: inc/admin.php:30
+msgid "Google News sitemap, AI crawler optimization, and news website SEO guide."
+msgstr ""
+
+#: inc/admin.php:32
+msgid "Open SEO & News"
+msgstr ""
+
+#: inc/admin.php:35
+msgid "Theme Updates"
+msgstr ""
+
+#: inc/admin.php:36
+msgid "Check for Updates"
+msgstr ""
+
+#: inc/admin.php:37
+msgid "Check GitHub for latest Makhad Ane theme version and update automatically."
+msgstr ""
+
+#: inc/admin.php:39
+msgid "Check Updates Now"
+msgstr ""
+
+#: inc/admin.php:42
+msgid "Color and Scripts"
+msgstr ""
+
+#: inc/admin.php:43
+msgid "Select colors and scripts"
+msgstr ""
+
+#: inc/admin.php:44
+msgid "Select and manage theme colors and custom scripts for Google Analytics and other tools."
+msgstr ""
+
+#: inc/admin.php:46
+msgid "General Setting"
+msgstr ""
+
+#: inc/admin.php:53
+msgid "Google News Ready"
+msgstr ""
+
+#: inc/admin.php:54
+msgid "Complete guide for Google News submission, AI crawler optimization, and news website SEO."
+msgstr ""
+
+#: inc/admin.php:55
+msgid "Enhance Yoast SEO Free with NewsArticle schema, Google News sitemap, and AI-friendly metadata."
+msgstr ""
+
+#: inc/admin.php:60
+msgid "Brand Identity"
+msgstr ""
+
+#: inc/admin.php:61
+msgid "Configure brand identity, logo, tagline, and fallback content for hero blocks."
+msgstr ""
+
+#: inc/admin.php:66
+msgid "Support Channel"
+msgstr ""
+
+#: inc/admin.php:67
+msgid "All communication channels: editorial email, hotline, WhatsApp, and operating hours."
+msgstr ""
+
+#: inc/admin.php:184
+msgid "Activate Advanced Custom Fields Pro to start using this options page."
+msgstr ""
+
+#: inc/admin.php:305
+#: inc/admin.php:313
+msgid "Open page"
+msgstr ""
+
+#: inc/admin.php:466
+msgid "Your Google News sitemap is general and includes posts from the last 2 days."
+msgstr ""
+
+#: inc/admin.php:469
+msgid "News Sitemap URL:"
+msgstr ""
+
+#: inc/admin.php:475
+msgid "View News Sitemap"
+msgstr ""
+
+#: inc/admin.php:480
+msgid "⚠️ Important:"
+msgstr ""
+
+#: inc/admin.php:481
+msgid "Add this URL to Google Search Console under Sitemaps section."
+msgstr ""
+
+#: inc/admin.php:488
+msgid "Follow these steps to submit your news website to Google News:"
+msgstr ""
+
+#: inc/admin.php:492
+msgid "Go to Google News Publisher Center"
+msgstr ""
+
+#: inc/admin.php:494
+msgid "Open Publisher Center"
+msgstr ""
+
+#: inc/admin.php:498
+msgid "Add Your Publication"
+msgstr ""
+
+#: inc/admin.php:499
+msgid "Click \"Add publication\" and enter your website URL."
+msgstr ""
+
+#: inc/admin.php:502
+msgid "Verify Ownership"
+msgstr ""
+
+#: inc/admin.php:503
+msgid "Verify via Google Search Console (recommended) or HTML tag."
+msgstr ""
+
+#: inc/admin.php:506
+msgid "Add News Sitemap"
+msgstr ""
+
+#: inc/admin.php:507
+msgid "In Google Search Console, go to Sitemaps and add:"
+msgstr ""
+
+#: inc/admin.php:511
+msgid "Complete Publication Details"
+msgstr ""
+
+#: inc/admin.php:512
+msgid "Fill in publication name, logo, contact info, and editorial team."
+msgstr ""
+
+#: inc/admin.php:515
+msgid "Submit for Review"
+msgstr ""
+
+#: inc/admin.php:516
+msgid "Google will review your application (typically 1-2 weeks)."
+msgstr ""
+
+#: inc/admin.php:521
+msgid "✅ Requirements Met:"
+msgstr ""
+
+#: inc/admin.php:522
+msgid "Your theme includes NewsArticle schema, proper meta tags, and author attribution."
+msgstr ""
+
+#: inc/admin.php:529
+msgid "Makhad Ane theme automatically includes these SEO enhancements:"
+msgstr ""
+
+#: inc/admin.php:533
+msgid "Schema.org Markup"
+msgstr ""
+
+#: inc/admin.php:535
+msgid "NewsArticle schema"
+msgstr ""
+
+#: inc/admin.php:536
+msgid "Breadcrumb schema"
+msgstr ""
+
+#: inc/admin.php:537
+msgid "Publisher & Author schema"
+msgstr ""
+
+#: inc/admin.php:542
+msgid "AI-Friendly Metadata"
+msgstr ""
+
+#: inc/admin.php:544
+msgid "Dublin Core metadata"
+msgstr ""
+
+#: inc/admin.php:545
+msgid "Citation metadata"
+msgstr ""
+
+#: inc/admin.php:546
+msgid "Enhanced RSS feed"
+msgstr ""
+
+#: inc/admin.php:551
+msgid "Open Graph & Twitter"
+msgstr ""
+
+#: inc/admin.php:553
+msgid "Facebook Open Graph"
+msgstr ""
+
+#: inc/admin.php:554
+msgid "Twitter Card tags"
+msgstr ""
+
+#: inc/admin.php:555
+msgid "Social sharing optimized"
+msgstr ""
+
+#: inc/admin.php:560
+msgid "News Optimization"
+msgstr ""
+
+#: inc/admin.php:562
+msgid "Google News sitemap"
+msgstr ""
+
+#: inc/admin.php:563
+msgid "Freshness signals"
+msgstr ""
+
+#: inc/admin.php:564
+msgid "Robots meta enhanced"
+msgstr ""
+
+#: inc/admin.php:573
+msgid "Your content is optimized for AI models like ChatGPT, Claude, and Perplexity:"
+msgstr ""
+
+#: inc/admin.php:576
+msgid "Dublin Core metadata for academic/news citations"
+msgstr ""
+
+#: inc/admin.php:577
+msgid "Citation metadata for proper attribution"
+msgstr ""
+
+#: inc/admin.php:578
+msgid "Structured NewsArticle schema"
+msgstr ""
+
+#: inc/admin.php:579
+msgid "Enhanced RSS feed with full content"
+msgstr ""
+
+#: inc/admin.php:580
+msgid "Clear author attribution and bylines"
+msgstr ""
+
+#: inc/admin.php:581
+msgid "Semantic HTML5 markup"
+msgstr ""
+
+#: inc/admin.php:585
+msgid "RSS Feed URL:"
+msgstr ""
+
+#: inc/admin.php:593
+msgid "Use these tools to validate your SEO implementation:"
+msgstr ""
+
+#: inc/admin.php:597
+msgid "Facebook Debugger"
+msgstr ""
+
+#: inc/admin.php:598
+msgid "Test Open Graph tags"
+msgstr ""
+
+#: inc/admin.php:600
+#: inc/admin.php:608
+#: inc/admin.php:616
+#: inc/admin.php:624
+msgid "Open Tool"
+msgstr ""
+
+#: inc/admin.php:605
+msgid "Twitter Card Validator"
+msgstr ""
+
+#: inc/admin.php:606
+msgid "Test Twitter Card meta"
+msgstr ""
+
+#: inc/admin.php:613
+msgid "Schema Markup Validator"
+msgstr ""
+
+#: inc/admin.php:614
+msgid "Test structured data"
+msgstr ""
+
+#: inc/admin.php:621
+msgid "Google Rich Results Test"
+msgstr ""
+
+#: inc/admin.php:622
+msgid "Test rich snippets"
+msgstr ""
+
+#: inc/admin.php:635
+msgid "Google News Guidelines:"
+msgstr ""
+
+#: inc/admin.php:637
+msgid "View Guidelines"
+msgstr ""
+
+#: inc/admin.php:641
+msgid "Google Search Console:"
+msgstr ""
+
+#: inc/admin.php:643
+msgid "Open Console"
+msgstr ""
+
+#: inc/admin.php:647
+msgid "Schema.org Documentation:"
+msgstr ""
+
+#: inc/admin.php:649
+msgid "NewsArticle Docs"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:103
+msgid "Facebook Comments"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:108
+msgid "Enable Facebook Comments"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:111
+msgid "Enable to replace WordPress native comments with Facebook Comments Social Plugin."
+msgstr ""
+
+#: inc/admin/facebook-comments.php:118
+msgid "Facebook App ID"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:121
+msgid "Enter your Facebook App ID. Get it from: https://developers.facebook.com/apps/"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:136
+msgid "Language / Locale"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:139
+msgid "Select language for Facebook Comments plugin."
+msgstr ""
+
+#: inc/admin/facebook-comments.php:165
+msgid "Number of Comments"
+msgstr ""
+
+#: inc/admin/facebook-comments.php:168
+msgid "Number of comments to display (default: 10)."
+msgstr ""
+
+#: tp/content-linktree.php:87
+msgid "Our Social Media"
+msgstr ""
+
+#: tp/content-linktree.php:146
+#, php-format
+msgid "Follow us on %s"
+msgstr ""
+
+#: single.php:111
+msgid "Tags"
+msgstr ""
+
+#: inc/updater.php:232
+msgid "Makhadane Theme Update Available!"
+msgstr ""
+
+#: inc/updater.php:236
+#, php-format
+msgid "Version %1$s is available. You have version %2$s."
+msgstr ""
+
+#: inc/updater.php:236
+msgid "Update now"
+msgstr ""
+
+#: inc/updater.php:271
+msgid "Update Available"
+msgstr ""
+
+#: inc/updater.php:269
+#, php-format
+msgid "Update %s now"
+msgstr ""
+
+#: inc/updater.php:305
+msgid "Update check completed!"
+msgstr ""

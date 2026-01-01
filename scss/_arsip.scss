@@ -1,0 +1,332 @@
+.ane-arsip {
+    margin-top: 0;
+    margin-bottom: 30px;
+    @include mobile {
+        margin-bottom: 0;
+    }
+    .archive-header {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        &:before {
+            position: absolute;
+            background: linear-gradient(180deg, rgba(var(--ane-warna-gelap-rgb),0.7) 0%, rgba(var(--ane-warna-gelap-rgb),0.2) 100%);
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            content: '';
+        }
+
+        h1 {
+            text-transform: capitalize;
+            color: var(--ane-warna-terang);
+            padding: 120px 0 50px 0;
+            position: relative;
+            padding-left: 20px;
+            font-size: 3rem;
+            font-size: 60px;
+            line-height: 63px;
+            font-weight: 700;
+            letter-spacing: -5px;
+            @include mobile {
+                font-size: 1.9rem;
+                line-height: 1.1;
+                letter-spacing: -1px;
+            }
+        }
+
+        .ane-author {
+            @include DisplayFlex;
+            width: 60%;
+            position: relative;
+            z-index: 1;
+            color: var(--ane-warna-terang);
+            margin: 120px auto 50px auto;
+
+            .author-image {
+                width: 20%;
+                padding-right: 10px;
+
+                .ane-image {
+                    img {
+                        border-radius: 5px;
+                    }
+                }
+            }
+            .author-desk {
+                width: 80%;
+                padding-left: 10px;
+
+                h1 {
+                    text-transform: capitalize;
+                    font-size: 2rem;
+                    padding: 0;
+                    margin-bottom: 10px;
+                    color: var(--ane-warna-terang);
+                }
+                p {
+                    margin-bottom: 0;
+                    color: var(--ane-warna-terang);
+                }
+            }
+        }
+
+
+
+        @include mobile {
+            
+            .ane-author {
+                width: 100%;
+                flex-direction: column;
+                margin: 30px auto 30px auto;
+
+                .author-image {
+                    width: 30%;
+                    margin-bottom: 10px;
+                    .ane-image {
+                        border-radius: 50%;
+                        border: 2px solid var(--ane-warna-utama);
+                        overflow: hidden;
+                    }
+                }
+
+                .author-desk {
+                    width: 90%;
+                    text-align: center;
+                    h1 {
+                        font-size: 19px;
+                        margin-bottom: 10px;
+                    }
+                    p {
+                        font-size: 16px;
+                    }
+                }
+            }
+            
+
+ 
+        }
+    }
+    .ane-cari {
+        margin-bottom: 30px;
+        @include mobile {
+            margin-bottom: 20px;
+        }
+    }
+    .ane-col-46 {
+        @include mobile {
+            flex-direction: column-reverse;
+
+            .ane-kanan {
+                @include mobile {
+                    margin-bottom: 20px;
+                }
+                .ane-konten-overlay {
+                    margin-bottom: 20px;
+                }
+                .ane-konten-lis {
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+            }
+        }
+    }
+ 
+    @include tablet {
+        .entry-content {
+            padding: 0 15px;
+           
+            .ane-post {
+                width: 60%;
+                padding-right: 7.5px;
+            }
+            .ane-side {
+                width: 40%;
+                padding-left: 7.5px;
+            }
+        }
+        .ane-konten-overlay {
+            margin-bottom: 20px;
+            .entry-header {
+                height: 288px;
+            }
+            .post-content {
+                padding: 100px 20px 20px 20px;
+
+                h2 {
+                    font-size: 18px;
+                    line-height: 1.4;
+                }
+            }
+        }
+        .ane-konten-default {
+            margin-bottom: 20px;
+            .entry-content {
+                .hidden-mobile {
+                    display: none;
+                }
+            }
+            .entry-header {
+                padding-right: 8px;
+            }
+            .entry-content {
+                padding-left: 8px;
+                h2 {
+                    font-size: 16px;
+                }
+            }
+        }
+        .hidden-mobile {
+            display: none;
+        }
+        .ane-konten-lis {
+            .entry-header {
+                padding-right: 7.5px;
+            }
+            .entry-content {
+                padding: 0 0 0 7.5px;
+            }
+        }
+    }
+
+    .accordion {
+        @include FlexColumn;
+        width: 70%;
+        margin: auto;
+        @include mobile {
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+}
+
+.ane-arsip-ustadz {
+    .entry-content {
+        @include DisplayFlex;
+
+        .ane-konten-guru {
+            width: calc(25% - 12px);
+            margin-right: 15px;
+            margin-bottom: 15px;
+
+            &:nth-child(4n+4) {
+                margin-right: 0;
+            }
+        }
+    }
+    @include tablet {
+        
+        .entry-content {
+            padding: 0 15px;
+    
+            .ane-konten-guru {
+                width: calc(33.33% - 10px);
+                margin-right: 15px;
+                margin-bottom: 15px;
+    
+                &:nth-child(3n+3) {
+                    margin-right: 0;
+                }
+                &:nth-child(4n+4) {
+                    margin-right: 15px;
+                }
+
+                .entry-content {
+                    padding: 10px;
+
+                    h2 {
+                        font-size: 15px;
+                        line-height: 1.2;
+                    }
+                }
+            }
+        }
+    }
+    @include mobile {
+    
+        .entry-content {
+            padding: 0 15px;
+            align-items: flex-start;
+    
+            .ane-konten-guru {
+                width: calc(50% - 8px);
+                margin-right: 15px;
+                margin-bottom: 15px;
+    
+                &:nth-child(3n+3) {
+                    margin-right: 15px;
+                }
+                &:nth-child(4n+4) {
+                    margin-right: 15px;
+                }
+                &:nth-child(2n+2) {
+                    margin-right: 0;
+                }
+
+                .entry-content {
+                    padding: 10px;
+
+                    h2 {
+                        font-size: 14px;
+                        line-height: 1.2;
+                    }
+                }
+            }
+        }
+    }
+}
+.ane-arsip-testimoni {
+    .entry-content {
+        @include DisplayFlex;
+        align-items: inherit;
+
+        .ane-konten-testimoni {
+            width: calc(25% - 12px);
+            margin-right: 15px;
+            margin-bottom: 15px;
+
+            &:nth-child(4n+4) {
+                margin-right: 0;
+            }
+        }
+    }
+    @include tablet {
+        padding: 0 15px;
+        .entry-content {
+    
+            .ane-konten-testimoni {
+                width: calc(50% - 8px);
+                margin-right: 15px;
+                margin-bottom: 15px;
+    
+                &:nth-child(2n+2) {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    
+    @include mobile {
+        .entry-content {
+    
+            .ane-konten-testimoni {
+                width: 90%;
+                margin: auto;
+                margin-bottom: 15px;
+    
+                &:nth-child(4n+4) {
+                    margin: 15px;
+                }
+            }
+        }
+    }
+
+}

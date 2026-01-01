@@ -1,0 +1,169 @@
+.home-slider {
+    width: 100%;
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+
+    .home-slider-item {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 85vh;
+        @include mobile {
+            height: 75vh;
+        }
+        .text {
+            @include FlexColumn;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+
+            @include mobile {
+                justify-content: flex-end;
+                height: 75vh;
+            }
+
+            .text-content {
+                width: 50%;
+                @include mobile {
+                    width: 100%;
+                    text-align: center;
+                    padding-bottom: 30px;
+                }
+                h2 {
+                    text-shadow: 0 0 15px rgba(var(--ane-warna-gelap-rgb),0.4);
+                    color: rgba(var(--ane-warna-putih-rgb), 0.8);
+                    font-size: 50px;
+                    line-height: 56px;
+                    margin-bottom: 15px;
+                    letter-spacing: -3px;
+
+                    span {
+                        color: var(--ane-warna-alternatif);
+                    }
+
+                    @include mobile {
+                        font-size: 1.7rem;
+                        line-height: 1.1;
+                        letter-spacing: -1px;
+                    }
+                }
+                p {
+                    color: rgba(var(--ane-warna-putih-rgb), 0.9);
+                    text-shadow: 0 0 8px rgba(var(--ane-warna-gelap-rgb),0.4);
+                }
+                .btn {
+                    margin-top: 20px;
+                }
+            }
+        }
+        .align-content-end {
+            .text-content {
+                text-align: right;
+
+                @include mobile {
+                    text-align: center;
+                }
+            }
+        }
+        .align-content-center {
+            .text-content {
+                text-align: center !important;
+            }
+        }
+        .overlay {
+            @include DisplayBlock;
+            position: absolute;
+            z-index: 1;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(rgba(var(--ane-warna-putih-rgb),0), var(--ane-warna-utama));
+            min-height: 400px;
+        }
+    }
+    .align-content-end-top {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: relative;
+        @include mobile {
+            background-position: 14% 28% !important;
+        }
+        &::before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            content: '';
+            z-index: 0;
+            background: linear-gradient(90deg, rgba(var(--ane-warna-gelap-rgb),0) 20%, rgba(var(--ane-warna-gelap-rgb),0.8) 100%);
+            @include mobile {
+                background: linear-gradient(180deg, rgba(var(--ane-warna-gelap-rgb),0) 20%, rgba(var(--ane-warna-gelap-rgb),0.8) 100%);
+            }
+        }
+    }
+    .align-content-start-top {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: relative;
+        @include mobile {
+            background-position: 88% !important;
+        }
+
+        &::before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            content: '';
+            z-index: 0;
+            background: linear-gradient(90deg, rgba(var(--ane-warna-gelap-rgb),0.7) 0%, rgba(var(--ane-warna-gelap-rgb),0) 100%);
+
+            @include mobile {
+                background: linear-gradient(180deg, rgba(var(--ane-warna-gelap-rgb),0) 20%, rgba(var(--ane-warna-gelap-rgb),0.8) 100%);
+            }
+        }
+    }
+    .align-content-center-top {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: relative;
+        @include mobile {
+            background-position: 50% !important;
+        }
+        &::before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            content: '';
+            z-index: 0;
+            background: linear-gradient(180deg, rgba(var(--ane-warna-gelap-rgb),0) 20%, rgba(var(--ane-warna-gelap-rgb),0.8) 100%);
+        }
+    }
+    
+    .owl-dots {
+        text-align: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 15px;
+    }
+}
