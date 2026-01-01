@@ -292,30 +292,27 @@ new Makhadane_Updater();
  * Add manual update check button to admin.
  */
 function makhadane_add_manual_update_check() {
-	add_action(
-		'admin_notices',
-		function () {
-			$screen = get_current_screen();
-
-			if ( 'themes' === $screen->base && isset( $_GET['ane_force_check'] ) ) {
-				Makhadane_Updater::force_update_check();
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p><?php esc_html_e( 'Update check completed!', 'makhadane' ); ?></p>
-				</div>
-				<?php
-			}
-
-			// Debug mode (add ?ane_debug=1 to themes.php URL).
-			if ( 'themes' === $screen->base && isset( $_GET['ane_debug'] ) ) {
-				$updates = get_site_transient( 'update_themes' );
-				echo '<div class="notice notice-info"><pre>';
-				echo 'Current version: ' . esc_html( wp_get_theme()->get( 'Version' ) ) . "\n";
-				echo 'Update data: ';
-				print_r( isset( $updates->response['makhadane'] ) ? $updates->response['makhadane'] : 'No update data' );
-				echo '</pre></div>';
-			}
+	add_action( 'admin_notices', function() {
+		$screen = get_current_screen();
+		// Support both 'ane_force_check' (from admin dashboard) and 'makhadane_force_check'
+		if ( 'themes' === $screen->base && ( isset( $_GET['ane_force_check'] ) || isset( $_GET['makhadane_force_check'] ) ) ) {
+			Makhadane_Updater::force_update_check();
+			?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php esc_html_e( 'Update check completed!', 'makhadane' ); ?></p>
+			</div>
+			<?php
 		}
-	);
+
+		// Debug: Show update transient data (remove after debugging).
+		if ( 'themes' === $screen->base && ( isset( $_GET['ane_debug'] ) || isset( $_GET['makhadane_debug'] ) ) ) {
+			$updates = get_site_transient( 'update_themes' );
+			echo '<div class="notice notice-info"><pre>';
+			echo 'Current version: ' . esc_html( wp_get_theme()->get( 'Version' ) ) . "\n";
+			echo 'Update data: ';
+			print_r( isset( $updates->response['makhadane'] ) ? $updates->response['makhadane'] : 'No update data' );
+			echo '</pre></div>';
+		}
+	});
 }
 add_action( 'admin_init', 'makhadane_add_manual_update_check' );
