@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'makhadane' ); ?></h1>
+		<h2 class="page-title"><?php esc_html_e( 'Nothing Found', 'makhadane' ); ?></h2>
 	</header>
 
 	<div class="page-content">

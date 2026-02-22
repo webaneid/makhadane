@@ -31,9 +31,7 @@ $jabatan = get_field('ane_jabatan');
 		</div>
 
 		<div class="orangnya">
-			<h2>
-				<a href="/testimoni" rel="bookmark"><?php the_title(); ?></a>
-			</h2>
+			<?php ane_get_title(); ?>
 			<?php if ($jabatan) : ?>
 				<p><?php echo esc_html($jabatan); ?></p>
 			<?php endif; ?>

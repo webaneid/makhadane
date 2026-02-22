@@ -432,11 +432,14 @@ function ane_related_post() {
  * Display newest posts
  */
 function ane_newest_posts() {
+    $current_post_id = is_single() ? get_queried_object_id() : 0;
+
 	$query = new WP_Query(
 		array(
 			'posts_per_page'      => 5,
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
+            'post__not_in'        => $current_post_id ? array( $current_post_id ) : array(),
 		)
 	);
 

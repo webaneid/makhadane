@@ -5,11 +5,44 @@ All notable changes to Makhadane theme will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.3] - 2026-02-22
+
+### Improved
+- **Single Post Heading Hierarchy**
+  - Ensured H1 is only used for the main single post title in main query
+  - Related posts and newest posts consistently render item titles as H3 in single context
+  - Excluded current post from newest posts query to avoid duplicate/self listing in single page
+- **Archive/Taxonomy Heading Consistency**
+  - Normalized testimonial item title rendering to use contextual title helper
+  - Updated no-results heading level to avoid duplicate H1 on archive/listing pages
+- **Mobile Post Meta Presentation**
+  - Refined mobile layout for `.ane-meta` in single posts to improve readability and spacing
+
+### Fixed
+- **Home Mobile Newest Posts Section Rendering**
+  - Section now fully hidden when no posts are available
+  - Section title is no longer displayed when post query is empty
+- **Mobile Meta Separator Noise**
+  - Removed leading dash separators from reading-time/meta text on mobile
+- **Mobile View Count Visibility**
+  - Hidden `interactionStatistic` (view count) on mobile output for cleaner presentation
+
 ## [4.1.2] - 2026-01-01
 
 ### Added
-- Automatic release creation when pushing tags
-- Auto-compile SCSS to CSS
+- **GitHub Actions Workflow** - Automatic release creation when pushing tags
+- **Extended Media Upload Support** - Enable upload for additional image formats:
+  - SVG (Scalable Vector Graphics) with sanitization
+  - WebP (modern image format)
+  - AVIF (next-gen image format)
+  - GIF (animated images)
+  - ICO (favicon files)
+- **Media Library Enhancements**
+  - SVG thumbnail display in media library
+  - Format badge column showing file type (SVG, WebP, GIF, etc.)
+  - ACF image field SVG support
+  - Automatic SVG sanitization for security
+- Auto-compile SCSS to CSS via GitHub Actions
 - Auto-create distribution ZIP
 - Auto-upload release asset
 - Complete with CHANGELOG.md, RELEASE-GUIDE.md

@@ -52,8 +52,8 @@ $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 	);
 	?>
 
-	<section class="ane-post-mobile">
-		<?php if ( $mobile_query->have_posts() ) : ?>
+	<?php if ( $mobile_query->have_posts() ) : ?>
+		<section class="ane-post-mobile">
 			<div class="ane-text">
 				<h2 class="judul-utama"><?php esc_html_e( 'Newest', 'makhadane' ); ?> <span><?php esc_html_e( 'Posts', 'makhadane' ); ?></span></h2>
 			</div>
@@ -64,20 +64,19 @@ $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 				get_template_part( 'tp/content', ( 4 === $counter ) ? 'overlay' : 'list' );
 				$counter++;
 			endwhile;
-			wp_reset_postdata();
 			?>
-		<?php else : ?>
-			<p><?php esc_html_e( 'Sorry, no posts matched your criteria.', 'makhadane' ); ?></p>
-		<?php endif; ?>
-	</section>
+		</section>
 
-	<?php
-	if ( $mobile_query->max_num_pages > 1 ) :
-		global $wp_query;
-		$orig_query = $wp_query;
-		$wp_query   = $mobile_query;
-		echo ane_post_pagination();
-		$wp_query = $orig_query;
-	endif;
-	?>
+		<?php
+		if ( $mobile_query->max_num_pages > 1 ) :
+			global $wp_query;
+			$orig_query = $wp_query;
+			$wp_query   = $mobile_query;
+			echo ane_post_pagination();
+			$wp_query = $orig_query;
+		endif;
+		?>
+	<?php endif; ?>
+
+	<?php wp_reset_postdata(); ?>
 </article>

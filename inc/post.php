@@ -21,12 +21,10 @@
  * @return void
  */
 function ane_get_title() {
-	global $wp_query;
-
-	// Check if current post is THE main post being viewed (not a related/newest post)
+	// Check if current post is THE main post being viewed (not related/newest/secondary queries)
 	$queried_object_id = get_queried_object_id();
 	$current_post_id   = get_the_ID();
-	$is_main_post      = is_single() && in_the_loop() && ( $queried_object_id === $current_post_id );
+	$is_main_post      = is_single() && in_the_loop() && is_main_query() && ( $queried_object_id === $current_post_id );
 
 	if ( is_home() ) {
 		// Homepage: use H3
@@ -180,6 +178,7 @@ function ane_single_meta() {
 	$formatted_time = esc_html( get_the_time( 'G:i' ) );
 	$reading_time   = ane_reading_time( $post->ID );
 	$views          = function_exists( 'ane_get_views' ) ? ane_get_views() : __( '0 views', 'makhadane' );
+	$show_separator = ! wp_is_mobile();
 
 	ob_start();
 	?>
@@ -200,17 +199,22 @@ function ane_single_meta() {
 				<?php
 				printf(
 					/* translators: %s: reading time */
-					esc_html__( '- Reading Time: %s', 'makhadane' ),
+					esc_html__( '%sReading Time: %s', 'makhadane' ),
+					$show_separator ? '- ' : '',
 					esc_html( $reading_time )
 				);
 				?>
 			</li>
-			<li itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
-				<meta itemprop="interactionType" content="https://schema.org/ViewAction"/>
-				<?php
-				echo esc_html__( '- ', 'makhadane' );
-				?><span itemprop="userInteractionCount"><?php echo esc_html( $views ); ?></span>
-			</li>
+			<?php if ( ! wp_is_mobile() ) : ?>
+				<li itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+					<meta itemprop="interactionType" content="https://schema.org/ViewAction"/>
+					<?php
+					if ( $show_separator ) {
+						echo esc_html__( '- ', 'makhadane' );
+					}
+					?><span itemprop="userInteractionCount"><?php echo esc_html( $views ); ?></span>
+				</li>
+			<?php endif; ?>
 		</ul>
 		<meta itemprop="dateModified" content="<?php echo esc_attr( $modified_date ); ?>" />
 	</div>

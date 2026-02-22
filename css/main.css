@@ -1412,8 +1412,7 @@ select:after {
   line-height: 1;
   transition: all 0.8s;
   position: relative;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 .btn-top i {
   background-color: rgba(var(--ane-warna-putih-rgb), 0.3);
@@ -3657,7 +3656,19 @@ select:after {
 }
 @media (max-width: 767px) {
   .ane-post-single .entry-content .ane-single-title .ane-meta ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    row-gap: 4px;
+  }
+  .ane-post-single .entry-content .ane-single-title .ane-meta ul li {
+    max-width: 100%;
+    margin-right: 0;
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
   }
 }
 .ane-post-single .entry-content .ane-image {
