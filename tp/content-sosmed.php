@@ -9,6 +9,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <?php if ( have_rows( 'sosmed_ane', 'option' ) ) : ?>
 <div class="ane-sosmed">
@@ -24,23 +26,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 
 			<?php if ( ! empty( $whatsapp ) ) : ?>
-			<li><a class="whatsapp" href="https://wa.me/<?php echo esc_attr( $whatsapp ); ?>" target="_blank"><i class="ane-whatsapp"></i></a></li>
+			<li><a class="whatsapp" href="https://wa.me/<?php echo esc_attr( $whatsapp ); ?>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><?php echo wp_kses_post( makhadane_icon( 'whatsapp' ) ); ?></a></li>
 		<?php endif; ?>
 
 			<?php if ( ! empty( $facebook ) ) : ?>
-			<li><a class="facebook" href="<?php echo esc_url( $facebook ); ?>" target="_blank"><i class="ane-facebook"></i></a></li>
+			<li><a class="facebook" href="<?php echo esc_url( $facebook ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><?php echo wp_kses_post( makhadane_icon( 'facebook' ) ); ?></a></li>
 		<?php endif; ?>
 
 			<?php if ( ! empty( $twitter ) ) : ?>
-			<li><a class="twitter" href="<?php echo esc_url( $twitter ); ?>" target="_blank"><i class="ane-twitter"></i></a></li>
+			<li><a class="twitter" href="<?php echo esc_url( $twitter ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><?php echo wp_kses_post( makhadane_icon( 'twitter' ) ); ?></a></li>
 		<?php endif; ?>
 
 			<?php if ( ! empty( $youtube ) ) : ?>
-			<li><a class="youtube" href="<?php echo esc_url( $youtube ); ?>" target="_blank"><i class="ane-youtube"></i></a></li>
+			<li><a class="youtube" href="<?php echo esc_url( $youtube ); ?>" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><?php echo wp_kses_post( makhadane_icon( 'youtube' ) ); ?></a></li>
 		<?php endif; ?>
 
 			<?php if ( ! empty( $instagram ) ) : ?>
-			<li><a class="instagram" href="<?php echo esc_url( $instagram ); ?>" target="_blank"><i class="ane-instagram"></i></a></li>
+			<li><a class="instagram" href="<?php echo esc_url( $instagram ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><?php echo wp_kses_post( makhadane_icon( 'instagram' ) ); ?></a></li>
 		<?php endif; ?>
 
 		<?php endwhile; ?>

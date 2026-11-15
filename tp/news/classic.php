@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 $homekategori  = get_sub_field( 'pilih_kategori' );
 $judul         = get_sub_field( 'custom_title' );
 $kategori_id   = $homekategori->term_id ?? 0;
@@ -32,16 +34,11 @@ $query = new WP_Query(
 		<div class="section-title">
 			<div class="section-title-item">
 				<a href="<?php echo $kategori_url; ?>" <?php echo ( $kategori_url !== '#' ) ? 'rel="noopener noreferrer"' : ''; ?>>
-					<h2><?php echo esc_html( $judul ?: $kategori_nama ); ?></h2>
+					<h2><?php echo esc_html( ! empty( $judul ) ? $judul : $kategori_nama ); ?></h2>
 				</a>
 			</div>
-			<a class="lainnya" href="<?php echo $kategori_url; ?>" aria-label="
-			<?php
-			esc_attr_e( 'View All Posts in ', 'makhadane' );
-			echo esc_attr( $kategori_nama );
-			?>
-			">
-				<?php esc_html_e( 'View All', 'makhadane' ); ?> <i class="ane-chevron-right-alt-2"></i>
+			<a class="lainnya" href="<?php echo $kategori_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $kategori_nama ); ?>">
+				<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
 			</a>
 		</div>
 

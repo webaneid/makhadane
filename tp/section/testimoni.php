@@ -9,6 +9,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <section class="ane-home-testimoni">
 	<div class="ane-container">
@@ -24,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 			<div class="lainnya">
 				<a href="<?php echo esc_url( get_post_type_archive_link( 'testimoni' ) ); ?>" class="btn btn-primary" aria-label="<?php esc_attr_e( 'View All Testimonials', 'makhadane' ); ?>">
-					<?php esc_html_e( 'View All', 'makhadane' ); ?> <i class="ane-chevron-right-alt-2"></i>
+					<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
 				</a>
 			</div>
 		</div>

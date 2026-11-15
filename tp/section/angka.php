@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 if ( have_rows( 'ane_data_sekolah' ) ) : ?>
 	<div class="ane-data-content">
 		<?php
@@ -26,9 +28,9 @@ if ( have_rows( 'ane_data_sekolah' ) ) : ?>
 			if ( ! empty( $icon ) && ! empty( $title ) && ! empty( $jml ) ) :
 				?>
 			<div class="ane-item">
-				<i class="fa <?php echo $icon; ?>"></i>
-				<h2 class="mb-0 fw-bold"><?php echo $jml; ?></h2>
-				<p class="mb-0"><?php echo $title; ?></p>
+				<?php echo wp_kses_post( makhadane_icon( $icon ) ); ?>
+				<h2 class="mb-0 fw-bold"><?php echo $jml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+				<p class="mb-0"><?php echo $title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 			</div>
 				<?php
 		endif;

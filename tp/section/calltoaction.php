@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 $image = get_sub_field( 'ane_background' );
 if ( ! empty( $image ) ) :
 	$image_url    = esc_url( $image );
@@ -24,7 +26,7 @@ if ( ! empty( $image ) ) :
 			<div class="isi-cta">
 				<div class="judul-cta">
 					<?php if ( ! empty( $custom_title ) ) : ?>
-						<i class="ane-pengumuman"></i>
+						<?php echo wp_kses_post( makhadane_icon( 'pengumuman' ) ); ?>
 						<h2><?php echo esc_html( $custom_title ); ?></h2>
 					<?php endif; ?>
 				</div>

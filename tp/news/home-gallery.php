@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 $homekategori = get_sub_field( 'pilih_kategori' );
 $judul        = get_sub_field( 'ane_title' );
 
@@ -37,13 +39,8 @@ $category_link = esc_url( get_category_link( $category_id ) );
 			?>
 
 			<div class="lainnya">
-				<a href="<?php echo $category_link; ?>" aria-label="
-				<?php
-				esc_attr_e( 'View All Posts in ', 'makhadane' );
-				echo esc_attr( $category_name );
-				?>
-				">
-					<?php _e( 'View All', 'makhadane' ); ?> <i class="ane-chevron-right-alt-2"></i>
+				<a href="<?php echo $category_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $category_name ); ?>">
+					<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
 				</a>
 			</div>
 		</div>

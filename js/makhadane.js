@@ -283,7 +283,10 @@
 						loop: true,
 						nav: true,
 						margin: 15,
-						navText: ["<i class='ane-chevron-left'></i>", "<i class='ane-chevron-right'></i>"],
+						navText: [
+							'<i class="ane-icon" aria-hidden="true"><svg class="ane-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></i>',
+							'<i class="ane-icon" aria-hidden="true"><svg class="ane-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg></i>'
+						],
 						responsive: {
 							0: { items: 1.2, margin: 16 },
 							768: { items: 2 },

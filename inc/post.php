@@ -122,7 +122,8 @@ function ane_load_times_ago() {
 	$time_ago  = ane_time_ago( $timestamp );
 
 	return sprintf(
-		'<div class="meta-time"><i class="fa fa-clock-o" aria-hidden="true"></i> %s</div>',
+		'<div class="meta-time">%s %s</div>',
+		wp_kses_post( makhadane_icon( 'clock' ) ),
 		esc_html( $time_ago )
 	);
 }

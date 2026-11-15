@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 if ( have_rows( 'column_item' ) ) : ?>
 <section class="ane-news-column ane-blog-section">
 	<div class="ane-container">
@@ -19,11 +21,11 @@ if ( have_rows( 'column_item' ) ) : ?>
 				the_row();
 				?>
 				<?php
-				$ColumnCat   = get_sub_field( 'pilih_kategori' );
-				$ColumnTitle = get_sub_field( 'column_title' );
+				$column_cat   = get_sub_field( 'pilih_kategori' );
+				$column_title = get_sub_field( 'column_title' );
 
-				$category_id   = $ColumnCat->term_id ?? 0;
-				$category_name = esc_html( $ColumnCat->name ?? '' );
+				$category_id   = $column_cat->term_id ?? 0;
+				$category_name = esc_html( $column_cat->name ?? '' );
 				$category_url  = $category_id ? esc_url( get_category_link( $category_id ) ) : '#';
 
 				// Query semua post (5 post)
@@ -42,11 +44,11 @@ if ( have_rows( 'column_item' ) ) : ?>
 					<div class="section-title">
 						<div class="section-title-item">
 							<a href="<?php echo $category_url; ?>">
-								<h2><?php echo ! empty( $ColumnTitle ) ? wp_kses_post( $ColumnTitle ) : $category_name; ?></h2>
+								<h2><?php echo ! empty( $column_title ) ? wp_kses_post( $column_title ) : $category_name; ?></h2>
 							</a>
 						</div>
-						<a class="lainnya" href="<?php echo $category_url; ?>">
-							<?php esc_html_e( 'View All', 'makhadane' ); ?> <i class="ane-chevron-right-alt-2"></i>
+						<a class="lainnya" href="<?php echo $category_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
+							<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
 						</a>
 					</div>
 

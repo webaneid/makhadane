@@ -124,7 +124,7 @@ if ( esc_attr( get_field( 'ane_cs_aktif', 'option' ) ) ) :
 				<span class="tombol"><?php echo esc_html( $cs_title ); ?></span>
 			<?php endif; ?>
 			<div class="ane-close">
-				<i class="ane-tutup"></i>
+				<?php echo wp_kses_post( makhadane_icon( 'tutup' ) ); ?>
 			</div>
 		</div>
 		<div class="mesej">

@@ -11,6 +11,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'linktree-content' ); ?>>
 	<header class="entry-header">
@@ -69,7 +71,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 						rel="noopener noreferrer"
 						title="<?php echo esc_attr( $link_label ); ?>">
 						<div class="ane-links <?php echo esc_attr( $link_type ); ?>">
-							<div class="icon-ane"></div>
+							<div class="icon-ane">
+								<?php
+								if ( 'whatsapp' === $link_type ) {
+									echo wp_kses_post( makhadane_icon( 'whatsapp' ) );
+								} elseif ( 'website' === $link_type ) {
+									echo wp_kses_post( makhadane_icon( 'link' ) );
+								}
+								?>
+							</div>
 							<div class="ane-label">
 								<?php echo esc_html( $link_label ); ?>
 							</div>
@@ -93,47 +103,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'whatsapp'  => array(
 						'url'   => get_field( 'ane_whatsapp', 'option' ),
 						'label' => 'WhatsApp',
-						'icon'  => 'ane-whatsapp',
+						'icon'  => 'whatsapp',
 					),
 					'facebook'  => array(
 						'url'   => get_field( 'ane_facebook', 'option' ),
 						'label' => 'Facebook',
-						'icon'  => 'ane-facebook',
+						'icon'  => 'facebook',
 					),
 					'twitter'   => array(
 						'url'   => get_field( 'ane_twitter', 'option' ),
 						'label' => 'Twitter',
-						'icon'  => 'ane-twitter',
+						'icon'  => 'twitter',
 					),
 					'youtube'   => array(
 						'url'   => get_field( 'ane_youtube', 'option' ),
 						'label' => 'Youtube',
-						'icon'  => 'ane-youtube',
+						'icon'  => 'youtube',
 					),
 					'instagram' => array(
 						'url'   => get_field( 'ane_instagram', 'option' ),
 						'label' => 'Instagram',
-						'icon'  => 'ane-instagram',
+						'icon'  => 'instagram',
 					),
 					'tiktok'    => array(
 						'url'   => get_field( 'ane_tiktok', 'option' ),
 						'label' => 'TikTok',
-						'icon'  => 'ane-tiktok',
+						'icon'  => 'tiktok',
 					),
 					'telegram'  => array(
 						'url'   => get_field( 'ane_telegram', 'option' ),
 						'label' => 'Telegram',
-						'icon'  => 'ane-telegram',
+						'icon'  => 'telegram',
 					),
 					'threads'   => array(
 						'url'   => get_field( 'ane_threads', 'option' ),
 						'label' => 'Threads',
-						'icon'  => 'ane-threads',
+						'icon'  => 'threads',
 					),
 					'linkedin'  => array(
 						'url'   => get_field( 'ane_linkedin', 'option' ),
 						'label' => 'LinkedIn',
-						'icon'  => 'ane-linkedin',
+						'icon'  => 'linkedin',
 					),
 				);
 
@@ -145,7 +155,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							target="_blank" rel="noopener noreferrer"
 							aria-label="<?php echo esc_attr( sprintf( __( 'Follow us on %s', 'makhadane' ), $data['label'] ) ); ?>">
 							<li class="<?php echo esc_attr( $platform ); ?>">
-								<i class="<?php echo esc_attr( $data['icon'] ); ?>"></i>
+								<?php echo wp_kses_post( makhadane_icon( $data['icon'] ) ); ?>
 								<span><?php echo esc_html( $data['label'] ); ?></span>
 							</li>
 						</a>

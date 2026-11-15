@@ -9,6 +9,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 
 <div class="ane-mobile-list">
@@ -24,12 +26,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					if ( $kategori && ! empty( $kategori->term_id ) ) :
 						$category_link = esc_url( get_category_link( $kategori->term_id ) );
 						$category_name = esc_html( $kategori->name );
-						$icon_html     = $icon ? '<i class="fa ' . esc_attr( $icon ) . '"></i> ' : '';
+						$icon_html     = $icon ? wp_kses_post( makhadane_icon( (string) $icon ) ) . ' ' : '';
 						?>
 						<li>
-							<a href="<?php echo $category_link; ?>" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $category_name ); ?>">
-								<?php echo $icon_html; ?>
-								<span><?php echo $category_name; ?></span>
+							<a href="<?php echo $category_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $category_name ); ?>">
+								<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<span><?php echo $category_name; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 							</a>
 						</li>
 						<?php

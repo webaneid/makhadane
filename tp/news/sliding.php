@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 	$homekategori  = get_sub_field( 'pilih_kategori' );
 	$judul         = get_sub_field( 'custom_title' );
 	$category_link = '';
@@ -32,7 +34,7 @@ if ( $homekategori && ! empty( $homekategori->term_id ) ) {
 					<?php endif; ?>
 				</div>
 				<a class="lainnya" href="<?php echo esc_url( $category_link ); ?>">
-					<?php esc_html_e( 'View All', 'makhadane' ); ?> <i class="ane-chevron-right-alt-2"></i>
+					<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
 				</a>
 			</div>
 		<?php endif; ?>

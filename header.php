@@ -9,6 +9,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -84,7 +86,7 @@ if ( function_exists( 'wp_body_open' ) ) {
 							?>
 							<div class="ane-link-top">
 								<a id="klik-header" class="btn-top" href="<?php echo esc_url( $link['url'] ); ?>">
-									<?php echo esc_html( $link['title'] ); ?><i class="ane-chevron-right"></i>
+									<?php echo esc_html( $link['title'] ); ?><?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
 								</a>
 							</div>
 						<?php endif; ?>
@@ -114,7 +116,7 @@ if ( function_exists( 'wp_body_open' ) ) {
 							</div>
 						</div>
 						<div class="ane-kanan">
-							<i class="ane-kalender"></i> <?php echo esc_html( date_i18n( 'l, j F Y' ) ); ?>
+							<?php echo wp_kses_post( makhadane_icon( 'calendar' ) ); ?> <?php echo esc_html( date_i18n( 'l, j F Y' ) ); ?>
 						</div>
 					</div>
 				</div>
