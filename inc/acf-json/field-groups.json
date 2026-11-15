@@ -131,7 +131,7 @@
                     },
                     {
                         "key": "field_6032a54c5c366",
-                        "label": "Jabatan \/ Posisi",
+                        "label": "Jabatan / Posisi",
                         "name": "ane_area",
                         "aria-label": "",
                         "type": "text",
@@ -373,7 +373,7 @@
                     },
                     {
                         "key": "field_5de74ad3f88e5",
-                        "label": "Motto \/ Sologan",
+                        "label": "Motto / Sologan",
                         "name": "company_sologan",
                         "aria-label": "",
                         "type": "text",
@@ -645,7 +645,7 @@
                         },
                         "default_value": "",
                         "allow_in_bindings": 1,
-                        "placeholder": "https:\/\/www.instagram.com\/webane.id"
+                        "placeholder": "https://www.instagram.com/webane.id"
                     },
                     {
                         "key": "field_67cb7db315227",
@@ -663,7 +663,7 @@
                         },
                         "default_value": "",
                         "allow_in_bindings": 0,
-                        "placeholder": "https:\/\/www.tiktok.com\/@wasugis"
+                        "placeholder": "https://www.tiktok.com/@wasugis"
                     },
                     {
                         "key": "field_5de74f07f88ef",
@@ -790,7 +790,7 @@
             },
             {
                 "key": "field_62ad418c68d6e",
-                "label": "background gambar arsip author\/penulis",
+                "label": "background gambar arsip author/penulis",
                 "name": "ane_image_author",
                 "aria-label": "",
                 "type": "image",
@@ -1079,7 +1079,7 @@
                     },
                     {
                         "key": "field_632affae153ff",
-                        "label": "URL \/ Link",
+                        "label": "URL / Link",
                         "name": "ane_url",
                         "aria-label": "",
                         "type": "url",
@@ -1092,7 +1092,7 @@
                             "id": ""
                         },
                         "default_value": "",
-                        "placeholder": "https:\/\/webane.com",
+                        "placeholder": "https://webane.com",
                         "parent_repeater": "field_632afe8c153fd"
                     },
                     {
@@ -1229,7 +1229,7 @@
                 "default_value": "",
                 "maxlength": "",
                 "rows": "",
-                "placeholder": "<!-- Google Tag Manager -->         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=         'https:\/\/www.googletagmanager.com\/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);         })(window,document,'script','dataLayer','GTM-CONTOHSAJA');<\/script>     <!-- End Google Tag Manager -->",
+                "placeholder": "<!-- Google Tag Manager -->         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);         })(window,document,'script','dataLayer','GTM-CONTOHSAJA');</script>     <!-- End Google Tag Manager -->",
                 "new_lines": ""
             },
             {
@@ -1249,7 +1249,7 @@
                 "default_value": "",
                 "maxlength": "",
                 "rows": "",
-                "placeholder": "<!-- Google Tag Manager (noscript) --> <noscript><iframe src=\"https:\/\/www.googletagmanager.com\/ns.html?id=GTM-EDITDISINI\" height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"><\/iframe><\/noscript> <!-- End Google Tag Manager (noscript) -->",
+                "placeholder": "<!-- Google Tag Manager (noscript) --> <noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-EDITDISINI\" height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->",
                 "new_lines": ""
             },
             {
@@ -1258,7 +1258,7 @@
                 "name": "ane_sc_header",
                 "aria-label": "",
                 "type": "textarea",
-                "instructions": "copy dan paste google site verification meta name: dapatkan melalui:\r\nhttps:\/\/search.google.com\/search-console",
+                "instructions": "copy dan paste google site verification meta name: dapatkan melalui:\r\nhttps://search.google.com/search-console",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1269,7 +1269,7 @@
                 "default_value": "",
                 "maxlength": "",
                 "rows": "",
-                "placeholder": "<meta name=\"google-site-verification\" content=\"B1J8HfzndaR9br_GkUXi1Q5fLbjH6hqrLDk4RO_AKTI\" \/>",
+                "placeholder": "<meta name=\"google-site-verification\" content=\"B1J8HfzndaR9br_GkUXi1Q5fLbjH6hqrLDk4RO_AKTI\" />",
                 "new_lines": ""
             },
             {
@@ -1307,7 +1307,7 @@
                 "default_value": "",
                 "maxlength": "",
                 "rows": "",
-                "placeholder": "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https:\/\/connect.facebook.net\/en_US\/fbevents.js'); fbq('init', '1515151515151515158'); fbq('track', 'PageView'); <\/script> <noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https:\/\/www.facebook.com\/tr?id=1515151515151515158&ev=PageView&noscript=1\" \/><\/noscript> <!-- End Meta Pixel Code -->",
+                "placeholder": "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1515151515151515158'); fbq('track', 'PageView'); </script> <noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=1515151515151515158&ev=PageView&noscript=1\" /></noscript> <!-- End Meta Pixel Code -->",
                 "new_lines": ""
             },
             {
@@ -1324,10 +1324,10 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "<script>\r\n  window.fbAsyncInit = function() {\r\n    FB.init({\r\n      appId      : '352619118625171',\r\n      xfbml      : true,\r\n      version    : 'v19.0'\r\n    });\r\n    FB.AppEvents.logPageView();\r\n  };\r\n\r\n  (function(d, s, id){\r\n     var js, fjs = d.getElementsByTagName(s)[0];\r\n     if (d.getElementById(id)) {return;}\r\n     js = d.createElement(s); js.id = id;\r\n     js.src = \"https:\/\/connect.facebook.net\/en_US\/sdk.js\";\r\n     fjs.parentNode.insertBefore(js, fjs);\r\n   }(document, 'script', 'facebook-jssdk'));\r\n<\/script>",
+                "default_value": "<script>\r\n  window.fbAsyncInit = function() {\r\n    FB.init({\r\n      appId      : '352619118625171',\r\n      xfbml      : true,\r\n      version    : 'v19.0'\r\n    });\r\n    FB.AppEvents.logPageView();\r\n  };\r\n\r\n  (function(d, s, id){\r\n     var js, fjs = d.getElementsByTagName(s)[0];\r\n     if (d.getElementById(id)) {return;}\r\n     js = d.createElement(s); js.id = id;\r\n     js.src = \"https://connect.facebook.net/en_US/sdk.js\";\r\n     fjs.parentNode.insertBefore(js, fjs);\r\n   }(document, 'script', 'facebook-jssdk'));\r\n</script>",
                 "maxlength": "",
                 "rows": "",
-                "placeholder": "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https:\/\/connect.facebook.net\/en_US\/fbevents.js'); fbq('init', '1515151515151515158'); fbq('track', 'PageView'); <\/script> <noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https:\/\/www.facebook.com\/tr?id=1515151515151515158&ev=PageView&noscript=1\" \/><\/noscript> <!-- End Meta Pixel Code -->",
+                "placeholder": "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1515151515151515158'); fbq('track', 'PageView'); </script> <noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=1515151515151515158&ev=PageView&noscript=1\" /></noscript> <!-- End Meta Pixel Code -->",
                 "new_lines": ""
             }
         ],
@@ -1361,7 +1361,7 @@
                 "name": "ane_jabatan",
                 "aria-label": "",
                 "type": "text",
-                "instructions": "Cnth: Orang Tua \/ Wali Murid \/ Alumni",
+                "instructions": "Cnth: Orang Tua / Wali Murid / Alumni",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1857,7 +1857,7 @@
                     "layout_5e3e5b55e3a51": {
                         "key": "layout_5e3e5b55e3a51",
                         "name": "home_cta",
-                        "label": "Banner Iklan\/Ajakan",
+                        "label": "Banner Iklan/Ajakan",
                         "display": "block",
                         "sub_fields": [
                             {
@@ -2024,7 +2024,7 @@
                                     "id": ""
                                 },
                                 "default_value": "",
-                                "placeholder": "https:\/\/webane.com"
+                                "placeholder": "https://webane.com"
                             },
                             {
                                 "key": "field_628542c0b5214",
@@ -2143,7 +2143,7 @@
                                 "collapsed": "",
                                 "min": 0,
                                 "max": 3,
-                                "layout": "table",
+                                "layout": "block",
                                 "button_label": "Tambah Slider",
                                 "rows_per_page": 20,
                                 "sub_fields": [
@@ -2157,7 +2157,7 @@
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "50",
                                             "class": "",
                                             "id": ""
                                         },
@@ -2171,7 +2171,7 @@
                                         "max_size": "",
                                         "mime_types": "",
                                         "allow_in_bindings": 1,
-                                        "preview_size": "backend-default",
+                                        "preview_size": "thumbnail",
                                         "parent_repeater": "field_5e3dc0e9f8120"
                                     },
                                     {
@@ -2180,11 +2180,11 @@
                                         "name": "ane_title",
                                         "aria-label": "",
                                         "type": "text",
-                                        "instructions": "",
+                                        "instructions": "Opsional. Kosongkan jika tidak ingin menampilkan judul.",
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "50",
                                             "class": "",
                                             "id": ""
                                         },
@@ -2201,11 +2201,11 @@
                                         "name": "ane_deskripsi",
                                         "aria-label": "",
                                         "type": "text",
-                                        "instructions": "",
+                                        "instructions": "Opsional. Kosongkan jika tidak ingin menampilkan deskripsi.",
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "50",
                                             "class": "",
                                             "id": ""
                                         },
@@ -2222,11 +2222,11 @@
                                         "name": "ane_link",
                                         "aria-label": "",
                                         "type": "link",
-                                        "instructions": "",
+                                        "instructions": "Opsional. Kosongkan jika tidak ingin menampilkan tombol.",
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "50",
                                             "class": "",
                                             "id": ""
                                         },
@@ -2235,36 +2235,75 @@
                                     },
                                     {
                                         "key": "field_67c30d5cf973c",
-                                        "label": "Posisi Text",
+                                        "label": "Posisi Teks",
                                         "name": "ane_posisi",
                                         "aria-label": "",
-                                        "type": "select",
-                                        "instructions": "",
+                                        "type": "button_group",
+                                        "instructions": "Pilih posisi teks pada slide ini (kiri, tengah, atau kanan).",
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "50",
                                             "class": "",
                                             "id": ""
                                         },
                                         "choices": {
-                                            "align-content-start": "Sebelah Kiri",
-                                            "align-content-center": "Tengah",
-                                            "align-content-end": "Sebelah Kanan"
+                                            "left": "Kiri",
+                                            "center": "Tengah",
+                                            "right": "Kanan"
                                         },
-                                        "default_value": false,
+                                        "default_value": "left",
                                         "return_format": "value",
-                                        "multiple": 0,
                                         "allow_null": 0,
                                         "allow_in_bindings": 0,
-                                        "ui": 0,
-                                        "ajax": 0,
-                                        "placeholder": "",
                                         "parent_repeater": "field_5e3dc0e9f8120",
-                                        "create_options": 0,
-                                        "save_options": 0
+                                        "layout": "horizontal"
+                                    },
+                                    {
+                                        "key": "field_makhadane_slider_overlay",
+                                        "label": "Overlay Background",
+                                        "name": "ane_overlay",
+                                        "aria-label": "",
+                                        "type": "button_group",
+                                        "instructions": "Beri lapisan gelap agar teks terbaca jelas, atau biarkan warna gambar asli.",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "50",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "choices": {
+                                            "dark": "Overlay Gelap",
+                                            "none": "Asli (Tanpa Overlay)"
+                                        },
+                                        "default_value": "dark",
+                                        "return_format": "value",
+                                        "allow_null": 0,
+                                        "layout": "horizontal",
+                                        "parent_repeater": "field_5e3dc0e9f8120"
                                     }
                                 ]
+                            },
+                            {
+                                "key": "field_makhadane_slider_curve",
+                                "label": "Marking Lengkungan Bawah Hero",
+                                "name": "ane_slider_curve",
+                                "aria-label": "",
+                                "type": "true_false",
+                                "instructions": "Tampilkan bentuk lengkungan dekoratif di bagian bawah Hero Slider (default: aktif).",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "",
+                                "default_value": 1,
+                                "ui_on_text": "Tampil",
+                                "ui_off_text": "Sembunyikan",
+                                "ui": 1
                             }
                         ],
                         "min": "",
@@ -2282,7 +2321,7 @@
                                 "name": "ane_featured",
                                 "aria-label": "",
                                 "type": "repeater",
-                                "instructions": "Tambah fitur sekolah, seperti sekolah SMP\/SMA\/SD atau bisa untuk kurikulum, fitur ini untuk menampilkan informasi penting dari sekolah.",
+                                "instructions": "Tambah fitur sekolah, seperti sekolah SMP/SMA/SD atau bisa untuk kurikulum, fitur ini untuk menampilkan informasi penting dari sekolah.",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
@@ -2563,7 +2602,7 @@
                                 "name": "ane_title",
                                 "aria-label": "",
                                 "type": "text",
-                                "instructions": "Default Judul \"Dewan Guru\". Untuk Memvariasikan tampilan tambah <span> pada test tertentu contoh: Dewan <span>Guru<\/span>",
+                                "instructions": "Default Judul \"Dewan Guru\". Untuk Memvariasikan tampilan tambah <span> pada test tertentu contoh: Dewan <span>Guru</span>",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
@@ -2572,7 +2611,7 @@
                                     "id": ""
                                 },
                                 "default_value": "",
-                                "placeholder": "Dewan <span>Guru<\/span>",
+                                "placeholder": "Dewan <span>Guru</span>",
                                 "prepend": "",
                                 "append": "",
                                 "maxlength": ""
@@ -4032,7 +4071,7 @@
                 "name": "ane_data_sekolah",
                 "aria-label": "",
                 "type": "repeater",
-                "instructions": "Misalnya: Jumlah Murid - 20 .. untuk icon silahkan pilih disini:\r\nhttps:\/\/fontawesome.com\/v4\/icons\/",
+                "instructions": "Misalnya: Jumlah Murid - 20 .. untuk icon silahkan pilih disini:\r\nhttps://fontawesome.com/v4/icons/",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4145,7 +4184,7 @@
                 "name": "ane_mobile_menu",
                 "aria-label": "",
                 "type": "repeater",
-                "instructions": "Maksimal 4 - untuk icon silahkan pilih melalui tautan ini: https:\/\/fontawesome.com\/v4.7\/icons\/ lalu copy text: bagian fa-nama-icon, contoh icon bintang: fa-star",
+                "instructions": "Maksimal 4 - untuk icon silahkan pilih melalui tautan ini: https://fontawesome.com/v4.7/icons/ lalu copy text: bagian fa-nama-icon, contoh icon bintang: fa-star",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4251,7 +4290,7 @@
                 "name": "ane_list_lembaga",
                 "aria-label": "",
                 "type": "repeater",
-                "instructions": "Maksimal 12 categori, untuk icon silahkan pilih melalui tautan ini: https:\/\/fontawesome.com\/v4.7\/icons\/ lalu copy text: bagian fa-nama-icon, contoh icon bintang: fa-star",
+                "instructions": "Maksimal 12 categori, untuk icon silahkan pilih melalui tautan ini: https://fontawesome.com/v4.7/icons/ lalu copy text: bagian fa-nama-icon, contoh icon bintang: fa-star",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {

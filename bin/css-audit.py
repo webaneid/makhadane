@@ -44,7 +44,6 @@ ALLOWED_DYNAMIC_CLASSES = {
     "wp-block-media-text", "wp-block-media-text__media", "wp-block-media-text__content", "has-large-font-size",
     # ACF dynamic classes (tp/section/big-slider.php & tp/section/image-side-text.php: ane_posisi)
     "align-content-start", "align-content-center", "align-content-end",
-    "align-content-start-top", "align-content-center-top", "align-content-end-top",
     "gambar-kiri", "gambar-kanan",
     "menu-item", "menu-item-has-children", "sub-menu", "current-menu-item", "page_item",
     "comment", "comment-list", "comment-body", "comment-meta", "comment-author", "comment-content",
