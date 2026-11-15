@@ -121,13 +121,6 @@ function ane_load_css_and_js() {
 
 	// CSS Files.
 	wp_enqueue_style(
-		'ane-font-icon',
-		ane_get_asset_url( 'css/FontAne.css' ),
-		array(),
-		MAKHADANE_VERSION
-	);
-
-	wp_enqueue_style(
 		'ane-google-fonts',
 		'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap',
 		array(),
