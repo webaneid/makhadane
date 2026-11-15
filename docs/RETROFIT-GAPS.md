@@ -12,7 +12,7 @@
 | 🔴 **Critical** | 2 | ✅ Selesai (2/2) | Fase 03 (`GAP-01`, `GAP-02` ✅) |
 | 🟠 **High** | 4 | ✅ Selesai (4/4) | Fase 02 (`GAP-05` ✅) & Fase 03 (`GAP-03`, `GAP-04`, `GAP-07` ✅) |
 | 🟡 **Medium** | 10 | ✅ Selesai (10/10) | Fase 02 (`GAP-12` ✅), Fase 03 (`GAP-06`, `GAP-08`, `GAP-09`, `GAP-10`, `GAP-13`, `GAP-14` ✅) & Fase 04 (`GAP-11`, `GAP-15`, `GAP-16` ✅) |
-| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (2/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅) & Fase 05 – Fase 10 |
+| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (3/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅), Fase 05 (`GAP-18` ✅) & Fase 06 – Fase 10 |
 
 ---
 
@@ -118,10 +118,10 @@
 - **Masalah:** Workflow lama masih menggunakan `actions/create-release@v1` (deprecated), pemicu tag manual, dan daftar `--exclude` manual. Belum ada `.github/workflows/ci.yml` dan `.releaserc.json`.
 - **Status Fix (Fase 02):** Dipasang `.github/workflows/ci.yml`, `.github/workflows/release.yml` (2 jalur: `semantic-release` otomatis + manual tag fallback dengan `.distignore` & `bin/check-dist.sh`), dan `.releaserc.json` sesuai ADR-0002.
 
-### GAP-18 — 🔵 Low: Belum Ada Auto-Convert Upload Gambar ke WebP (`inc/webp-converter.php`)
-- **Lokasi:** `inc/media.php`
+### GAP-18 — 🔵 Low: Belum Ada Auto-Convert Upload Gambar ke WebP (`inc/webp-converter.php`) — ✅ Fixed (Fase 05)
+- **Lokasi:** [inc/webp-converter.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/webp-converter.php)
 - **Masalah:** Gambar JPG/PNG yang diunggah pelanggan belum otomatis dikonversi ke `.webp`.
-- **Rencana Fix (Fase 05):** Implementasikan `inc/webp-converter.php` sesuai ADR-0004.
+- **Status Fix (Fase 05):** Diimplementasikan `inc/webp-converter.php` sesuai ADR-0004 (`MAKHADANE_WEBP_QUALITY = 78`, konversi otomatis JPG/PNG ke `.webp` saat `wp_handle_upload` & `wp_handle_sideload`, fallback PNG 8-bit palette ke truecolor alpha, dan penghapusan file asli non-WebP setelah `.webp` terverifikasi valid).
 
 ### GAP-19 — 🔵 Low: Script JS Terpecah & Inline `<script>` di `footer.php`
 - **Lokasi:** `js/makhadane.js`, `js/gmap.js`, `js/postviews-cache.js`, `footer.php:183-228`
