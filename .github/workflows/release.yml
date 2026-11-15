@@ -1,78 +1,85 @@
-name: Create Release
+name: Release Theme Package
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*.*.*'
 
 permissions:
   contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
-  build:
+  # Jalur 1: Otomatis via semantic-release saat push/merge ke main
+  semantic-release:
+    if: github.ref == 'refs/heads/main'
+    name: Semantic Release (Auto Bump & Package)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx --yes \
+            -p semantic-release@24 \
+            -p conventional-changelog-conventionalcommits@8 \
+            -p @semantic-release/commit-analyzer@13 \
+            -p @semantic-release/release-notes-generator@14 \
+            -p @semantic-release/changelog@6 \
+            -p @semantic-release/exec@6 \
+            -p @semantic-release/git@10 \
+            -p @semantic-release/github@10 \
+            semantic-release
+
+  # Jalur 2: Fallback jika tag vX.Y.Z di-push manual (kompatibel dengan pola jalawarta)
+  tag-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    name: Package from Manual Tag
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Sass
-        run: npm install -g sass
-
-      - name: Compile SCSS
+      - name: Check if release already exists (created by semantic-release)
+        id: check_release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sass scss/main.scss css/main.min.css --style=compressed
-          sass scss/admin.scss css/admin.min.css --style=compressed
+          TAG="${GITHUB_REF#refs/tags/}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Get version from tag
-        id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-
-      - name: Create distribution package
+      - name: Build and publish release ZIP
+        if: steps.check_release.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          bash bin/check-dist.sh
+          VERSION="${{ steps.check_release.outputs.version }}"
           mkdir -p dist
-          rsync -av --progress . dist/makhadane \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='node_modules' \
-            --exclude='scss' \
-            --exclude='dist' \
-            --exclude='.gitignore' \
-            --exclude='.DS_Store' \
-            --exclude='*.map' \
-            --exclude='package-lock.json' \
-            --exclude='*.log' \
-            --exclude='.vscode' \
-            --exclude='.idea'
+          rsync -av --exclude-from=.distignore ./ dist/makhadane/
           cd dist
-          zip -r makhadane-${{ steps.get_version.outputs.VERSION }}.zip makhadane
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Makhadane v${{ steps.get_version.outputs.VERSION }}
-          body: |
-            Release version ${{ steps.get_version.outputs.VERSION }}
-
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/makhadane-${{ steps.get_version.outputs.VERSION }}.zip
-          asset_name: makhadane-${{ steps.get_version.outputs.VERSION }}.zip
-          asset_content_type: application/zip
+          zip -r "makhadane-${VERSION}.zip" makhadane
+          gh release create "v${VERSION}" "makhadane-${VERSION}.zip" \
+            --title "Makhad Ane v${VERSION}" \
+            --notes "Release version ${VERSION}. Lihat CHANGELOG.md untuk rincian perubahan."

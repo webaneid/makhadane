@@ -1,42 +1,35 @@
 <?php
 /**
- * Functions and definitions
+ * Setup utama theme Makhad Ane.
  *
  * @package makhadane
  * @since 4.1.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+defined( 'ABSPATH' ) || exit;
+
+if ( ! defined( 'MAKHADANE_VERSION' ) ) {
+	$makhadane_version = wp_get_theme( get_template() )->get( 'Version' );
+	define( 'MAKHADANE_VERSION', is_string( $makhadane_version ) && '' !== $makhadane_version ? $makhadane_version : '4.1.3' );
 }
 
-if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
-	return;
-}
-
-if ( ! function_exists( 'ane_theme_setup' ) ) :
-
-	function ane_theme_setup() {
-
+if ( ! function_exists( 'makhadane_theme_setup' ) ) :
+	/**
+	 * Daftarkan fitur standar theme, ukuran gambar, dan lokasi menu.
+	 *
+	 * @return void
+	 */
+	function makhadane_theme_setup() {
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'post-thumbnails' );
+
 		add_image_size( 'kotak', 400, 400, true );
 		add_image_size( 'persegi', 800, 1000, true );
 		add_image_size( 'backend-persegi', 100, 125, true );
 		add_image_size( 'backend-kotak', 100, 100, true );
 		add_image_size( 'backend-default', 100, 56, true );
 		add_image_size( 'backend-banner', 200, 44, true );
-		update_option( 'medium_size_w', 700 );
-		update_option( 'medium_size_h', 394 );
-		update_option( 'medium_crop', 1 );
-		update_option( 'large_size_w', 1000 );
-		update_option( 'large_size_h', 563 );
-		update_option( 'large_crop', 1 );
-		update_option( 'thumbnail_size_w', 400 );
-		update_option( 'thumbnail_size_h', 225 );
-		update_option( 'thumbnail_crop', 1 );
 
 		register_nav_menus(
 			array(
@@ -44,6 +37,7 @@ if ( ! function_exists( 'ane_theme_setup' ) ) :
 				'menufooter' => __( 'Menu Footer', 'makhadane' ),
 			)
 		);
+
 		add_theme_support(
 			'post-formats',
 			array(
@@ -51,7 +45,7 @@ if ( ! function_exists( 'ane_theme_setup' ) ) :
 				'gallery',
 			)
 		);
-		add_theme_support( 'html5', array( 'gallery', 'caption' ) );
+
 		add_theme_support(
 			'html5',
 			array(
@@ -62,6 +56,7 @@ if ( ! function_exists( 'ane_theme_setup' ) ) :
 				'caption',
 			)
 		);
+
 		add_theme_support(
 			'custom-logo',
 			array(
@@ -71,29 +66,69 @@ if ( ! function_exists( 'ane_theme_setup' ) ) :
 				'flex-height' => false,
 			)
 		);
+
 		add_theme_support( 'yoast-seo-breadcrumbs' );
 	}
 endif;
-add_action( 'after_setup_theme', 'ane_theme_setup' );
+add_action( 'after_setup_theme', 'makhadane_theme_setup' );
+
+if ( ! function_exists( 'makhadane_configure_image_sizes' ) ) :
+	/**
+	 * Setel ukuran gambar bawaan WordPress hanya saat aktivasi theme atau upgrade versi.
+	 *
+	 * @return void
+	 */
+	function makhadane_configure_image_sizes() {
+		update_option( 'medium_size_w', 700 );
+		update_option( 'medium_size_h', 394 );
+		update_option( 'medium_crop', 1 );
+		update_option( 'large_size_w', 1000 );
+		update_option( 'large_size_h', 563 );
+		update_option( 'large_crop', 1 );
+		update_option( 'thumbnail_size_w', 400 );
+		update_option( 'thumbnail_size_h', 225 );
+		update_option( 'thumbnail_crop', 1 );
+		update_option( 'makhadane_image_sizes_ver', MAKHADANE_VERSION );
+	}
+endif;
+add_action( 'after_switch_theme', 'makhadane_configure_image_sizes' );
+
+if ( ! function_exists( 'makhadane_maybe_upgrade_image_sizes' ) ) :
+	/**
+	 * Pastikan ukuran & crop gambar tersetel satu kali setelah auto-update versi baru.
+	 *
+	 * @return void
+	 */
+	function makhadane_maybe_upgrade_image_sizes() {
+		if ( get_option( 'makhadane_image_sizes_ver' ) !== MAKHADANE_VERSION ) {
+			makhadane_configure_image_sizes();
+		}
+	}
+endif;
+add_action( 'admin_init', 'makhadane_maybe_upgrade_image_sizes' );
 
 if ( ! function_exists( 'makhadane_load_theme_textdomain' ) ) :
+	/**
+	 * Muat file terjemahan theme.
+	 *
+	 * @return void
+	 */
 	function makhadane_load_theme_textdomain() {
 		load_theme_textdomain( 'makhadane', get_template_directory() . '/languages' );
 	}
 endif;
 add_action( 'after_setup_theme', 'makhadane_load_theme_textdomain' );
 
-// add_filter('acf/settings/show_admin', '__return_false');
-
-if ( ! function_exists( 'ane_widgets' ) ) :
+if ( ! function_exists( 'makhadane_widgets' ) ) :
 	/**
-	 * Register widget areas
+	 * Register widget areas.
+	 *
+	 * @return void
 	 */
-	function ane_widgets() {
-
+	function makhadane_widgets() {
 		register_sidebar(
 			array(
-				'name'          => 'Default Sidebar',
+				'name'          => __( 'Default Sidebar', 'makhadane' ),
 				'id'            => 'default-sidebar',
 				'before_widget' => '<div class="ane-sidebar">',
 				'after_widget'  => '</div>',
@@ -104,7 +139,7 @@ if ( ! function_exists( 'ane_widgets' ) ) :
 
 		register_sidebar(
 			array(
-				'name'          => 'Blog Type Sidebar',
+				'name'          => __( 'Blog Type Sidebar', 'makhadane' ),
 				'id'            => 'blog-sidebar',
 				'before_widget' => '<div class="ane-sidebar">',
 				'after_widget'  => '</div>',
@@ -114,49 +149,64 @@ if ( ! function_exists( 'ane_widgets' ) ) :
 		);
 	}
 endif;
-add_action( 'widgets_init', 'ane_widgets' );
-if ( ! function_exists( 'ane_remove_wp_version_strings' ) ) :
+add_action( 'widgets_init', 'makhadane_widgets' );
+
+if ( ! function_exists( 'makhadane_remove_wp_version_strings' ) ) :
 	/**
-	 * Remove WordPress version strings from scripts and styles
+	 * Remove WordPress version strings from scripts and styles.
 	 *
 	 * @param string $src Script/style source URL.
 	 * @return string Modified source URL.
 	 */
-	function ane_remove_wp_version_strings( $src ) {
+	function makhadane_remove_wp_version_strings( $src ) {
 		global $wp_version;
-		parse_str( parse_url( $src, PHP_URL_QUERY ), $query );
+
+		if ( ! is_string( $src ) || '' === $src ) {
+			return $src;
+		}
+
+		$query_str = wp_parse_url( $src, PHP_URL_QUERY );
+		if ( ! is_string( $query_str ) || '' === $query_str ) {
+			return $src;
+		}
+
+		wp_parse_str( $query_str, $query );
 		if ( ! empty( $query['ver'] ) && $query['ver'] === $wp_version ) {
 			$src = remove_query_arg( 'ver', $src );
 		}
+
 		return $src;
 	}
 endif;
-add_filter( 'script_loader_src', 'ane_remove_wp_version_strings' );
-add_filter( 'style_loader_src', 'ane_remove_wp_version_strings' );
+add_filter( 'script_loader_src', 'makhadane_remove_wp_version_strings' );
+add_filter( 'style_loader_src', 'makhadane_remove_wp_version_strings' );
 
-if ( ! function_exists( 'ane_remove_meta_version' ) ) :
+if ( ! function_exists( 'makhadane_remove_meta_version' ) ) :
 	/**
-	 * Remove WordPress version meta tag
+	 * Remove WordPress version meta tag.
 	 *
 	 * @return string Empty string.
 	 */
-	function ane_remove_meta_version() {
+	function makhadane_remove_meta_version() {
 		return '';
 	}
 endif;
-add_filter( 'the_generator', 'ane_remove_meta_version' );
+add_filter( 'the_generator', 'makhadane_remove_meta_version' );
 
 /**
- * Load theme includes
+ * Load theme includes.
  *
- * Auto-load all PHP files from /inc directory and subdirectories
+ * Auto-load all PHP files from /inc directory and subdirectories.
  */
-$root_files        = glob( get_template_directory() . '/inc/*.php' );
-$subdirectory_files = glob( get_template_directory() . '/inc/**/*.php' );
-$all_files         = array_merge( $root_files ?: array(), $subdirectory_files ?: array() );
+$makhadane_root_files   = glob( get_template_directory() . '/inc/*.php' );
+$makhadane_subdir_files = glob( get_template_directory() . '/inc/**/*.php' );
+$makhadane_all_files    = array_merge(
+	is_array( $makhadane_root_files ) ? $makhadane_root_files : array(),
+	is_array( $makhadane_subdir_files ) ? $makhadane_subdir_files : array()
+);
 
-foreach ( $all_files as $file ) {
-	if ( is_file( $file ) && pathinfo( $file, PATHINFO_EXTENSION ) === 'php' ) {
-		require_once $file;
+foreach ( $makhadane_all_files as $makhadane_file ) {
+	if ( is_file( $makhadane_file ) && 'php' === pathinfo( $makhadane_file, PATHINFO_EXTENSION ) ) {
+		require_once $makhadane_file;
 	}
 }

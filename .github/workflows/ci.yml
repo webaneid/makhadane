@@ -1,0 +1,51 @@
+name: CI Validate
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/**'
+      - 'fix/**'
+      - 'chore/**'
+      - 'refactor/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Lint & Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Check PHP syntax
+        run: composer lint:syntax
+
+      - name: Run PHPCS on changed files
+        env:
+          BASE: origin/main
+        run: composer lint:changed
+
+      - name: Run PHPStan
+        run: composer analyse
+
+      - name: Run Anti-Webshell & Security Scan
+        run: composer security:scan
+
+      - name: Verify clean distribution package (no .md, docs, or AI folders)
+        run: composer dist:check

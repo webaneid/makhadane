@@ -10,9 +10,9 @@
 | Level | Jumlah | Status | Target Fase |
 |---|---|---|---|
 | 🔴 **Critical** | 2 | ⏳ Belum (0/2) | Fase 03 |
-| 🟠 **High** | 4 | ⏳ Belum (0/4) | Fase 02 & Fase 03 |
-| 🟡 **Medium** | 10 | ⏳ Belum (0/10) | Fase 03 & Fase 04 |
-| 🔵 **Low / Clean-up** | 6 | ⏳ Belum (0/6) | Fase 04 – Fase 10 |
+| 🟠 **High** | 4 | 🔄 Sebagian (1/4) | Fase 02 (`GAP-05` ✅) & Fase 03 |
+| 🟡 **Medium** | 10 | 🔄 Sebagian (1/10) | Fase 02 (`GAP-12` ✅), Fase 03 & Fase 04 |
+| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (1/6) | Fase 02 (`GAP-17` ✅) & Fase 04 – Fase 10 |
 
 ---
 
@@ -40,10 +40,10 @@
   2. Upload SVG diizinkan tanpa pengecekan `current_user_can( 'manage_options' )` dan sanitasi hanya memakai 2 baris `preg_replace` yang mudah di-bypass (`<svg onload=...>`, `<foreignObject>`, `xlink:href="javascript:..."`).
 - **Rencana Fix (Fase 03):** Hapus fungsi duplikat `ane_allowed_mime_types()` di `inc/makhadane.php`, batasi upload SVG hanya untuk administrator (`current_user_can( 'manage_options' )`), dan perketat sanitasi XML/SVG (seperti standar `sekolahane`).
 
-### GAP-05 — 🟠 High: Handler `ane_force_check` & `ane_debug` (`print_r`) di `inc/updater.php` Tanpa Nonce & Capability Check
-- **Lokasi:** [inc/updater.php:294-318](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/updater.php#L294-L318)
+### GAP-05 — 🟠 High: Handler `ane_force_check` & `ane_debug` (`print_r`) di `inc/updater.php` Tanpa Nonce & Capability Check — ✅ Fixed (Fase 02)
+- **Lokasi:** [inc/updater.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/updater.php)
 - **Masalah:** Parameter `$_GET['ane_force_check']` menghapus transient update tanpa mengecek `current_user_can( 'update_themes' )` maupun nonce, dan `$_GET['ane_debug']` menjalankan `print_r()` data transient di admin. Selain itu updater belum mendukung token repo privat (`MAKHADANE_UPDATER_TOKEN` / `ane_updater_token`).
-- **Rencana Fix (Fase 02):** Standarisasi `inc/updater.php` dengan pola `sekolahane`/`jalawarta` (nonce `check_admin_referer`, `current_user_can( 'update_themes' )`, dukungan token GitHub opsional, dan hapus kode debug `print_r`).
+- **Status Fix (Fase 02):** `inc/updater.php` telah ditulis ulang ke standar prosedural `makhadane_updater_*` dengan pengecekan `current_user_can( 'update_themes' )` + `check_admin_referer( 'makhadane_updater_action' )`, dukungan token GitHub privat (`MAKHADANE_UPDATER_TOKEN` & field ACF `ane_updater_token`), tab Update di `ane-general-setting`, serta penghapusan kode debug `print_r()`.
 
 ### GAP-06 — 🟡 Medium: Endpoint AJAX `nopriv` Post Views Tanpa Validasi Status Post & Sanitisasi IP
 - **Lokasi:** [inc/makhadane.php:1317-1358](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/makhadane.php#L1317-L1358)
@@ -90,10 +90,10 @@
 
 ## C. Performa & Database
 
-### GAP-12 — 🟡 Medium: `update_option()` ×9 di `after_setup_theme` (Setiap Request)
-- **Lokasi:** [functions.php:31-39](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/functions.php#L31-L39)
+### GAP-12 — 🟡 Medium: `update_option()` ×9 di `after_setup_theme` (Setiap Request) — ✅ Fixed (Fase 02)
+- **Lokasi:** [functions.php:75-107](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/functions.php#L75-L107)
 - **Masalah:** Mengubah 9 option ukuran gambar di setiap request halaman.
-- **Rencana Fix (Fase 03):** Pindahkan ke hook `after_switch_theme` (`makhadane_configure_image_sizes()`).
+- **Status Fix (Fase 02):** Dipindahkan ke `makhadane_configure_image_sizes()` pada hook `after_switch_theme` dan `makhadane_maybe_upgrade_image_sizes()` pada `admin_init` (hanya dijalankan satu kali saat versi `MAKHADANE_VERSION` berubah).
 
 ### GAP-13 — 🟡 Medium: `update_option( 'sticky_posts', array() )` di `init` (Setiap Request)
 - **Lokasi:** [inc/post.php:260-263](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/post.php#L260-L263)
@@ -119,10 +119,10 @@
 - **Masalah:** File template part tidak pernah dipanggil dan membingungkan pemeliharaan.
 - **Rencana Fix (Fase 04):** Hapus file/fungsi duplikat yang tidak terpakai.
 
-### GAP-17 — 🔵 Low: Workflow CI/CD Belum Memakai `semantic-release` & `.distignore`
-- **Lokasi:** [.github/workflows/release.yml](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.github/workflows/release.yml)
+### GAP-17 — 🔵 Low: Workflow CI/CD Belum Memakai `semantic-release` & `.distignore` — ✅ Fixed (Fase 02)
+- **Lokasi:** [.github/workflows/ci.yml](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.github/workflows/ci.yml), [.github/workflows/release.yml](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.github/workflows/release.yml), [.releaserc.json](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.releaserc.json)
 - **Masalah:** Workflow lama masih menggunakan `actions/create-release@v1` (deprecated), pemicu tag manual, dan daftar `--exclude` manual. Belum ada `.github/workflows/ci.yml` dan `.releaserc.json`.
-- **Rencana Fix (Fase 02):** Pasang `.github/workflows/ci.yml`, `.github/workflows/release.yml`, dan `.releaserc.json` sesuai ADR-0002.
+- **Status Fix (Fase 02):** Dipasang `.github/workflows/ci.yml`, `.github/workflows/release.yml` (2 jalur: `semantic-release` otomatis + manual tag fallback dengan `.distignore` & `bin/check-dist.sh`), dan `.releaserc.json` sesuai ADR-0002.
 
 ### GAP-18 — 🔵 Low: Belum Ada Auto-Convert Upload Gambar ke WebP (`inc/webp-converter.php`)
 - **Lokasi:** `inc/media.php`
