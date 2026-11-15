@@ -1,19 +1,25 @@
 <?php
-/*
+/**
  * Template Name: Contact Us
+ *
+ * @package makhadane
  */
+
+defined( 'ABSPATH' ) || exit;
+
 get_header();
 ?>
 
 <main id="site-content">
-    <?php
-    if (have_posts()) :
-        while (have_posts()) :
-            the_post();
-            get_template_part('tp/content', 'page-kontak');
-        endwhile;
-    endif;
-    ?>
+	<?php
+	if ( have_posts() ) :
+		while ( have_posts() ) :
+			the_post();
+			get_template_part( 'tp/content', 'page-kontak' );
+		endwhile;
+	endif;
+	?>
 </main>
 
-<?php get_footer(); ?>
+<?php
+get_footer();

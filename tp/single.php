@@ -19,8 +19,18 @@ $tanggal_modified = esc_attr(get_the_modified_date('c', $post_id));
 $author_name = esc_html(get_the_author());
 $categories = get_the_category();
 
-$category_names = array_map(fn($cat) => esc_html($cat->cat_name), $categories);
-$category_links = array_map(fn($cat) => '<a class="post-cat" href="' . esc_url(get_category_link($cat->term_id)) . '">' . esc_html($cat->cat_name) . '</a>', $categories);
+$category_names = array_map(
+	function ( $cat ) {
+		return esc_html( $cat->name );
+	},
+	$categories
+);
+$category_links = array_map(
+	function ( $cat ) {
+		return '<a class="post-cat" href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . esc_html( $cat->name ) . '</a>';
+	},
+	$categories
+);
 $category_markup = implode(', ', $category_links);
 $tag_list = get_the_tag_list('<ul><li>', '</li><li>', '</li></ul>');
 ?>
@@ -43,7 +53,7 @@ $tag_list = get_the_tag_list('<ul><li>', '</li><li>', '</li></ul>');
         <div class="ane-single-title">
             <div class="ane-kategori hidden-mobile"><?php echo $category_markup; ?></div>
             <?php
-            echo ane_get_title();
+            ane_get_title();
             echo ane_single_meta();
             ?>
         </div>

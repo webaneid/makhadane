@@ -6,6 +6,8 @@
  * @since 4.1.1
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Register posts widget
  *
@@ -155,8 +157,8 @@ class Ane_Posts_Widget extends WP_Widget {
 	 * Back-end widget form
 	 *
 	 * @since 4.1.1
-	 * @param array $instance Previously saved values from database
-	 * @return void
+	 * @param array<string, mixed> $instance Previously saved values from database.
+	 * @return string
 	 */
 	public function form( $instance ) {
 		$types    = array( 'Recent Post', 'Popular Post', 'Most Comments', 'Post Format: Gallery', 'Post Format: Video' );
@@ -261,5 +263,6 @@ class Ane_Posts_Widget extends WP_Widget {
 			</select>
 		</p>
 		<?php
+		return '';
 	}
 }

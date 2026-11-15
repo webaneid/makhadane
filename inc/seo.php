@@ -1286,14 +1286,12 @@ function ane_output_person_schema() {
 
 	// Add subjects taught (pelajaran taxonomy)
 	$pelajaran = get_the_terms( $post_id, 'pelajaran' );
-	if ( $pelajaran && ! is_wp_error( $pelajaran ) ) {
+	if ( is_array( $pelajaran ) && ! empty( $pelajaran ) ) {
 		$subjects = array();
 		foreach ( $pelajaran as $pel ) {
 			$subjects[] = $pel->name;
 		}
-		if ( ! empty( $subjects ) ) {
-			$schema['knowsAbout'] = $subjects;
-		}
+		$schema['knowsAbout'] = $subjects;
 	}
 
 	// Output JSON-LD

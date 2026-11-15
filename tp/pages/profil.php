@@ -19,7 +19,7 @@ $photo = ! empty( $imgurl ) ? $imgurl : ane_dummy_thumbnail();
 	<header class="entry-header" style="background: url('<?php echo esc_url($photo); ?>')">
         <div class="ane-container">
             <div class="isi">
-                <h1 class="post-title general-title"><?php the_title(); ?></h1>
+                <h1 class="post-title general-title"><?php echo esc_html( get_the_title() ); ?></h1>
                 <?php
                 $headline = get_field('ane_headline');
                 if (!empty($headline)) {
@@ -40,7 +40,7 @@ $photo = ! empty( $imgurl ) ? $imgurl : ane_dummy_thumbnail();
                 </div>
                 <div class="ane-data">
                     <div class="ane-image">
-                        <img src="<?php echo !empty($photo) ? esc_url($photo) : esc_url(ane_dummy_thumbnail()); ?>" alt="<?php the_title(); ?>">
+                        <img src="<?php echo !empty($photo) ? esc_url($photo) : esc_url(ane_dummy_thumbnail()); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
                     </div>
                     <?php get_template_part('tp/section/angka'); ?>
                 </div>

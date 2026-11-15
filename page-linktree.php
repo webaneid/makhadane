@@ -1,18 +1,22 @@
+<?php
+/**
+ * Template Name: Link Tree
+ *
+ * Standalone link aggregator page for social media bio links.
+ * This template does not use header/footer and renders independently.
+ *
+ * @package makhadane
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
-	<?php
-	/**
-	 * Template Name: Link Tree
-	 *
-	 * Standalone link aggregator page for social media bio links.
-	 * This template does not use header/footer and renders independently.
-	 */
-	wp_head();
-	?>
+	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'ane-linktree' ); ?>>
 	<?php wp_body_open(); ?>

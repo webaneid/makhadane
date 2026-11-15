@@ -1,9 +1,11 @@
 <?php
 /**
- * Admin pages & styling for Elemen Ane options.
+ * Admin pages & styling for Makhad Ane options.
  *
  * @package makhadane
  */
+
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Return all Ane admin sections.
@@ -35,7 +37,7 @@ function ane_get_admin_sections() : array {
 					'label'       => __( 'Theme Updates', 'makhadane' ),
 					'title'       => __( 'Check for Updates', 'makhadane' ),
 					'description' => __( 'Check GitHub for latest Makhad Ane theme version and update automatically.', 'makhadane' ),
-					'link'        => add_query_arg( 'ane_force_check', '1', admin_url( 'themes.php' ) ),
+					'link'        => wp_nonce_url( admin_url( 'themes.php?makhadane_force_check=1' ), 'makhadane_updater_action' ),
 					'link_label'  => __( 'Check Updates Now', 'makhadane' ),
 				),
 				array(

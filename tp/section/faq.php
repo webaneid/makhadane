@@ -69,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 								<div class="accordion-item">
 									<button id="accordion-button-<?php the_ID(); ?>" aria-expanded="false">
-										<span class="accordion-title"><?php the_title(); ?></span>
+										<span class="accordion-title"><?php echo esc_html( get_the_title() ); ?></span>
 										<span class="icon" aria-hidden="true"></span>
 									</button>
 									<div class="accordion-content">

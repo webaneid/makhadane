@@ -908,8 +908,7 @@ function ane_author_info_box( $content ) {
     return $content;
 }
 
-add_action( 'the_content', 'ane_author_info_box' );
-remove_filter( 'pre_user_description', 'wp_filter_kses' );
+add_filter( 'the_content', 'ane_author_info_box' );
 
 /**
  * Generate SEO-friendly breadcrumbs with schema markup
@@ -1115,6 +1114,11 @@ function ane_get_designed_by() {
  * @return string Copyright year output
  */
 function ane_get_copyright_year() {
+    $cached = get_transient( 'makhadane_copyright_year' );
+    if ( is_string( $cached ) && '' !== $cached ) {
+        return $cached;
+    }
+
     global $wpdb;
 
     $copyright_dates = $wpdb->get_results(
@@ -1125,7 +1129,9 @@ function ane_get_copyright_year() {
         WHERE post_status = 'publish'"
     );
 
-    if ( ! empty( $copyright_dates ) && isset( $copyright_dates[0]->firstdate ) ) {
+    $copyright = '&copy; ' . gmdate( 'Y' );
+
+    if ( ! empty( $copyright_dates ) && isset( $copyright_dates[0]->firstdate ) && ! empty( $copyright_dates[0]->firstdate ) ) {
         $first_year = $copyright_dates[0]->firstdate;
         $last_year  = $copyright_dates[0]->lastdate;
 
@@ -1134,12 +1140,22 @@ function ane_get_copyright_year() {
         if ( $first_year != $last_year ) {
             $copyright .= '-' . $last_year;
         }
-
-        return $copyright;
     }
 
-    return '&copy; ' . date( 'Y' );
+    set_transient( 'makhadane_copyright_year', $copyright, DAY_IN_SECONDS );
+
+    return $copyright;
 }
+
+/**
+ * Bersihkan cache tahun copyright saat post disimpan.
+ *
+ * @return void
+ */
+function makhadane_flush_copyright_year_cache() {
+    delete_transient( 'makhadane_copyright_year' );
+}
+add_action( 'save_post', 'makhadane_flush_copyright_year_cache' );
 
 /**
  * Filter avatar to use custom ACF image if available
@@ -1258,27 +1274,6 @@ function ane_build_html_attrs( $attrs ) {
 add_filter( 'get_avatar', 'ane_custom_avatar', 10, 5 );
 
 /**
- * Filter allowed mime types for uploads
- *
- * Adds support for modern image formats.
- *
- * @since 4.1.1
- * @param array $mimes Existing mime types
- * @return array Modified mime types
- */
-function ane_allowed_mime_types( $mimes ) {
-    return array(
-        'jpg|jpeg' => 'image/jpeg',
-        'png'      => 'image/png',
-        'gif'      => 'image/gif',
-        'webp'     => 'image/webp',
-        'svg'      => 'image/svg+xml',
-        'bmp'      => 'image/bmp',
-    );
-}
-add_filter( 'upload_mimes', 'ane_allowed_mime_types' );
-
-/**
  * Get post view count with formatted text
  *
  * Returns human-readable view count for a post.
@@ -1323,7 +1318,12 @@ function ane_set_views( $post_id = 0 ) {
         $post_id = $post->ID;
     }
 
-    $ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+    $post_id = absint( $post_id );
+    if ( $post_id <= 0 || 'publish' !== get_post_status( $post_id ) ) {
+        return;
+    }
+
+    $ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
     $count_key  = 'musi_views';
     $view_key   = 'viewed_' . $post_id . '_' . md5( $ip_address );
 
@@ -1345,9 +1345,11 @@ function ane_set_views( $post_id = 0 ) {
  * @return void
  */
 function ane_increment_views_ajax() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public read-only view counter throttled per IP via transient.
     if ( ! empty( $_GET['postviews_id'] ) ) {
-        $post_id = absint( $_GET['postviews_id'] );
-        if ( $post_id > 0 ) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $post_id = absint( wp_unslash( $_GET['postviews_id'] ) );
+        if ( $post_id > 0 && 'publish' === get_post_status( $post_id ) ) {
             ane_set_views( $post_id );
         }
     }
@@ -1400,7 +1402,8 @@ function musi_add_views_column($columns) {
 
 function musi_show_views_column($column_name, $post_id) {
     if ($column_name === 'musi_post_views') {
-        echo get_post_meta($post_id, 'musi_views', true) ?: '0';
+        $views_count = (int) get_post_meta( $post_id, 'musi_views', true );
+        echo esc_html( (string) $views_count );
     }
 }
 

@@ -25,8 +25,18 @@ ane_set_views( get_the_ID() );
 		$author_name = get_the_author();
 		$author_url = get_author_posts_url(get_the_author_meta('ID'));
 		$categories = get_the_category();
-		$category_names = array_map(fn($cat) => $cat->cat_name, $categories);
-		$category_links = array_map(fn($cat) => '<a class="post-cat" href="' . esc_url(get_category_link($cat->term_id)) . '">' . esc_html($cat->cat_name) . '</a>', $categories);
+		$category_names = array_map(
+			function ( $cat ) {
+				return $cat->name;
+			},
+			$categories
+		);
+		$category_links = array_map(
+			function ( $cat ) {
+				return '<a class="post-cat" href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . esc_html( $cat->name ) . '</a>';
+			},
+			$categories
+		);
 		$category_markup = implode(', ', $category_links);
 		$tag_list = get_the_tag_list('<ul><li>', '</li><li>', '</li></ul>');
 

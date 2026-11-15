@@ -87,18 +87,10 @@ if ( $group && isset( $group['company_name'] ) ) {
 		<div class="ane-container">
 			<div class="isi mplr">
 				<?php
-				$copyright_year = date( 'Y' );
-				$designed_by    = '';
+				$copyright_year = function_exists( 'ane_get_copyright_year' ) ? ane_get_copyright_year() : '&copy; ' . gmdate( 'Y' );
+				$designed_by    = function_exists( 'ane_get_designed_by' ) ? ane_get_designed_by() : '';
 
-				if ( function_exists( 'webane_load_dynamic_copyright_year' ) ) {
-					$copyright_year = webane_load_dynamic_copyright_year();
-				}
-
-				if ( function_exists( 'webane_load_designed_by' ) ) {
-					$designed_by = webane_load_designed_by();
-				}
-
-				echo esc_html__( 'Copyright', 'makhadane' ) . ' ' . esc_html( $copyright_year . ' ' . $nama ) . ' ' . $designed_by;
+				echo esc_html__( 'Copyright', 'makhadane' ) . ' ' . wp_kses_post( $copyright_year ) . ' ' . esc_html( (string) $nama ) . ' ' . wp_kses_post( $designed_by );
 				?>
 			</div>
 		</div>

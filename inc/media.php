@@ -1,6 +1,6 @@
 <?php
 /**
- * Media Upload Functions
+ * Media Upload Functions.
  *
  * Enable additional file types for upload including SVG, WebP, and other formats.
  *
@@ -8,26 +8,26 @@
  * @since 4.1.2
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
 
 /**
- * Enable SVG and additional image format uploads
+ * Enable SVG (administrator only) and additional image format uploads.
  *
- * @param array $mimes Existing MIME types.
- * @return array Modified MIME types.
+ * @param array<string, string> $mimes Existing MIME types.
+ * @return array<string, string> Modified MIME types.
  */
 function ane_enable_additional_mime_types( $mimes ) {
-	// Image formats
-	$mimes['svg']  = 'image/svg+xml';
-	$mimes['svgz'] = 'image/svg+xml';
-	$mimes['webp'] = 'image/webp';
-	$mimes['ico']  = 'image/x-icon';
-	$mimes['gif']  = 'image/gif';
-	$mimes['avif'] = 'image/avif';
+	if ( current_user_can( 'manage_options' ) ) {
+		$mimes['svg']  = 'image/svg+xml';
+		$mimes['svgz'] = 'image/svg+xml';
+	}
 
-	// Already supported but ensure they're there
+	$mimes['webp']         = 'image/webp';
+	$mimes['ico']          = 'image/x-icon';
+	$mimes['gif']          = 'image/gif';
+	$mimes['avif']         = 'image/avif';
 	$mimes['jpg|jpeg|jpe'] = 'image/jpeg';
 	$mimes['png']          = 'image/png';
 
@@ -36,37 +36,43 @@ function ane_enable_additional_mime_types( $mimes ) {
 add_filter( 'upload_mimes', 'ane_enable_additional_mime_types' );
 
 /**
- * Check file type for SVG uploads
+ * Check file type for SVG uploads (restricted to administrators).
  *
- * WordPress by default blocks SVG for security reasons.
- * This function validates SVG files before upload.
- *
- * @param array  $file     File array.
- * @param string $filename File name.
- * @param array  $mimes    MIME types.
- * @return array Modified file array.
+ * @param array<string, mixed> $data     Values for the extension, mime type, and corrected filename.
+ * @param string               $file     Full path to the file.
+ * @param string               $filename The name of the file.
+ * @param string[]|null        $mimes    Array of mime types keyed by their file extension regex.
+ * @return array<string, mixed> Modified file data array.
  */
 function ane_check_filetype_and_ext( $data, $file, $filename, $mimes ) {
-	$filetype = wp_check_filetype( $filename, $mimes );
+	unset( $file, $mimes );
 
-	return array(
-		'ext'             => $filetype['ext'],
-		'type'            => $filetype['type'],
-		'proper_filename' => $data['proper_filename'],
-	);
+	if ( ! empty( $data['ext'] ) && ! empty( $data['type'] ) ) {
+		return $data;
+	}
+
+	$ext = strtolower( (string) pathinfo( (string) $filename, PATHINFO_EXTENSION ) );
+	if ( 'svg' === $ext && current_user_can( 'manage_options' ) ) {
+		$data['ext']  = 'svg';
+		$data['type'] = 'image/svg+xml';
+	}
+
+	return $data;
 }
 add_filter( 'wp_check_filetype_and_ext', 'ane_check_filetype_and_ext', 10, 4 );
 
 /**
- * Fix SVG thumbnail display in media library
+ * Fix SVG thumbnail display in media library modal.
  *
- * @param string $response   Response data.
- * @param object $attachment Attachment object.
- * @param array  $meta       Attachment metadata.
- * @return string Modified response.
+ * @param array<string, mixed> $response   Response data.
+ * @param WP_Post              $attachment Attachment object.
+ * @param array<string, mixed> $meta       Attachment metadata.
+ * @return array<string, mixed> Modified response.
  */
 function ane_fix_svg_thumbnail_display( $response, $attachment, $meta ) {
-	if ( 'image/svg+xml' === $response['mime'] ) {
+	unset( $attachment, $meta );
+
+	if ( isset( $response['mime'], $response['url'] ) && 'image/svg+xml' === $response['mime'] ) {
 		$response['image'] = array(
 			'src'    => $response['url'],
 			'width'  => 150,
@@ -88,39 +94,39 @@ function ane_fix_svg_thumbnail_display( $response, $attachment, $meta ) {
 add_filter( 'wp_prepare_attachment_for_js', 'ane_fix_svg_thumbnail_display', 10, 3 );
 
 /**
- * Display SVG in media library
+ * Provide fallback dimensions for SVG in wp_get_attachment_image_src.
  *
- * @param string $content HTML content.
- * @param int    $post_id Post ID.
- * @return string Modified content.
+ * @param array<int, mixed>|false $image         Array of image data, or boolean false if no image is available.
+ * @param int                     $attachment_id Image attachment ID.
+ * @return array<int, mixed>|false
  */
-function ane_display_svg_in_media_library( $content, $post_id ) {
-	$attachment = get_post( $post_id );
-
-	if ( ! $attachment ) {
-		return $content;
+function ane_display_svg_in_media_library( $image, $attachment_id ) {
+	if ( is_array( $image ) && ! empty( $image[0] ) && ! empty( $image[1] ) ) {
+		return $image;
 	}
 
-	if ( 'image/svg+xml' === get_post_mime_type( $attachment ) ) {
-		$url     = wp_get_attachment_url( $post_id );
-		$content = '<img src="' . esc_url( $url ) . '" style="width: 100%; height: auto;" />';
+	$attachment = get_post( (int) $attachment_id );
+	if ( ! $attachment || 'image/svg+xml' !== get_post_mime_type( $attachment ) ) {
+		return $image;
 	}
 
-	return $content;
+	$url = wp_get_attachment_url( (int) $attachment_id );
+	if ( ! is_string( $url ) || '' === $url ) {
+		return $image;
+	}
+
+	return array( $url, 150, 150, false );
 }
 add_filter( 'wp_get_attachment_image_src', 'ane_display_svg_in_media_library', 10, 2 );
 
 /**
- * Add SVG support to ACF
- *
- * Enable SVG upload in ACF image fields.
+ * Add SVG support to ACF image fields in admin.
  *
  * @return void
  */
 function ane_add_svg_support_to_acf() {
 	?>
 	<style>
-		/* Fix SVG display in ACF */
 		.acf-image-uploader img[src$=".svg"] {
 			width: 100% !important;
 			height: auto !important;
@@ -131,41 +137,57 @@ function ane_add_svg_support_to_acf() {
 add_action( 'admin_head', 'ane_add_svg_support_to_acf' );
 
 /**
- * Sanitize SVG uploads for security
+ * Sanitize SVG uploads to prevent XSS and XXE attacks.
  *
- * Basic SVG sanitization to prevent XSS attacks.
- * For production, consider using a library like enshrined/svg-sanitize.
- *
- * @param array $file Upload file array.
- * @return array Modified file array.
+ * @param array<string, mixed> $file Upload file array.
+ * @return array<string, mixed> Modified file array.
  */
 function ane_sanitize_svg_upload( $file ) {
-	// Only process SVG files
-	if ( 'image/svg+xml' !== $file['type'] ) {
+	$name = isset( $file['name'] ) ? (string) $file['name'] : '';
+	$type = isset( $file['type'] ) ? (string) $file['type'] : '';
+	$ext  = strtolower( (string) pathinfo( $name, PATHINFO_EXTENSION ) );
+
+	if ( 'svg' !== $ext && 'image/svg+xml' !== $type ) {
 		return $file;
 	}
 
-	// Get file content
-	$svg_content = file_get_contents( $file['tmp_name'] );
+	if ( ! current_user_can( 'manage_options' ) ) {
+		$file['error'] = __( 'Hanya administrator yang diizinkan mengunggah file SVG.', 'makhadane' );
+		return $file;
+	}
 
-	// Basic sanitization - remove script tags and event handlers
-	$svg_content = preg_replace( '/<script\b[^>]*>(.*?)<\/script>/is', '', $svg_content );
-	$svg_content = preg_replace( '/\bon\w+\s*=\s*["\'].*?["\']/i', '', $svg_content );
+	$tmp_name = isset( $file['tmp_name'] ) ? (string) $file['tmp_name'] : '';
+	if ( '' === $tmp_name || ! is_readable( $tmp_name ) ) {
+		return $file;
+	}
 
-	// Save sanitized content
-	file_put_contents( $file['tmp_name'], $svg_content );
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	$content = file_get_contents( $tmp_name );
+	if ( ! is_string( $content ) || '' === trim( $content ) || false === stripos( $content, '<svg' ) ) {
+		$file['error'] = __( 'File SVG tidak valid.', 'makhadane' );
+		return $file;
+	}
+
+	// Bersihkan deklarasi DOCTYPE/ENTITY eksternal (XXE), tag berbahaya, event handler on*, dan javascript:/data: URI.
+	$clean = (string) preg_replace( '/<!DOCTYPE[^>]*>/i', '', $content );
+	$clean = (string) preg_replace( '/<!ENTITY[^>]*>/i', '', $clean );
+	$clean = (string) preg_replace( '#<\s*(script|foreignObject|iframe|object|embed|applet)\b[^>]*>.*?<\s*/\s*\1\s*>#is', '', $clean );
+	$clean = (string) preg_replace( '#<\s*(script|foreignObject|iframe|object|embed|applet)\b[^>]*/?\s*>#is', '', $clean );
+	$clean = (string) preg_replace( '/\s+on[a-z]+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $clean );
+	$clean = (string) preg_replace( '/(href|xlink:href|src)\s*=\s*(?:"\s*(?:javascript|data):[^"]*"|\'\s*(?:javascript|data):[^\']*\')/i', '', $clean );
+
+	// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+	file_put_contents( $tmp_name, $clean );
 
 	return $file;
 }
 add_filter( 'wp_handle_upload_prefilter', 'ane_sanitize_svg_upload' );
 
 /**
- * Add WebP support for thumbnails
+ * Add WebP support for thumbnails.
  *
- * Ensure WebP images generate thumbnails properly.
- *
- * @param array $sizes Image sizes.
- * @return array Modified sizes.
+ * @param array<string, mixed> $sizes Image sizes.
+ * @return array<string, mixed> Modified sizes.
  */
 function ane_webp_thumbnail_support( $sizes ) {
 	return $sizes;
@@ -173,10 +195,10 @@ function ane_webp_thumbnail_support( $sizes ) {
 add_filter( 'intermediate_image_sizes_advanced', 'ane_webp_thumbnail_support' );
 
 /**
- * Display file format info in media library columns
+ * Display file format info in media library columns.
  *
- * @param array $columns Existing columns.
- * @return array Modified columns.
+ * @param array<string, string> $columns Existing columns.
+ * @return array<string, string> Modified columns.
  */
 function ane_add_media_format_column( $columns ) {
 	$columns['format'] = __( 'Format', 'makhadane' );
@@ -185,7 +207,7 @@ function ane_add_media_format_column( $columns ) {
 add_filter( 'manage_media_columns', 'ane_add_media_format_column' );
 
 /**
- * Display file format in media library
+ * Display file format in media library.
  *
  * @param string $column_name Column name.
  * @param int    $post_id     Post ID.
@@ -193,7 +215,7 @@ add_filter( 'manage_media_columns', 'ane_add_media_format_column' );
  */
 function ane_display_media_format_column( $column_name, $post_id ) {
 	if ( 'format' === $column_name ) {
-		$mime_type = get_post_mime_type( $post_id );
+		$mime_type = (string) get_post_mime_type( $post_id );
 		$format    = '';
 
 		switch ( $mime_type ) {

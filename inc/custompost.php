@@ -6,6 +6,8 @@
  * @since 4.1.1
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Register custom post types
  *
@@ -170,7 +172,7 @@ function ane_custom_post_feed( $query ) {
         $query->set( 'post_type', array( 'post', 'ustadz', 'ekstrakurikuler' ) );
     }
 }
-add_filter( 'pre_get_posts', 'ane_custom_post_feed' );
+add_action( 'pre_get_posts', 'ane_custom_post_feed' );
 
 
 /**

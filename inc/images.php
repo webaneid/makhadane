@@ -6,6 +6,8 @@
  * @since 4.1.1
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Get image caption for featured image
  *

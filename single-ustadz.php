@@ -42,7 +42,7 @@ if ( have_posts() ) :
 
 					<div class="ane-content">
 						<div class="ane-single-title">
-							<h1 class="post-title"><?php the_title(); ?></h1>
+							<h1 class="post-title"><?php echo esc_html( get_the_title() ); ?></h1>
 						</div>
 
 						<div class="share-this">

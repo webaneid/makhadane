@@ -30,7 +30,7 @@ add_action( 'admin_menu', 'ane_register_linktree_analytics_menu', 999 );
  * Enqueue analytics dashboard assets.
  */
 function ane_linktree_analytics_assets( $hook ) {
-	if ( 'elemen-ane_page_ane-linktree-analytics' !== $hook ) {
+	if ( false === strpos( (string) $hook, 'ane-linktree-analytics' ) ) {
 		return;
 	}
 

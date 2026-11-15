@@ -46,7 +46,7 @@ if ( $bgimg_data && isset( $bgimg_data['sizes']['large'] ) ) {
 					?>
 					<div class="accordion-item">
 						<button id="accordion-button-<?php the_ID(); ?>" aria-expanded="false">
-							<span class="accordion-title"><?php the_title(); ?></span>
+							<span class="accordion-title"><?php echo esc_html( get_the_title() ); ?></span>
 							<span class="icon" aria-hidden="true"></span>
 						</button>
 						<div class="accordion-content"><?php the_content(); ?></div>

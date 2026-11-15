@@ -67,12 +67,10 @@ if ($location) {
 	<?php echo wp_json_encode($schema_data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
 </script>
 
-<?php get_header(); ?>
-
 <article id="post-<?php the_ID(); ?>" <?php post_class('ane-page-default ane-page-kontak'); ?>>
 
 	<header class="entry-header" style="background-image: url('<?php echo esc_url($photo); ?>');">
-		<?php the_title('<h1>', '</h1>'); ?>
+		<h1><?php echo esc_html( get_the_title() ); ?></h1>
 	</header>
 
 	<?php ane_display_breadcrumbs(); ?>
@@ -165,5 +163,3 @@ if ($location) {
 		</div>
 	</div>
 </article>
-
-<?php get_footer(); ?>

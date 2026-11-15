@@ -5,6 +5,8 @@
  * @package makhadane
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Enqueue user profile styles and scripts.
  */

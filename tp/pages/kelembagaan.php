@@ -20,7 +20,7 @@ if ( has_post_thumbnail() ) {
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'ane-page-default ane-page-lembaga' ); ?>>
 	<header class="entry-header" style="background: url('<?php echo esc_url( $photo ); ?>')">
-		<h1><?php the_title(); ?></h1>
+		<h1><?php echo esc_html( get_the_title() ); ?></h1>
 	</header>
 
 	<?php ane_display_breadcrumbs(); ?>
