@@ -12,7 +12,7 @@
 | 🔴 **Critical** | 2 | ✅ Selesai (2/2) | Fase 03 (`GAP-01`, `GAP-02` ✅) |
 | 🟠 **High** | 4 | ✅ Selesai (4/4) | Fase 02 (`GAP-05` ✅) & Fase 03 (`GAP-03`, `GAP-04`, `GAP-07` ✅) |
 | 🟡 **Medium** | 10 | ✅ Selesai (10/10) | Fase 02 (`GAP-12` ✅), Fase 03 (`GAP-06`, `GAP-08`, `GAP-09`, `GAP-10`, `GAP-13`, `GAP-14` ✅) & Fase 04 (`GAP-11`, `GAP-15`, `GAP-16` ✅) |
-| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (5/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅), Fase 05 (`GAP-18` ✅), Fase 06 (`GAP-19` ✅), Fase 07–09 (`GAP-20` ✅) & Fase 10 |
+| 🔵 **Low / Clean-up** | 6 | ✅ Selesai (6/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅), Fase 05 (`GAP-18` ✅), Fase 06 (`GAP-19` ✅), Fase 07–09 (`GAP-20` ✅) & Fase 10 (`GAP-21` ✅) |
 
 ---
 
@@ -133,10 +133,10 @@
 - **Masalah:** Memuat file font eksternal `FontAne` (256 KB) dan CSS belum terstruktur dalam 12 bagian (`[01]`–`[12]`) yang diaudit oleh `composer css:check` (`0 dead CSS rules`).
 - **Status Fix (Fase 07–09):** `css/main.css` direstrukturisasi ke 12 bagian (`[01]`–`[12]`) dan dikompilasi ke 1 file rilis `css/main.min.css` (`124.1 KB`, turun dari `145.4 KB`), seluruh icon `FontAne` & FontAwesome dimigrasikan ke helper inline SVG `makhadane_icon()`, `0 dead CSS rules` diverifikasi oleh `composer css:check`, serta folder `fonts/`, `scss/`, `css/FontAne.css`, `css/admin.css`, dan 4 file `.map` dihapus.
 
-### GAP-21 — 🔵 Low: Definisi Field ACF Belum Disimpan di Repo (`inc/acf-json/`)
-- **Lokasi:** Belum ada `inc/acf-json/` dan `inc/acf-importer.php`.
+### GAP-21 — 🔵 Low: Definisi Field ACF Belum Disimpan di Repo (`inc/acf-json/`) — ✅ Fixed (Fase 10)
+- **Lokasi:** [inc/acf-json/field-groups.json](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/acf-json/field-groups.json), [inc/acf-importer.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/acf-importer.php)
 - **Masalah:** Struktur field group ACF hanya ada di database situs pelanggan.
-- **Rencana Fix (Fase 10):** Bundel `inc/acf-json/field-groups.json` dan `inc/acf-importer.php`.
+- **Status Fix (Fase 10):** Seluruh 16 Field Group ACF database diekspor ke `inc/acf-json/field-groups.json` dan dilengkapi `inc/acf-importer.php` (auto-fallback lokal jika belum ada di DB, auto-sync 1 kali saat hash MD5 JSON berubah, auto-import saat `after_switch_theme`, dan tab **Import ACF JSON** di halaman `ane-general-setting`).
 
 ### GAP-22 — 🔵 Low: Format Kode Belum Sesuai WPCS — ✅ Fixed (Fase 04)
 - **Lokasi:** Seluruh codebase PHP.
