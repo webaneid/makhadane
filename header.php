@@ -42,7 +42,12 @@ if ( function_exists( 'wp_body_open' ) ) {
 ?>
 <div class="webane-wrapper">
 	<header class="ane-header">
-		<div class="bawah" <?php if ( get_field( 'ane_display_topheader', 'option' ) ) { echo 'style="padding-top:45px"'; } ?>>
+		<div class="bawah" 
+		<?php
+		if ( get_field( 'ane_display_topheader', 'option' ) ) {
+			echo 'style="padding-top:45px"'; }
+		?>
+		>
 			<div class="desktop-menu">
 				<div class="ane-container">
 					<div class="desktop-menu-row">

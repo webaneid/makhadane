@@ -30,7 +30,7 @@ function ane_admin_header_scripts( $hook ) {
 	}
 
 	$theme_uri = get_template_directory_uri();
-	$version = wp_get_theme()->get( 'Version' );
+	$version   = wp_get_theme()->get( 'Version' );
 
 	if ( file_exists( get_template_directory() . '/js/admin-header.js' ) ) {
 		wp_enqueue_script(

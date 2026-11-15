@@ -5,7 +5,7 @@
  * Handles injection of third-party tracking scripts (Google Analytics, Meta Pixel, etc.)
  * via ACF Options fields.
  *
- * @package elemenane
+ * @package makhadane
  * @since 1.0.0
  */
 
@@ -98,4 +98,3 @@ function ane_gtm_footer_content() {
 	}
 }
 add_action( 'wp_footer', 'ane_gtm_footer_content', 100 );
-

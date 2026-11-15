@@ -20,18 +20,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$thumb = isset( $image['sizes']['large'] ) ? esc_url( $image['sizes']['large'] ) : '';
 					$alt   = isset( $image['alt'] ) ? esc_attr( $image['alt'] ) : '';
 
-					if ( $thumb ) : ?>
+					if ( $thumb ) :
+						?>
 						<div class="ane-image">
 							<img src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" title="<?php echo $alt; ?>" />
 						</div>
-					<?php endif;
+						<?php
+					endif;
 				endif;
 				?>
 
 				<div class="ane-funfact">
 					<?php if ( have_rows( 'ane_repeater' ) ) : ?>
 						<ul>
-							<?php while ( have_rows( 'ane_repeater' ) ) : the_row();
+							<?php
+							while ( have_rows( 'ane_repeater' ) ) :
+								the_row();
 								$angka = get_sub_field( 'ane_angka' );
 								$title = get_sub_field( 'ane_title' );
 								?>
@@ -53,25 +57,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="ane-text">
 					<?php
 					$title = get_sub_field( 'ane_title' );
-					if ( ! empty( $title ) ) : ?>
+					if ( ! empty( $title ) ) :
+						?>
 						<h2><?php echo wp_kses_post( $title ); ?></h2>
 					<?php endif; ?>
 
 					<?php
 					$subtitle = get_sub_field( 'ane_subtitle' );
-					if ( ! empty( $subtitle ) ) : ?>
+					if ( ! empty( $subtitle ) ) :
+						?>
 						<h3><?php echo wp_kses_post( $subtitle ); ?></h3>
 					<?php endif; ?>
 
 					<?php
 					$desc = get_sub_field( 'ane_deskripsi' );
-					if ( ! empty( $desc ) ) : ?>
+					if ( ! empty( $desc ) ) :
+						?>
 						<p><?php echo wp_kses_post( $desc ); ?></p>
 					<?php endif; ?>
 
 					<?php
 					$link = get_sub_field( 'ane_link' );
-					if ( ! empty( $link ) && is_array( $link ) && isset( $link['url'], $link['title'] ) ) : ?>
+					if ( ! empty( $link ) && is_array( $link ) && isset( $link['url'], $link['title'] ) ) :
+						?>
 						<a href="<?php echo esc_url( $link['url'] ); ?>" class="btn btn-primary"><?php echo esc_html( $link['title'] ); ?></a>
 					<?php endif; ?>
 				</div>

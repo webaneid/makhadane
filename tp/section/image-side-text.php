@@ -46,7 +46,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					endif;
 
 					$link = get_sub_field( 'ane_link' );
-					if ( ! empty( $link ) ) : ?>
+					if ( ! empty( $link ) ) :
+						?>
 						<a href="<?php echo esc_url( $link['url'] ); ?>" class="btn btn-primary">
 							<?php echo esc_html( $link['title'] ); ?>
 						</a>

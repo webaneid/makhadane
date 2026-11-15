@@ -16,9 +16,9 @@ function ane_register_page_schema_field() {
 
 	acf_add_local_field_group(
 		array(
-			'key'      => 'group_page_schema',
-			'title'    => 'SEO Schema Settings',
-			'fields'   => array(
+			'key'                   => 'group_page_schema',
+			'title'                 => 'SEO Schema Settings',
+			'fields'                => array(
 				array(
 					'key'           => 'field_ane_page_schema_type',
 					'label'         => 'Schema Type',
@@ -45,7 +45,7 @@ function ane_register_page_schema_field() {
 					),
 				),
 			),
-			'location' => array(
+			'location'              => array(
 				array(
 					array(
 						'param'    => 'post_type',

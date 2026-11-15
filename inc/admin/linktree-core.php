@@ -82,7 +82,7 @@ function ane_check_linktree_db_migration() {
 
 	// Future migrations example:
 	// if ( version_compare( $current_version, '1.1', '<' ) ) {
-	//     ane_migrate_to_1_1();
+	// ane_migrate_to_1_1();
 	// }
 }
 add_action( 'admin_init', 'ane_check_linktree_db_migration' );

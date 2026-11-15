@@ -100,25 +100,25 @@ function ane_register_facebook_comments_fields() {
 	acf_add_local_field_group(
 		array(
 			'key'      => 'group_ane_facebook_comments',
-			'title'    => __( 'Facebook Comments', 'elemenane' ),
+			'title'    => __( 'Facebook Comments', 'makhadane' ),
 			'fields'   => array(
 				// Enable Facebook Comments.
 				array(
 					'key'           => 'field_ane_facebook_comments_enable',
-					'label'         => __( 'Enable Facebook Comments', 'elemenane' ),
+					'label'         => __( 'Enable Facebook Comments', 'makhadane' ),
 					'name'          => 'ane_facebook_comments_enable',
 					'type'          => 'true_false',
-					'instructions'  => __( 'Enable to replace WordPress native comments with Facebook Comments Social Plugin.', 'elemenane' ),
+					'instructions'  => __( 'Enable to replace WordPress native comments with Facebook Comments Social Plugin.', 'makhadane' ),
 					'ui'            => 1,
 					'default_value' => 0,
 				),
 				// Facebook App ID.
 				array(
 					'key'               => 'field_ane_facebook_app_id',
-					'label'             => __( 'Facebook App ID', 'elemenane' ),
+					'label'             => __( 'Facebook App ID', 'makhadane' ),
 					'name'              => 'ane_facebook_app_id',
 					'type'              => 'text',
-					'instructions'      => __( 'Enter your Facebook App ID. Get it from: https://developers.facebook.com/apps/', 'elemenane' ),
+					'instructions'      => __( 'Enter your Facebook App ID. Get it from: https://developers.facebook.com/apps/', 'makhadane' ),
 					'placeholder'       => '352619118625171',
 					'conditional_logic' => array(
 						array(
@@ -133,10 +133,10 @@ function ane_register_facebook_comments_fields() {
 				// Locale/Language.
 				array(
 					'key'               => 'field_ane_facebook_comments_locale',
-					'label'             => __( 'Language / Locale', 'elemenane' ),
+					'label'             => __( 'Language / Locale', 'makhadane' ),
 					'name'              => 'ane_facebook_comments_locale',
 					'type'              => 'select',
-					'instructions'      => __( 'Select language for Facebook Comments plugin.', 'elemenane' ),
+					'instructions'      => __( 'Select language for Facebook Comments plugin.', 'makhadane' ),
 					'choices'           => array(
 						'id_ID' => 'Indonesian (id_ID)',
 						'en_US' => 'English (en_US)',
@@ -162,10 +162,10 @@ function ane_register_facebook_comments_fields() {
 				// Number of posts.
 				array(
 					'key'               => 'field_ane_facebook_comments_num_posts',
-					'label'             => __( 'Number of Comments', 'elemenane' ),
+					'label'             => __( 'Number of Comments', 'makhadane' ),
 					'name'              => 'ane_facebook_comments_num_posts',
 					'type'              => 'number',
-					'instructions'      => __( 'Number of comments to display (default: 10).', 'elemenane' ),
+					'instructions'      => __( 'Number of comments to display (default: 10).', 'makhadane' ),
 					'default_value'     => 10,
 					'min'               => 1,
 					'max'               => 100,

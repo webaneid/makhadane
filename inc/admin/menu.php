@@ -113,9 +113,9 @@ add_filter( 'admin_body_class', 'ane_admin_body_class' );
  *
  * Example: Change dashicon untuk specific menu item.
  *
- * @param array $icon_data Icon data array.
+ * @param array  $icon_data Icon data array.
  * @param string $icon_file Icon file path.
- * @param int $menu_id Menu ID.
+ * @param int    $menu_id Menu ID.
  * @return array Modified icon data.
  */
 function ane_custom_menu_icon( $icon_data, $icon_file, $menu_id ) {

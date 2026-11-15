@@ -50,7 +50,7 @@ get_header();
 						<?php the_content(); ?>
 					</div>
 				</div>
-			<?php
+				<?php
 			endwhile;
 		endif;
 		?>

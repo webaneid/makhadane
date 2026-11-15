@@ -6,9 +6,7 @@
  * @since 4.1.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'ane-mobile-cat' ); ?>>
@@ -23,11 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 
 			<?php
-			$paged = get_query_var( 'paged', 1 );
-
-			if ( 1 === $paged ) {
-				get_template_part( 'tp/news', 'featured-mobile' );
-			}
+			$paged = max( 1, absint( get_query_var( 'paged', 1 ) ) );
 
 			$mobile_query = new WP_Query(
 				array(
@@ -41,20 +35,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			if ( $mobile_query->have_posts() ) :
 				echo '<section class="ane-newest">';
 
-				foreach ( $mobile_query->posts as $index => $post ) {
-					setup_postdata( $post );
+				while ( $mobile_query->have_posts() ) :
+					$mobile_query->the_post();
 					get_template_part( 'tp/content', 'list' );
-
-					if ( 6 === $index ) {
-						get_template_part( 'tp/mobile', 'news-populer' );
-					}
-				}
+				endwhile;
 
 				wp_reset_postdata();
 				echo '</section>';
 
 				if ( $mobile_query->max_num_pages > 1 ) {
-					echo ane_post_pagination();
+					ane_post_pagination( $mobile_query );
 				}
 			endif;
 			?>

@@ -156,7 +156,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 							if ( ! empty( $thumb ) ) :
 								?>
 								<img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $nama ); ?>">
-							<?php
+								<?php
 							endif;
 						endif;
 						?>
@@ -182,16 +182,18 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		// Ambil nomor WhatsApp dari ACF Repeater
-		let numbers = <?php
+		let numbers = 
+		<?php
 			$numbers = array();
-			if ( have_rows( 'ane_cs', 'option' ) ) {
-				while ( have_rows( 'ane_cs', 'option' ) ) {
-					the_row();
-					$numbers[] = get_sub_field( 'ane_whatsapp' );
-				}
+		if ( have_rows( 'ane_cs', 'option' ) ) {
+			while ( have_rows( 'ane_cs', 'option' ) ) {
+				the_row();
+				$numbers[] = get_sub_field( 'ane_whatsapp' );
 			}
+		}
 			echo wp_json_encode( $numbers );
-		?>;
+		?>
+		;
 
 		if (numbers.length === 0) {
 			alert("<?php esc_html_e( 'WhatsApp number not available.', 'makhadane' ); ?>");

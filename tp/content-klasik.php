@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class('ane-konten-klasik'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'ane-konten-klasik' ); ?>>
 	<header class="entry-header">
 		<?php ane_get_featured_image(); ?>
 	</header>

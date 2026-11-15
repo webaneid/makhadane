@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return string Company name
  */
-function ane_get_company_name() : string {
+function ane_get_company_name(): string {
 	$about = get_field( 'about_ane', 'option' );
 	return ! empty( $about['company_name'] ) ? $about['company_name'] : get_bloginfo( 'name' );
 }
@@ -40,7 +40,7 @@ function ane_get_company_name() : string {
  *
  * @return string Company description/slogan
  */
-function ane_get_company_description() : string {
+function ane_get_company_description(): string {
 	$about = get_field( 'about_ane', 'option' );
 	return ! empty( $about['company_sologan'] ) ? $about['company_sologan'] : get_bloginfo( 'description' );
 }
@@ -51,7 +51,7 @@ function ane_get_company_description() : string {
  *
  * @return string Company URL
  */
-function ane_get_company_url() : string {
+function ane_get_company_url(): string {
 	$contact = get_field( 'contact_ane', 'option' );
 	return ! empty( $contact['kontak_website'] ) ? $contact['kontak_website'] : home_url();
 }
@@ -62,7 +62,7 @@ function ane_get_company_url() : string {
  *
  * @return string Company address
  */
-function ane_get_company_address() : string {
+function ane_get_company_address(): string {
 	// Reuse existing function to avoid duplication
 	if ( function_exists( 'ane_get_alamat' ) ) {
 		return ane_get_alamat();
@@ -91,7 +91,7 @@ function ane_get_company_address() : string {
  *
  * @return string Company phone number
  */
-function ane_get_company_phone() : string {
+function ane_get_company_phone(): string {
 	$contact = get_field( 'contact_ane', 'option' );
 	return ! empty( $contact['kontak_telepon'] ) ? $contact['kontak_telepon'] : '';
 }
@@ -102,7 +102,7 @@ function ane_get_company_phone() : string {
  *
  * @return string Company mobile number
  */
-function ane_get_company_mobile() : string {
+function ane_get_company_mobile(): string {
 	$contact = get_field( 'contact_ane', 'option' );
 	return ! empty( $contact['kontak_handphone'] ) ? $contact['kontak_handphone'] : '';
 }
@@ -113,7 +113,7 @@ function ane_get_company_mobile() : string {
  *
  * @return string Company email
  */
-function ane_get_company_email() : string {
+function ane_get_company_email(): string {
 	$contact = get_field( 'contact_ane', 'option' );
 	return ! empty( $contact['kontak_email'] ) ? $contact['kontak_email'] : get_bloginfo( 'admin_email' );
 }
@@ -124,7 +124,7 @@ function ane_get_company_email() : string {
  *
  * @return string Company website URL
  */
-function ane_get_company_website() : string {
+function ane_get_company_website(): string {
 	$contact = get_field( 'contact_ane', 'option' );
 	return ! empty( $contact['kontak_website'] ) ? $contact['kontak_website'] : home_url();
 }
@@ -145,7 +145,7 @@ function ane_get_company_location() {
  * @param string $size Image size (default: 'full')
  * @return string Logo URL
  */
-function ane_get_company_logo( $size = 'full' ) : string {
+function ane_get_company_logo( $size = 'full' ): string {
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 	if ( $custom_logo_id ) {
 		$logo_url = wp_get_attachment_image_url( $custom_logo_id, $size );
@@ -161,7 +161,7 @@ function ane_get_company_logo( $size = 'full' ) : string {
  *
  * @return array Complete company contact information
  */
-function ane_get_company_info() : array {
+function ane_get_company_info(): array {
 	return array(
 		'name'        => ane_get_company_name(),
 		'description' => ane_get_company_description(),
@@ -247,7 +247,7 @@ add_action( 'wp_head', 'ane_add_seo_metadata', 5 );
  *
  * @return bool True if Yoast is active and OpenGraph is enabled
  */
-function ane_yoast_handles_opengraph() : bool {
+function ane_yoast_handles_opengraph(): bool {
 	if ( ! defined( 'WPSEO_VERSION' ) ) {
 		return false;
 	}
@@ -265,7 +265,7 @@ function ane_yoast_handles_opengraph() : bool {
  *
  * @return bool True if Yoast is active and Twitter is enabled
  */
-function ane_yoast_handles_twitter() : bool {
+function ane_yoast_handles_twitter(): bool {
 	if ( ! defined( 'WPSEO_VERSION' ) ) {
 		return false;
 	}
@@ -291,13 +291,13 @@ function ane_output_newsarticle_schema() {
 	$post_id = get_the_ID();
 
 	// Get post data
-	$title           = get_the_title();
-	$excerpt         = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 30 );
-	$permalink       = get_permalink();
-	$date_published  = get_the_date( 'c' );
-	$date_modified   = get_the_modified_date( 'c' );
-	$author_name     = get_the_author();
-	$author_url      = get_author_posts_url( get_the_author_meta( 'ID' ) );
+	$title          = get_the_title();
+	$excerpt        = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 30 );
+	$permalink      = get_permalink();
+	$date_published = get_the_date( 'c' );
+	$date_modified  = get_the_modified_date( 'c' );
+	$author_name    = get_the_author();
+	$author_url     = get_author_posts_url( get_the_author_meta( 'ID' ) );
 
 	// Get featured image
 	$image_url    = get_the_post_thumbnail_url( $post_id, 'large' );
@@ -320,9 +320,9 @@ function ane_output_newsarticle_schema() {
 	$company_logo = ane_get_company_logo();
 
 	// Get categories
-	$categories      = get_the_category();
-	$category_name   = ! empty( $categories ) ? $categories[0]->name : 'News';
-	$category_url    = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : '';
+	$categories    = get_the_category();
+	$category_name = ! empty( $categories ) ? $categories[0]->name : 'News';
+	$category_url  = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : '';
 
 	// Build schema
 	$schema = array(
@@ -458,7 +458,7 @@ function ane_output_collectionpage_schema() {
 	// Add article items for current page
 	global $wp_query;
 	if ( $wp_query->have_posts() ) {
-		$items = array();
+		$items    = array();
 		$position = 1;
 
 		while ( $wp_query->have_posts() ) {
@@ -466,9 +466,9 @@ function ane_output_collectionpage_schema() {
 			$post_id = get_the_ID();
 
 			$item = array(
-				'@type'            => 'ListItem',
-				'position'         => $position++,
-				'item'             => array(
+				'@type'    => 'ListItem',
+				'position' => $position++,
+				'item'     => array(
 					'@type'         => 'NewsArticle',
 					'@id'           => get_permalink() . '#newsarticle',
 					'url'           => get_permalink(),
@@ -527,9 +527,9 @@ function ane_output_page_schema() {
 	$schema_type = get_field( 'ane_page_schema_type', $page_id ) ?: 'WebPage';
 
 	// Get page data
-	$title       = get_the_title();
-	$description = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 55 );
-	$permalink   = get_permalink();
+	$title          = get_the_title();
+	$description    = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 55 );
+	$permalink      = get_permalink();
 	$date_published = get_the_date( 'c' );
 	$date_modified  = get_the_modified_date( 'c' );
 
@@ -637,7 +637,7 @@ function ane_output_page_schema() {
 		case 'FAQPage':
 			// FAQ pages should have Question/Answer items
 			// Check if content has FAQ blocks or list items
-			$content = get_the_content();
+			$content              = get_the_content();
 			$schema['mainEntity'] = array(); // Will be populated by user with FAQ blocks
 
 			// Note: This requires proper FAQ structured content
@@ -753,15 +753,15 @@ function ane_output_citation_metadata() {
  * For Facebook, LinkedIn, and other social platforms
  */
 function ane_output_opengraph_tags() {
-	$og_type        = 'website';
-	$og_title       = get_bloginfo( 'name' );
-	$og_description = get_bloginfo( 'description' );
-	$og_url         = home_url();
-	$og_image       = ane_dummy_thumbnail();
-	$og_site_name   = get_bloginfo( 'name' );
-	$og_image_width = 1200;
+	$og_type         = 'website';
+	$og_title        = get_bloginfo( 'name' );
+	$og_description  = get_bloginfo( 'description' );
+	$og_url          = home_url();
+	$og_image        = ane_dummy_thumbnail();
+	$og_site_name    = get_bloginfo( 'name' );
+	$og_image_width  = 1200;
 	$og_image_height = 630;
-	$og_image_type  = 'image/jpeg';
+	$og_image_type   = 'image/jpeg';
 
 	if ( is_single() ) {
 		$post_id        = get_the_ID();
@@ -952,7 +952,7 @@ function ane_output_breadcrumb_schema() {
 	if ( is_single() && get_post_type() === 'post' ) {
 		$categories = get_the_category();
 		if ( ! empty( $categories ) ) {
-			$category = $categories[0];
+			$category      = $categories[0];
 			$breadcrumbs[] = array(
 				'@type'    => 'ListItem',
 				'position' => $position++,
@@ -970,7 +970,7 @@ function ane_output_breadcrumb_schema() {
 
 	// Category Archive
 	if ( is_category() ) {
-		$category = get_queried_object();
+		$category      = get_queried_object();
 		$breadcrumbs[] = array(
 			'@type'    => 'ListItem',
 			'position' => $position++,
@@ -981,7 +981,7 @@ function ane_output_breadcrumb_schema() {
 
 	// Tag Archive
 	if ( is_tag() ) {
-		$tag = get_queried_object();
+		$tag           = get_queried_object();
 		$breadcrumbs[] = array(
 			'@type'    => 'ListItem',
 			'position' => $position++,
@@ -992,7 +992,7 @@ function ane_output_breadcrumb_schema() {
 
 	// Author Archive
 	if ( is_author() ) {
-		$author = get_queried_object();
+		$author        = get_queried_object();
 		$breadcrumbs[] = array(
 			'@type'    => 'ListItem',
 			'position' => $position++,
@@ -1042,13 +1042,13 @@ function ane_output_website_schema() {
 
 	// Build WebSite schema with SearchAction
 	$schema = array(
-		'@context' => 'https://schema.org',
-		'@type'    => 'WebSite',
-		'@id'      => home_url() . '#website',
-		'url'      => home_url(),
-		'name'     => $company_name,
-		'alternateName' => get_bloginfo( 'description' ),
-		'publisher' => array(
+		'@context'        => 'https://schema.org',
+		'@type'           => 'WebSite',
+		'@id'             => home_url() . '#website',
+		'url'             => home_url(),
+		'name'            => $company_name,
+		'alternateName'   => get_bloginfo( 'description' ),
+		'publisher'       => array(
 			'@type' => 'Organization',
 			'name'  => $company_name,
 			'url'   => $company_url,
@@ -1157,8 +1157,8 @@ function ane_output_product_schema() {
 	$discount_pct  = get_field( 'ane_persen_diskon', $product_id );
 
 	// Determine current price
-	$price         = $active_price ?: $regular_price;
-	$price_valid   = gmdate( 'Y-m-d', strtotime( '+1 year' ) ); // Valid for 1 year
+	$price       = $active_price ?: $regular_price;
+	$price_valid = gmdate( 'Y-m-d', strtotime( '+1 year' ) ); // Valid for 1 year
 
 	// Get stock status
 	$stock_status = get_field( 'ane_stok', $product_id );
@@ -1183,13 +1183,13 @@ function ane_output_product_schema() {
 	// Add pricing if available
 	if ( $price ) {
 		$schema['offers'] = array(
-			'@type'         => 'Offer',
-			'price'         => (float) $price,
-			'priceCurrency' => 'IDR',
+			'@type'           => 'Offer',
+			'price'           => (float) $price,
+			'priceCurrency'   => 'IDR',
 			'priceValidUntil' => $price_valid,
-			'availability'  => 'https://schema.org/' . $availability,
-			'url'           => $permalink,
-			'seller'        => array(
+			'availability'    => 'https://schema.org/' . $availability,
+			'url'             => $permalink,
+			'seller'          => array(
 				'@type' => 'Organization',
 				'name'  => $company_name,
 			),
@@ -1214,9 +1214,9 @@ function ane_output_product_schema() {
 	// You can add custom rating fields here if needed
 	// Example structure (commented out):
 	// $schema['aggregateRating'] = array(
-	//     '@type'       => 'AggregateRating',
-	//     'ratingValue' => '4.5',
-	//     'reviewCount' => '10',
+	// '@type'       => 'AggregateRating',
+	// 'ratingValue' => '4.5',
+	// 'reviewCount' => '10',
 	// );
 
 	// Output JSON-LD

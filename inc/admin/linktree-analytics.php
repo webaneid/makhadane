@@ -79,9 +79,9 @@ function ane_linktree_analytics_assets( $hook ) {
 		'ane-linktree-analytics',
 		'aneLinktreeData',
 		array(
-			'clicksData'  => $analytics_data,
-			'deviceData'  => $device_data,
-			'colors'      => array(
+			'clicksData' => $analytics_data,
+			'deviceData' => $device_data,
+			'colors'     => array(
 				'primary'   => '#dc3545',
 				'secondary' => '#ff6b35',
 				'accent'    => '#e0ddcf',
@@ -96,10 +96,10 @@ add_action( 'admin_enqueue_scripts', 'ane_linktree_analytics_assets' );
  * Render Linktree Analytics dashboard page.
  */
 function ane_render_linktree_analytics_page() {
-	$stats           = ane_get_linktree_stats();
-	$top_links       = ane_get_top_linktree_links( 5 );
-	$top_referrers   = ane_get_top_referrers( 5 );
-	$device_stats    = ane_get_device_breakdown();
+	$stats         = ane_get_linktree_stats();
+	$top_links     = ane_get_top_linktree_links( 5 );
+	$top_referrers = ane_get_top_referrers( 5 );
+	$device_stats  = ane_get_device_breakdown();
 	?>
 	<div class="wrap ane-custom-dashboard">
 		<h1 class="wp-heading-inline"><?php esc_html_e( 'Linktree Analytics', 'makhadane' ); ?></h1>
@@ -379,8 +379,8 @@ function ane_get_linktree_analytics_data() {
 
 	// Get last 12 months
 	for ( $i = 11; $i >= 0; $i-- ) {
-		$date = strtotime( "-$i months" );
-		$year = gmdate( 'Y', $date );
+		$date  = strtotime( "-$i months" );
+		$year  = gmdate( 'Y', $date );
 		$month = gmdate( 'n', $date );
 		$label = gmdate( 'M Y', $date );
 

@@ -218,7 +218,7 @@ function ane_dashboard_stats_cards() {
 						echo esc_html(
 							sprintf(
 								/* translators: %s: percentage with sign */
-								__( '%s%s%% this month', 'makhadane' ),
+								__( '%1$s%2$s%% this month', 'makhadane' ),
 								$growth_sign,
 								number_format_i18n( abs( $growth_value ), 1 )
 							)
@@ -632,15 +632,15 @@ function ane_get_posts_per_month_data() {
 
 	// Get data for last 12 months.
 	for ( $i = 11; $i >= 0; $i-- ) {
-		$date = strtotime( "-{$i} months" );
+		$date  = strtotime( "-{$i} months" );
 		$month = date( 'n', $date );
-		$year = date( 'Y', $date );
+		$year  = date( 'Y', $date );
 
 		// Month label.
 		$data['labels'][] = date_i18n( 'M Y', $date );
 
 		// Posts count.
-		$posts_count = (int) $wpdb->get_var(
+		$posts_count     = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*)
 				FROM {$wpdb->posts}
@@ -655,7 +655,7 @@ function ane_get_posts_per_month_data() {
 		$data['posts'][] = $posts_count;
 
 		// Views count.
-		$views_count = (int) $wpdb->get_var(
+		$views_count     = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT SUM(pm.meta_value)
 				FROM {$wpdb->postmeta} pm
@@ -691,7 +691,7 @@ function ane_get_popular_posts_dashboard( $limit = 5 ) {
 	);
 
 	$posts = array();
-	$rank = 1;
+	$rank  = 1;
 
 	if ( $query->have_posts() ) {
 		while ( $query->have_posts() ) {
@@ -758,9 +758,9 @@ function ane_get_content_breakdown() {
 	global $wpdb;
 
 	$categories = wp_count_terms( 'category' );
-	$tags = wp_count_terms( 'post_tag' );
+	$tags       = wp_count_terms( 'post_tag' );
 
-	$drafts = (int) wp_count_posts()->draft;
+	$drafts    = (int) wp_count_posts()->draft;
 	$scheduled = (int) wp_count_posts()->future;
 
 	// Posts this month.
@@ -778,7 +778,7 @@ function ane_get_content_breakdown() {
 	);
 
 	// Goal: 30 posts per month (customize as needed).
-	$goal = 30;
+	$goal            = 30;
 	$goal_percentage = min( 100, ( $posts_this_month / $goal ) * 100 );
 
 	return array(

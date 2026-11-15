@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Enqueue user profile styles and scripts.
  */
-function ane_user_profile_enqueue_scripts() : void {
+function ane_user_profile_enqueue_scripts(): void {
 	$screen = get_current_screen();
 
 	if ( ! $screen || ( 'profile' !== $screen->id && 'user-edit' !== $screen->id ) ) {
@@ -73,16 +73,16 @@ add_action( 'admin_enqueue_scripts', 'ane_user_profile_enqueue_scripts' );
  *
  * @param WP_User $user User object.
  */
-function ane_user_profile_header( WP_User $user ) : void {
+function ane_user_profile_header( WP_User $user ): void {
 	// Get user data.
-	$avatar         = get_avatar( $user->ID, 120 );
-	$display_name   = $user->display_name;
-	$username       = $user->user_login;
-	$email          = $user->user_email;
-	$roles          = $user->roles;
-	$role_name      = ! empty( $roles ) ? translate_user_role( ucfirst( $roles[0] ) ) : __( 'Subscriber', 'makhadane' );
-	$registered     = date_i18n( get_option( 'date_format' ), strtotime( $user->user_registered ) );
-	$bio            = get_user_meta( $user->ID, 'description', true );
+	$avatar       = get_avatar( $user->ID, 120 );
+	$display_name = $user->display_name;
+	$username     = $user->user_login;
+	$email        = $user->user_email;
+	$roles        = $user->roles;
+	$role_name    = ! empty( $roles ) ? translate_user_role( ucfirst( $roles[0] ) ) : __( 'Subscriber', 'makhadane' );
+	$registered   = date_i18n( get_option( 'date_format' ), strtotime( $user->user_registered ) );
+	$bio          = get_user_meta( $user->ID, 'description', true );
 
 	?>
 	<div class="ane-user-profile__header">
@@ -133,7 +133,7 @@ function ane_user_profile_header( WP_User $user ) : void {
  *
  * @param WP_User $user User object.
  */
-function ane_user_profile_performance( WP_User $user ) : void {
+function ane_user_profile_performance( WP_User $user ): void {
 	// Get user stats.
 	$stats = ane_get_user_stats( $user->ID );
 
@@ -224,7 +224,7 @@ function ane_user_profile_performance( WP_User $user ) : void {
  *
  * @param WP_User $user User object.
  */
-function ane_user_profile_recent_activity( WP_User $user ) : void {
+function ane_user_profile_recent_activity( WP_User $user ): void {
 	// Get recent posts.
 	$recent_posts = get_posts(
 		array(
@@ -325,7 +325,7 @@ function ane_user_profile_recent_activity( WP_User $user ) : void {
  * @param int $user_id User ID.
  * @return array User stats.
  */
-function ane_get_user_stats( int $user_id ) : array {
+function ane_get_user_stats( int $user_id ): array {
 	global $wpdb;
 
 	// Total posts.
@@ -393,7 +393,7 @@ function ane_get_user_stats( int $user_id ) : array {
  * @param int $user_id User ID.
  * @return array Posts per month data.
  */
-function ane_get_user_posts_data( int $user_id ) : array {
+function ane_get_user_posts_data( int $user_id ): array {
 	global $wpdb;
 
 	$data = array(
@@ -412,7 +412,7 @@ function ane_get_user_posts_data( int $user_id ) : array {
 		$data['labels'][] = date_i18n( 'M Y', $date );
 
 		// Posts count.
-		$posts_count = (int) $wpdb->get_var(
+		$posts_count     = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*)
 				FROM {$wpdb->posts}
@@ -429,7 +429,7 @@ function ane_get_user_posts_data( int $user_id ) : array {
 		$data['posts'][] = $posts_count;
 
 		// Views count.
-		$views_count = (int) $wpdb->get_var(
+		$views_count     = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT SUM(pm.meta_value)
 				FROM {$wpdb->postmeta} pm
@@ -456,7 +456,7 @@ function ane_get_user_posts_data( int $user_id ) : array {
  *
  * @param WP_User $user User object.
  */
-function ane_render_user_profile( WP_User $user ) : void {
+function ane_render_user_profile( WP_User $user ): void {
 	?>
 	<div class="ane-user-profile">
 		<h2 class="ane-user-profile__title"><?php esc_html_e( 'User Overview', 'makhadane' ); ?></h2>
@@ -488,7 +488,7 @@ add_action( 'personal_options', 'ane_render_user_profile', 1 );
  * WordPress personal_options hook doesn't allow full wrapping,
  * so we need to inject closing div + h2 for default form.
  */
-function ane_user_profile_close_wrapper() : void {
+function ane_user_profile_close_wrapper(): void {
 	?>
 	<!-- End Ane User Profile -->
 	<h2 style="margin-top: 2rem;"><?php esc_html_e( 'Personal Options', 'makhadane' ); ?></h2>

@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Return all Ane admin sections.
  */
-function ane_get_admin_sections() : array {
+function ane_get_admin_sections(): array {
 	$sections = array(
-		'ane-setup'          => array(
+		'ane-setup'           => array(
 			'title'      => __( 'Makhad Ane', 'makhadane' ),
 			'menu_title' => __( 'Makhad Ane', 'makhadane' ),
 			'badge'      => __( 'Control Center', 'makhadane' ),
@@ -41,15 +41,15 @@ function ane_get_admin_sections() : array {
 					'link_label'  => __( 'Check Updates Now', 'makhadane' ),
 				),
 				array(
-					'label'        => __( 'Color and Scripts', 'makhadane' ),
-					'title'        => __( 'Select colors and scripts', 'makhadane' ),
-					'description'  => __( 'Select and manage theme colors and custom scripts for Google Analytics and other tools.', 'makhadane' ),
-					'link'       => admin_url( 'admin.php?page=ane-general-setting' ),
-					'link_label' => __( 'General Setting', 'makhadane' ),
+					'label'       => __( 'Color and Scripts', 'makhadane' ),
+					'title'       => __( 'Select colors and scripts', 'makhadane' ),
+					'description' => __( 'Select and manage theme colors and custom scripts for Google Analytics and other tools.', 'makhadane' ),
+					'link'        => admin_url( 'admin.php?page=ane-general-setting' ),
+					'link_label'  => __( 'General Setting', 'makhadane' ),
 				),
 			),
 		),
-		'ane-seo-news'       => array(
+		'ane-seo-news'        => array(
 			'title'      => __( 'SEO & News Setup', 'makhadane' ),
 			'menu_title' => __( 'SEO & News', 'makhadane' ),
 			'badge'      => __( 'Google News Ready', 'makhadane' ),
@@ -62,7 +62,7 @@ function ane_get_admin_sections() : array {
 			'badge'      => __( 'Brand Identity', 'makhadane' ),
 			'tagline'    => __( 'Configure brand identity, logo, tagline, and fallback content for hero blocks.', 'makhadane' ),
 		),
-		'ane-customer-care'    => array(
+		'ane-customer-care'   => array(
 			'title'      => __( 'Customer Care', 'makhadane' ),
 			'menu_title' => __( 'Customer Care', 'makhadane' ),
 			'badge'      => __( 'Support Channel', 'makhadane' ),
@@ -76,7 +76,7 @@ function ane_get_admin_sections() : array {
 /**
  * Register options pages via ACF.
  */
-function ane_register_acf_options_pages() : void {
+function ane_register_acf_options_pages(): void {
 	if ( ! function_exists( 'acf_add_options_page' ) ) {
 		return;
 	}
@@ -141,7 +141,7 @@ add_action( 'admin_menu', 'ane_register_seo_news_page', 999 );
 /**
  * Register fallback menu when ACF Options is not available.
  */
-function ane_register_admin_menu_fallback() : void {
+function ane_register_admin_menu_fallback(): void {
 	if ( function_exists( 'acf_add_options_page' ) ) {
 		return;
 	}
@@ -158,7 +158,7 @@ function ane_register_admin_menu_fallback() : void {
 
 	$sections = ane_get_admin_sections();
 	// Note: ane-seo-news is registered separately via ane_register_seo_news_page().
-	$slugs    = array( 'ane-general-setting', 'ane-customer-care' );
+	$slugs = array( 'ane-general-setting', 'ane-customer-care' );
 
 	foreach ( $slugs as $slug ) {
 		if ( empty( $sections[ $slug ] ) ) {
@@ -180,7 +180,7 @@ add_action( 'admin_menu', 'ane_register_admin_menu_fallback' );
 /**
  * Render fallback notice.
  */
-function ane_render_acf_missing_notice() : void {
+function ane_render_acf_missing_notice(): void {
 	echo '<div class="wrap">';
 	echo '<h1>' . esc_html__( 'Makhad Ane', 'makhadane' ) . '</h1>';
 	echo '<p>' . esc_html__( 'Activate Advanced Custom Fields Pro to start using this options page.', 'makhadane' ) . '</p>';
@@ -190,7 +190,7 @@ function ane_render_acf_missing_notice() : void {
 /**
  * Determine current Ane admin slug.
  */
-function ane_get_current_admin_page_slug() : ?string {
+function ane_get_current_admin_page_slug(): ?string {
 	if ( empty( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		return null;
 	}
@@ -206,7 +206,7 @@ function ane_get_current_admin_page_slug() : ?string {
  *
  * This ensures consistent styling across dashboard, settings, and custom admin pages.
  */
-function ane_enqueue_global_admin_styles() : void {
+function ane_enqueue_global_admin_styles(): void {
 	wp_enqueue_style(
 		'ane-admin-global',
 		get_template_directory_uri() . '/css/admin.min.css',
@@ -219,7 +219,7 @@ add_action( 'admin_enqueue_scripts', 'ane_enqueue_global_admin_styles' );
 /**
  * Register custom meta boxes for Ane admin pages.
  */
-function ane_register_admin_meta_boxes() : void {
+function ane_register_admin_meta_boxes(): void {
 	$sections = ane_get_admin_sections();
 
 	foreach ( array_keys( $sections ) as $slug ) {
@@ -232,7 +232,7 @@ add_action( 'admin_menu', 'ane_register_admin_meta_boxes', 20 );
 /**
  * Prepare metaboxes for the current screen.
  */
-function ane_prepare_admin_metaboxes() : void {
+function ane_prepare_admin_metaboxes(): void {
 	$screen = get_current_screen();
 	if ( ! $screen ) {
 		return;
@@ -252,7 +252,7 @@ function ane_prepare_admin_metaboxes() : void {
 /**
  * Render hero + cards before ACF form.
  */
-function ane_render_admin_intro() : void {
+function ane_render_admin_intro(): void {
 	$slug = ane_get_current_admin_page_slug();
 
 	if ( ! $slug ) {
@@ -348,7 +348,7 @@ add_action( 'admin_notices', 'ane_render_admin_intro' );
  *
  * @return string News sitemap URL.
  */
-function ane_get_news_sitemap_url() : string {
+function ane_get_news_sitemap_url(): string {
 	// Check if Yoast SEO is active and has news sitemap
 	if ( defined( 'WPSEO_VERSION' ) && class_exists( 'WPSEO_News_Sitemap' ) ) {
 		return home_url( '/news-sitemap.xml' );
@@ -804,7 +804,7 @@ function ane_render_seo_news_page() {
  *
  * @since 1.0.0
  */
-function ane_admin_bar_logo() : void {
+function ane_admin_bar_logo(): void {
 	// Get custom logo ID from theme customizer.
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 

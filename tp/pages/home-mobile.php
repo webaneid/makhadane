@@ -62,7 +62,7 @@ $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 			while ( $mobile_query->have_posts() ) :
 				$mobile_query->the_post();
 				get_template_part( 'tp/content', ( 4 === $counter ) ? 'overlay' : 'list' );
-				$counter++;
+				++$counter;
 			endwhile;
 			?>
 		</section>

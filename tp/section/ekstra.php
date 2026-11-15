@@ -37,12 +37,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="ane-kanan">
 				<div class="ane-col-row">
 					<?php
-					$the_query = new WP_Query( array(
-						'post_type'      => 'ekstrakurikuler',
-						'posts_per_page' => 4,
-					) );
+					$the_query = new WP_Query(
+						array(
+							'post_type'      => 'ekstrakurikuler',
+							'posts_per_page' => 4,
+						)
+					);
 					if ( $the_query->have_posts() ) :
-						while ( $the_query->have_posts() ) : $the_query->the_post();
+						while ( $the_query->have_posts() ) :
+							$the_query->the_post();
 							get_template_part( 'tp/content', 'ekstrakurikuler' );
 						endwhile;
 						wp_reset_postdata();

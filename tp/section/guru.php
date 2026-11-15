@@ -36,20 +36,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<?php
-		$the_query = new WP_Query( array(
-			'post_type'      => 'ustadz',
-			'posts_per_page' => 8,
-			'post_status'    => 'publish',
-		) );
+		$the_query = new WP_Query(
+			array(
+				'post_type'      => 'ustadz',
+				'posts_per_page' => 8,
+				'post_status'    => 'publish',
+			)
+		);
 
 		if ( $the_query->have_posts() ) :
-		?>
+			?>
 			<div class="owl-carousel dot-style2" id="home-sliding">
-				<?php while ( $the_query->have_posts() ) : $the_query->the_post();
+				<?php
+				while ( $the_query->have_posts() ) :
+					$the_query->the_post();
 					get_template_part( 'tp/content', 'ustadz' );
-				endwhile; ?>
+				endwhile;
+				?>
 			</div>
-		<?php
+			<?php
 			wp_reset_postdata();
 		endif;
 		?>

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Loads external CSS file instead of inline styles for better performance and caching.
  */
-function ane_login_enqueue_scripts() : void {
+function ane_login_enqueue_scripts(): void {
 	wp_enqueue_style(
 		'ane-login',
 		get_template_directory_uri() . '/css/admin.min.css',
@@ -72,6 +72,9 @@ add_filter( 'login_headertext', 'ane_login_logo_title' );
 /**
  * Remove shake effect on login error.
  */
-add_action( 'login_head', function() {
-	remove_action( 'login_head', 'wp_shake_js', 12 );
-});
+add_action(
+	'login_head',
+	function () {
+		remove_action( 'login_head', 'wp_shake_js', 12 );
+	}
+);

@@ -20,14 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			if ( has_custom_logo() ) {
 				the_custom_logo();
 			} else {
-				$default_logo = get_template_directory_uri() . '/img/logo-newsane.png';
+				$default_logo = get_template_directory_uri() . '/img/logo-makhadane.png';
 				$logo_url     = get_theme_mod( 'logo', $default_logo );
 				$site_name    = get_bloginfo( 'name' );
 				?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 					<img src="<?php echo esc_url( $logo_url ); ?>"
-					     alt="<?php echo esc_attr( $site_name ); ?>"
-					     title="<?php echo esc_attr( $site_name ); ?>">
+						alt="<?php echo esc_attr( $site_name ); ?>"
+						title="<?php echo esc_attr( $site_name ); ?>">
 				</a>
 				<?php
 			}
@@ -65,9 +65,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				if ( ! empty( $link_url ) && ! empty( $link_label ) ) :
 					?>
 					<a href="<?php echo esc_url( $link_url ); ?>"
-					   target="_blank"
-					   rel="noopener noreferrer"
-					   title="<?php echo esc_attr( $link_label ); ?>">
+						target="_blank"
+						rel="noopener noreferrer"
+						title="<?php echo esc_attr( $link_label ); ?>">
 						<div class="ane-links <?php echo esc_attr( $link_type ); ?>">
 							<div class="icon-ane"></div>
 							<div class="ane-label">
@@ -142,8 +142,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					if ( ! empty( $data['url'] ) ) :
 						?>
 						<a href="<?php echo esc_url( $data['url'] ); ?>"
-						   target="_blank" rel="noopener noreferrer"
-						   aria-label="<?php echo esc_attr( sprintf( __( 'Follow us on %s', 'makhadane' ), $data['label'] ) ); ?>">
+							target="_blank" rel="noopener noreferrer"
+							aria-label="<?php echo esc_attr( sprintf( __( 'Follow us on %s', 'makhadane' ), $data['label'] ) ); ?>">
 							<li class="<?php echo esc_attr( $platform ); ?>">
 								<i class="<?php echo esc_attr( $data['icon'] ); ?>"></i>
 								<span><?php echo esc_html( $data['label'] ); ?></span>

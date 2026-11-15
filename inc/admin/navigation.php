@@ -37,7 +37,7 @@ function ane_render_breadcrumbs( array $breadcrumbs ) {
 	$count = 0;
 
 	foreach ( $breadcrumbs as $title => $url ) {
-		$count++;
+		++$count;
 
 		if ( $count === $total ) {
 			// Last item (current page) - no link.

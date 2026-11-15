@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					endif;
 
 					if ( ! empty( $link ) ) :
-					?>
+						?>
 						<a href="<?php echo esc_url( $link['url'] ); ?>" class="btn btn-alternatif">
 							<?php echo esc_html( $link['title'] ); ?>
 						</a>
@@ -57,16 +57,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="ane-item">
 				<div class="ane-text">
 					<?php
-					$the_query = new WP_Query( array(
-						'post_type'      => 'faq',
-						'posts_per_page' => 7,
-						'post_status'    => 'publish',
-					) );
+					$the_query = new WP_Query(
+						array(
+							'post_type'      => 'faq',
+							'posts_per_page' => 7,
+							'post_status'    => 'publish',
+						)
+					);
 
 					if ( $the_query->have_posts() ) :
-					?>
+						?>
 						<div class="accordion">
-							<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+							<?php
+							while ( $the_query->have_posts() ) :
+								$the_query->the_post();
+								?>
 								<div class="accordion-item">
 									<button id="accordion-button-<?php the_ID(); ?>" aria-expanded="false">
 										<span class="accordion-title"><?php echo esc_html( get_the_title() ); ?></span>

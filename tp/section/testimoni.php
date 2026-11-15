@@ -30,19 +30,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<?php
-		$the_query = new WP_Query( array(
-			'post_type'      => 'testimoni',
-			'posts_per_page' => 9,
-			'no_found_rows'  => true,
-		) );
+		$the_query = new WP_Query(
+			array(
+				'post_type'      => 'testimoni',
+				'posts_per_page' => 9,
+				'no_found_rows'  => true,
+			)
+		);
 
-		if ( $the_query->have_posts() ) : ?>
+		if ( $the_query->have_posts() ) :
+			?>
 			<div class="testimoni-slider owl-carousel">
-				<?php while ( $the_query->have_posts() ) : $the_query->the_post();
+				<?php
+				while ( $the_query->have_posts() ) :
+					$the_query->the_post();
 					get_template_part( 'tp/content', 'testimoni' );
-				endwhile; ?>
+				endwhile;
+				?>
 			</div>
-		<?php
+			<?php
 		endif;
 		wp_reset_postdata();
 		?>

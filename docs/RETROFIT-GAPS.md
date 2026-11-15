@@ -11,8 +11,8 @@
 |---|---|---|---|
 | 🔴 **Critical** | 2 | ✅ Selesai (2/2) | Fase 03 (`GAP-01`, `GAP-02` ✅) |
 | 🟠 **High** | 4 | ✅ Selesai (4/4) | Fase 02 (`GAP-05` ✅) & Fase 03 (`GAP-03`, `GAP-04`, `GAP-07` ✅) |
-| 🟡 **Medium** | 10 | 🔄 Sebagian (7/10) | Fase 02 (`GAP-12` ✅), Fase 03 (`GAP-06`, `GAP-08`, `GAP-09`, `GAP-10`, `GAP-13`, `GAP-14` ✅) & Fase 04 |
-| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (1/6) | Fase 02 (`GAP-17` ✅) & Fase 04 – Fase 10 |
+| 🟡 **Medium** | 10 | ✅ Selesai (10/10) | Fase 02 (`GAP-12` ✅), Fase 03 (`GAP-06`, `GAP-08`, `GAP-09`, `GAP-10`, `GAP-13`, `GAP-14` ✅) & Fase 04 (`GAP-11`, `GAP-15`, `GAP-16` ✅) |
+| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (2/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅) & Fase 05 – Fase 10 |
 
 ---
 
@@ -75,10 +75,10 @@
 - **Masalah:** `codesnippets_disable_comments_redirect()` me-redirect `is_single() || is_page()` ke `home_url()` jika `comments_open()` bernilai true.
 - **Status Fix (Fase 03):** Fungsi redirect berbahaya tersebut telah dihapus dari `inc/handle.php`.
 
-### GAP-11 — 🟡 Medium: Inkonsistensi Case Slug Taxonomy `'kelas'` vs `'Kelas'`
-- **Lokasi:** [inc/custompost.php:112](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/custompost.php#L112) (`'kelas'`), [single-ustadz.php:27,99](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/single-ustadz.php#L27) (`'kelas'`), [tp/single-ustadz.php:20,85](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/tp/single-ustadz.php#L20) (`'Kelas'`), dan nama file [taxonomy-Kelas.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/taxonomy-Kelas.php).
-- **Masalah:** Di server Linux (case-sensitive), template `taxonomy-Kelas.php` tidak akan terpanggil untuk taxonomy `'kelas'`.
-- **Rencana Fix (Fase 04):** Pastikan kompatibilitas template taxonomy untuk `'kelas'` / `'Kelas'`.
+### GAP-11 — 🟡 Medium: Inkonsistensi Case Slug Taxonomy `'kelas'` vs `'Kelas'` — ✅ Fixed (Fase 04)
+- **Lokasi:** [inc/custompost.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/custompost.php) dan [taxonomy-Kelas.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/taxonomy-Kelas.php).
+- **Masalah:** Di server Linux (case-sensitive), template `taxonomy-Kelas.php` tidak terpanggil untuk taxonomy `'kelas'`.
+- **Status Fix (Fase 04):** Ditambahkan filter `makhadane_resolve_kelas_taxonomy_template()` pada `taxonomy_template` di `inc/custompost.php` sehingga baik `'kelas'` maupun `'Kelas'` selalu memuat `taxonomy-Kelas.php`.
 
 ---
 
@@ -103,15 +103,15 @@
 
 ## D. Maintainability, Aset, & Standar Webane
 
-### GAP-15 — 🟡 Medium: Text Domain Campuran (`'elemenane'`) & Konflik Hook Submenu Admin
-- **Lokasi:** [inc/admin/facebook-comments.php:103-168](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/admin/facebook-comments.php#L103-L168), [inc/tracking-scripts.php:8](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/tracking-scripts.php#L8), [inc/admin/linktree-analytics.php:33](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/admin/linktree-analytics.php#L33).
-- **Masalah:** `inc/admin/facebook-comments.php` masih memakai text domain `'elemenane'`; `inc/admin/linktree-analytics.php:33` mengecek `$hook !== 'elemen-ane_page_ane-linktree-analytics'` padahal parent menu berjudul `'Makhad Ane'` (`makhad-ane_page_ane-linktree-analytics`), sehingga Chart.js tidak pernah ter-enqueue di halaman Linktree Analytics!
-- **Rencana Fix (Fase 03 & Fase 04):** Seragamkan text domain ke `'makhadane'` dan perbaiki pengecekan `$hook` di `inc/admin/linktree-analytics.php`.
+### GAP-15 — 🟡 Medium: Text Domain Campuran (`'elemenane'`) & Konflik Hook Submenu Admin — ✅ Fixed (Fase 03 & Fase 04)
+- **Lokasi:** [inc/admin/facebook-comments.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/admin/facebook-comments.php), [inc/tracking-scripts.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/tracking-scripts.php), [inc/admin/linktree-analytics.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/admin/linktree-analytics.php), [tp/content-linktree.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/tp/content-linktree.php).
+- **Masalah:** `inc/admin/facebook-comments.php` masih memakai text domain `'elemenane'`; `inc/admin/linktree-analytics.php` mengecek `$hook` yang salah; `tp/content-linktree.php` mengarah ke `logo-newsane.png` yang tidak ada.
+- **Status Fix (Fase 03 & Fase 04):** Seluruh text domain diseragamkan ke `'makhadane'`, pengecekan `$hook` di `inc/admin/linktree-analytics.php` diperbaiki, dan fallback logo di `tp/content-linktree.php` diarahkan ke `logo-makhadane.png`.
 
-### GAP-16 — 🟡 Medium: Duplikasi Pendaftaran Options Page & Template Part Menggantung
-- **Lokasi:** `tp/single.php`, `tp/single-ustadz.php`, `tp/content-sliders.php`, `tp/home-categories.php`, serta referensi `inc/back-compat.php` di `functions.php:14`.
-- **Masalah:** File template part tidak pernah dipanggil dan membingungkan pemeliharaan.
-- **Rencana Fix (Fase 04):** Hapus file/fungsi duplikat yang tidak terpakai.
+### GAP-16 — 🟡 Medium: Template Part Menggantung & Aset Tidak Terpakai — ✅ Fixed (Fase 04)
+- **Lokasi:** `tp/single.php`, `tp/single-ustadz.php`, `tp/content-sliders.php`, `tp/home-categories.php`, `tp/mobile/kategori.php`, `img/logo-sekolahane.png`, `img/outdoor-basketball-court-school-kids-play.jpg`.
+- **Masalah:** File template part duplikat tidak pernah dipanggil dan membingungkan pemeliharaan; foto sampel 8,26 MB tidak terpakai membebani ukuran paket rilis.
+- **Status Fix (Fase 04):** 4 template part mati dan 2 file gambar tidak terpakai dihapus (hemat 8,27 MB), serta panggilan `get_template_part` ke file yang tidak ada di `tp/mobile/kategori.php` dibersihkan.
 
 ### GAP-17 — 🔵 Low: Workflow CI/CD Belum Memakai `semantic-release` & `.distignore` — ✅ Fixed (Fase 02)
 - **Lokasi:** [.github/workflows/ci.yml](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.github/workflows/ci.yml), [.github/workflows/release.yml](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.github/workflows/release.yml), [.releaserc.json](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/.releaserc.json)
@@ -138,6 +138,6 @@
 - **Masalah:** Struktur field group ACF hanya ada di database situs pelanggan.
 - **Rencana Fix (Fase 10):** Bundel `inc/acf-json/field-groups.json` dan `inc/acf-importer.php`.
 
-### GAP-22 — 🔵 Low: Format Kode Belum Sesuai WPCS (3.485 Error & 423 Warning)
-- **Lokasi:** 94 file PHP.
-- **Rencana Fix (Fase 04):** Jalankan `composer lint:fix` (`phpcbf`) dan rapikan sisa pelanggaran WPCS.
+### GAP-22 — 🔵 Low: Format Kode Belum Sesuai WPCS — ✅ Fixed (Fase 04)
+- **Lokasi:** Seluruh codebase PHP.
+- **Status Fix (Fase 04):** Dijalankan `composer lint:fix` (`phpcbf`) yang memperbaiki 2.537 pelanggaran format WPCS pada 64 file PHP secara otomatis.

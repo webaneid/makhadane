@@ -48,7 +48,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="ane-text ane-list">
 					<?php if ( have_rows( 'ane_repeater' ) ) : ?>
 						<ul>
-							<?php while ( have_rows( 'ane_repeater' ) ) : the_row();
+							<?php
+							while ( have_rows( 'ane_repeater' ) ) :
+								the_row();
 								$titler     = get_sub_field( 'ane_title' );
 								$deskripsir = get_sub_field( 'ane_deskripsi' );
 								$icon       = get_sub_field( 'ane_icon' );
@@ -76,7 +78,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<?php
 					$link = get_sub_field( 'ane_link' );
-					if ( ! empty( $link ) ) : ?>
+					if ( ! empty( $link ) ) :
+						?>
 						<a href="<?php echo esc_url( $link['url'] ); ?>" class="btn btn-primary">
 							<?php echo esc_html( $link['title'] ); ?>
 						</a>

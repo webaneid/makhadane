@@ -18,16 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		while ( have_posts() ) :
 			the_post();
-			$counter++;
+			++$counter;
 
 			if ( $counter === 1 || $counter === 5 ) :
 				get_template_part( 'tp/content', 'overlay' );
-			else :
-				if ( wp_is_mobile() ) {
+			elseif ( wp_is_mobile() ) :
 					get_template_part( 'tp/content', 'list' );
-				} else {
+				else :
 					get_template_part( 'tp/content', get_post_format() ?: 'standard' );
-				}
 			endif;
 		endwhile;
 		?>

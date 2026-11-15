@@ -14,14 +14,16 @@ $bgcss = 'background-repeat: no-repeat; background-position: center; background-
 ?>
 <section class="home-slider v2">
 	<div class="home-big-slider owl-carousel">
-		<?php if ( have_rows( 'home_slider' ) ) :
-			while ( have_rows( 'home_slider' ) ) : the_row();
+		<?php
+		if ( have_rows( 'home_slider' ) ) :
+			while ( have_rows( 'home_slider' ) ) :
+				the_row();
 
-				$bg         = get_sub_field( 'ane_background' );
-				$judul      = get_sub_field( 'ane_title' );
-				$deskripsi  = get_sub_field( 'ane_deskripsi' );
-				$link       = get_sub_field( 'ane_link' );
-				$posisi     = get_sub_field( 'ane_posisi' );
+				$bg        = get_sub_field( 'ane_background' );
+				$judul     = get_sub_field( 'ane_title' );
+				$deskripsi = get_sub_field( 'ane_deskripsi' );
+				$link      = get_sub_field( 'ane_link' );
+				$posisi    = get_sub_field( 'ane_posisi' );
 
 				$bg         = ! empty( $bg ) ? esc_url( $bg ) : '';
 				$judul      = ! empty( $judul ) ? wp_kses_post( $judul ) : '';
@@ -30,7 +32,7 @@ $bgcss = 'background-repeat: no-repeat; background-position: center; background-
 				$link_url   = ( ! empty( $link['url'] ) ) ? esc_url( $link['url'] ) : '';
 				$link_title = ( ! empty( $link['title'] ) ) ? esc_html( $link['title'] ) : '';
 
-		?>
+				?>
 			<div class="home-slider-item <?php echo $posisi . '-' . esc_attr( 'top' ); ?>"<?php echo ! empty( $bg ) ? ' style="background-image: url(' . $bg . '); ' . $bgcss . '"' : ''; ?>>
 				<div class="overlay"></div>
 				<div class="ane-container">
@@ -51,6 +53,9 @@ $bgcss = 'background-repeat: no-repeat; background-position: center; background-
 					<?php endif; ?>
 				</div>
 			</div>
-		<?php endwhile; endif; ?>
+				<?php
+		endwhile;
+endif;
+		?>
 	</div>
 </section>

@@ -20,9 +20,9 @@ if ( $bgimg_data && isset( $bgimg_data['sizes']['large'] ) ) {
 	$bgimg_url = esc_url( $bgimg_data['sizes']['large'] );
 }
 
-$author_id    = get_queried_object_id();
-$display_name = esc_html( get_the_author_meta( 'display_name', $author_id ) );
-$author_desc  = get_the_author_meta( 'description', $author_id );
+$author_id     = get_queried_object_id();
+$display_name  = esc_html( get_the_author_meta( 'display_name', $author_id ) );
+$author_desc   = get_the_author_meta( 'description', $author_id );
 $author_avatar = esc_url( get_avatar_url( $author_id, array( 'size' => 90 ) ) );
 ?>
 

@@ -52,13 +52,13 @@ function ane_generate_manifest() {
 	$icon_url = has_site_icon() ? get_site_icon_url( 192 ) : ane_get_asset_url( 'img/admin-webane.svg' );
 
 	$manifest = array(
-		'name'              => get_bloginfo( 'name' ),
-		'short_name'        => get_bloginfo( 'name' ),
-		'start_url'         => home_url( '/' ),
-		'display'           => 'standalone',
-		'background_color'  => '#ffffff',
-		'theme_color'       => $theme_color,
-		'icons'             => array(
+		'name'             => get_bloginfo( 'name' ),
+		'short_name'       => get_bloginfo( 'name' ),
+		'start_url'        => home_url( '/' ),
+		'display'          => 'standalone',
+		'background_color' => '#ffffff',
+		'theme_color'      => $theme_color,
+		'icons'            => array(
 			array(
 				'src'   => esc_url( $icon_url ),
 				'sizes' => '192x192',
@@ -70,11 +70,11 @@ function ane_generate_manifest() {
 				'type'  => 'image/png',
 			),
 		),
-		'scope'             => home_url( '/' ),
-		'categories'        => array( 'education', 'school', 'news', 'blog' ),
-		'description'       => get_bloginfo( 'description' ) ? get_bloginfo( 'description' ) : 'Situs resmi ' . get_bloginfo( 'name' ),
-		'lang'              => get_bloginfo( 'language' ),
-		'dir'               => 'ltr',
+		'scope'            => home_url( '/' ),
+		'categories'       => array( 'education', 'school', 'news', 'blog' ),
+		'description'      => get_bloginfo( 'description' ) ? get_bloginfo( 'description' ) : 'Situs resmi ' . get_bloginfo( 'name' ),
+		'lang'             => get_bloginfo( 'language' ),
+		'dir'              => 'ltr',
 	);
 
 	echo wp_json_encode( $manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
@@ -101,8 +101,8 @@ function ane_load_css_and_js() {
 		array(),
 		null
 	);
-	wp_enqueue_style( 'magnific-popup','https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css' );
-	wp_enqueue_style( 'OwlCarouse','https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css' );
+	wp_enqueue_style( 'magnific-popup', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css' );
+	wp_enqueue_style( 'OwlCarouse', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css' );
 
 	wp_enqueue_style(
 		'ane-main-style',
@@ -185,7 +185,7 @@ function ane_popup_gallery( $content ) {
 		return $content;
 	}
 
-	$pattern = '/<a(.*?)href=([\'"])(.*?\.(bmp|gif|jpeg|jpg|png|webp|svg))([\'"])(.*?)>/i';
+	$pattern     = '/<a(.*?)href=([\'"])(.*?\.(bmp|gif|jpeg|jpg|png|webp|svg))([\'"])(.*?)>/i';
 	$replacement = sprintf(
 		'<a$1href=$2$3$5 class="gallery-popup" title="%s"$6>',
 		esc_attr( $post->post_title )
@@ -277,11 +277,11 @@ function ane_get_youtube_thumbnail( $url, $size = '' ) {
 	}
 	// Extract from youtu.be or embed URL
 	elseif ( preg_match( '/youtu\.be/', $url ) || preg_match( '/embed/', $url ) ) {
-		$id = preg_replace( "/^((?![^\/]+$).)*/", '', $url );
+		$id = preg_replace( '/^((?![^\/]+$).)*/', '', $url );
 	}
 	// Extract from watch URL
 	else {
-		$id = preg_replace( "/^((?![^\?v]+$).)*=|&[^\&]*/", '', $url );
+		$id = preg_replace( '/^((?![^\?v]+$).)*=|&[^\&]*/', '', $url );
 	}
 
 	if ( empty( $id ) ) {
@@ -432,14 +432,14 @@ function ane_related_post() {
  * Display newest posts
  */
 function ane_newest_posts() {
-    $current_post_id = is_single() ? get_queried_object_id() : 0;
+	$current_post_id = is_single() ? get_queried_object_id() : 0;
 
 	$query = new WP_Query(
 		array(
 			'posts_per_page'      => 5,
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
-            'post__not_in'        => $current_post_id ? array( $current_post_id ) : array(),
+			'post__not_in'        => $current_post_id ? array( $current_post_id ) : array(),
 		)
 	);
 
@@ -626,67 +626,67 @@ function ane_social_share() {
  * @return void
  */
 function ane_sosial_media() {
-    $sosmed = get_field( 'sosmed_ane', 'option' );
+	$sosmed = get_field( 'sosmed_ane', 'option' );
 
-    if ( ! $sosmed ) {
-        return;
-    }
+	if ( ! $sosmed ) {
+		return;
+	}
 
-    $sosmed_list = array(
-        'sosmed_wa'      => array(
-            'class'  => 'whatsapp',
-            'prefix' => 'https://wa.me/',
-            'icon'   => 'ane-whatsapp',
-            'label'  => __( 'WhatsApp', 'makhadane' ),
-        ),
-        'sosmed_fb'      => array(
-            'class'  => 'facebook',
-            'prefix' => '',
-            'icon'   => 'ane-facebook',
-            'label'  => __( 'Facebook', 'makhadane' ),
-        ),
-        'sosmed_tw'      => array(
-            'class'  => 'twitter',
-            'prefix' => '',
-            'icon'   => 'ane-twitter-x',
-            'label'  => __( 'Twitter/X', 'makhadane' ),
-        ),
-        'sosmed_youtube' => array(
-            'class'  => 'youtube',
-            'prefix' => '',
-            'icon'   => 'ane-youtube',
-            'label'  => __( 'YouTube', 'makhadane' ),
-        ),
-        'sosmed_ig'      => array(
-            'class'  => 'instagram',
-            'prefix' => '',
-            'icon'   => 'ane-instagram',
-            'label'  => __( 'Instagram', 'makhadane' ),
-        ),
-        'sosmed_tiktok'  => array(
-            'class'  => 'tiktok',
-            'prefix' => '',
-            'icon'   => 'ane-tiktok',
-            'label'  => __( 'TikTok', 'makhadane' ),
-        ),
-    );
+	$sosmed_list = array(
+		'sosmed_wa'      => array(
+			'class'  => 'whatsapp',
+			'prefix' => 'https://wa.me/',
+			'icon'   => 'ane-whatsapp',
+			'label'  => __( 'WhatsApp', 'makhadane' ),
+		),
+		'sosmed_fb'      => array(
+			'class'  => 'facebook',
+			'prefix' => '',
+			'icon'   => 'ane-facebook',
+			'label'  => __( 'Facebook', 'makhadane' ),
+		),
+		'sosmed_tw'      => array(
+			'class'  => 'twitter',
+			'prefix' => '',
+			'icon'   => 'ane-twitter-x',
+			'label'  => __( 'Twitter/X', 'makhadane' ),
+		),
+		'sosmed_youtube' => array(
+			'class'  => 'youtube',
+			'prefix' => '',
+			'icon'   => 'ane-youtube',
+			'label'  => __( 'YouTube', 'makhadane' ),
+		),
+		'sosmed_ig'      => array(
+			'class'  => 'instagram',
+			'prefix' => '',
+			'icon'   => 'ane-instagram',
+			'label'  => __( 'Instagram', 'makhadane' ),
+		),
+		'sosmed_tiktok'  => array(
+			'class'  => 'tiktok',
+			'prefix' => '',
+			'icon'   => 'ane-tiktok',
+			'label'  => __( 'TikTok', 'makhadane' ),
+		),
+	);
 
-    echo '<div class="ane-sosmed"><ul>';
+	echo '<div class="ane-sosmed"><ul>';
 
-    foreach ( $sosmed_list as $key => $data ) {
-        if ( ! empty( $sosmed[ $key ] ) ) {
-            $url = esc_url( $data['prefix'] . $sosmed[ $key ] );
-            printf(
-                '<li><a class="%s" href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s"><i class="%s"></i></a></li>',
-                esc_attr( $data['class'] ),
-                $url,
-                esc_attr( $data['label'] ),
-                esc_attr( $data['icon'] )
-            );
-        }
-    }
+	foreach ( $sosmed_list as $key => $data ) {
+		if ( ! empty( $sosmed[ $key ] ) ) {
+			$url = esc_url( $data['prefix'] . $sosmed[ $key ] );
+			printf(
+				'<li><a class="%s" href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s"><i class="%s"></i></a></li>',
+				esc_attr( $data['class'] ),
+				$url,
+				esc_attr( $data['label'] ),
+				esc_attr( $data['icon'] )
+			);
+		}
+	}
 
-    echo '</ul></div>';
+	echo '</ul></div>';
 }
 
 
@@ -699,22 +699,22 @@ function ane_sosial_media() {
  * @return void
  */
 function ane_about_company() {
-    $about = get_field( 'about_ane', 'option' );
+	$about = get_field( 'about_ane', 'option' );
 
-    if ( ! $about ) {
-        return;
-    }
+	if ( ! $about ) {
+		return;
+	}
 
-    $judul   = ! empty( $about['company_name'] ) ? esc_html( $about['company_name'] ) : '';
-    $sologan = ! empty( $about['company_sologan'] ) ? esc_html( $about['company_sologan'] ) : '';
+	$judul   = ! empty( $about['company_name'] ) ? esc_html( $about['company_name'] ) : '';
+	$sologan = ! empty( $about['company_sologan'] ) ? esc_html( $about['company_sologan'] ) : '';
 
-    if ( $judul ) {
-        echo '<h3>' . $judul . '</h3>';
-    }
+	if ( $judul ) {
+		echo '<h3>' . $judul . '</h3>';
+	}
 
-    if ( $sologan ) {
-        echo '<h4>' . $sologan . '</h4>';
-    }
+	if ( $sologan ) {
+		echo '<h4>' . $sologan . '</h4>';
+	}
 }
 
 /**
@@ -726,51 +726,51 @@ function ane_about_company() {
  * @return void
  */
 function ane_contact_info() {
-    $contact = get_field( 'contact_ane', 'option' );
+	$contact = get_field( 'contact_ane', 'option' );
 
-    if ( ! $contact ) {
-        return;
-    }
+	if ( ! $contact ) {
+		return;
+	}
 
-    $alamat_parts = array_filter(
-        array(
-            ! empty( $contact['kontak_alamat'] ) ? $contact['kontak_alamat'] : '',
-            ! empty( $contact['kontak_kabupaten'] ) ? $contact['kontak_kabupaten'] : '',
-            ! empty( $contact['kontak_provinsi'] ) ? $contact['kontak_provinsi'] : '',
-            ! empty( $contact['kontak_kodepos'] ) ? $contact['kontak_kodepos'] : '',
-        )
-    );
+	$alamat_parts = array_filter(
+		array(
+			! empty( $contact['kontak_alamat'] ) ? $contact['kontak_alamat'] : '',
+			! empty( $contact['kontak_kabupaten'] ) ? $contact['kontak_kabupaten'] : '',
+			! empty( $contact['kontak_provinsi'] ) ? $contact['kontak_provinsi'] : '',
+			! empty( $contact['kontak_kodepos'] ) ? $contact['kontak_kodepos'] : '',
+		)
+	);
 
-    $alamat  = ! empty( $alamat_parts ) ? esc_html( implode( ', ', $alamat_parts ) ) : '';
-    $phone   = ! empty( $contact['kontak_telepon'] ) ? esc_html( $contact['kontak_telepon'] ) : '';
-    $mobile  = ! empty( $contact['kontak_handphone'] ) ? esc_html( $contact['kontak_handphone'] ) : '';
-    $email   = ! empty( $contact['kontak_email'] ) ? esc_html( $contact['kontak_email'] ) : '';
-    $website = ! empty( $contact['kontak_website'] ) ? esc_url( $contact['kontak_website'] ) : '';
+	$alamat  = ! empty( $alamat_parts ) ? esc_html( implode( ', ', $alamat_parts ) ) : '';
+	$phone   = ! empty( $contact['kontak_telepon'] ) ? esc_html( $contact['kontak_telepon'] ) : '';
+	$mobile  = ! empty( $contact['kontak_handphone'] ) ? esc_html( $contact['kontak_handphone'] ) : '';
+	$email   = ! empty( $contact['kontak_email'] ) ? esc_html( $contact['kontak_email'] ) : '';
+	$website = ! empty( $contact['kontak_website'] ) ? esc_url( $contact['kontak_website'] ) : '';
 
-    echo '<div class="footer-kontak"><ul>';
+	echo '<div class="footer-kontak"><ul>';
 
-    if ( $alamat ) {
-        echo '<li><i class="ane-lokasi"></i> ' . $alamat . '</li>';
-    }
-    if ( $phone ) {
-        echo '<li><i class="ane-telepon"></i> ' . $phone . '</li>';
-    }
-    if ( $mobile ) {
-        echo '<li><i class="ane-handphone"></i> ' . $mobile . '</li>';
-    }
-    if ( $email ) {
-        echo '<li><i class="ane-email"></i> ' . $email . '</li>';
-    }
-    if ( $website ) {
-        printf(
-            '<li><a href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s"><i class="ane-laptop"></i> %s</a></li>',
-            $website,
-            esc_attr__( 'Visit website', 'makhadane' ),
-            $website
-        );
-    }
+	if ( $alamat ) {
+		echo '<li><i class="ane-lokasi"></i> ' . $alamat . '</li>';
+	}
+	if ( $phone ) {
+		echo '<li><i class="ane-telepon"></i> ' . $phone . '</li>';
+	}
+	if ( $mobile ) {
+		echo '<li><i class="ane-handphone"></i> ' . $mobile . '</li>';
+	}
+	if ( $email ) {
+		echo '<li><i class="ane-email"></i> ' . $email . '</li>';
+	}
+	if ( $website ) {
+		printf(
+			'<li><a href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s"><i class="ane-laptop"></i> %s</a></li>',
+			$website,
+			esc_attr__( 'Visit website', 'makhadane' ),
+			$website
+		);
+	}
 
-    echo '</ul></div>';
+	echo '</ul></div>';
 }
 
 /**
@@ -782,22 +782,22 @@ function ane_contact_info() {
  * @return string Formatted address or empty string
  */
 function ane_get_alamat() {
-    $contact = get_field( 'contact_ane', 'option' );
+	$contact = get_field( 'contact_ane', 'option' );
 
-    if ( ! $contact ) {
-        return '';
-    }
+	if ( ! $contact ) {
+		return '';
+	}
 
-    $alamat_parts = array_filter(
-        array(
-            ! empty( $contact['kontak_alamat'] ) ? $contact['kontak_alamat'] : '',
-            ! empty( $contact['kontak_kabupaten'] ) ? $contact['kontak_kabupaten'] : '',
-            ! empty( $contact['kontak_provinsi'] ) ? $contact['kontak_provinsi'] : '',
-            ! empty( $contact['kontak_kodepos'] ) ? $contact['kontak_kodepos'] : '',
-        )
-    );
+	$alamat_parts = array_filter(
+		array(
+			! empty( $contact['kontak_alamat'] ) ? $contact['kontak_alamat'] : '',
+			! empty( $contact['kontak_kabupaten'] ) ? $contact['kontak_kabupaten'] : '',
+			! empty( $contact['kontak_provinsi'] ) ? $contact['kontak_provinsi'] : '',
+			! empty( $contact['kontak_kodepos'] ) ? $contact['kontak_kodepos'] : '',
+		)
+	);
 
-    return ! empty( $alamat_parts ) ? esc_html( implode( ', ', $alamat_parts ) ) : '';
+	return ! empty( $alamat_parts ) ? esc_html( implode( ', ', $alamat_parts ) ) : '';
 }
 
 
@@ -810,36 +810,36 @@ function ane_get_alamat() {
  * @return array Array of news items with title and url
  */
 function ane_get_marquee_news() {
-    $cache_key = 'ane_marquee_news';
-    $news      = get_transient( $cache_key );
+	$cache_key = 'ane_marquee_news';
+	$news      = get_transient( $cache_key );
 
-    if ( false === $news ) {
-        $args = array(
-            'post_type'      => 'post',
-            'posts_per_page' => 5,
-            'orderby'        => 'date',
-            'order'          => 'DESC',
-            'no_found_rows'  => true,
-        );
+	if ( false === $news ) {
+		$args = array(
+			'post_type'      => 'post',
+			'posts_per_page' => 5,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+			'no_found_rows'  => true,
+		);
 
-        $query = new WP_Query( $args );
-        $news  = array();
+		$query = new WP_Query( $args );
+		$news  = array();
 
-        if ( $query->have_posts() ) {
-            while ( $query->have_posts() ) {
-                $query->the_post();
-                $news[] = array(
-                    'title' => get_the_title(),
-                    'url'   => get_permalink(),
-                );
-            }
-            wp_reset_postdata();
-        }
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$news[] = array(
+					'title' => get_the_title(),
+					'url'   => get_permalink(),
+				);
+			}
+			wp_reset_postdata();
+		}
 
-        set_transient( $cache_key, $news, MINUTE_IN_SECONDS );
-    }
+		set_transient( $cache_key, $news, MINUTE_IN_SECONDS );
+	}
 
-    return $news;
+	return $news;
 }
 
 /**
@@ -852,60 +852,60 @@ function ane_get_marquee_news() {
  * @return string Modified content with author bio
  */
 function ane_author_info_box( $content ) {
-    global $post;
+	global $post;
 
-    if ( ! is_singular( 'post' ) || ! isset( $post->post_author ) ) {
-        return $content;
-    }
+	if ( ! is_singular( 'post' ) || ! isset( $post->post_author ) ) {
+		return $content;
+	}
 
-    $display_name = get_the_author_meta( 'display_name', $post->post_author );
+	$display_name = get_the_author_meta( 'display_name', $post->post_author );
 
-    if ( empty( $display_name ) ) {
-        $display_name = get_the_author_meta( 'nickname', $post->post_author );
-    }
+	if ( empty( $display_name ) ) {
+		$display_name = get_the_author_meta( 'nickname', $post->post_author );
+	}
 
-    $user_description = get_the_author_meta( 'user_description', $post->post_author );
-    $user_website     = get_the_author_meta( 'url', $post->post_author );
-    $user_posts       = get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) );
+	$user_description = get_the_author_meta( 'user_description', $post->post_author );
+	$user_website     = get_the_author_meta( 'url', $post->post_author );
+	$user_posts       = get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) );
 
-    $author_details = '';
+	$author_details = '';
 
-    if ( ! empty( $display_name ) ) {
-        $author_details .= sprintf(
-            '<h2 class="author_name">%s %s</h2>',
-            esc_html__( 'Written By:', 'makhadane' ),
-            esc_html( $display_name )
-        );
-    }
+	if ( ! empty( $display_name ) ) {
+		$author_details .= sprintf(
+			'<h2 class="author_name">%s %s</h2>',
+			esc_html__( 'Written By:', 'makhadane' ),
+			esc_html( $display_name )
+		);
+	}
 
-    if ( ! empty( $user_description ) ) {
-        $author_details .= sprintf(
-            '<div class="author_details">%s%s</div>',
-            get_avatar( get_the_author_meta( 'user_email' ), 90 ),
-            nl2br( esc_html( $user_description ) )
-        );
-    }
+	if ( ! empty( $user_description ) ) {
+		$author_details .= sprintf(
+			'<div class="author_details">%s%s</div>',
+			get_avatar( get_the_author_meta( 'user_email' ), 90 ),
+			nl2br( esc_html( $user_description ) )
+		);
+	}
 
-    $author_details .= sprintf(
-        '<div class="author_links"><a href="%s">%s %s</a>',
-        esc_url( $user_posts ),
-        esc_html( $display_name ),
-        esc_html__( 'Posts', 'makhadane' )
-    );
+	$author_details .= sprintf(
+		'<div class="author_links"><a href="%s">%s %s</a>',
+		esc_url( $user_posts ),
+		esc_html( $display_name ),
+		esc_html__( 'Posts', 'makhadane' )
+	);
 
-    if ( ! empty( $user_website ) ) {
-        $author_details .= sprintf(
-            ' | <a href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a></div>',
-            esc_url( $user_website ),
-            esc_html__( 'Website', 'makhadane' )
-        );
-    } else {
-        $author_details .= '</div>';
-    }
+	if ( ! empty( $user_website ) ) {
+		$author_details .= sprintf(
+			' | <a href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a></div>',
+			esc_url( $user_website ),
+			esc_html__( 'Website', 'makhadane' )
+		);
+	} else {
+		$author_details .= '</div>';
+	}
 
-    $content .= '<footer class="author_bio_section">' . $author_details . '</footer>';
+	$content .= '<footer class="author_bio_section">' . $author_details . '</footer>';
 
-    return $content;
+	return $content;
 }
 
 add_filter( 'the_content', 'ane_author_info_box' );
@@ -919,137 +919,137 @@ add_filter( 'the_content', 'ane_author_info_box' );
  * @return void
  */
 function ane_breadcrumbs() {
-    if ( is_front_page() ) {
-        return;
-    }
+	if ( is_front_page() ) {
+		return;
+	}
 
-    global $post;
-    $home_url    = home_url( '/' );
-    $breadcrumbs = array();
-    $position    = 1;
+	global $post;
+	$home_url    = home_url( '/' );
+	$breadcrumbs = array();
+	$position    = 1;
 
-    // Home link dengan schema
-    $breadcrumbs[] = sprintf(
-        '<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
-        esc_url( $home_url ),
-        esc_html__( 'Home', 'makhadane' ),
-        $position
-    );
+	// Home link dengan schema
+	$breadcrumbs[] = sprintf(
+		'<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
+		esc_url( $home_url ),
+		esc_html__( 'Home', 'makhadane' ),
+		$position
+	);
 
-    $position++;
+	++$position;
 
-    if ( is_archive() ) {
-        if ( is_post_type_archive() ) {
-            $post_type     = get_query_var( 'post_type' );
-            $post_type_obj = get_post_type_object( $post_type );
+	if ( is_archive() ) {
+		if ( is_post_type_archive() ) {
+			$post_type     = get_query_var( 'post_type' );
+			$post_type_obj = get_post_type_object( $post_type );
 
-            if ( $post_type_obj ) {
-                $breadcrumbs[] = sprintf(
-                    '<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
-                    esc_html( $post_type_obj->labels->name ),
-                    $position
-                );
-            }
-        } elseif ( is_category() ) {
-            $category = get_queried_object();
+			if ( $post_type_obj ) {
+				$breadcrumbs[] = sprintf(
+					'<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
+					esc_html( $post_type_obj->labels->name ),
+					$position
+				);
+			}
+		} elseif ( is_category() ) {
+			$category = get_queried_object();
 
-            if ( $category->parent != 0 ) {
-                $parent_cats = array();
-                $parent_id   = $category->parent;
+			if ( $category->parent != 0 ) {
+				$parent_cats = array();
+				$parent_id   = $category->parent;
 
-                while ( $parent_id ) {
-                    $parent      = get_category( $parent_id );
-                    $parent_cats[] = sprintf(
-                        '<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
-                        esc_url( get_category_link( $parent->term_id ) ),
-                        esc_html( $parent->name ),
-                        $position
-                    );
-                    $parent_id = $parent->parent;
-                    $position++;
-                }
+				while ( $parent_id ) {
+					$parent        = get_category( $parent_id );
+					$parent_cats[] = sprintf(
+						'<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
+						esc_url( get_category_link( $parent->term_id ) ),
+						esc_html( $parent->name ),
+						$position
+					);
+					$parent_id     = $parent->parent;
+					++$position;
+				}
 
-                $breadcrumbs = array_merge( $breadcrumbs, array_reverse( $parent_cats ) );
-            }
+				$breadcrumbs = array_merge( $breadcrumbs, array_reverse( $parent_cats ) );
+			}
 
-            $breadcrumbs[] = sprintf(
-                '<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
-                esc_html( single_cat_title( '', false ) ),
-                $position
-            );
-        } elseif ( is_tag() ) {
-            $breadcrumbs[] = sprintf(
-                '<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
-                esc_html( single_tag_title( '', false ) ),
-                $position
-            );
-        } else {
-            $breadcrumbs[] = sprintf(
-                '<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
-                esc_html( get_the_archive_title() ),
-                $position
-            );
-        }
-    } elseif ( is_singular() ) {
-        $post_type = get_post_type();
+			$breadcrumbs[] = sprintf(
+				'<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
+				esc_html( single_cat_title( '', false ) ),
+				$position
+			);
+		} elseif ( is_tag() ) {
+			$breadcrumbs[] = sprintf(
+				'<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
+				esc_html( single_tag_title( '', false ) ),
+				$position
+			);
+		} else {
+			$breadcrumbs[] = sprintf(
+				'<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
+				esc_html( get_the_archive_title() ),
+				$position
+			);
+		}
+	} elseif ( is_singular() ) {
+		$post_type = get_post_type();
 
-        if ( 'post' !== $post_type && 'page' !== $post_type ) {
-            $post_type_obj = get_post_type_object( $post_type );
+		if ( 'post' !== $post_type && 'page' !== $post_type ) {
+			$post_type_obj = get_post_type_object( $post_type );
 
-            if ( $post_type_obj && ! empty( $post_type_obj->has_archive ) ) {
-                $breadcrumbs[] = sprintf(
-                    '<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
-                    esc_url( get_post_type_archive_link( $post_type ) ),
-                    esc_html( $post_type_obj->labels->singular_name ),
-                    $position
-                );
-                $position++;
-            }
-        }
+			if ( $post_type_obj && ! empty( $post_type_obj->has_archive ) ) {
+				$breadcrumbs[] = sprintf(
+					'<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
+					esc_url( get_post_type_archive_link( $post_type ) ),
+					esc_html( $post_type_obj->labels->singular_name ),
+					$position
+				);
+				++$position;
+			}
+		}
 
-        if ( 'post' === $post_type ) {
-            $categories = get_the_category();
+		if ( 'post' === $post_type ) {
+			$categories = get_the_category();
 
-            if ( ! empty( $categories ) ) {
-                $category = $categories[0];
+			if ( ! empty( $categories ) ) {
+				$category = $categories[0];
 
-                $breadcrumbs[] = sprintf(
-                    '<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
-                    esc_url( get_category_link( $category->term_id ) ),
-                    esc_html( $category->name ),
-                    $position
-                );
-                $position++;
-            }
-        }
+				$breadcrumbs[] = sprintf(
+					'<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
+					esc_url( get_category_link( $category->term_id ) ),
+					esc_html( $category->name ),
+					$position
+				);
+				++$position;
+			}
+		}
 
-        if ( isset( $post->post_parent ) && $post->post_parent ) {
-            $parents   = array();
-            $parent_id = $post->post_parent;
+		if ( isset( $post->post_parent ) && $post->post_parent ) {
+			$parents   = array();
+			$parent_id = $post->post_parent;
 
-            while ( $parent_id ) {
-                $parent    = get_post( $parent_id );
-                $parents[] = sprintf(
-                    '<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
-                    esc_url( get_permalink( $parent->ID ) ),
-                    esc_html( get_the_title( $parent->ID ) ),
-                    $position
-                );
-                $parent_id = $parent->post_parent;
-                $position++;
-            }
+			while ( $parent_id ) {
+				$parent    = get_post( $parent_id );
+				$parents[] = sprintf(
+					'<li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="%s"><span itemprop="name">%s</span></a><meta itemprop="position" content="%d" /></li>',
+					esc_url( get_permalink( $parent->ID ) ),
+					esc_html( get_the_title( $parent->ID ) ),
+					$position
+				);
+				$parent_id = $parent->post_parent;
+				++$position;
+			}
 
-            $breadcrumbs = array_merge( $breadcrumbs, array_reverse( $parents ) );
-        }
+			$breadcrumbs = array_merge( $breadcrumbs, array_reverse( $parents ) );
+		}
 
-        $breadcrumbs[] = sprintf(
-            '<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
-            esc_html( get_the_title() ),
-            $position
-        );
-    }
+		$breadcrumbs[] = sprintf(
+			'<li class="current" itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">%s</span><meta itemprop="position" content="%d" /></li>',
+			esc_html( get_the_title() ),
+			$position
+		);
+	}
 
-    echo '<ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">' . implode( '', $breadcrumbs ) . '</ul>';
+	echo '<ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">' . implode( '', $breadcrumbs ) . '</ul>';
 }
 
 
@@ -1062,15 +1062,15 @@ function ane_breadcrumbs() {
  * @return void
  */
 function ane_display_breadcrumbs() {
-    if ( function_exists( 'ane_breadcrumbs' ) ) {
-        ?>
-        <div class="ane-breadcrumb">
-            <div class="ane-container">
-                <?php ane_breadcrumbs(); ?>
-            </div>
-        </div>
-        <?php
-    }
+	if ( function_exists( 'ane_breadcrumbs' ) ) {
+		?>
+		<div class="ane-breadcrumb">
+			<div class="ane-container">
+				<?php ane_breadcrumbs(); ?>
+			</div>
+		</div>
+		<?php
+	}
 }
 
 /**
@@ -1082,27 +1082,27 @@ function ane_display_breadcrumbs() {
  * @return string HTML output with attribution links
  */
 function ane_get_designed_by() {
-    $yakaafi_url = 'https://yakaafi.com/';
-    $webane_url  = 'https://webane.com/';
+	$yakaafi_url = 'https://yakaafi.com/';
+	$webane_url  = 'https://webane.com/';
 
-    return sprintf(
-        '| %s',
-        sprintf(
-            __( 'Wakaf digital %s, kolaborasi dengan %s', 'makhadane' ),
-            sprintf(
-                '<a id="klik-yakaafi" href="%s" target="_blank" rel="noopener noreferrer" title="%s">%s</a>',
-                esc_url( $yakaafi_url ),
-                esc_attr__( 'Yakaafi - Yayasan Amal Wakaf Indonesia', 'makhadane' ),
-                esc_html__( 'Yakaafi Foundation', 'makhadane' )
-            ),
-            sprintf(
-                '<a id="klik-webane" href="%s" target="_blank" rel="noopener noreferrer" title="%s">%s</a>',
-                esc_url( $webane_url ),
-                esc_attr__( 'Web Design Webane Indonesia', 'makhadane' ),
-                esc_html__( 'Webane Indonesia', 'makhadane' )
-            )
-        )
-    );
+	return sprintf(
+		'| %s',
+		sprintf(
+			__( 'Wakaf digital %1$s, kolaborasi dengan %2$s', 'makhadane' ),
+			sprintf(
+				'<a id="klik-yakaafi" href="%s" target="_blank" rel="noopener noreferrer" title="%s">%s</a>',
+				esc_url( $yakaafi_url ),
+				esc_attr__( 'Yakaafi - Yayasan Amal Wakaf Indonesia', 'makhadane' ),
+				esc_html__( 'Yakaafi Foundation', 'makhadane' )
+			),
+			sprintf(
+				'<a id="klik-webane" href="%s" target="_blank" rel="noopener noreferrer" title="%s">%s</a>',
+				esc_url( $webane_url ),
+				esc_attr__( 'Web Design Webane Indonesia', 'makhadane' ),
+				esc_html__( 'Webane Indonesia', 'makhadane' )
+			)
+		)
+	);
 }
 
 /**
@@ -1114,37 +1114,37 @@ function ane_get_designed_by() {
  * @return string Copyright year output
  */
 function ane_get_copyright_year() {
-    $cached = get_transient( 'makhadane_copyright_year' );
-    if ( is_string( $cached ) && '' !== $cached ) {
-        return $cached;
-    }
+	$cached = get_transient( 'makhadane_copyright_year' );
+	if ( is_string( $cached ) && '' !== $cached ) {
+		return $cached;
+	}
 
-    global $wpdb;
+	global $wpdb;
 
-    $copyright_dates = $wpdb->get_results(
-        "SELECT
+	$copyright_dates = $wpdb->get_results(
+		"SELECT
             YEAR(MIN(post_date_gmt)) AS firstdate,
             YEAR(MAX(post_date_gmt)) AS lastdate
         FROM {$wpdb->posts}
         WHERE post_status = 'publish'"
-    );
+	);
 
-    $copyright = '&copy; ' . gmdate( 'Y' );
+	$copyright = '&copy; ' . gmdate( 'Y' );
 
-    if ( ! empty( $copyright_dates ) && isset( $copyright_dates[0]->firstdate ) && ! empty( $copyright_dates[0]->firstdate ) ) {
-        $first_year = $copyright_dates[0]->firstdate;
-        $last_year  = $copyright_dates[0]->lastdate;
+	if ( ! empty( $copyright_dates ) && isset( $copyright_dates[0]->firstdate ) && ! empty( $copyright_dates[0]->firstdate ) ) {
+		$first_year = $copyright_dates[0]->firstdate;
+		$last_year  = $copyright_dates[0]->lastdate;
 
-        $copyright = '&copy; ' . $first_year;
+		$copyright = '&copy; ' . $first_year;
 
-        if ( $first_year != $last_year ) {
-            $copyright .= '-' . $last_year;
-        }
-    }
+		if ( $first_year != $last_year ) {
+			$copyright .= '-' . $last_year;
+		}
+	}
 
-    set_transient( 'makhadane_copyright_year', $copyright, DAY_IN_SECONDS );
+	set_transient( 'makhadane_copyright_year', $copyright, DAY_IN_SECONDS );
 
-    return $copyright;
+	return $copyright;
 }
 
 /**
@@ -1153,7 +1153,7 @@ function ane_get_copyright_year() {
  * @return void
  */
 function makhadane_flush_copyright_year_cache() {
-    delete_transient( 'makhadane_copyright_year' );
+	delete_transient( 'makhadane_copyright_year' );
 }
 add_action( 'save_post', 'makhadane_flush_copyright_year_cache' );
 
@@ -1171,43 +1171,43 @@ add_action( 'save_post', 'makhadane_flush_copyright_year_cache' );
  * @return string Modified avatar HTML
  */
 function ane_custom_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
-    $size = absint( $size );
-    $alt  = esc_attr( $alt );
+	$size = absint( $size );
+	$alt  = esc_attr( $alt );
 
-    $user = ane_get_user_from_id_or_email( $id_or_email );
+	$user = ane_get_user_from_id_or_email( $id_or_email );
 
-    if ( ! $user instanceof WP_User ) {
-        return $avatar;
-    }
+	if ( ! $user instanceof WP_User ) {
+		return $avatar;
+	}
 
-    $image_id = get_user_meta( $user->ID, 'gravatar_ane', true );
+	$image_id = get_user_meta( $user->ID, 'gravatar_ane', true );
 
-    if ( empty( $image_id ) ) {
-        return $avatar;
-    }
+	if ( empty( $image_id ) ) {
+		return $avatar;
+	}
 
-    $image_id = absint( $image_id );
+	$image_id = absint( $image_id );
 
-    if ( ! wp_attachment_is_image( $image_id ) ) {
-        return $avatar;
-    }
+	if ( ! wp_attachment_is_image( $image_id ) ) {
+		return $avatar;
+	}
 
-    $image = wp_get_attachment_image_src( $image_id, 'kotak' );
+	$image = wp_get_attachment_image_src( $image_id, 'kotak' );
 
-    if ( ! $image ) {
-        return $avatar;
-    }
+	if ( ! $image ) {
+		return $avatar;
+	}
 
-    $attrs = array(
-        'alt'     => $alt,
-        'src'     => esc_url( $image[0] ),
-        'class'   => sprintf( 'avatar avatar-%d', $size ),
-        'height'  => $size,
-        'width'   => $size,
-        'loading' => 'lazy',
-    );
+	$attrs = array(
+		'alt'     => $alt,
+		'src'     => esc_url( $image[0] ),
+		'class'   => sprintf( 'avatar avatar-%d', $size ),
+		'height'  => $size,
+		'width'   => $size,
+		'loading' => 'lazy',
+	);
 
-    return sprintf( '<img%s />', ane_build_html_attrs( $attrs ) );
+	return sprintf( '<img%s />', ane_build_html_attrs( $attrs ) );
 }
 
 /**
@@ -1220,30 +1220,30 @@ function ane_custom_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
  * @return WP_User|false User object or false on failure
  */
 function ane_get_user_from_id_or_email( $id_or_email ) {
-    if ( $id_or_email instanceof WP_User ) {
-        return $id_or_email;
-    }
+	if ( $id_or_email instanceof WP_User ) {
+		return $id_or_email;
+	}
 
-    if ( $id_or_email instanceof WP_Post ) {
-        return get_user_by( 'id', (int) $id_or_email->post_author );
-    }
+	if ( $id_or_email instanceof WP_Post ) {
+		return get_user_by( 'id', (int) $id_or_email->post_author );
+	}
 
-    if ( $id_or_email instanceof WP_Comment ) {
-        if ( ! empty( $id_or_email->user_id ) ) {
-            return get_user_by( 'id', (int) $id_or_email->user_id );
-        }
-        return get_user_by( 'email', $id_or_email->comment_author_email );
-    }
+	if ( $id_or_email instanceof WP_Comment ) {
+		if ( ! empty( $id_or_email->user_id ) ) {
+			return get_user_by( 'id', (int) $id_or_email->user_id );
+		}
+		return get_user_by( 'email', $id_or_email->comment_author_email );
+	}
 
-    if ( is_numeric( $id_or_email ) ) {
-        return get_user_by( 'id', (int) $id_or_email );
-    }
+	if ( is_numeric( $id_or_email ) ) {
+		return get_user_by( 'id', (int) $id_or_email );
+	}
 
-    if ( is_string( $id_or_email ) && is_email( $id_or_email ) ) {
-        return get_user_by( 'email', $id_or_email );
-    }
+	if ( is_string( $id_or_email ) && is_email( $id_or_email ) ) {
+		return get_user_by( 'email', $id_or_email );
+	}
 
-    return false;
+	return false;
 }
 
 /**
@@ -1256,19 +1256,19 @@ function ane_get_user_from_id_or_email( $id_or_email ) {
  * @return string Formatted HTML attributes
  */
 function ane_build_html_attrs( $attrs ) {
-    $html = '';
+	$html = '';
 
-    foreach ( $attrs as $key => $value ) {
-        if ( ! empty( $value ) || '0' === $value ) {
-            $html .= sprintf(
-                ' %s="%s"',
-                esc_attr( $key ),
-                esc_attr( $value )
-            );
-        }
-    }
+	foreach ( $attrs as $key => $value ) {
+		if ( ! empty( $value ) || '0' === $value ) {
+			$html .= sprintf(
+				' %s="%s"',
+				esc_attr( $key ),
+				esc_attr( $value )
+			);
+		}
+	}
 
-    return $html;
+	return $html;
 }
 
 add_filter( 'get_avatar', 'ane_custom_avatar', 10, 5 );
@@ -1283,21 +1283,21 @@ add_filter( 'get_avatar', 'ane_custom_avatar', 10, 5 );
  * @return string Formatted view count
  */
 function ane_get_views( $post_id = null ) {
-    if ( ! $post_id ) {
-        global $post;
-        if ( ! $post ) {
-            return __( '0 views', 'makhadane' );
-        }
-        $post_id = $post->ID;
-    }
+	if ( ! $post_id ) {
+		global $post;
+		if ( ! $post ) {
+			return __( '0 views', 'makhadane' );
+		}
+		$post_id = $post->ID;
+	}
 
-    $count_key = 'musi_views';
-    $count     = (int) get_post_meta( $post_id, $count_key, true );
+	$count_key = 'musi_views';
+	$count     = (int) get_post_meta( $post_id, $count_key, true );
 
-    return sprintf(
-        _n( '%s view', '%s views', $count, 'makhadane' ),
-        number_format_i18n( $count )
-    );
+	return sprintf(
+		_n( '%s view', '%s views', $count, 'makhadane' ),
+		number_format_i18n( $count )
+	);
 }
 
 /**
@@ -1310,30 +1310,30 @@ function ane_get_views( $post_id = null ) {
  * @return void
  */
 function ane_set_views( $post_id = 0 ) {
-    if ( ! $post_id ) {
-        global $post;
-        if ( ! $post ) {
-            return;
-        }
-        $post_id = $post->ID;
-    }
+	if ( ! $post_id ) {
+		global $post;
+		if ( ! $post ) {
+			return;
+		}
+		$post_id = $post->ID;
+	}
 
-    $post_id = absint( $post_id );
-    if ( $post_id <= 0 || 'publish' !== get_post_status( $post_id ) ) {
-        return;
-    }
+	$post_id = absint( $post_id );
+	if ( $post_id <= 0 || 'publish' !== get_post_status( $post_id ) ) {
+		return;
+	}
 
-    $ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
-    $count_key  = 'musi_views';
-    $view_key   = 'viewed_' . $post_id . '_' . md5( $ip_address );
+	$ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	$count_key  = 'musi_views';
+	$view_key   = 'viewed_' . $post_id . '_' . md5( $ip_address );
 
-    if ( false === get_transient( $view_key ) ) {
-        $count = (int) get_post_meta( $post_id, $count_key, true );
-        $count++;
-        update_post_meta( $post_id, $count_key, $count );
+	if ( false === get_transient( $view_key ) ) {
+		$count = (int) get_post_meta( $post_id, $count_key, true );
+		++$count;
+		update_post_meta( $post_id, $count_key, $count );
 
-        set_transient( $view_key, time(), HOUR_IN_SECONDS );
-    }
+		set_transient( $view_key, time(), HOUR_IN_SECONDS );
+	}
 }
 
 /**
@@ -1346,14 +1346,14 @@ function ane_set_views( $post_id = 0 ) {
  */
 function ane_increment_views_ajax() {
     // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public read-only view counter throttled per IP via transient.
-    if ( ! empty( $_GET['postviews_id'] ) ) {
+	if ( ! empty( $_GET['postviews_id'] ) ) {
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $post_id = absint( wp_unslash( $_GET['postviews_id'] ) );
-        if ( $post_id > 0 && 'publish' === get_post_status( $post_id ) ) {
-            ane_set_views( $post_id );
-        }
-    }
-    wp_die();
+		$post_id = absint( wp_unslash( $_GET['postviews_id'] ) );
+		if ( $post_id > 0 && 'publish' === get_post_status( $post_id ) ) {
+			ane_set_views( $post_id );
+		}
+	}
+	wp_die();
 }
 add_action( 'wp_ajax_postviews', 'ane_increment_views_ajax' );
 add_action( 'wp_ajax_nopriv_postviews', 'ane_increment_views_ajax' );
@@ -1367,63 +1367,63 @@ add_action( 'wp_ajax_nopriv_postviews', 'ane_increment_views_ajax' );
  * @return void
  */
 function ane_enqueue_postviews_script() {
-    global $post;
+	global $post;
 
-    if ( is_single() && isset( $post->ID ) ) {
-        wp_enqueue_script(
-            'ane-postviews',
-            ane_get_asset_url( 'js/postviews-cache.js' ),
-            array( 'jquery' ),
-            '4.1.1',
-            true
-        );
+	if ( is_single() && isset( $post->ID ) ) {
+		wp_enqueue_script(
+			'ane-postviews',
+			ane_get_asset_url( 'js/postviews-cache.js' ),
+			array( 'jquery' ),
+			'4.1.1',
+			true
+		);
 
-        wp_localize_script(
-            'ane-postviews',
-            'postViewsCache',
-            array(
-                'admin_ajax_url' => admin_url( 'admin-ajax.php' ),
-                'post_id'        => $post->ID,
-            )
-        );
-    }
+		wp_localize_script(
+			'ane-postviews',
+			'postViewsCache',
+			array(
+				'admin_ajax_url' => admin_url( 'admin-ajax.php' ),
+				'post_id'        => $post->ID,
+			)
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'ane_enqueue_postviews_script' );
 
 // Tambahkan kolom di admin post dan custom post type
-add_filter('manage_posts_columns', 'musi_add_views_column');
-add_filter('manage_edit-post_sortable_columns', 'musi_make_views_column_sortable');
-add_action('manage_posts_custom_column', 'musi_show_views_column', 10, 2);
+add_filter( 'manage_posts_columns', 'musi_add_views_column' );
+add_filter( 'manage_edit-post_sortable_columns', 'musi_make_views_column_sortable' );
+add_action( 'manage_posts_custom_column', 'musi_show_views_column', 10, 2 );
 
-function musi_add_views_column($columns) {
-    $columns['musi_post_views'] = __('Views', 'makhadane');
-    return $columns;
+function musi_add_views_column( $columns ) {
+	$columns['musi_post_views'] = __( 'Views', 'makhadane' );
+	return $columns;
 }
 
-function musi_show_views_column($column_name, $post_id) {
-    if ($column_name === 'musi_post_views') {
-        $views_count = (int) get_post_meta( $post_id, 'musi_views', true );
-        echo esc_html( (string) $views_count );
-    }
+function musi_show_views_column( $column_name, $post_id ) {
+	if ( $column_name === 'musi_post_views' ) {
+		$views_count = (int) get_post_meta( $post_id, 'musi_views', true );
+		echo esc_html( (string) $views_count );
+	}
 }
 
 // Jadikan kolom views sortable
-function musi_make_views_column_sortable($columns) {
-    $columns['musi_post_views'] = 'musi_views';
-    return $columns;
+function musi_make_views_column_sortable( $columns ) {
+	$columns['musi_post_views'] = 'musi_views';
+	return $columns;
 }
 
 // Custom sorting untuk kolom views
-add_action('pre_get_posts', 'musi_sort_views_column');
-function musi_sort_views_column($query) {
-    if (!is_admin() || !$query->is_main_query()) {
-        return;
-    }
+add_action( 'pre_get_posts', 'musi_sort_views_column' );
+function musi_sort_views_column( $query ) {
+	if ( ! is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
 
-    if ($orderby = $query->get('orderby')) {
-        if ($orderby === 'musi_views') {
-            $query->set('meta_key', 'musi_views');
-            $query->set('orderby', 'meta_value_num');
-        }
-    }
+	if ( $orderby = $query->get( 'orderby' ) ) {
+		if ( $orderby === 'musi_views' ) {
+			$query->set( 'meta_key', 'musi_views' );
+			$query->set( 'orderby', 'meta_value_num' );
+		}
+	}
 }

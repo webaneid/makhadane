@@ -27,7 +27,7 @@ $akhir  = ! empty( $end ) ? ( strtotime( $end ) - strtotime( 'today' ) ) / ( 60 
 $online = ! is_null( $akhir ) ? $akhir : -1;
 
 if ( ! is_null( $mulai ) && ( $mulai <= 0 || $online >= 0 ) ) :
-?>
+	?>
 	<section class="section-banner">
 		<div class="ane-container">
 			<a href="<?php echo $url; ?>" target="_blank" title="<?php echo esc_attr( $nama . ' by ' . $perusahaan ); ?>">

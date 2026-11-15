@@ -14,10 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5">
-				<?php if ( has_post_thumbnail() ) :
+				<?php
+				if ( has_post_thumbnail() ) :
 					$thumb_img_url = esc_url( get_the_post_thumbnail_url( $post->ID, 'large' ) );
-					$title = esc_attr( get_the_title() );
-				?>
+					$title         = esc_attr( get_the_title() );
+					?>
 					<div class="ane-image">
 						<img src="<?php echo $thumb_img_url; ?>" alt="<?php echo $title; ?>" title="<?php echo $title; ?>">
 					</div>

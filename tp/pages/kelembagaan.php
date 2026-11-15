@@ -37,7 +37,7 @@ if ( has_post_thumbnail() ) {
 				<?php the_content(); ?>
 
 				<div class="comments-form">
-					<?php //echo fungsi_komen_facebook_webane(); ?>
+					<?php // echo fungsi_komen_facebook_webane(); ?>
 				</div>
 			</div>
 		</div>

@@ -15,7 +15,9 @@ if ( have_rows( 'ane_featured' ) ) : ?>
 	<div class="ane-container">
 		<?php $has_items = false; ?>
 		<ul>
-			<?php while ( have_rows( 'ane_featured' ) ) : the_row();
+			<?php
+			while ( have_rows( 'ane_featured' ) ) :
+				the_row();
 				$link      = get_sub_field( 'ane_link' );
 				$image     = get_sub_field( 'ane_icon' );
 				$judul     = get_sub_field( 'ane_title' );
@@ -28,7 +30,7 @@ if ( have_rows( 'ane_featured' ) ) : ?>
 					$link_url    = $has_link ? esc_url( $link['url'] ) : '';
 					$link_target = ( $has_link && ! empty( $link['target'] ) ) ? ' target="' . esc_attr( $link['target'] ) . '"' : '';
 					$link_rel    = ( $link_target === ' target="_blank"' ) ? ' rel="noopener noreferrer"' : '';
-			?>
+					?>
 			<li>
 				<div class="item">
 					<?php if ( ! empty( $image ) && ! empty( $judul ) ) : ?>
@@ -66,7 +68,10 @@ if ( have_rows( 'ane_featured' ) ) : ?>
 					</div>
 				</div>
 			</li>
-			<?php endif; endwhile; ?>
+					<?php
+			endif;
+endwhile;
+			?>
 		</ul>
 		<?php if ( ! $has_items ) : ?>
 			<p><?php echo esc_html__( 'No posts found.', 'makhadane' ); ?></p>

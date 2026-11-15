@@ -93,7 +93,7 @@ if ( have_posts() ) :
 			<?php
 			endwhile;
 endif;
-			?>
+?>
 
 			<?php
 			ane_tampilkan_ustadz_terkait( 'kelas' );
