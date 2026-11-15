@@ -252,6 +252,10 @@ function ane_yoast_handles_opengraph() : bool {
 		return false;
 	}
 
+	if ( false !== has_action( 'wp_head', 'wpseo_head' ) ) {
+		return true;
+	}
+
 	$options = get_option( 'wpseo_social' );
 	return ! empty( $options['opengraph'] );
 }
@@ -264,6 +268,10 @@ function ane_yoast_handles_opengraph() : bool {
 function ane_yoast_handles_twitter() : bool {
 	if ( ! defined( 'WPSEO_VERSION' ) ) {
 		return false;
+	}
+
+	if ( false !== has_action( 'wp_head', 'wpseo_head' ) ) {
+		return true;
 	}
 
 	$options = get_option( 'wpseo_social' );
@@ -749,8 +757,11 @@ function ane_output_opengraph_tags() {
 	$og_title       = get_bloginfo( 'name' );
 	$og_description = get_bloginfo( 'description' );
 	$og_url         = home_url();
-	$og_image       = get_template_directory_uri() . '/img/logo-webane.png';
+	$og_image       = ane_dummy_thumbnail();
 	$og_site_name   = get_bloginfo( 'name' );
+	$og_image_width = 1200;
+	$og_image_height = 630;
+	$og_image_type  = 'image/jpeg';
 
 	if ( is_single() ) {
 		$post_id        = get_the_ID();
@@ -760,7 +771,18 @@ function ane_output_opengraph_tags() {
 		$og_url         = get_permalink();
 
 		if ( has_post_thumbnail() ) {
-			$og_image = get_the_post_thumbnail_url( $post_id, 'large' );
+			$thumbnail_data = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'large' );
+			if ( ! empty( $thumbnail_data[0] ) ) {
+				$og_image = $thumbnail_data[0];
+			}
+
+			if ( ! empty( $thumbnail_data[1] ) ) {
+				$og_image_width = (int) $thumbnail_data[1];
+			}
+
+			if ( ! empty( $thumbnail_data[2] ) ) {
+				$og_image_height = (int) $thumbnail_data[2];
+			}
 		}
 
 		// Article specific tags
@@ -805,12 +827,23 @@ function ane_output_opengraph_tags() {
 		}
 	}
 
+	$og_image = set_url_scheme( $og_image, is_ssl() ? 'https' : null );
+
+	$og_image_filetype = wp_check_filetype( $og_image );
+	if ( ! empty( $og_image_filetype['type'] ) ) {
+		$og_image_type = $og_image_filetype['type'];
+	}
+
 	echo "\n<!-- Open Graph Tags -->\n";
 	echo '<meta property="og:type" content="' . esc_attr( $og_type ) . '">' . "\n";
 	echo '<meta property="og:title" content="' . esc_attr( $og_title ) . '">' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( $og_description ) . '">' . "\n";
 	echo '<meta property="og:url" content="' . esc_url( $og_url ) . '">' . "\n";
 	echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
+	echo '<meta property="og:image:secure_url" content="' . esc_url( set_url_scheme( $og_image, 'https' ) ) . '">' . "\n";
+	echo '<meta property="og:image:width" content="' . esc_attr( $og_image_width ) . '">' . "\n";
+	echo '<meta property="og:image:height" content="' . esc_attr( $og_image_height ) . '">' . "\n";
+	echo '<meta property="og:image:type" content="' . esc_attr( $og_image_type ) . '">' . "\n";
 	echo '<meta property="og:site_name" content="' . esc_attr( $og_site_name ) . '">' . "\n";
 	echo '<meta property="og:locale" content="' . esc_attr( str_replace( '-', '_', get_bloginfo( 'language' ) ) ) . '">' . "\n";
 }
