@@ -12,7 +12,7 @@
 | 🔴 **Critical** | 2 | ✅ Selesai (2/2) | Fase 03 (`GAP-01`, `GAP-02` ✅) |
 | 🟠 **High** | 4 | ✅ Selesai (4/4) | Fase 02 (`GAP-05` ✅) & Fase 03 (`GAP-03`, `GAP-04`, `GAP-07` ✅) |
 | 🟡 **Medium** | 10 | ✅ Selesai (10/10) | Fase 02 (`GAP-12` ✅), Fase 03 (`GAP-06`, `GAP-08`, `GAP-09`, `GAP-10`, `GAP-13`, `GAP-14` ✅) & Fase 04 (`GAP-11`, `GAP-15`, `GAP-16` ✅) |
-| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (4/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅), Fase 05 (`GAP-18` ✅), Fase 06 (`GAP-19` ✅) & Fase 07 – Fase 10 |
+| 🔵 **Low / Clean-up** | 6 | 🔄 Sebagian (5/6) | Fase 02 (`GAP-17` ✅), Fase 04 (`GAP-22` ✅), Fase 05 (`GAP-18` ✅), Fase 06 (`GAP-19` ✅), Fase 07–09 (`GAP-20` ✅) & Fase 10 |
 
 ---
 
@@ -128,10 +128,10 @@
 - **Masalah:** Banyak file JS di `js/` (`gmap.js`, `postviews-cache.js`, `linktree-tracking.js`, `admin-*.js`), inline `<script>` di `footer.php` dan `inc/post.php`, selector mati di `js/makhadane.js`, versi OwlCarousel CSS (`2.2.1`) vs JS (`2.3.4`) tidak seragam, serta library dimuat di semua halaman.
 - **Status Fix (Fase 06):** Dikonsolidasikan menjadi **1 file tunggal `js/makhadane.js`** (9 file JS redundan dihapus), inline `<script>` di `footer.php` & `inc/post.php` dihapus, selector mati (`.cc-contactpop`, `.commrnt-toggle`) dan `console.log` debug dibersihkan, `titleSrc` Magnific Popup diamankan dari DOM XSS, serta `owl-carousel` (`2.3.4`) dan `magnific-popup` (`1.1.0`) dimuat secara kondisional dengan cache-busting `filemtime()`.
 
-### GAP-20 — 🔵 Low: Arsitektur CSS Masih Berbasis SCSS Manual & Belum 12 Bagian + `FontAne` (256 KB)
-- **Lokasi:** `scss/`, `css/main.css`, `css/FontAne.css`, `fonts/FontAne.*`
+### GAP-20 — 🔵 Low: Arsitektur CSS Masih Berbasis SCSS Manual & Belum 12 Bagian + `FontAne` (256 KB) — ✅ Fixed (Fase 07–09)
+- **Lokasi:** [css/main.css](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/css/main.css), [css/main.min.css](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/css/main.min.css), [inc/makhadane.php](file:///Users/webane/sites/makhadane/wp-content/themes/makhadane/inc/makhadane.php)
 - **Masalah:** Memuat file font eksternal `FontAne` (256 KB) dan CSS belum terstruktur dalam 12 bagian (`[01]`–`[12]`) yang diaudit oleh `composer css:check` (`0 dead CSS rules`).
-- **Rencana Fix (Fase 07–09):** Konsolidasi CSS ke 12 bagian (`css/main.css` → `css/main.min.css`), migrasi `FontAne` ke inline SVG `makhadane_icon()`, dan hapus folder `fonts/` serta `scss/`.
+- **Status Fix (Fase 07–09):** `css/main.css` direstrukturisasi ke 12 bagian (`[01]`–`[12]`) dan dikompilasi ke 1 file rilis `css/main.min.css` (`124.1 KB`, turun dari `145.4 KB`), seluruh icon `FontAne` & FontAwesome dimigrasikan ke helper inline SVG `makhadane_icon()`, `0 dead CSS rules` diverifikasi oleh `composer css:check`, serta folder `fonts/`, `scss/`, `css/FontAne.css`, `css/admin.css`, dan 4 file `.map` dihapus.
 
 ### GAP-21 — 🔵 Low: Definisi Field ACF Belum Disimpan di Repo (`inc/acf-json/`)
 - **Lokasi:** Belum ada `inc/acf-json/` dan `inc/acf-importer.php`.

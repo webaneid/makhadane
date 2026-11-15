@@ -14,6 +14,6 @@
 | 06 | Optimasi & konsolidasi JavaScript (1 file `js/makhadane.js` & conditional enqueue) | Done | `phases/phase-06-optimasi-javascript.md` |
 | 07 | Optimasi CSS: struktur 12 bagian `css/main.css` & konsolidasi 1 file `css/main.min.css` | Done | `phases/phase-07-optimasi-css-12-bagian.md` |
 | 08 | Migrasi icon `FontAne` & FontAwesome ke Inline SVG (`makhadane_icon()`) + hapus `fonts/` | Done | `phases/phase-08-migrasi-icon-svg.md` |
-| 09 | Audit, pembersihan dead CSS (`0 dead CSS rules`), & penghapusan folder `scss/` | Planned | `phases/phase-09-pembersihan-dan-deduplikasi-css.md` |
+| 09 | Audit, pembersihan dead CSS (`0 dead CSS rules`), & penghapusan folder `scss/` | Done | `phases/phase-09-pembersihan-dan-deduplikasi-css.md` |
 | 10 | Bundling & importer ACF JSON (`inc/acf-importer.php`) + verifikasi `composer dist:check` | Planned | `phases/phase-10-acf-json-importer.md` |
 | 11 | Penerapan Standar `webane-pagespeed-cwv` (Preload LCP, Zero-CLS Slider, Async CSS, Defer JS, & Aksesibilitas 100) | Planned | `phases/phase-11-standar-pagespeed-cwv.md` |

@@ -41,6 +41,11 @@ ALLOWED_DYNAMIC_CLASSES = {
     "gallery", "gallery-item", "gallery-icon",
     "wp-block-separator", "wp-block-pullquote", "has-nested-images", "wp-embed-aspect-16-9", "is-type-video",
     "wp-block-buttons", "wp-block-button", "is-style-outline", "wp-block-details", "schema-faq-answer", "individual-image",
+    "wp-block-media-text", "wp-block-media-text__media", "wp-block-media-text__content", "has-large-font-size",
+    # ACF dynamic classes (tp/section/big-slider.php & tp/section/image-side-text.php: ane_posisi)
+    "align-content-start", "align-content-center", "align-content-end",
+    "align-content-start-top", "align-content-center-top", "align-content-end-top",
+    "gambar-kiri", "gambar-kanan",
     "menu-item", "menu-item-has-children", "sub-menu", "current-menu-item", "page_item",
     "comment", "comment-list", "comment-body", "comment-meta", "comment-author", "comment-content",
     "comment-respond", "comment-form", "comment-reply-title", "comments-area", "children",
@@ -87,7 +92,7 @@ def main() -> int:
         code_text += "\n" + p.read_text(encoding="utf-8", errors="ignore")
 
     lines = css_text.splitlines()
-    start_idx = next((i for i, l in enumerate(lines) if "[03]" in l), 305)
+    start_idx = next((i for i, l in enumerate(lines) if l.strip().startswith("[03]")), 305)
 
     dead_rules = []
     for idx in range(start_idx, len(lines)):
