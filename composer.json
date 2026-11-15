@@ -1,0 +1,51 @@
+{
+    "name": "webane/makhadane",
+    "description": "Makhad Ane — WordPress theme oleh Webane Indonesia",
+    "type": "wordpress-theme",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "wp-coding-standards/wpcs": "^3.1",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpstan/phpstan": "^2.1",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "php-stubs/acf-pro-stubs": "^6.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "8.0.30"
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint:syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -not -path './.phpstan-cache/*' -print0 | xargs -0 -n1 php -l -d display_errors=1 | grep -v '^No syntax errors' || true",
+        "lint:phpcs": "phpcs",
+        "lint:changed": "bash bin/lint-changed.sh",
+        "lint": [
+            "@lint:syntax",
+            "@lint:phpcs"
+        ],
+        "lint:fix": "phpcbf",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "analyse:baseline": "phpstan analyse --memory-limit=1G --generate-baseline",
+        "security:scan": "bash bin/security-scan.sh",
+        "css:check": "python3 bin/css-audit.py",
+        "dist:check": "bash bin/check-dist.sh"
+    },
+    "scripts-descriptions": {
+        "lint": "Cek sintaks PHP + WordPress Coding Standards (seluruh theme, termasuk pelanggaran lama)",
+        "lint:changed": "PHPCS hanya untuk file yang berubah dibanding main — dipakai di SOP Langkah 3",
+        "lint:fix": "Perbaiki otomatis pelanggaran format yang bisa diperbaiki",
+        "analyse": "Analisis statis PHPStan",
+        "analyse:baseline": "Rekam ulang baseline PHPStan (hanya saat retrofit/keputusan sadar)",
+        "security:scan": "Scan anti-webshell, fungsi berbahaya, hardcoded secret, dan guard ABSPATH di seluruh file PHP",
+        "css:check": "Compile css/main.css -> css/main.min.css dan audit 0 dead CSS rules",
+        "dist:check": "Pastikan paket ZIP rilis bersih dari semua file .md, folder docs/AI, dan tooling dev"
+    }
+}

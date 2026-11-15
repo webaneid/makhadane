@@ -1,0 +1,23 @@
+includes:
+	- vendor/szepeviktor/phpstan-wordpress/extension.neon
+	- phpstan-baseline.neon
+
+parameters:
+	level: 3
+	paths:
+		- .
+	excludePaths:
+		analyse:
+			- vendor
+			- node_modules (?)
+			- dist (?)
+			- languages (?)
+	scanFiles:
+		- vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
+	tmpDir: .phpstan-cache
+	treatPhpDocTypesAsCertain: false
+	ignoreErrors:
+		# Template WordPress memakai global loop ($post, $wp_query) — bukan bug.
+		-
+			identifier: variable.undefined
+			message: '#^Variable \$(post|wp_query|wp_the_query|wp_rewrite) might not be defined\.$#'

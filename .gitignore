@@ -1,43 +1,35 @@
-# WordPress
+# OS / editor
 .DS_Store
 Thumbs.db
-
-# Node modules
-node_modules/
-package-lock.json
-
-# Editor files
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
-
-# Temporary files
 *.tmp
 *.bak
 *.swp
 *~
 
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-desktop.ini
+# Dependencies (diinstall ulang lewat composer/npm, tidak di-commit)
+/vendor/
+/node_modules/
 
-# Logs
+# Build output
+/dist/
+.sass-cache/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# SCSS source maps (optional - uncomment if you don't want to track them)
-# *.css.map
+# Cache tooling
+.phpcs-cache
+.phpunit.result.cache
+.phpstan-cache/
 
-# Compiled MO files (optional - we track them for distribution)
-# *.mo
+# Konfigurasi lokal AI tools (preferensi pribadi, bukan standar tim)
+.claude/settings.local.json
+.claude/worktrees/
 
-# Distribution folder
-dist/
+# Secret — JANGAN pernah di-commit
+.env
+.env.*
+!.env.example
+auth.json
