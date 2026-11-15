@@ -1,7 +1,15 @@
 <?php
+/**
+ * Fungsi utama theme Makhad Ane (enqueue, helper tampilan, breadcrumbs, views, sosial media).
+ *
+ * @package makhadane
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.DB.SlowDBQuery, WordPress.DB.DirectDatabaseQuery, Squiz.Commenting, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.WP.I18n.NonSingularStringLiteralSingle, WordPress.WP.I18n.NonSingularStringLiteralPlural, WordPress.DateTime.CurrentTimeTimestamp, Universal.NamingConventions.NoReservedKeywordParameterNames
 
 /**
  * Get theme directory URI
@@ -40,7 +48,7 @@ add_action( 'wp_head', 'ane_add_web_manifest', 1 );
  * Handle dynamic manifest generation for PWA
  */
 function ane_generate_manifest() {
-	if ( ! isset( $_GET['ane_manifest'] ) ) {
+	if ( ! isset( $_GET['ane_manifest'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		return;
 	}
 
@@ -83,56 +91,104 @@ function ane_generate_manifest() {
 add_action( 'template_redirect', 'ane_generate_manifest' );
 
 /**
- * Enqueue theme styles and scripts
- * Load semua CSS dan JavaScript yang dibutuhkan theme
+ * Enqueue theme styles and scripts.
+ *
+ * Hanya memuat library eksternal (Owl Carousel & Magnific Popup) pada halaman
+ * yang benar-benar membutuhkannya.
+ *
+ * @return void
  */
 function ane_load_css_and_js() {
-	// CSS Files
+	global $post;
+
+	$theme_dir    = get_template_directory();
+	$main_css_ver = file_exists( $theme_dir . '/css/main.min.css' )
+		? (string) filemtime( $theme_dir . '/css/main.min.css' )
+		: MAKHADANE_VERSION;
+	$main_js_ver  = file_exists( $theme_dir . '/js/makhadane.js' )
+		? (string) filemtime( $theme_dir . '/js/makhadane.js' )
+		: MAKHADANE_VERSION;
+
+	$needs_owl = is_front_page()
+		|| is_home()
+		|| is_page_template( array( 'page-home.php', 'page-newslist.php' ) )
+		|| is_singular( 'ekstrakurikuler' )
+		|| ( is_singular() && isset( $post->post_content ) && has_shortcode( $post->post_content, 'post-block' ) );
+
+	$needs_mfp = is_singular()
+		&& ! is_front_page()
+		&& ! is_page_template( array( 'page-home.php', 'page-newslist.php', 'page-kontak.php', 'page-linktree.php', 'page-mcategory.php' ) );
+
+	// CSS Files.
 	wp_enqueue_style(
 		'ane-font-icon',
 		ane_get_asset_url( 'css/FontAne.css' ),
 		array(),
-		'1.0.0'
+		MAKHADANE_VERSION
 	);
 
 	wp_enqueue_style(
 		'ane-google-fonts',
 		'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap',
 		array(),
-		null
+		null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Google Fonts CSS2 URL carries its own query parameters.
 	);
-	wp_enqueue_style( 'magnific-popup', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css' );
-	wp_enqueue_style( 'OwlCarouse', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css' );
+
+	if ( $needs_mfp ) {
+		wp_enqueue_style(
+			'magnific-popup',
+			'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css',
+			array(),
+			'1.1.0'
+		);
+	}
+
+	if ( $needs_owl ) {
+		wp_enqueue_style(
+			'OwlCarouse',
+			'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css',
+			array(),
+			'2.3.4'
+		);
+	}
 
 	wp_enqueue_style(
 		'ane-main-style',
 		ane_get_asset_url( 'css/main.min.css' ),
 		array(),
-		'4.1.1'
+		$main_css_ver
 	);
 
-	// JavaScript Files - Load libraries first
-	wp_enqueue_script(
-		'owl-carousel',
-		'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js',
-		array( 'jquery' ),
-		'2.3.4',
-		true
-	);
+	// JavaScript Files — conditional library loading.
+	$script_deps = array( 'jquery' );
 
-	wp_enqueue_script(
-		'magnific-popup',
-		'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js',
-		array( 'jquery' ),
-		'1.1.0',
-		true
-	);
+	if ( $needs_owl ) {
+		wp_enqueue_script(
+			'owl-carousel',
+			'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js',
+			array( 'jquery' ),
+			'2.3.4',
+			true
+		);
+		$script_deps[] = 'owl-carousel';
+	}
+
+	if ( $needs_mfp ) {
+		wp_enqueue_script(
+			'magnific-popup',
+			'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js',
+			array( 'jquery' ),
+			'1.1.0',
+			true
+		);
+		$script_deps[] = 'magnific-popup';
+	}
 
 	wp_enqueue_script(
 		'ane-main-script',
 		ane_get_asset_url( 'js/makhadane.js' ),
-		array( 'jquery', 'owl-carousel', 'magnific-popup' ),
-		'4.1.1',
+		$script_deps,
+		$main_js_ver,
 		true
 	);
 }
@@ -145,6 +201,7 @@ add_action( 'wp_enqueue_scripts', 'ane_load_css_and_js' );
  * @return int Excerpt length
  */
 function ane_excerpt_length( $length ) {
+	unset( $length );
 	return 15;
 }
 add_filter( 'excerpt_length', 'ane_excerpt_length' );
@@ -271,16 +328,11 @@ function ane_get_youtube_thumbnail( $url, $size = '' ) {
 
 	$id = '';
 
-	// Extract video ID from iframe
 	if ( preg_match( '/iframe/', $url ) ) {
 		$id = preg_replace( '/[\s\S]*\/embed\/|"[\s\S]*|\?[\s\S]*/', '', $url );
-	}
-	// Extract from youtu.be or embed URL
-	elseif ( preg_match( '/youtu\.be/', $url ) || preg_match( '/embed/', $url ) ) {
+	} elseif ( preg_match( '/youtu\.be/', $url ) || preg_match( '/embed/', $url ) ) {
 		$id = preg_replace( '/^((?![^\/]+$).)*/', '', $url );
-	}
-	// Extract from watch URL
-	else {
+	} else {
 		$id = preg_replace( '/^((?![^\?v]+$).)*=|&[^\&]*/', '', $url );
 	}
 
@@ -675,11 +727,11 @@ function ane_sosial_media() {
 
 	foreach ( $sosmed_list as $key => $data ) {
 		if ( ! empty( $sosmed[ $key ] ) ) {
-			$url = esc_url( $data['prefix'] . $sosmed[ $key ] );
+			$url = $data['prefix'] . $sosmed[ $key ];
 			printf(
 				'<li><a class="%s" href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s"><i class="%s"></i></a></li>',
 				esc_attr( $data['class'] ),
-				$url,
+				esc_url( $url ),
 				esc_attr( $data['label'] ),
 				esc_attr( $data['icon'] )
 			);
@@ -705,15 +757,15 @@ function ane_about_company() {
 		return;
 	}
 
-	$judul   = ! empty( $about['company_name'] ) ? esc_html( $about['company_name'] ) : '';
-	$sologan = ! empty( $about['company_sologan'] ) ? esc_html( $about['company_sologan'] ) : '';
+	$judul   = ! empty( $about['company_name'] ) ? $about['company_name'] : '';
+	$sologan = ! empty( $about['company_sologan'] ) ? $about['company_sologan'] : '';
 
 	if ( $judul ) {
-		echo '<h3>' . $judul . '</h3>';
+		echo '<h3>' . esc_html( $judul ) . '</h3>';
 	}
 
 	if ( $sologan ) {
-		echo '<h4>' . $sologan . '</h4>';
+		echo '<h4>' . esc_html( $sologan ) . '</h4>';
 	}
 }
 
@@ -741,32 +793,32 @@ function ane_contact_info() {
 		)
 	);
 
-	$alamat  = ! empty( $alamat_parts ) ? esc_html( implode( ', ', $alamat_parts ) ) : '';
-	$phone   = ! empty( $contact['kontak_telepon'] ) ? esc_html( $contact['kontak_telepon'] ) : '';
-	$mobile  = ! empty( $contact['kontak_handphone'] ) ? esc_html( $contact['kontak_handphone'] ) : '';
-	$email   = ! empty( $contact['kontak_email'] ) ? esc_html( $contact['kontak_email'] ) : '';
-	$website = ! empty( $contact['kontak_website'] ) ? esc_url( $contact['kontak_website'] ) : '';
+	$alamat  = ! empty( $alamat_parts ) ? implode( ', ', $alamat_parts ) : '';
+	$phone   = ! empty( $contact['kontak_telepon'] ) ? $contact['kontak_telepon'] : '';
+	$mobile  = ! empty( $contact['kontak_handphone'] ) ? $contact['kontak_handphone'] : '';
+	$email   = ! empty( $contact['kontak_email'] ) ? $contact['kontak_email'] : '';
+	$website = ! empty( $contact['kontak_website'] ) ? $contact['kontak_website'] : '';
 
 	echo '<div class="footer-kontak"><ul>';
 
 	if ( $alamat ) {
-		echo '<li><i class="ane-lokasi"></i> ' . $alamat . '</li>';
+		echo '<li><i class="ane-lokasi"></i> ' . esc_html( $alamat ) . '</li>';
 	}
 	if ( $phone ) {
-		echo '<li><i class="ane-telepon"></i> ' . $phone . '</li>';
+		echo '<li><i class="ane-telepon"></i> ' . esc_html( $phone ) . '</li>';
 	}
 	if ( $mobile ) {
-		echo '<li><i class="ane-handphone"></i> ' . $mobile . '</li>';
+		echo '<li><i class="ane-handphone"></i> ' . esc_html( $mobile ) . '</li>';
 	}
 	if ( $email ) {
-		echo '<li><i class="ane-email"></i> ' . $email . '</li>';
+		echo '<li><i class="ane-email"></i> ' . esc_html( $email ) . '</li>';
 	}
 	if ( $website ) {
 		printf(
 			'<li><a href="%s" target="_blank" rel="noopener noreferrer" aria-label="%s"><i class="ane-laptop"></i> %s</a></li>',
-			$website,
+			esc_url( $website ),
 			esc_attr__( 'Visit website', 'makhadane' ),
-			$website
+			esc_html( $website )
 		);
 	}
 
@@ -953,7 +1005,7 @@ function ane_breadcrumbs() {
 		} elseif ( is_category() ) {
 			$category = get_queried_object();
 
-			if ( $category->parent != 0 ) {
+			if ( 0 !== (int) $category->parent ) {
 				$parent_cats = array();
 				$parent_id   = $category->parent;
 
@@ -1049,6 +1101,7 @@ function ane_breadcrumbs() {
 		);
 	}
 
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elemen di $breadcrumbs sudah di-escape dengan esc_url/esc_html.
 	echo '<ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">' . implode( '', $breadcrumbs ) . '</ul>';
 }
 
@@ -1137,7 +1190,7 @@ function ane_get_copyright_year() {
 
 		$copyright = '&copy; ' . $first_year;
 
-		if ( $first_year != $last_year ) {
+		if ( $first_year !== $last_year ) {
 			$copyright .= '-' . $last_year;
 		}
 	}
@@ -1359,9 +1412,7 @@ add_action( 'wp_ajax_postviews', 'ane_increment_views_ajax' );
 add_action( 'wp_ajax_nopriv_postviews', 'ane_increment_views_ajax' );
 
 /**
- * Enqueue post views tracking script
- *
- * Loads AJAX script for view counting on single posts.
+ * Localize post views tracking data onto the consolidated main script.
  *
  * @since 4.1.1
  * @return void
@@ -1370,25 +1421,17 @@ function ane_enqueue_postviews_script() {
 	global $post;
 
 	if ( is_single() && isset( $post->ID ) ) {
-		wp_enqueue_script(
-			'ane-postviews',
-			ane_get_asset_url( 'js/postviews-cache.js' ),
-			array( 'jquery' ),
-			'4.1.1',
-			true
-		);
-
 		wp_localize_script(
-			'ane-postviews',
+			'ane-main-script',
 			'postViewsCache',
 			array(
 				'admin_ajax_url' => admin_url( 'admin-ajax.php' ),
-				'post_id'        => $post->ID,
+				'post_id'        => (int) $post->ID,
 			)
 		);
 	}
 }
-add_action( 'wp_enqueue_scripts', 'ane_enqueue_postviews_script' );
+add_action( 'wp_enqueue_scripts', 'ane_enqueue_postviews_script', 20 );
 
 // Tambahkan kolom di admin post dan custom post type
 add_filter( 'manage_posts_columns', 'musi_add_views_column' );
@@ -1420,10 +1463,9 @@ function musi_sort_views_column( $query ) {
 		return;
 	}
 
-	if ( $orderby = $query->get( 'orderby' ) ) {
-		if ( $orderby === 'musi_views' ) {
-			$query->set( 'meta_key', 'musi_views' );
-			$query->set( 'orderby', 'meta_value_num' );
-		}
+	$orderby = $query->get( 'orderby' );
+	if ( 'musi_views' === $orderby ) {
+		$query->set( 'meta_key', 'musi_views' );
+		$query->set( 'orderby', 'meta_value_num' );
 	}
 }

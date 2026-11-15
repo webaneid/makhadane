@@ -265,31 +265,3 @@ function ane_single_meta() {
 	return (string) ob_get_clean();
 }
 
-/**
- * Hide sticky checkbox on post edit screen.
- *
- * @since 4.1.1
- * @return void
- */
-function ane_hide_admin_sticky_checkbox() {
-	?>
-	<script>
-		function hideAdminStickyCheckbox() {
-			let labels = jQuery('.components-panel label.components-checkbox-control__label');
-
-			labels.each(function(){
-				let label = jQuery(this);
-
-				if ( label.html() === 'Stick to the top of the blog') {
-					label.closest('.components-panel__row').hide();
-					return;
-				}
-			});
-		}
-
-		jQuery('body').on('DOMNodeInserted', '.edit-post-sidebar .edit-post-post-status', hideAdminStickyCheckbox);
-	</script>
-	<?php
-}
-add_action( 'admin_footer-post.php', 'ane_hide_admin_sticky_checkbox', 999, 0 );
-add_action( 'admin_footer-post-new.php', 'ane_hide_admin_sticky_checkbox', 999, 0 );

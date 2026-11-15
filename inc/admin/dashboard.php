@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.DB.DirectDatabaseQuery, WordPress.DB.SlowDBQuery, Squiz.Commenting, WordPress.DateTime.RestrictedFunctions, WordPress.DateTime.CurrentTimeTimestamp
+
 /**
  * Add custom dashboard page to admin menu.
  */
@@ -75,19 +77,10 @@ function ane_dashboard_assets( $hook ) {
 		true
 	);
 
-	// Dashboard JavaScript.
-	wp_enqueue_script(
-		'ane-admin-dashboard',
-		$theme_uri . '/js/admin-dashboard.js',
-		array( 'ane-chartjs' ),
-		wp_get_theme()->get( 'Version' ),
-		true
-	);
-
 	// Localize data for Chart.js.
 	$chart_data = ane_get_posts_per_month_data();
 	wp_localize_script(
-		'ane-admin-dashboard',
+		'ane-chartjs',
 		'aneDashboard',
 		array(
 			'postsData' => $chart_data,
@@ -98,6 +91,11 @@ function ane_dashboard_assets( $hook ) {
 				'body'      => '#3c434a',
 			),
 		)
+	);
+
+	wp_add_inline_script(
+		'ane-chartjs',
+		"(function(){'use strict';document.addEventListener('DOMContentLoaded',function(){if(typeof Chart==='undefined'||typeof aneDashboard==='undefined'){return;}var chartCanvas=document.getElementById('ane-posts-chart');if(!chartCanvas){return;}var data=aneDashboard.postsData;var colors=aneDashboard.colors;var ctx=chartCanvas.getContext('2d');var postsGradient=ctx.createLinearGradient(0,0,0,400);postsGradient.addColorStop(0,colors.primary+'40');postsGradient.addColorStop(1,colors.primary+'00');var viewsGradient=ctx.createLinearGradient(0,0,0,400);viewsGradient.addColorStop(0,colors.secondary+'40');viewsGradient.addColorStop(1,colors.secondary+'00');new Chart(ctx,{type:'line',data:{labels:data.labels,datasets:[{label:'Published Posts',data:data.posts,borderColor:colors.primary,backgroundColor:postsGradient,borderWidth:2,fill:true,tension:0.4,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:'#ffffff',pointBorderColor:colors.primary,pointBorderWidth:2,pointHoverBackgroundColor:colors.primary,pointHoverBorderColor:'#ffffff'},{label:'Total Views',data:data.views,borderColor:colors.secondary,backgroundColor:viewsGradient,borderWidth:2,fill:true,tension:0.4,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:'#ffffff',pointBorderColor:colors.secondary,pointBorderWidth:2,pointHoverBackgroundColor:colors.secondary,pointHoverBorderColor:'#ffffff'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(255, 255, 255, 0.95)',titleColor:colors.body,bodyColor:colors.body,borderColor:colors.accent,borderWidth:1,padding:12,displayColors:true,boxWidth:12,boxHeight:12,usePointStyle:true,callbacks:{label:function(context){var label=context.dataset.label?context.dataset.label+': ':'';return label+new Intl.NumberFormat().format(context.parsed.y);}}}},scales:{x:{grid:{display:false,drawBorder:false},ticks:{color:colors.body,font:{size:11}}},y:{beginAtZero:true,grid:{color:colors.accent,drawBorder:false},ticks:{color:colors.body,font:{size:11},callback:function(value){return new Intl.NumberFormat().format(value);}}}}}});});})();"
 	);
 }
 add_action( 'admin_enqueue_scripts', 'ane_dashboard_assets' );

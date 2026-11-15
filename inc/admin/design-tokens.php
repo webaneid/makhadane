@@ -19,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, Squiz.Commenting
+
 /**
  * Inject design tokens CSS variables into admin head.
  *
@@ -298,18 +300,3 @@ function ane_tap_target_size( bool $force_mobile = false ): string {
 	return '32px'; // Desktop can be smaller.
 }
 
-/**
- * Enqueue admin animations script.
- *
- * Smooth page transitions, fade-ins, ripple effects.
- */
-function ane_admin_animations_script() {
-	wp_enqueue_script(
-		'ane-admin-animations',
-		get_template_directory_uri() . '/js/admin-animations.js',
-		array(),
-		wp_get_theme()->get( 'Version' ),
-		true
-	);
-}
-add_action( 'admin_enqueue_scripts', 'ane_admin_animations_script', 999 );

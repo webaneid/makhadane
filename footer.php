@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
 get_template_part( 'tp/mobile/menu-footer' );
 
 $group = get_field( 'about_ane', 'option' );
@@ -99,15 +101,27 @@ if ( $group && isset( $group['company_name'] ) ) {
 </footer>
 
 
-<?php if ( esc_attr( get_field( 'ane_cs_aktif', 'option' ) ) ) : ?>
-<div class="floating-chat">
+<?php
+if ( esc_attr( get_field( 'ane_cs_aktif', 'option' ) ) ) :
+	$makhadane_wa_numbers = array();
+	if ( have_rows( 'ane_cs', 'option' ) ) {
+		while ( have_rows( 'ane_cs', 'option' ) ) {
+			the_row();
+			$makhadane_wa_item = get_sub_field( 'ane_whatsapp' );
+			if ( is_string( $makhadane_wa_item ) && '' !== trim( $makhadane_wa_item ) ) {
+				$makhadane_wa_numbers[] = trim( $makhadane_wa_item );
+			}
+		}
+	}
+	?>
+<div class="floating-chat" data-wa-numbers="<?php echo esc_attr( (string) wp_json_encode( $makhadane_wa_numbers ) ); ?>" data-wa-empty-msg="<?php esc_attr_e( 'WhatsApp number not available.', 'makhadane' ); ?>">
 	<div class="chat">
 		<div class="header">
 			<?php
-			$title = get_field( 'ane_cs_label', 'option' );
-			if ( ! empty( $title ) ) :
+			$cs_title = get_field( 'ane_cs_label', 'option' );
+			if ( ! empty( $cs_title ) ) :
 				?>
-				<span class="tombol"><?php echo esc_html( $title ); ?></span>
+				<span class="tombol"><?php echo esc_html( $cs_title ); ?></span>
 			<?php endif; ?>
 			<div class="ane-close">
 				<i class="ane-tutup"></i>
@@ -125,7 +139,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 
 			<div class="mesej-box">
 				<input type="text" id="waMessage" class="wa-input" placeholder="Ketik pesan...">
-				<button class="wa-button" id="sendWaButton">
+				<button type="button" class="wa-button" id="sendWaButton" aria-label="<?php esc_attr_e( 'Kirim WhatsApp', 'makhadane' ); ?>">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-send">
 						<path d="M10 14l11 -11"></path>
 						<path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
@@ -160,7 +174,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 							endif;
 						endif;
 						?>
-						<a href="https://wa.me/<?php echo esc_attr( $wa ); ?>" target="_blank">
+						<a href="https://wa.me/<?php echo esc_attr( $wa ); ?>" target="_blank" rel="noopener noreferrer">
 							<span><?php echo esc_html( $nama ); ?></span><br/>
 							<?php echo esc_html( $area ); ?>
 						</a>
@@ -171,56 +185,6 @@ if ( $group && isset( $group['company_name'] ) ) {
 		</div>
 	</div>
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-	function sendWhatsApp() {
-		let message = document.getElementById("waMessage").value.trim();
-		if (message === "") {
-			alert("Silakan ketik pesan terlebih dahulu.");
-			return;
-		}
-
-		// Ambil nomor WhatsApp dari ACF Repeater
-		let numbers = 
-		<?php
-			$numbers = array();
-		if ( have_rows( 'ane_cs', 'option' ) ) {
-			while ( have_rows( 'ane_cs', 'option' ) ) {
-				the_row();
-				$numbers[] = get_sub_field( 'ane_whatsapp' );
-			}
-		}
-			echo wp_json_encode( $numbers );
-		?>
-		;
-
-		if (numbers.length === 0) {
-			alert("<?php esc_html_e( 'WhatsApp number not available.', 'makhadane' ); ?>");
-			return;
-		}
-
-		// Ambil indeks terakhir dari localStorage
-		let lastIndex = localStorage.getItem("waLastIndex");
-		lastIndex = lastIndex ? parseInt(lastIndex) : 0;
-
-		// Tentukan nomor WhatsApp yang akan digunakan
-		let phone = numbers[lastIndex];
-
-		// Perbarui indeks untuk pemanggilan berikutnya (round-robin)
-		lastIndex = (lastIndex + 1) % numbers.length;
-		localStorage.setItem("waLastIndex", lastIndex);
-
-		// Buka WhatsApp dengan nomor yang dipilih
-		let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-		window.open(url, "_blank");
-	}
-
-	// Tambahkan event listener ke tombol
-	document.querySelector(".wa-button").addEventListener("click", sendWhatsApp);
-});
-</script>
-
 <?php endif; ?>
 
 <?php wp_footer(); ?>

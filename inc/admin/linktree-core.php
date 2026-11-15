@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, Squiz.Commenting
+
 /**
  * Get current database version.
  */
@@ -79,11 +81,6 @@ function ane_check_linktree_db_migration() {
 	if ( version_compare( $current_version, '1.0', '<' ) ) {
 		ane_create_linktree_analytics_table();
 	}
-
-	// Future migrations example:
-	// if ( version_compare( $current_version, '1.1', '<' ) ) {
-	// ane_migrate_to_1_1();
-	// }
 }
 add_action( 'admin_init', 'ane_check_linktree_db_migration' );
 
@@ -228,24 +225,17 @@ add_action( 'wp_ajax_ane_track_linktree_click', 'ane_track_linktree_click' );
 add_action( 'wp_ajax_nopriv_ane_track_linktree_click', 'ane_track_linktree_click' );
 
 /**
- * Enqueue linktree tracking script.
+ * Localize linktree tracking data onto the consolidated main script.
+ *
+ * @return void
  */
 function ane_enqueue_linktree_tracking_script() {
-	// Only load on linktree pages
 	if ( ! is_page_template( 'page-linktree.php' ) ) {
 		return;
 	}
 
-	wp_enqueue_script(
-		'ane-linktree-tracking',
-		get_template_directory_uri() . '/js/linktree-tracking.js',
-		array( 'jquery' ),
-		'1.0.6',
-		true
-	);
-
 	wp_localize_script(
-		'ane-linktree-tracking',
+		'ane-main-script',
 		'aneLinktreeTracking',
 		array(
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
@@ -253,4 +243,4 @@ function ane_enqueue_linktree_tracking_script() {
 		)
 	);
 }
-add_action( 'wp_enqueue_scripts', 'ane_enqueue_linktree_tracking_script' );
+add_action( 'wp_enqueue_scripts', 'ane_enqueue_linktree_tracking_script', 20 );

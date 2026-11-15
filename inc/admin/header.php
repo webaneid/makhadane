@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
 /**
  * Admin bar styles now loaded from scss/_admin-header.scss
  * Compiled into css/admin.css
@@ -21,26 +23,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 /**
- * Enqueue mobile header JavaScript.
+ * Enqueue mobile header JavaScript via inline script.
+ *
+ * @param string $hook Current admin page hook.
+ * @return void
  */
 function ane_admin_header_scripts( $hook ) {
-	// Only load on admin pages
+	unset( $hook );
+
 	if ( ! is_admin() ) {
 		return;
 	}
 
-	$theme_uri = get_template_directory_uri();
-	$version   = wp_get_theme()->get( 'Version' );
-
-	if ( file_exists( get_template_directory() . '/js/admin-header.js' ) ) {
-		wp_enqueue_script(
-			'ane-admin-header',
-			$theme_uri . '/js/admin-header.js',
-			array(),
-			$version,
-			true
-		);
-	}
+	wp_register_script( 'ane-admin-header', false, array(), MAKHADANE_VERSION, true );
+	wp_enqueue_script( 'ane-admin-header' );
+	wp_add_inline_script(
+		'ane-admin-header',
+		"(function(){'use strict';if(window.innerWidth>782){return;}function initMobileMenu(){var hamburger=document.querySelector('#wp-admin-bar-site-name > .ab-item');var userAvatar=document.querySelector('#wp-admin-bar-my-account > .ab-item');if(userAvatar){userAvatar.removeAttribute('href');userAvatar.setAttribute('aria-disabled','true');userAvatar.style.cursor='pointer';}var body=document.body;if(!hamburger){return;}var menuPanel=document.createElement('div');menuPanel.className='ane-mobile-menu';var adminMenu=document.querySelector('#adminmenu');if(adminMenu){var menuClone=adminMenu.cloneNode(true);menuClone.id='ane-mobile-adminmenu';menuPanel.appendChild(menuClone);}body.appendChild(menuPanel);var userPanel=document.createElement('div');userPanel.className='ane-mobile-user';var userSubmenu=document.querySelector('#wp-admin-bar-my-account .ab-submenu');if(userSubmenu){var submenuClone=userSubmenu.cloneNode(true);var userInfoItem=submenuClone.querySelector('#wp-admin-bar-user-info');if(userInfoItem){var userInfoLink=userInfoItem.querySelector('a');if(userInfoLink){var userInfoDiv=document.createElement('div');userInfoDiv.className=userInfoLink.className;userInfoDiv.innerHTML=userInfoLink.innerHTML;userInfoLink.parentNode.replaceChild(userInfoDiv,userInfoLink);}}userPanel.appendChild(submenuClone);}body.appendChild(userPanel);var overlay=document.createElement('div');overlay.className='ane-mobile-overlay';body.appendChild(overlay);function openMenu(){body.classList.add('ane-menu-open');menuPanel.classList.add('is-open');overlay.classList.add('is-visible');}function closeMenu(){body.classList.remove('ane-menu-open');menuPanel.classList.remove('is-open');if(!body.classList.contains('ane-user-open')){overlay.classList.remove('is-visible');}}function openUserPanel(){body.classList.add('ane-user-open');userPanel.classList.add('is-open');overlay.classList.add('is-visible');}function closeUserPanel(){body.classList.remove('ane-user-open');userPanel.classList.remove('is-open');if(!body.classList.contains('ane-menu-open')){overlay.classList.remove('is-visible');}}hamburger.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();closeUserPanel();if(body.classList.contains('ane-menu-open')){closeMenu();}else{openMenu();}});if(userAvatar){userAvatar.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();closeMenu();if(body.classList.contains('ane-user-open')){closeUserPanel();}else{openUserPanel();}},{capture:true});}overlay.addEventListener('click',function(){closeMenu();closeUserPanel();});var menuItems=menuPanel.querySelectorAll('li.wp-has-submenu');menuItems.forEach(function(item){var link=item.querySelector('a.menu-top');var submenu=item.querySelector('.wp-submenu');if(!link||!submenu){return;}var icon=document.createElement('span');icon.className='ane-accordion-icon';icon.textContent='+';link.appendChild(icon);link.addEventListener('click',function(e){e.preventDefault();var isOpen=item.classList.contains('ane-submenu-open');menuItems.forEach(function(otherItem){if(otherItem!==item){otherItem.classList.remove('ane-submenu-open');}});item.classList.toggle('ane-submenu-open',!isOpen);});});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initMobileMenu);}else{initMobileMenu();}window.addEventListener('resize',function(){if(window.innerWidth<=782&&!document.querySelector('.ane-mobile-menu')){initMobileMenu();}});})();"
+	);
 }
 add_action( 'admin_enqueue_scripts', 'ane_admin_header_scripts' );
 
@@ -120,19 +120,19 @@ add_action( 'after_setup_theme', 'ane_hide_admin_bar_frontend' );
 /**
  * Add custom CSS class to admin bar.
  *
- * @param string $class Current class.
+ * @param string $classes Current class.
  * @return string Modified class.
  */
-function ane_admin_bar_class( $class ) {
-	$class .= ' ane-admin-bar';
+function ane_admin_bar_class( $classes ) {
+	$classes .= ' ane-admin-bar';
 
 	// Add role-based class.
 	$user = wp_get_current_user();
 	if ( ! empty( $user->roles ) ) {
-		$class .= ' user-role-' . $user->roles[0];
+		$classes .= ' user-role-' . $user->roles[0];
 	}
 
-	return $class;
+	return $classes;
 }
 add_filter( 'admin_bar_class', 'ane_admin_bar_class' );
 

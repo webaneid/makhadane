@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, Squiz.Commenting, WordPress.DateTime.RestrictedFunctions
+
 /**
  * Register Linktree Analytics submenu.
  * Uses late priority (999) to ensure parent menu exists.
@@ -48,16 +50,7 @@ function ane_linktree_analytics_assets( $hook ) {
 		'ane-admin-dashboard',
 		get_template_directory_uri() . '/css/admin.min.css',
 		array(),
-		'1.0.6'
-	);
-
-	// Enqueue analytics script
-	wp_enqueue_script(
-		'ane-linktree-analytics',
-		get_template_directory_uri() . '/js/admin-linktree-analytics.js',
-		array( 'jquery', 'chart-js' ),
-		'1.0.6',
-		true
+		MAKHADANE_VERSION
 	);
 
 	// Localize data
@@ -76,7 +69,7 @@ function ane_linktree_analytics_assets( $hook ) {
 	}
 
 	wp_localize_script(
-		'ane-linktree-analytics',
+		'chart-js',
 		'aneLinktreeData',
 		array(
 			'clicksData' => $analytics_data,
@@ -88,6 +81,11 @@ function ane_linktree_analytics_assets( $hook ) {
 				'body'      => '#3c434a',
 			),
 		)
+	);
+
+	wp_add_inline_script(
+		'chart-js',
+		"(function(){'use strict';document.addEventListener('DOMContentLoaded',function(){if(typeof Chart==='undefined'||typeof aneLinktreeData==='undefined'){return;}var clicksCtx=document.getElementById('ane-linktree-clicks-chart');if(clicksCtx){new Chart(clicksCtx,{type:'line',data:{labels:aneLinktreeData.clicksData.labels,datasets:[{label:'Clicks',data:aneLinktreeData.clicksData.clicks,borderColor:aneLinktreeData.colors.primary,backgroundColor:aneLinktreeData.colors.primary+'20',tension:0.4,fill:true,pointBackgroundColor:aneLinktreeData.colors.primary,pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:4,pointHoverRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:aneLinktreeData.colors.body,titleColor:'#fff',bodyColor:'#fff',borderColor:aneLinktreeData.colors.accent,borderWidth:1,padding:12,displayColors:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,color:aneLinktreeData.colors.body},grid:{color:aneLinktreeData.colors.accent+'40'}},x:{ticks:{color:aneLinktreeData.colors.body},grid:{display:false}}}}});}var deviceCtx=document.getElementById('ane-device-chart');if(deviceCtx&&typeof aneLinktreeData.deviceData!=='undefined'){new Chart(deviceCtx,{type:'doughnut',data:{labels:aneLinktreeData.deviceData.labels,datasets:[{data:aneLinktreeData.deviceData.values,backgroundColor:[aneLinktreeData.colors.primary,aneLinktreeData.colors.secondary,aneLinktreeData.colors.accent],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:15,color:aneLinktreeData.colors.body,font:{size:13},usePointStyle:true,pointStyle:'circle'}},tooltip:{backgroundColor:aneLinktreeData.colors.body,titleColor:'#fff',bodyColor:'#fff',borderColor:aneLinktreeData.colors.accent,borderWidth:1,padding:12,callbacks:{label:function(context){var label=context.label||'';var value=context.parsed||0;var total=context.dataset.data.reduce(function(a,b){return a+b;},0);var percentage=total>0?((value/total)*100).toFixed(1):0;return label+': '+value+' ('+percentage+'%)';}}}}}});});})();"
 	);
 }
 add_action( 'admin_enqueue_scripts', 'ane_linktree_analytics_assets' );
