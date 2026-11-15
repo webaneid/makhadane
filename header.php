@@ -80,13 +80,45 @@ if ( function_exists( 'wp_body_open' ) ) {
 							</nav>
 						</div>
 						<?php
-						$link = get_field( 'ane_link_top', 'option' );
-						if ( ! empty( $link ) ) :
+						$makhadane_contact    = get_field( 'contact_ane', 'option' );
+						$makhadane_phone_raw  = ( is_array( $makhadane_contact ) && ! empty( $makhadane_contact['kontak_telepon'] ) ) ? trim( (string) $makhadane_contact['kontak_telepon'] ) : '';
+						$makhadane_phone_href = '' !== $makhadane_phone_raw ? (string) preg_replace( '/[^0-9+]/', '', $makhadane_phone_raw ) : '';
+
+						$makhadane_sosmed = get_field( 'sosmed_ane', 'option' );
+						$makhadane_wa_raw = ( is_array( $makhadane_sosmed ) && ! empty( $makhadane_sosmed['sosmed_wa'] ) ) ? trim( (string) $makhadane_sosmed['sosmed_wa'] ) : '';
+						if ( '' === $makhadane_wa_raw ) {
+							$makhadane_cs = get_field( 'ane_cs', 'option' );
+							if ( is_array( $makhadane_cs ) && ! empty( $makhadane_cs[0]['ane_whatsapp'] ) ) {
+								$makhadane_wa_raw = trim( (string) $makhadane_cs[0]['ane_whatsapp'] );
+							}
+						}
+						$makhadane_wa_digits = '' !== $makhadane_wa_raw ? (string) preg_replace( '/[^0-9]/', '', $makhadane_wa_raw ) : '';
+
+						$makhadane_header_link = get_field( 'ane_link_top', 'option' );
+						$makhadane_cta_url     = ( is_array( $makhadane_header_link ) && ! empty( $makhadane_header_link['url'] ) ) ? trim( (string) $makhadane_header_link['url'] ) : '';
+						$makhadane_cta_title   = ( is_array( $makhadane_header_link ) && ! empty( $makhadane_header_link['title'] ) ) ? trim( (string) $makhadane_header_link['title'] ) : '';
+						$makhadane_cta_target  = ( is_array( $makhadane_header_link ) && ! empty( $makhadane_header_link['target'] ) ) ? trim( (string) $makhadane_header_link['target'] ) : '';
+
+						if ( '' !== $makhadane_phone_href || '' !== $makhadane_wa_digits || ( '' !== $makhadane_cta_url && '' !== $makhadane_cta_title ) ) :
 							?>
-							<div class="ane-link-top">
-								<a id="klik-header" class="btn-top" href="<?php echo esc_url( $link['url'] ); ?>">
-									<?php echo esc_html( $link['title'] ); ?><?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
-								</a>
+							<div class="ane-header-actions">
+								<?php if ( '' !== $makhadane_phone_href ) : ?>
+									<a class="ane-header-icon-btn" href="tel:<?php echo esc_attr( $makhadane_phone_href ); ?>" aria-label="<?php esc_attr_e( 'Telepon', 'makhadane' ); ?>" title="<?php echo esc_attr( $makhadane_phone_raw ); ?>">
+										<?php echo wp_kses_post( makhadane_icon( 'telepon' ) ); ?>
+									</a>
+								<?php endif; ?>
+
+								<?php if ( '' !== $makhadane_wa_digits ) : ?>
+									<a class="ane-header-icon-btn" href="https://wa.me/<?php echo esc_attr( $makhadane_wa_digits ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'WhatsApp', 'makhadane' ); ?>">
+										<?php echo wp_kses_post( makhadane_icon( 'whatsapp' ) ); ?>
+									</a>
+								<?php endif; ?>
+
+								<?php if ( '' !== $makhadane_cta_url && '' !== $makhadane_cta_title ) : ?>
+									<a id="klik-header" class="ane-header-cta" href="<?php echo esc_url( $makhadane_cta_url ); ?>"<?php echo '_blank' === $makhadane_cta_target ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+										<?php echo esc_html( $makhadane_cta_title ); ?>
+									</a>
+								<?php endif; ?>
 							</div>
 						<?php endif; ?>
 					</div>
