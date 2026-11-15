@@ -31,7 +31,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	$logoimg = get_theme_mod( 'logo', get_template_directory_uri() . '/img/logo-makhadane.png' );
 	?>
-	<link rel="preload" as="image" href="<?php echo esc_url( $logoimg ); ?>">
 
 	<?php wp_head(); ?>
 
@@ -59,7 +58,7 @@ if ( function_exists( 'wp_body_open' ) ) {
 								the_custom_logo();
 							} else {
 								echo '<a class="logo" href="' . esc_url( get_home_url() ) . '" rel="home">
-									<img src="' . esc_url( $logoimg ) . '" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '">
+									<img src="' . esc_url( $logoimg ) . '" width="250" height="61" decoding="async" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '">
 								</a>';
 							}
 							?>
@@ -129,7 +128,7 @@ if ( function_exists( 'wp_body_open' ) ) {
 				the_custom_logo();
 			} else {
 				echo '<a class="logo" href="' . esc_url( get_home_url() ) . '" rel="home">
-					<img src="' . esc_url( $logoimg ) . '" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '">
+					<img src="' . esc_url( $logoimg ) . '" width="250" height="61" decoding="async" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '">
 				</a>';
 			}
 			?>

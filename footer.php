@@ -21,6 +21,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 }
 ?>
 <footer id="footer" class="ane-footer">
+	<h2 class="screen-reader-text"><?php esc_html_e( 'Informasi Situs', 'makhadane' ); ?></h2>
 	<div class="atas">
 		<div class="ane-container mplr">
 			<div class="ane-atas">
@@ -30,7 +31,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 					if ( has_custom_logo() ) {
 						the_custom_logo();
 					} else {
-						echo '<a class="logo" href="' . esc_url( get_home_url() ) . '" rel="home"><img src="' . esc_url( $logoimg ) . '" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '"></a>';
+						echo '<a class="logo" href="' . esc_url( get_home_url() ) . '" rel="home"><img src="' . esc_url( $logoimg ) . '" width="250" height="61" loading="lazy" decoding="async" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '"></a>';
 					}
 					?>
 				</div>

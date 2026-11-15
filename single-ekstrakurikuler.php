@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
 get_header();
 ?>
 
@@ -21,8 +23,8 @@ get_header();
 			while ( have_posts() ) :
 				the_post();
 
-				$thumbImg = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
-				$photo    = has_post_thumbnail() ? esc_url( $thumbImg[0] ) : esc_url( ane_dummy_thumbnail() );
+				$thumb_img = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
+				$photo     = has_post_thumbnail() ? esc_url( $thumb_img[0] ) : esc_url( ane_dummy_thumbnail() );
 				?>
 				<header class="entry-header">
 					<div class="single-post-header" style="background: url('<?php echo esc_url( $photo ); ?>')"></div>
@@ -35,15 +37,13 @@ get_header();
 						<h1 class="post-title"><?php echo esc_html( get_the_title() ); ?></h1>
 					</div>
 
-					<div class="ane-image">
-						<img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
-					</div>
+					<?php ane_get_featured_image(); ?>
 
 					<div class="ane-content">
 						<div class="share-this">
 							<?php
 							if ( function_exists( 'ane_social_share' ) ) {
-								echo ane_social_share();
+								echo wp_kses_post( ane_social_share() );
 							}
 							?>
 						</div>

@@ -356,8 +356,10 @@
 
 			$sidebar.before(spacer);
 
-			$(window).on('scroll', function () {
-				var scrollTop = $(window).scrollTop();
+			var isScrollTicking = false;
+			var updateStickySidebar = function () {
+				isScrollTicking = false;
+				var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 				var sidebarHeight = $sidebar.outerHeight();
 				var footerTop = $footer.offset().top;
 
@@ -385,14 +387,25 @@
 					});
 					spacer.hide();
 				}
-			});
+			};
+
+			window.addEventListener(
+				'scroll',
+				function () {
+					if (!isScrollTicking) {
+						isScrollTicking = true;
+						window.requestAnimationFrame(updateStickySidebar);
+					}
+				},
+				{ passive: true }
+			);
 		}
 
 		/* Floating WhatsApp Chat (.floating-chat) */
 		var $floatingChat = $('.floating-chat');
 		if ($floatingChat.length) {
 			var $chatBox = $floatingChat.find('.chat');
-			var $closeButton = $floatingChat.find('.ane-tutup');
+			var $closeButton = $floatingChat.find('.ane-close, .ane-tutup');
 
 			setTimeout(function () {
 				$floatingChat.addClass('enter');

@@ -16,4 +16,4 @@
 | 08 | Migrasi icon `FontAne` & FontAwesome ke Inline SVG (`makhadane_icon()`) + hapus `fonts/` | Done | `phases/phase-08-migrasi-icon-svg.md` |
 | 09 | Audit, pembersihan dead CSS (`0 dead CSS rules`), & penghapusan folder `scss/` | Done | `phases/phase-09-pembersihan-dan-deduplikasi-css.md` |
 | 10 | Bundling & importer ACF JSON (`inc/acf-importer.php`) + verifikasi `composer dist:check` | Done | `phases/phase-10-acf-json-importer.md` |
-| 11 | Penerapan Standar `webane-pagespeed-cwv` (Preload LCP, Zero-CLS Slider, Async CSS, Defer JS, & Aksesibilitas 100) | Planned | `phases/phase-11-standar-pagespeed-cwv.md` |
+| 11 | Penerapan Standar `webane-pagespeed-cwv` (Preload LCP, Zero-CLS Slider, Async CSS, Defer JS, & Aksesibilitas 100) | Done | `phases/phase-11-standar-pagespeed-cwv.md` |

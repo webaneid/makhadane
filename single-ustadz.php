@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
 get_header();
 ane_set_views( get_the_ID() );
 
@@ -37,7 +39,7 @@ if ( have_posts() ) :
 
 				<div class="entry-content">
 					<div class="ane-image">
-						<img src="<?php echo esc_url( $photo_kotak ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
+						<img src="<?php echo esc_url( $photo_kotak ); ?>" width="400" height="400" alt="<?php echo esc_attr( get_the_title() ); ?>" fetchpriority="high" decoding="async">
 					</div>
 
 					<div class="ane-content">
@@ -46,7 +48,7 @@ if ( have_posts() ) :
 						</div>
 
 						<div class="share-this">
-							<?php echo ane_social_share(); ?>
+							<?php echo wp_kses_post( ane_social_share() ); ?>
 						</div>
 
 						<?php if ( $pelajaran || $kelas ) : ?>
