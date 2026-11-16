@@ -576,5 +576,77 @@
 				trackLinktreeClick(linkType, linkLabel, linkUrl);
 			});
 		}
+
+		/* About Us Gallery Scroll Drift & Arrow Controls (.about-us) */
+		var aboutSection = document.querySelector('.about-us');
+		if (aboutSection) {
+			var aboutViewport = aboutSection.querySelector('.about-us-gallery-viewport');
+			var aboutTrack = aboutSection.querySelector('.about-us-gallery-track');
+			var aboutBar = aboutSection.querySelector('.about-us-progress-bar');
+			var prevBtn = aboutSection.querySelector('.about-us-nav-btn.is-prev');
+			var nextBtn = aboutSection.querySelector('.about-us-nav-btn.is-next');
+
+			if (aboutViewport && aboutTrack) {
+				var manualOffset = 0;
+				var scrollTicking = false;
+				var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+				var getMaxShift = function () {
+					return Math.max(140, aboutTrack.scrollWidth - aboutViewport.clientWidth);
+				};
+
+				var renderGallery = function () {
+					scrollTicking = false;
+					var maxShift = getMaxShift();
+					var scrollProgress = 0;
+
+					if (!reducedMotion) {
+						var rect = aboutSection.getBoundingClientRect();
+						var vh = window.innerHeight || document.documentElement.clientHeight;
+						var total = vh + rect.height;
+						if (total > 0) {
+							scrollProgress = Math.min(1, Math.max(0, (vh - rect.top) / total));
+						}
+					}
+
+					var baseShift = scrollProgress * maxShift * 0.65;
+					var totalShift = Math.min(maxShift, Math.max(0, baseShift + manualOffset));
+					aboutTrack.style.transform = 'translate3d(' + (-totalShift.toFixed(1)) + 'px, 0, 0)';
+
+					if (aboutBar) {
+						var pct = Math.min(100, Math.max(20, 20 + (totalShift / maxShift) * 80));
+						aboutBar.style.width = pct.toFixed(1) + '%';
+					}
+				};
+
+				window.addEventListener(
+					'scroll',
+					function () {
+						if (!scrollTicking) {
+							scrollTicking = true;
+							window.requestAnimationFrame(renderGallery);
+						}
+					},
+					{ passive: true }
+				);
+
+				window.addEventListener('resize', renderGallery, { passive: true });
+
+				if (prevBtn) {
+					prevBtn.addEventListener('click', function () {
+						manualOffset = Math.max(-getMaxShift() * 0.5, manualOffset - 260);
+						renderGallery();
+					});
+				}
+				if (nextBtn) {
+					nextBtn.addEventListener('click', function () {
+						manualOffset = Math.min(getMaxShift() * 0.8, manualOffset + 260);
+						renderGallery();
+					});
+				}
+
+				renderGallery();
+			}
+		}
 	});
 })(jQuery);

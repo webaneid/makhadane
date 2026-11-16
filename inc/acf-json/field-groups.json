@@ -3085,12 +3085,12 @@
                                 "append": ""
                             },
                             {
-                                "key": "field_679a37ec1fd0f",
-                                "label": "Tambah Funfact",
-                                "name": "ane_repeater",
+                                "key": "field_makhadane_about_gallery",
+                                "label": "Gallery Foto (6–7+ Foto)",
+                                "name": "ane_about_gallery",
                                 "aria-label": "",
                                 "type": "repeater",
-                                "instructions": "",
+                                "instructions": "Tambahkan minimal 6–7 foto agar memenuhi lebar layar dan bergerak halus saat halaman di-scroll.",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
@@ -3098,58 +3098,84 @@
                                     "class": "",
                                     "id": ""
                                 },
-                                "layout": "table",
+                                "layout": "block",
                                 "min": 0,
-                                "max": 0,
-                                "collapsed": "",
-                                "button_label": "Add Row",
+                                "max": 12,
+                                "collapsed": "field_makhadane_about_gal_title",
+                                "button_label": "Tambah Foto Gallery",
                                 "rows_per_page": 20,
                                 "sub_fields": [
                                     {
-                                        "key": "field_679a37ec1fd11",
-                                        "label": "Title",
-                                        "name": "ane_angka",
+                                        "key": "field_makhadane_about_gal_img",
+                                        "label": "Foto",
+                                        "name": "ane_gallery_image",
                                         "aria-label": "",
-                                        "type": "number",
-                                        "instructions": "Kosongkan jika tidak ada",
+                                        "type": "image",
+                                        "instructions": "",
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "35",
                                             "class": "",
                                             "id": ""
                                         },
-                                        "default_value": "",
-                                        "min": "",
-                                        "max": "",
-                                        "allow_in_bindings": 0,
-                                        "placeholder": 5000,
-                                        "step": "",
-                                        "prepend": "",
-                                        "append": "",
-                                        "parent_repeater": "field_679a37ec1fd0f"
+                                        "return_format": "array",
+                                        "library": "all",
+                                        "preview_size": "medium",
+                                        "parent_repeater": "field_makhadane_about_gallery"
                                     },
                                     {
-                                        "key": "field_679a37ec1fd12",
-                                        "label": "Label",
-                                        "name": "ane_title",
+                                        "key": "field_makhadane_about_gal_title",
+                                        "label": "Judul Foto (Opsional)",
+                                        "name": "ane_gallery_title",
                                         "aria-label": "",
                                         "type": "text",
                                         "instructions": "",
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "",
+                                            "width": "35",
                                             "class": "",
                                             "id": ""
                                         },
                                         "default_value": "",
-                                        "maxlength": "",
-                                        "allow_in_bindings": 0,
-                                        "placeholder": "Murid",
-                                        "prepend": "",
-                                        "append": "",
-                                        "parent_repeater": "field_679a37ec1fd0f"
+                                        "placeholder": "",
+                                        "parent_repeater": "field_makhadane_about_gallery"
+                                    },
+                                    {
+                                        "key": "field_makhadane_about_gal_link",
+                                        "label": "Link (Opsional)",
+                                        "name": "ane_gallery_link",
+                                        "aria-label": "",
+                                        "type": "link",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "30",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "return_format": "array",
+                                        "parent_repeater": "field_makhadane_about_gallery"
+                                    },
+                                    {
+                                        "key": "field_makhadane_about_gal_desc",
+                                        "label": "Deskripsi Singkat (Opsional)",
+                                        "name": "ane_gallery_desc",
+                                        "aria-label": "",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "100",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "parent_repeater": "field_makhadane_about_gallery"
                                     }
                                 ]
                             },
