@@ -2422,10 +2422,12 @@ select:after {
 }
 .ist-layout.has-steps .ist-media .ane-image {
   height: 100%;
-  min-height: 460px;
+  min-height: 480px;
+  aspect-ratio: 4 / 5;
   border-radius: 22px;
 }
 .ist-layout.is-classic .ist-media .ane-image {
+  aspect-ratio: 4 / 5;
   border-radius: 24px;
   box-shadow: 0 24px 54px rgba(var(--ane-warna-gelap-rgb), 0.14);
 }
