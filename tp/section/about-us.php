@@ -20,34 +20,21 @@ $makhadane_gallery  = get_sub_field( 'ane_about_gallery' );
 
 $makhadane_slides = array();
 if ( is_array( $makhadane_gallery ) ) {
-	foreach ( $makhadane_gallery as $makhadane_row ) {
-		if ( ! is_array( $makhadane_row ) ) {
+	foreach ( $makhadane_gallery as $makhadane_img ) {
+		if ( ! is_array( $makhadane_img ) ) {
 			continue;
 		}
-		$img     = $makhadane_row['ane_gallery_image'] ?? null;
-		$img_url = ( is_array( $img ) && ! empty( $img['sizes']['medium_large'] ) )
-			? (string) $img['sizes']['medium_large']
-			: ( ( is_array( $img ) && ! empty( $img['url'] ) ) ? (string) $img['url'] : '' );
-		$img_alt = ( is_array( $img ) && ! empty( $img['alt'] ) ) ? (string) $img['alt'] : '';
+		$img_url = ! empty( $makhadane_img['sizes']['medium_large'] )
+			? (string) $makhadane_img['sizes']['medium_large']
+			: ( ! empty( $makhadane_img['url'] ) ? (string) $makhadane_img['url'] : '' );
+		$img_alt = ! empty( $makhadane_img['alt'] ) ? (string) $makhadane_img['alt'] : get_bloginfo( 'name' );
 
-		if ( '' === $img_url ) {
-			continue;
+		if ( '' !== $img_url ) {
+			$makhadane_slides[] = array(
+				'url' => $img_url,
+				'alt' => $img_alt,
+			);
 		}
-
-		$g_title = trim( wp_strip_all_tags( (string) ( $makhadane_row['ane_gallery_title'] ?? '' ) ) );
-		$g_desc  = trim( wp_strip_all_tags( (string) ( $makhadane_row['ane_gallery_desc'] ?? '' ) ) );
-		$g_link  = $makhadane_row['ane_gallery_link'] ?? null;
-		$g_url   = ( is_array( $g_link ) && ! empty( $g_link['url'] ) ) ? trim( (string) $g_link['url'] ) : '';
-		$g_tgt   = ( is_array( $g_link ) && ! empty( $g_link['target'] ) ) ? trim( (string) $g_link['target'] ) : '';
-
-		$makhadane_slides[] = array(
-			'url'    => $img_url,
-			'alt'    => '' !== $img_alt ? $img_alt : ( '' !== $g_title ? $g_title : get_bloginfo( 'name' ) ),
-			'title'  => $g_title,
-			'desc'   => $g_desc,
-			'link'   => $g_url,
-			'target' => $g_tgt,
-		);
 	}
 }
 
@@ -55,12 +42,8 @@ if ( empty( $makhadane_slides ) ) {
 	$makhadane_fallback_img = get_sub_field( 'ane_image' );
 	if ( is_array( $makhadane_fallback_img ) && ! empty( $makhadane_fallback_img['sizes']['large'] ) ) {
 		$makhadane_slides[] = array(
-			'url'    => (string) $makhadane_fallback_img['sizes']['large'],
-			'alt'    => ! empty( $makhadane_fallback_img['alt'] ) ? (string) $makhadane_fallback_img['alt'] : get_bloginfo( 'name' ),
-			'title'  => '',
-			'desc'   => '',
-			'link'   => '',
-			'target' => '',
+			'url' => (string) $makhadane_fallback_img['sizes']['large'],
+			'alt' => ! empty( $makhadane_fallback_img['alt'] ) ? (string) $makhadane_fallback_img['alt'] : get_bloginfo( 'name' ),
 		);
 	}
 }
@@ -99,30 +82,11 @@ if ( empty( $makhadane_slides ) ) {
 		<div class="about-us-gallery-viewport">
 			<div class="about-us-gallery-track">
 				<?php foreach ( $makhadane_slides as $makhadane_slide ) : ?>
-					<?php $makhadane_has_info = ( '' !== $makhadane_slide['title'] || '' !== $makhadane_slide['desc'] || '' !== $makhadane_slide['link'] ); ?>
-					<article class="about-us-gallery-card<?php echo $makhadane_has_info ? ' has-info' : ''; ?>">
+					<div class="about-us-gallery-card">
 						<div class="about-us-gallery-media">
 							<img src="<?php echo esc_url( $makhadane_slide['url'] ); ?>" width="320" height="400" alt="<?php echo esc_attr( $makhadane_slide['alt'] ); ?>" loading="lazy" decoding="async">
 						</div>
-
-						<?php if ( $makhadane_has_info ) : ?>
-							<div class="about-us-gallery-info">
-								<div class="about-us-gallery-copy">
-									<?php if ( '' !== $makhadane_slide['title'] ) : ?>
-										<h3 class="about-us-gallery-card-title"><?php echo esc_html( $makhadane_slide['title'] ); ?></h3>
-									<?php endif; ?>
-									<?php if ( '' !== $makhadane_slide['desc'] ) : ?>
-										<p class="about-us-gallery-card-desc"><?php echo esc_html( $makhadane_slide['desc'] ); ?></p>
-									<?php endif; ?>
-								</div>
-								<?php if ( '' !== $makhadane_slide['link'] ) : ?>
-									<a class="about-us-gallery-arrow" href="<?php echo esc_url( $makhadane_slide['link'] ); ?>"<?php echo '_blank' === $makhadane_slide['target'] ? ' target="_blank" rel="noopener noreferrer"' : ''; ?> aria-label="<?php echo esc_attr( '' !== $makhadane_slide['title'] ? $makhadane_slide['title'] : __( 'Lihat detail', 'makhadane' ) ); ?>">
-										<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
-									</a>
-								<?php endif; ?>
-							</div>
-						<?php endif; ?>
-					</article>
+					</div>
 				<?php endforeach; ?>
 			</div>
 		</div>
