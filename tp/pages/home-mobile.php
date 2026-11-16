@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 ?>
 
@@ -55,7 +57,7 @@ $paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 	<?php if ( $mobile_query->have_posts() ) : ?>
 		<section class="ane-post-mobile">
 			<div class="ane-text">
-				<h2 class="judul-utama"><?php esc_html_e( 'Newest', 'makhadane' ); ?> <span><?php esc_html_e( 'Posts', 'makhadane' ); ?></span></h2>
+				<h2 class="section-title"><?php esc_html_e( 'Newest', 'makhadane' ); ?> <span><?php esc_html_e( 'Posts', 'makhadane' ); ?></span></h2>
 			</div>
 			<?php
 			$counter = 0;

@@ -28,7 +28,7 @@ $category_link = esc_url( get_category_link( $category_id ) );
 	<div class="ane-container">
 		<div class="ane-text">
 			<a href="<?php echo $category_link; ?>" rel="noopener noreferrer">
-				<h2 class="judul-utama"><?php echo ! empty( $judul ) ? wp_kses_post( $judul ) : $category_name; ?></h2>
+				<h2 class="section-title"><?php echo ! empty( $judul ) ? wp_kses_post( $judul ) : $category_name; ?></h2>
 			</a>
 
 			<?php

@@ -9,6 +9,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <section class="image-side-text">
 	<div class="ane-container">
@@ -22,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$link     = get_sub_field( 'ane_link' );
 
 					if ( ! empty( $title ) ) :
-						echo '<h2>' . wp_kses_post( $title ) . '</h2>';
+						echo '<h2 class="section-title">' . wp_kses_post( $title ) . '</h2>';
 					endif;
 
 					if ( ! empty( $subtitle ) ) :

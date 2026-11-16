@@ -46,7 +46,7 @@ if ( have_rows( 'ane_featured' ) ) :
 		<section class="section-featured <?php echo esc_attr( $makhadane_bg_cls ); ?>">
 			<div class="ane-container">
 				<?php if ( '' !== $makhadane_section_title ) : ?>
-					<h2 class="section-featured-title"><?php echo esc_html( $makhadane_section_title ); ?></h2>
+					<h2 class="section-title"><?php echo esc_html( $makhadane_section_title ); ?></h2>
 				<?php endif; ?>
 
 				<div class="section-featured-grid">

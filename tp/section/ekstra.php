@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php
 					$judul = get_sub_field( 'ane_title' );
 					if ( ! empty( $judul ) ) :
-						echo '<h2 class="judul-utama">' . wp_kses_post( $judul ) . '</h2>';
+						echo '<h2 class="section-title">' . wp_kses_post( $judul ) . '</h2>';
 					else :
-						echo '<h2 class="judul-utama">Ekstra<span>kurikuler</span></h2>';
+						echo '<h2 class="section-title">Ekstra<span>kurikuler</span></h2>';
 					endif;
 
 					$deskripsi = get_sub_field( 'ane_deskripsi' );

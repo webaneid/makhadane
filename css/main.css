@@ -727,19 +727,27 @@ ul {
   margin-bottom: 15px;
   letter-spacing: -0.8px;
 }
-.ane-text h2.judul-utama,
+.section-title {
+  color: var(--ane-warna-gelap);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
+}
+.section-title span {
+  color: var(--ane-warna-utama);
+}
 .ane-text h3 {
   color: var(--ane-warna-gelap);
   font-size: 42px;
   line-height: 50px;
   margin-bottom: 15px;
 }
-.ane-text h2.judul-utama span,
 .ane-text h3 span {
   color: var(--ane-warna-utama);
 }
 @media (max-width: 767px) {
-  .ane-text h2.judul-utama,
   .ane-text h3 {
     font-size: 1.6rem;
     line-height: 1.1;
@@ -2420,17 +2428,6 @@ select:after {
   border-radius: 999px;
   margin-bottom: 14px;
 }
-.ist-title {
-  font-size: clamp(1.75rem, 3vw, 2.65rem);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  color: var(--ane-warna-gelap);
-  margin: 0 0 14px;
-}
-.ist-title span {
-  color: var(--ane-warna-utama);
-}
 .ist-desc {
   font-size: 0.95rem;
   line-height: 1.7;
@@ -2650,13 +2647,6 @@ select:after {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0 0 10px;
-}
-.landing-page .image-below-text .ane-text h2 {
-  font-size: clamp(1.75rem, 3.2vw, 2.65rem);
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.025em;
-  margin: 0 0 14px;
 }
 .landing-page .image-below-text .ane-text p {
   font-size: 0.95rem;
@@ -2929,45 +2919,24 @@ select:after {
   margin: 0 auto;
   text-align: center;
 }
-.about-us-badge-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-.about-us-badge,
-.about-us-badge-icon {
+.about-us-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 36px;
+  padding: 0 18px;
+  margin-bottom: 18px;
   border-radius: 999px;
   background: rgba(var(--ane-warna-gelap-rgb), 0.04);
   border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
   color: var(--ane-warna-gelap);
-}
-.about-us-badge {
-  padding: 0 18px;
   font-size: 0.8125rem;
   font-weight: 600;
 }
-.about-us-badge-icon {
-  width: 36px;
-  color: var(--ane-warna-utama);
+.about-us-header .section-title {
+  text-align: center;
 }
-.about-us-badge-icon svg {
-  width: 15px;
-  height: 15px;
-}
-.about-us-title {
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  color: var(--ane-warna-gelap);
-  margin: 0 0 16px;
-}
-.about-us-title span {
+.about-us-header .section-title span {
   color: rgba(var(--ane-warna-text-rgb), 0.5);
 }
 .about-us-desc {
@@ -4011,19 +3980,12 @@ select:after {
   background: var(--ane-warna-text);
   color: var(--ane-warna-putih);
 }
-.section-featured-title {
+.section-featured .section-title {
   text-align: center;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
   margin: 0 auto clamp(32px, 4vw, 48px);
   max-width: 720px;
 }
-.section-featured.is-light .section-featured-title {
-  color: var(--ane-warna-gelap);
-}
-.section-featured.is-dark .section-featured-title {
+.section-featured.is-dark .section-title {
   color: var(--ane-warna-putih);
 }
 .section-featured-grid {

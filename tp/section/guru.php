@@ -18,9 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			$judul = get_sub_field( 'ane_title' );
 			if ( ! empty( $judul ) ) :
-				echo '<h2 class="judul-utama">' . wp_kses_post( $judul ) . '</h2>';
+				echo '<h2 class="section-title">' . wp_kses_post( $judul ) . '</h2>';
 			else :
-				echo '<h2 class="judul-utama">' . esc_html__( 'Our', 'makhadane' ) . ' <span>' . esc_html__( 'Teachers', 'makhadane' ) . '</span></h2>';
+				echo '<h2 class="section-title">' . esc_html__( 'Our', 'makhadane' ) . ' <span>' . esc_html__( 'Teachers', 'makhadane' ) . '</span></h2>';
 			endif;
 
 			$deskripsi = get_sub_field( 'ane_deskripsi' );

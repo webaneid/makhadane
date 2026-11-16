@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="ane-text">
 			<?php
 			$judul = get_sub_field( 'ane_title' );
-			echo '<h2 class="judul-utama">' . ( ! empty( $judul ) ? wp_kses_post( $judul ) : esc_html__( 'Testi<span>moni</span>', 'makhadane' ) ) . '</h2>';
+			echo '<h2 class="section-title">' . ( ! empty( $judul ) ? wp_kses_post( $judul ) : esc_html__( 'Testi<span>moni</span>', 'makhadane' ) ) . '</h2>';
 
 			$deskripsi = get_sub_field( 'ane_deskripsi' );
 			if ( ! empty( $deskripsi ) ) {

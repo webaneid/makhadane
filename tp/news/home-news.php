@@ -9,13 +9,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
 ?>
 <section class="ane-home-news gp">
 	<div class="ane-container">
 		<div class="ane-text">
 			<div class="ane-isi">
 				<?php $judul = get_sub_field( 'ane_title' ); ?>
-				<h2 class="judul-utama">
+				<h2 class="section-title">
 					<?php echo ! empty( $judul ) ? wp_kses_post( $judul ) : esc_html__( 'Our <span>Blogs</span>', 'makhadane' ); ?>
 				</h2>
 

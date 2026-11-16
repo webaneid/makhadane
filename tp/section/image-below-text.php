@@ -33,7 +33,7 @@ $makhadane_link     = get_sub_field( 'ane_link' );
 						<?php endif; ?>
 
 						<?php if ( '' !== $makhadane_title ) : ?>
-							<h2><?php echo wp_kses_post( $makhadane_title ); ?></h2>
+							<h2 class="section-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
 						<?php endif; ?>
 
 						<?php if ( '' !== $makhadane_desc ) : ?>

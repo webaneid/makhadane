@@ -52,16 +52,11 @@ if ( empty( $makhadane_slides ) ) {
 	<div class="ane-container">
 		<div class="about-us-header">
 			<?php if ( '' !== $makhadane_subtitle ) : ?>
-				<div class="about-us-badge-group">
-					<span class="about-us-badge"><?php echo esc_html( $makhadane_subtitle ); ?></span>
-					<span class="about-us-badge-icon" aria-hidden="true">
-						<?php echo wp_kses_post( makhadane_icon( 'star' ) ); ?>
-					</span>
-				</div>
+				<span class="about-us-badge"><?php echo esc_html( $makhadane_subtitle ); ?></span>
 			<?php endif; ?>
 
 			<?php if ( '' !== $makhadane_title ) : ?>
-				<h2 class="about-us-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
+				<h2 class="section-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
 			<?php endif; ?>
 
 			<?php if ( '' !== $makhadane_desc ) : ?>
