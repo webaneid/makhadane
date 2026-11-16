@@ -1,3 +1,34 @@
+## [4.2.0](https://github.com/webaneid/makhadane/compare/v4.1.3...v4.2.0) (2026-11-16)
+
+### Features
+
+* **acf:** bundle ACF JSON field groups and auto-sync importer (phase 10) ([267563b](https://github.com/webaneid/makhadane/commit/267563ba088ff93c481cb50bb97ecdb61bb899c1))
+* **header:** redesign desktop header with glassmorphic nav pill and action buttons ([a0ee318](https://github.com/webaneid/makhadane/commit/a0ee3184823c2b45ad146aa7d83cebe2b768d12c))
+* **hero:** convert funfacts to floating animated pills and enlarge right post stack ([edcc120](https://github.com/webaneid/makhadane/commit/edcc120d97d49e02bdc510924476be1e97c9e135))
+* **hero:** make hero 100vh and add glassmorphic funfacts and recent post dock ([56bfb0d](https://github.com/webaneid/makhadane/commit/56bfb0d7adc88ad2949172b5b9fc7f01876a7889))
+* **hero:** redesign bottom curve notch with scroll indicator and white/dark color option ([4577ebe](https://github.com/webaneid/makhadane/commit/4577ebe4de8ee19d9e593cc9e10fa93199f6fae4))
+* **hero:** redesign bottom right recent posts as fanned 3-card stack ([4eefbae](https://github.com/webaneid/makhadane/commit/4eefbaefe64d76df2015a353c8a34d2e16a9ab28))
+* **media:** add automatic WebP conversion on image upload (phase 05) ([a98d8a3](https://github.com/webaneid/makhadane/commit/a98d8a3140a798993bcf15b25d1c7fe635448b4e))
+
+### Bug Fixes
+
+* **header:** center SVG icons inside glassmorphic header icon buttons ([c892bc7](https://github.com/webaneid/makhadane/commit/c892bc7052a08dc929b5c0fe9d8819d7c4c6dc75))
+* **hero:** match hero dock glassmorphism style with desktop header nav pill ([e915f3f](https://github.com/webaneid/makhadane/commit/e915f3f822f57f4f6563a5398dfce0114110089e))
+* **hero:** reset letter-spacing on hero dock h3 titles ([ecaad7a](https://github.com/webaneid/makhadane/commit/ecaad7a69056b0e61217332fdbc117d51e74e5e3))
+* **section:** center PNG icon inside image-below-text list badge ([4e78a96](https://github.com/webaneid/makhadane/commit/4e78a96675de65c802b3943a045032fb15857832))
+* **section:** enforce 4:5 portrait aspect-ratio on image-side-text desktop media ([c2f3f3d](https://github.com/webaneid/makhadane/commit/c2f3f3de323464a427f09e5843bd70b91af39003))
+* **section:** overlap image-below-text glass cards over image on desktop and tablet ([be00461](https://github.com/webaneid/makhadane/commit/be00461ea9c5641b5e9d7979cd79a4b1ecf9b807))
+* **section:** prioritize persegi (800x1000) image size on image-side-text desktop ([272f0b6](https://github.com/webaneid/makhadane/commit/272f0b61c3411b8890e4661b4ef101bbd5d74b42))
+* **ui:** fit section-title pill width to text and align with section flow ([d46089b](https://github.com/webaneid/makhadane/commit/d46089b39e1510942f2bdc63812e4bc9a21c53bf))
+
+### Performance Improvements
+
+* **css:** prune dead CSS rules and remove legacy scss/ folder (phase 09) ([99825c0](https://github.com/webaneid/makhadane/commit/99825c0a402c94bb8b43a67f4b80c5dbe1dc91a2))
+* **css:** restructure main.css into 12 sections and consolidate FontAne.css (phase 07) ([fcdd848](https://github.com/webaneid/makhadane/commit/fcdd8483fb5dbaa85d1e9d0fba707dfac933bd5f))
+* **cwv:** apply webane-pagespeed-cwv standard for LCP, CLS, FCP, and a11y (phase 11) ([cb88837](https://github.com/webaneid/makhadane/commit/cb8883769b292255373768bbb9502de9faab87af))
+* **icons:** migrate FontAne and FontAwesome to inline SVG makhadane_icon and remove fonts/ (phase 08) ([d53460b](https://github.com/webaneid/makhadane/commit/d53460bdcafb8047d8fc1635d88f98e4ded7e60b))
+* **js:** consolidate JS into single makhadane.js and add conditional enqueue (phase 06) ([1ae549f](https://github.com/webaneid/makhadane/commit/1ae549f92ccaea4cbf7e470468adbc049323c25e))
+
 # Changelog
 
 All notable changes to Makhadane theme will be documented in this file.
