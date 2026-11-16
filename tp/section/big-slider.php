@@ -21,22 +21,29 @@ $makhadane_show_curve = ( null === $makhadane_raw_curve || '' === $makhadane_raw
 
 $makhadane_raw_funfacts = get_sub_field( 'ane_hero_funfacts' );
 $makhadane_funfacts     = array();
+$makhadane_ff_icon_map  = array(
+	'building' => 'building',
+	'teacher'  => 'teacher',
+	'student'  => 'users',
+	'book'     => 'buku',
+);
 if ( is_array( $makhadane_raw_funfacts ) ) {
 	foreach ( $makhadane_raw_funfacts as $makhadane_ff_row ) {
 		if ( ! is_array( $makhadane_ff_row ) ) {
 			continue;
 		}
-		$ff_title = trim( wp_strip_all_tags( (string) ( $makhadane_ff_row['ane_funfact_title'] ?? '' ) ) );
-		$ff_value = trim( wp_strip_all_tags( (string) ( $makhadane_ff_row['ane_funfact_value'] ?? '' ) ) );
-		$ff_label = trim( wp_strip_all_tags( (string) ( $makhadane_ff_row['ane_funfact_label'] ?? '' ) ) );
-		if ( '' !== $ff_title || '' !== $ff_value || '' !== $ff_label ) {
+		$ff_icon_raw = (string) ( $makhadane_ff_row['ane_funfact_icon'] ?? 'building' );
+		$ff_icon     = $makhadane_ff_icon_map[ $ff_icon_raw ] ?? 'building';
+		$ff_title    = trim( wp_strip_all_tags( (string) ( $makhadane_ff_row['ane_funfact_title'] ?? '' ) ) );
+		$ff_value    = trim( wp_strip_all_tags( (string) ( $makhadane_ff_row['ane_funfact_value'] ?? '' ) ) );
+		if ( '' !== $ff_title || '' !== $ff_value ) {
 			$makhadane_funfacts[] = array(
+				'icon'  => $ff_icon,
 				'title' => $ff_title,
 				'value' => $ff_value,
-				'label' => $ff_label,
 			);
 		}
-		if ( count( $makhadane_funfacts ) >= 2 ) {
+		if ( count( $makhadane_funfacts ) >= 4 ) {
 			break;
 		}
 	}
@@ -165,24 +172,22 @@ if ( $makhadane_has_dock ) {
 			<div class="ane-container">
 				<div class="home-slider-dock-grid<?php echo ( $makhadane_has_funfacts && $makhadane_has_post ) ? ' is-split' : ' is-single'; ?>">
 					<?php if ( $makhadane_has_funfacts ) : ?>
-						<div class="home-hero-funfacts-card">
-							<div class="home-hero-funfacts-grid<?php echo 1 === count( $makhadane_funfacts ) ? ' is-one' : ''; ?>">
-								<?php foreach ( $makhadane_funfacts as $makhadane_ff ) : ?>
-									<div class="home-hero-funfact-item">
+						<div class="home-hero-funfacts-wrap">
+							<?php foreach ( $makhadane_funfacts as $makhadane_ff ) : ?>
+								<div class="home-hero-funfact-pill">
+									<span class="home-hero-funfact-icon" aria-hidden="true">
+										<?php echo wp_kses_post( makhadane_icon( $makhadane_ff['icon'] ) ); ?>
+									</span>
+									<div class="home-hero-funfact-text">
 										<?php if ( '' !== $makhadane_ff['title'] ) : ?>
-											<h3 class="home-hero-funfact-title"><?php echo esc_html( $makhadane_ff['title'] ); ?></h3>
+											<span class="home-hero-funfact-title"><?php echo esc_html( $makhadane_ff['title'] ); ?></span>
 										<?php endif; ?>
-										<div class="home-hero-funfact-body">
-											<?php if ( '' !== $makhadane_ff['value'] ) : ?>
-												<span class="home-hero-funfact-value"><?php echo esc_html( $makhadane_ff['value'] ); ?></span>
-											<?php endif; ?>
-											<?php if ( '' !== $makhadane_ff['label'] ) : ?>
-												<p class="home-hero-funfact-label"><?php echo esc_html( $makhadane_ff['label'] ); ?></p>
-											<?php endif; ?>
-										</div>
+										<?php if ( '' !== $makhadane_ff['value'] ) : ?>
+											<span class="home-hero-funfact-value"><?php echo esc_html( $makhadane_ff['value'] ); ?></span>
+										<?php endif; ?>
 									</div>
-								<?php endforeach; ?>
-							</div>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
 

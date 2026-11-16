@@ -2307,11 +2307,11 @@
                             },
                             {
                                 "key": "field_makhadane_hero_funfacts",
-                                "label": "Funfact Hero (Maksimal 2)",
+                                "label": "Funfact Hero (Maksimal 4)",
                                 "name": "ane_hero_funfacts",
                                 "aria-label": "",
                                 "type": "repeater",
-                                "instructions": "Tambahkan maksimal 2 item statistik/funfact yang tampil di panel glassmorphism bagian bawah Hero.",
+                                "instructions": "Tambahkan 3 sampai 4 item statistik/funfact melayang di pojok kiri bawah Hero.",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
@@ -2321,11 +2321,40 @@
                                 },
                                 "collapsed": "",
                                 "min": 0,
-                                "max": 2,
+                                "max": 4,
                                 "layout": "table",
                                 "button_label": "Tambah Funfact",
                                 "rows_per_page": 20,
                                 "sub_fields": [
+                                    {
+                                        "key": "field_makhadane_funfact_icon",
+                                        "label": "Icon",
+                                        "name": "ane_funfact_icon",
+                                        "aria-label": "",
+                                        "type": "select",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "25",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "choices": {
+                                            "building": "Building / Gedung",
+                                            "teacher": "Teacher / Pengajar",
+                                            "student": "Student / Santri",
+                                            "book": "Book / Kitab"
+                                        },
+                                        "default_value": "building",
+                                        "return_format": "value",
+                                        "multiple": 0,
+                                        "allow_null": 0,
+                                        "ui": 0,
+                                        "ajax": 0,
+                                        "placeholder": "",
+                                        "parent_repeater": "field_makhadane_hero_funfacts"
+                                    },
                                     {
                                         "key": "field_makhadane_funfact_title",
                                         "label": "Title",
@@ -2336,7 +2365,7 @@
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "25",
+                                            "width": "45",
                                             "class": "",
                                             "id": ""
                                         },
@@ -2349,7 +2378,7 @@
                                     },
                                     {
                                         "key": "field_makhadane_funfact_value",
-                                        "label": "Value",
+                                        "label": "Value (Angka)",
                                         "name": "ane_funfact_value",
                                         "aria-label": "",
                                         "type": "text",
@@ -2357,7 +2386,7 @@
                                         "required": 0,
                                         "conditional_logic": 0,
                                         "wrapper": {
-                                            "width": "20",
+                                            "width": "30",
                                             "class": "",
                                             "id": ""
                                         },
@@ -2366,27 +2395,6 @@
                                         "placeholder": "1.200+",
                                         "prepend": "",
                                         "append": "",
-                                        "parent_repeater": "field_makhadane_hero_funfacts"
-                                    },
-                                    {
-                                        "key": "field_makhadane_funfact_label",
-                                        "label": "Label",
-                                        "name": "ane_funfact_label",
-                                        "aria-label": "",
-                                        "type": "textarea",
-                                        "instructions": "",
-                                        "required": 0,
-                                        "conditional_logic": 0,
-                                        "wrapper": {
-                                            "width": "55",
-                                            "class": "",
-                                            "id": ""
-                                        },
-                                        "default_value": "",
-                                        "maxlength": "",
-                                        "rows": 2,
-                                        "placeholder": "Santri mukim dari berbagai daerah di Indonesia",
-                                        "new_lines": "",
                                         "parent_repeater": "field_makhadane_hero_funfacts"
                                     }
                                 ]
