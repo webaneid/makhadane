@@ -3446,6 +3446,71 @@
                                 "allow_in_bindings": 0
                             },
                             {
+                                "key": "field_makhadane_ist_steps",
+                                "label": "Poin / Langkah Bento (Opsional)",
+                                "name": "ane_side_steps",
+                                "aria-label": "",
+                                "type": "repeater",
+                                "instructions": "Opsional. Jika diisi (1–3 item), section otomatis tampil sebagai layout Bento Grid bernomor (01, 02, 03) + kartu CTA.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_makhadane_ist_step_title",
+                                "min": 0,
+                                "max": 3,
+                                "layout": "table",
+                                "button_label": "Tambah Poin",
+                                "rows_per_page": 20,
+                                "sub_fields": [
+                                    {
+                                        "key": "field_makhadane_ist_step_title",
+                                        "label": "Judul Poin",
+                                        "name": "ane_step_title",
+                                        "aria-label": "",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "40",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "maxlength": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "parent_repeater": "field_makhadane_ist_steps"
+                                    },
+                                    {
+                                        "key": "field_makhadane_ist_step_desc",
+                                        "label": "Deskripsi Singkat",
+                                        "name": "ane_step_desc",
+                                        "aria-label": "",
+                                        "type": "textarea",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "60",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "maxlength": "",
+                                        "rows": 2,
+                                        "placeholder": "",
+                                        "new_lines": "",
+                                        "parent_repeater": "field_makhadane_ist_steps"
+                                    }
+                                ]
+                            },
+                            {
                                 "key": "field_67990369975dc",
                                 "label": "Settings",
                                 "name": "",
