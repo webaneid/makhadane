@@ -49,8 +49,8 @@ $makhadane_img_url   = '';
 $makhadane_img_alt   = get_bloginfo( 'name' );
 if ( is_array( $makhadane_image ) ) {
 	$makhadane_img_url = wp_is_mobile()
-		? (string) ( $makhadane_image['sizes']['medium_large'] ?? ( $makhadane_image['sizes']['medium'] ?? ( $makhadane_image['url'] ?? '' ) ) )
-		: (string) ( $makhadane_image['sizes']['large'] ?? ( $makhadane_image['sizes']['persegi'] ?? ( $makhadane_image['url'] ?? '' ) ) );
+		? (string) ( $makhadane_image['sizes']['medium'] ?? ( $makhadane_image['sizes']['persegi'] ?? ( $makhadane_image['url'] ?? '' ) ) )
+		: (string) ( $makhadane_image['sizes']['persegi'] ?? ( $makhadane_image['sizes']['large'] ?? ( $makhadane_image['url'] ?? '' ) ) );
 	if ( ! empty( $makhadane_image['alt'] ) ) {
 		$makhadane_img_alt = (string) $makhadane_image['alt'];
 	}
@@ -62,7 +62,7 @@ if ( is_array( $makhadane_image ) ) {
 			<?php if ( '' !== $makhadane_img_url ) : ?>
 				<div class="ist-media">
 					<div class="ane-image">
-						<img src="<?php echo esc_url( $makhadane_img_url ); ?>" width="640" height="720" alt="<?php echo esc_attr( $makhadane_img_alt ); ?>" loading="lazy" decoding="async">
+						<img src="<?php echo esc_url( $makhadane_img_url ); ?>" width="800" height="1000" alt="<?php echo esc_attr( $makhadane_img_alt ); ?>" loading="lazy" decoding="async">
 					</div>
 				</div>
 			<?php endif; ?>
