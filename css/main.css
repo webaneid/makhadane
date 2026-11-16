@@ -2463,14 +2463,21 @@ select:after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 0;
   margin: 0 0 18px;
   background: rgba(var(--ane-warna-putih-rgb), 0.14);
   border: 1px solid rgba(var(--ane-warna-putih-rgb), 0.22);
 }
 .landing-page .image-below-text .ane-list ul li .list-image .ane-image {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
 }
 .landing-page .image-below-text .ane-list ul li .list-image .ane-image img {
+  display: block;
   width: 26px;
   height: 26px;
   object-fit: contain;
