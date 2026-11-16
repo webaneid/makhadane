@@ -727,10 +727,14 @@ ul {
   margin-bottom: 15px;
   letter-spacing: -0.8px;
 }
-.section-title {
+.section-title,
+.ane-text h2.section-title {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
   height: 36px;
   padding: 0 18px;
   margin: 0 0 18px;
@@ -2646,6 +2650,11 @@ select:after {
   max-width: 760px;
   width: 100%;
   margin: 0 auto 36px;
+}
+.landing-page .image-below-text .ane-text h2.section-title {
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .landing-page .image-below-text .ane-list {
   max-width: 100%;
