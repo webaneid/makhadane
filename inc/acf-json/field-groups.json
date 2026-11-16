@@ -2410,6 +2410,69 @@
                         "display": "block",
                         "sub_fields": [
                             {
+                                "key": "field_makhadane_featured_bg",
+                                "label": "Background Section",
+                                "name": "ane_featured_bg",
+                                "aria-label": "",
+                                "type": "button_group",
+                                "instructions": "Pilih tema background section: White (terang) atau Dark (menggunakan warna text tema).",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "30",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "white": "White",
+                                    "dark": "Dark"
+                                },
+                                "default_value": "white",
+                                "return_format": "value",
+                                "allow_null": 0,
+                                "layout": "horizontal"
+                            },
+                            {
+                                "key": "field_makhadane_featured_title",
+                                "label": "Judul Section",
+                                "name": "ane_featured_title",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "Opsional. Ditampilkan rata tengah di atas kartu fitur.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "70",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "maxlength": "",
+                                "placeholder": "Keunggulan Program Kami",
+                                "prepend": "",
+                                "append": ""
+                            },
+                            {
+                                "key": "field_makhadane_featured_intro",
+                                "label": "Deskripsi Bawah Section",
+                                "name": "ane_featured_intro",
+                                "aria-label": "",
+                                "type": "textarea",
+                                "instructions": "Opsional. Paragraf ringkas rata tengah di bawah daftar kartu fitur.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "maxlength": "",
+                                "rows": 3,
+                                "placeholder": "",
+                                "new_lines": ""
+                            },
+                            {
                                 "key": "field_5e3e4f2be5e45",
                                 "label": "Fitur Sekolah",
                                 "name": "ane_featured",
