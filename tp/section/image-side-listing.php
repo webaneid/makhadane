@@ -9,73 +9,106 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
+
+$makhadane_posisi_raw = (string) ( get_sub_field( 'ane_posisi' ) ?? 'gambar-kiri' );
+$makhadane_posisi     = ( 'gambar-kanan' === $makhadane_posisi_raw ) ? 'gambar-kanan' : 'gambar-kiri';
+$makhadane_image      = get_sub_field( 'ane_image' );
+$makhadane_title      = trim( (string) get_sub_field( 'ane_title' ) );
+$makhadane_subtitle   = trim( wp_strip_all_tags( (string) get_sub_field( 'ane_subtitle' ) ) );
+$makhadane_desc       = trim( wp_strip_all_tags( (string) get_sub_field( 'ane_deskripsi' ) ) );
+$makhadane_link       = get_sub_field( 'ane_link' );
+$makhadane_link_url   = ( is_array( $makhadane_link ) && ! empty( $makhadane_link['url'] ) ) ? trim( (string) $makhadane_link['url'] ) : '';
+$makhadane_link_title = ( is_array( $makhadane_link ) && ! empty( $makhadane_link['title'] ) ) ? trim( wp_strip_all_tags( (string) $makhadane_link['title'] ) ) : '';
+$makhadane_link_tgt   = ( is_array( $makhadane_link ) && ! empty( $makhadane_link['target'] ) ) ? trim( (string) $makhadane_link['target'] ) : '';
+
+$makhadane_steps = array();
+if ( have_rows( 'ane_repeater' ) ) {
+	while ( have_rows( 'ane_repeater' ) ) {
+		the_row();
+		$st_title = trim( wp_strip_all_tags( (string) get_sub_field( 'ane_title' ) ) );
+		$st_desc  = trim( wp_strip_all_tags( (string) get_sub_field( 'ane_deskripsi' ) ) );
+		if ( '' !== $st_title || '' !== $st_desc ) {
+			$makhadane_steps[] = array(
+				'title' => $st_title,
+				'desc'  => $st_desc,
+			);
+		}
+	}
+}
+
+$makhadane_has_steps = ! empty( $makhadane_steps );
+$makhadane_img_url   = '';
+$makhadane_img_alt   = get_bloginfo( 'name' );
+if ( is_array( $makhadane_image ) ) {
+	$makhadane_img_url = wp_is_mobile()
+		? (string) ( $makhadane_image['sizes']['medium_large'] ?? ( $makhadane_image['sizes']['medium'] ?? ( $makhadane_image['url'] ?? '' ) ) )
+		: (string) ( $makhadane_image['sizes']['large'] ?? ( $makhadane_image['sizes']['persegi'] ?? ( $makhadane_image['url'] ?? '' ) ) );
+	if ( ! empty( $makhadane_image['alt'] ) ) {
+		$makhadane_img_alt = (string) $makhadane_image['alt'];
+	}
+}
 ?>
 <section class="image-side-text gp">
 	<div class="ane-container">
-		<div class="ane-col-2 align-items-center <?php echo esc_attr( get_sub_field( 'ane_posisi' ) ?? '' ); ?>">
-			<div class="ane-item">
-				<?php
-				$image = get_sub_field( 'ane_image' );
-				if ( ! empty( $image ) ) :
-					$size   = 'persegi';
-					$medium = 'medium';
-					$thumb  = wp_is_mobile() ? ( $image['sizes'][ $medium ] ?? $image['url'] ) : ( $image['sizes'][ $size ] ?? $image['url'] );
-					?>
+		<div class="ist-layout <?php echo esc_attr( $makhadane_posisi ); ?><?php echo $makhadane_has_steps ? ' has-steps' : ' is-classic'; ?>">
+			<?php if ( '' !== $makhadane_img_url ) : ?>
+				<div class="ist-media">
 					<div class="ane-image">
-						<img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $image['alt'] ?? '' ); ?>" title="<?php echo esc_attr( $image['alt'] ?? '' ); ?>" />
+						<img src="<?php echo esc_url( $makhadane_img_url ); ?>" width="640" height="720" alt="<?php echo esc_attr( $makhadane_img_alt ); ?>" loading="lazy" decoding="async">
 					</div>
-				<?php endif; ?>
-			</div>
+				</div>
+			<?php endif; ?>
 
-			<div class="ane-item">
+			<div class="ist-body">
 				<div class="ane-text">
-					<?php
-					$title = get_sub_field( 'ane_title' );
-					if ( ! empty( $title ) ) :
-						echo '<h2>' . wp_kses_post( $title ) . '</h2>';
-					endif;
+					<?php if ( '' !== $makhadane_subtitle ) : ?>
+						<span class="ist-kicker"><?php echo esc_html( $makhadane_subtitle ); ?></span>
+					<?php endif; ?>
 
-					$subtitle = get_sub_field( 'ane_subtitle' );
-					if ( ! empty( $subtitle ) ) :
-						echo '<h3>' . wp_kses_post( $subtitle ) . '</h3>';
-					endif;
+					<?php if ( '' !== $makhadane_title ) : ?>
+						<h2 class="ist-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
+					<?php endif; ?>
 
-					$desc = get_sub_field( 'ane_deskripsi' );
-					if ( ! empty( $desc ) ) :
-						echo '<p>' . esc_html( $desc ) . '</p>';
-					endif;
+					<?php if ( '' !== $makhadane_desc ) : ?>
+						<p class="ist-desc"><?php echo esc_html( $makhadane_desc ); ?></p>
+					<?php endif; ?>
 
-					if ( have_rows( 'ane_repeater' ) ) :
-						?>
-						<ul>
-							<?php
-							while ( have_rows( 'ane_repeater' ) ) :
-								the_row();
-								$titler     = get_sub_field( 'ane_title' );
-								$deskripsir = get_sub_field( 'ane_deskripsi' );
-								?>
-								<li>
-									<?php if ( ! empty( $titler ) ) : ?>
-										<h5><?php echo esc_html( $titler ); ?></h5>
-									<?php endif; ?>
-
-									<?php if ( ! empty( $deskripsir ) ) : ?>
-										<p><?php echo esc_html( $deskripsir ); ?></p>
-									<?php endif; ?>
-								</li>
-							<?php endwhile; ?>
-						</ul>
-						<?php
-					endif;
-
-					$link = get_sub_field( 'ane_link' );
-					if ( ! empty( $link ) ) :
-						?>
-						<a href="<?php echo esc_url( $link['url'] ); ?>" class="btn btn-primary">
-							<?php echo esc_html( $link['title'] ); ?>
+					<?php if ( ! $makhadane_has_steps && '' !== $makhadane_link_url && '' !== $makhadane_link_title ) : ?>
+						<a href="<?php echo esc_url( $makhadane_link_url ); ?>" class="btn btn-primary ist-classic-btn"<?php echo '_blank' === $makhadane_link_tgt ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+							<span><?php echo esc_html( $makhadane_link_title ); ?></span>
+							<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
 						</a>
 					<?php endif; ?>
 				</div>
+
+				<?php if ( $makhadane_has_steps ) : ?>
+					<ul class="ist-steps-grid">
+						<?php foreach ( $makhadane_steps as $makhadane_step_idx => $makhadane_step ) : ?>
+							<li class="ist-step-card">
+								<span class="ist-step-num"><?php echo esc_html( sprintf( '%02d', $makhadane_step_idx + 1 ) ); ?></span>
+								<?php if ( '' !== $makhadane_step['title'] ) : ?>
+									<h3 class="ist-step-title"><?php echo esc_html( $makhadane_step['title'] ); ?></h3>
+								<?php endif; ?>
+								<?php if ( '' !== $makhadane_step['desc'] ) : ?>
+									<p class="ist-step-desc"><?php echo esc_html( $makhadane_step['desc'] ); ?></p>
+								<?php endif; ?>
+							</li>
+						<?php endforeach; ?>
+
+						<?php if ( '' !== $makhadane_link_url && '' !== $makhadane_link_title ) : ?>
+							<li class="ist-cta-item">
+								<a href="<?php echo esc_url( $makhadane_link_url ); ?>" class="ist-cta-card"<?php echo '_blank' === $makhadane_link_tgt ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+									<span class="ist-cta-pill">
+										<span><?php echo esc_html( $makhadane_link_title ); ?></span>
+										<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
+									</span>
+								</a>
+							</li>
+						<?php endif; ?>
+					</ul>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

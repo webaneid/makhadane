@@ -2458,7 +2458,16 @@ select:after {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 28px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ist-cta-item {
+  display: flex;
+}
+.ist-cta-item .ist-cta-card {
+  width: 100%;
+  height: 100%;
 }
 .ist-step-card {
   background: rgba(var(--ane-warna-gelap-rgb), 0.03);
