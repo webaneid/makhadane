@@ -3235,6 +3235,7 @@ select:after {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -0.015em;
   color: var(--ane-warna-putih);
   margin: 0 0 10px;
 }
@@ -3300,6 +3301,7 @@ select:after {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -0.015em;
   color: var(--ane-warna-putih);
   margin: 0 0 5px;
   display: -webkit-box;
