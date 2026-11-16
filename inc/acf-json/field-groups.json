@@ -2295,7 +2295,7 @@
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
-                                    "width": "",
+                                    "width": "50",
                                     "class": "",
                                     "id": ""
                                 },
@@ -2304,6 +2304,37 @@
                                 "ui_on_text": "Tampil",
                                 "ui_off_text": "Sembunyikan",
                                 "ui": 1
+                            },
+                            {
+                                "key": "field_makhadane_slider_curve_color",
+                                "label": "Warna Lengkungan Bawah Hero",
+                                "name": "ane_slider_curve_color",
+                                "aria-label": "",
+                                "type": "button_group",
+                                "instructions": "Sesuaikan dengan warna background section di bawah Hero.",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_makhadane_slider_curve",
+                                            "operator": "==",
+                                            "value": "1"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "white": "White",
+                                    "dark": "Dark"
+                                },
+                                "default_value": "white",
+                                "return_format": "value",
+                                "allow_null": 0,
+                                "layout": "horizontal"
                             },
                             {
                                 "key": "field_makhadane_hero_funfacts",

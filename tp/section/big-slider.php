@@ -16,8 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
 
-$makhadane_raw_curve  = get_sub_field( 'ane_slider_curve' );
-$makhadane_show_curve = ( null === $makhadane_raw_curve || '' === $makhadane_raw_curve ) ? true : (bool) $makhadane_raw_curve;
+$makhadane_raw_curve   = get_sub_field( 'ane_slider_curve' );
+$makhadane_show_curve  = ( null === $makhadane_raw_curve || '' === $makhadane_raw_curve ) ? true : (bool) $makhadane_raw_curve;
+$makhadane_curve_color = ( 'dark' === (string) get_sub_field( 'ane_slider_curve_color' ) ) ? 'curve-dark' : 'curve-white';
 
 $makhadane_raw_funfacts = get_sub_field( 'ane_hero_funfacts' );
 $makhadane_funfacts     = array();
@@ -66,7 +67,7 @@ $makhadane_has_post     = $makhadane_hero_post_query->have_posts();
 $makhadane_has_dock     = ( $makhadane_has_funfacts || $makhadane_has_post );
 
 $makhadane_section_cls  = 'home-slider v2';
-$makhadane_section_cls .= $makhadane_show_curve ? ' has-curve' : ' no-curve';
+$makhadane_section_cls .= $makhadane_show_curve ? ' has-curve ' . $makhadane_curve_color : ' no-curve';
 if ( $makhadane_has_dock ) {
 	$makhadane_section_cls .= ' has-bottom-dock';
 }
@@ -227,10 +228,18 @@ if ( $makhadane_has_dock ) {
 	<?php endif; ?>
 
 	<?php if ( $makhadane_show_curve ) : ?>
-		<div class="pemanis-slider" aria-hidden="true">
-			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" viewBox="0 0 100 100" focusable="false">
-				<path d="M 0 0 L0 100 L100 100 L100 0 Q 50 200 0 0"></path>
+		<div class="pemanis-slider">
+			<svg class="pemanis-curve-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 76" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+				<path d="M 0 76 L 0 70 L 580 70 C 642 70 662 6 720 6 C 778 6 798 70 860 70 L 1440 70 L 1440 76 Z"></path>
 			</svg>
+			<button type="button" class="pemanis-scroll-btn" aria-label="<?php esc_attr_e( 'Gulir ke bawah', 'makhadane' ); ?>">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+					<rect x="6.5" y="3.5" width="11" height="17" rx="5.5"></rect>
+					<path d="M12 8v8"></path>
+					<path d="M9.8 10.2 12 8l2.2 2.2"></path>
+					<path d="M9.8 13.8 12 16l2.2-2.2"></path>
+				</svg>
+			</button>
 		</div>
 	<?php endif; ?>
 </section>

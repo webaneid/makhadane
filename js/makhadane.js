@@ -577,6 +577,18 @@
 			});
 		}
 
+		/* Hero Bottom Scroll Button (.pemanis-scroll-btn) */
+		var heroScrollBtn = document.querySelector('.home-slider .pemanis-scroll-btn');
+		if (heroScrollBtn) {
+			heroScrollBtn.addEventListener('click', function () {
+				var heroSection = heroScrollBtn.closest('.home-slider');
+				var nextSection = heroSection ? heroSection.nextElementSibling : null;
+				if (nextSection && typeof nextSection.scrollIntoView === 'function') {
+					nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}
+			});
+		}
+
 		/* About Us Gallery Scroll Drift & Arrow Controls (.about-us) */
 		var aboutSection = document.querySelector('.about-us');
 		if (aboutSection) {
