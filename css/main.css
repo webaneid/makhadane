@@ -728,6 +728,23 @@ ul {
   letter-spacing: -0.8px;
 }
 .section-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 18px;
+  margin: 0 0 18px;
+  border-radius: 999px;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.04);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  color: var(--ane-warna-gelap);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.section-tagline,
+.ane-text h3.section-tagline {
   color: var(--ane-warna-gelap);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 700;
@@ -735,8 +752,16 @@ ul {
   letter-spacing: -0.025em;
   margin: 0 0 16px;
 }
-.section-title span {
+.section-tagline span,
+.ane-text h3.section-tagline span {
   color: var(--ane-warna-utama);
+}
+.section-description,
+.ane-text p.section-description {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(var(--ane-warna-text-rgb), 0.72);
+  margin: 0;
 }
 .ane-text h3 {
   color: var(--ane-warna-gelap);
@@ -2416,24 +2441,6 @@ select:after {
   flex-direction: column;
   justify-content: center;
 }
-.ist-kicker {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ane-warna-utama);
-  background: rgba(var(--ane-warna-utama-rgb), 0.08);
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin-bottom: 14px;
-}
-.ist-desc {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(var(--ane-warna-text-rgb), 0.78);
-  margin: 0;
-}
 .ist-classic-btn {
   margin-top: 24px;
   display: inline-flex;
@@ -2640,20 +2647,6 @@ select:after {
   width: 100%;
   margin: 0 auto 36px;
 }
-.landing-page .image-below-text .ane-text h3 {
-  display: inline-block;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 10px;
-}
-.landing-page .image-below-text .ane-text p {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin: 0;
-  opacity: 0.88;
-}
 .landing-page .image-below-text .ane-list {
   max-width: 100%;
   width: 100%;
@@ -2755,13 +2748,18 @@ select:after {
   background: var(--ane-warna-utama-2);
   pointer-events: none;
 }
-.landing-page .utama .ane-text h2 {
+.landing-page .utama .ane-text h2.section-title {
+  background: rgba(var(--ane-warna-putih-rgb), 0.12);
+  border-color: rgba(var(--ane-warna-putih-rgb), 0.24);
   color: var(--ane-warna-putih);
 }
-.landing-page .utama .ane-text h3 {
+.landing-page .utama .ane-text h3.section-tagline {
+  color: var(--ane-warna-putih);
+}
+.landing-page .utama .ane-text h3.section-tagline span {
   color: var(--ane-warna-alternatif);
 }
-.landing-page .utama .ane-text p {
+.landing-page .utama .ane-text p.section-description {
   color: rgba(var(--ane-warna-putih-rgb), 0.88);
 }
 .landing-page .utama .ane-list ul li {
@@ -2833,13 +2831,18 @@ select:after {
   background: var(--ane-warna-utama);
   pointer-events: none;
 }
-.landing-page .gelap .ane-text h2 {
+.landing-page .gelap .ane-text h2.section-title {
+  background: rgba(var(--ane-warna-putih-rgb), 0.12);
+  border-color: rgba(var(--ane-warna-putih-rgb), 0.24);
   color: var(--ane-warna-putih);
 }
-.landing-page .gelap .ane-text h3 {
+.landing-page .gelap .ane-text h3.section-tagline {
+  color: var(--ane-warna-putih);
+}
+.landing-page .gelap .ane-text h3.section-tagline span {
   color: var(--ane-warna-alternatif);
 }
-.landing-page .gelap .ane-text p {
+.landing-page .gelap .ane-text p.section-description {
   color: rgba(var(--ane-warna-putih-rgb), 0.86);
 }
 .landing-page .gelap .ane-list ul li {
@@ -2919,32 +2922,12 @@ select:after {
   margin: 0 auto;
   text-align: center;
 }
-.about-us-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  padding: 0 18px;
-  margin-bottom: 18px;
-  border-radius: 999px;
-  background: rgba(var(--ane-warna-gelap-rgb), 0.04);
-  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
-  color: var(--ane-warna-gelap);
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-.about-us-header .section-title {
-  text-align: center;
-}
-.about-us-header .section-title span {
+.about-us-header .section-tagline span {
   color: rgba(var(--ane-warna-text-rgb), 0.5);
 }
-.about-us-desc {
+.about-us-header .section-description {
   max-width: 620px;
   margin: 0 auto;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: rgba(var(--ane-warna-text-rgb), 0.72);
 }
 .about-us-cta {
   margin-top: 24px;
@@ -3981,11 +3964,13 @@ select:after {
   color: var(--ane-warna-putih);
 }
 .section-featured .section-title {
-  text-align: center;
-  margin: 0 auto clamp(32px, 4vw, 48px);
-  max-width: 720px;
+  display: table;
+  line-height: 36px;
+  margin: 0 auto clamp(28px, 3.5vw, 40px);
 }
 .section-featured.is-dark .section-title {
+  background: rgba(var(--ane-warna-putih-rgb), 0.12);
+  border-color: rgba(var(--ane-warna-putih-rgb), 0.24);
   color: var(--ane-warna-putih);
 }
 .section-featured-grid {

@@ -51,16 +51,16 @@ if ( empty( $makhadane_slides ) ) {
 <section class="about-us gp">
 	<div class="ane-container">
 		<div class="about-us-header">
-			<?php if ( '' !== $makhadane_subtitle ) : ?>
-				<span class="about-us-badge"><?php echo esc_html( $makhadane_subtitle ); ?></span>
-			<?php endif; ?>
-
 			<?php if ( '' !== $makhadane_title ) : ?>
 				<h2 class="section-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
 			<?php endif; ?>
 
+			<?php if ( '' !== $makhadane_subtitle ) : ?>
+				<h3 class="section-tagline"><?php echo wp_kses_post( (string) get_sub_field( 'ane_subtitle' ) ); ?></h3>
+			<?php endif; ?>
+
 			<?php if ( '' !== $makhadane_desc ) : ?>
-				<p class="about-us-desc"><?php echo esc_html( $makhadane_desc ); ?></p>
+				<p class="section-description"><?php echo esc_html( $makhadane_desc ); ?></p>
 			<?php endif; ?>
 
 			<?php if ( is_array( $makhadane_link ) && ! empty( $makhadane_link['url'] ) && ! empty( $makhadane_link['title'] ) ) : ?>

@@ -28,16 +28,16 @@ $makhadane_link     = get_sub_field( 'ane_link' );
 			<div class="ane-item">
 				<?php if ( '' !== $makhadane_title || '' !== $makhadane_subtitle || '' !== $makhadane_desc ) : ?>
 					<div class="ane-text">
-						<?php if ( '' !== $makhadane_subtitle ) : ?>
-							<h3><?php echo esc_html( $makhadane_subtitle ); ?></h3>
-						<?php endif; ?>
-
 						<?php if ( '' !== $makhadane_title ) : ?>
 							<h2 class="section-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
 						<?php endif; ?>
 
+						<?php if ( '' !== $makhadane_subtitle ) : ?>
+							<h3 class="section-tagline"><?php echo wp_kses_post( (string) get_sub_field( 'ane_subtitle' ) ); ?></h3>
+						<?php endif; ?>
+
 						<?php if ( '' !== $makhadane_desc ) : ?>
-							<p><?php echo esc_html( $makhadane_desc ); ?></p>
+							<p class="section-description"><?php echo esc_html( $makhadane_desc ); ?></p>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>

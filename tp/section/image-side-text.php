@@ -69,16 +69,16 @@ if ( is_array( $makhadane_image ) ) {
 
 			<div class="ist-body">
 				<div class="ane-text">
-					<?php if ( '' !== $makhadane_subtitle ) : ?>
-						<span class="ist-kicker"><?php echo esc_html( $makhadane_subtitle ); ?></span>
-					<?php endif; ?>
-
 					<?php if ( '' !== $makhadane_title ) : ?>
 						<h2 class="section-title"><?php echo wp_kses_post( $makhadane_title ); ?></h2>
 					<?php endif; ?>
 
+					<?php if ( '' !== $makhadane_subtitle ) : ?>
+						<h3 class="section-tagline"><?php echo wp_kses_post( (string) get_sub_field( 'ane_subtitle' ) ); ?></h3>
+					<?php endif; ?>
+
 					<?php if ( '' !== $makhadane_desc ) : ?>
-						<p class="ist-desc"><?php echo esc_html( $makhadane_desc ); ?></p>
+						<p class="section-description"><?php echo esc_html( $makhadane_desc ); ?></p>
 					<?php endif; ?>
 
 					<?php if ( ! $makhadane_has_steps && '' !== $makhadane_link_url && '' !== $makhadane_link_title ) : ?>

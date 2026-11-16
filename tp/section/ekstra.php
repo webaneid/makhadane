@@ -22,12 +22,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 					if ( ! empty( $judul ) ) :
 						echo '<h2 class="section-title">' . wp_kses_post( $judul ) . '</h2>';
 					else :
-						echo '<h2 class="section-title">Ekstra<span>kurikuler</span></h2>';
+						echo '<h2 class="section-title">' . esc_html__( 'Ekstrakurikuler', 'makhadane' ) . '</h2>';
+					endif;
+
+					$subtitle = get_sub_field( 'ane_subtitle' );
+					if ( ! empty( $subtitle ) ) :
+						echo '<h3 class="section-tagline">' . wp_kses_post( $subtitle ) . '</h3>';
 					endif;
 
 					$deskripsi = get_sub_field( 'ane_deskripsi' );
 					if ( ! empty( $deskripsi ) ) :
-						echo '<p>' . esc_html( $deskripsi ) . '</p>';
+						echo '<p class="section-description">' . esc_html( $deskripsi ) . '</p>';
 					endif;
 					?>
 					<a class="btn btn-primary" href="<?php echo esc_url( get_post_type_archive_link( 'ekstrakurikuler' ) ); ?>">
