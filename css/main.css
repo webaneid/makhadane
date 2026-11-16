@@ -1634,6 +1634,7 @@ select:after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 0;
   background: rgba(var(--ane-warna-putih-rgb), 0.1);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -1642,9 +1643,18 @@ select:after {
   color: var(--ane-warna-putih);
   transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
+.ane-header .bawah .desktop-menu-row .ane-header-icon-btn .ane-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  vertical-align: 0;
+}
 .ane-header .bawah .desktop-menu-row .ane-header-icon-btn svg {
   width: 18px;
   height: 18px;
+  vertical-align: 0;
 }
 .ane-header .bawah .desktop-menu-row .ane-header-icon-btn:hover {
   background: rgba(var(--ane-warna-putih-rgb), 0.22);
