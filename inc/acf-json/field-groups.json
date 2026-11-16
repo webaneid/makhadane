@@ -2304,6 +2304,92 @@
                                 "ui_on_text": "Tampil",
                                 "ui_off_text": "Sembunyikan",
                                 "ui": 1
+                            },
+                            {
+                                "key": "field_makhadane_hero_funfacts",
+                                "label": "Funfact Hero (Maksimal 2)",
+                                "name": "ane_hero_funfacts",
+                                "aria-label": "",
+                                "type": "repeater",
+                                "instructions": "Tambahkan maksimal 2 item statistik/funfact yang tampil di panel glassmorphism bagian bawah Hero.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "",
+                                "min": 0,
+                                "max": 2,
+                                "layout": "table",
+                                "button_label": "Tambah Funfact",
+                                "rows_per_page": 20,
+                                "sub_fields": [
+                                    {
+                                        "key": "field_makhadane_funfact_title",
+                                        "label": "Title",
+                                        "name": "ane_funfact_title",
+                                        "aria-label": "",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "25",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "maxlength": "",
+                                        "placeholder": "Santri Aktif",
+                                        "prepend": "",
+                                        "append": "",
+                                        "parent_repeater": "field_makhadane_hero_funfacts"
+                                    },
+                                    {
+                                        "key": "field_makhadane_funfact_value",
+                                        "label": "Value",
+                                        "name": "ane_funfact_value",
+                                        "aria-label": "",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "20",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "maxlength": "",
+                                        "placeholder": "1.200+",
+                                        "prepend": "",
+                                        "append": "",
+                                        "parent_repeater": "field_makhadane_hero_funfacts"
+                                    },
+                                    {
+                                        "key": "field_makhadane_funfact_label",
+                                        "label": "Label",
+                                        "name": "ane_funfact_label",
+                                        "aria-label": "",
+                                        "type": "textarea",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "55",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "maxlength": "",
+                                        "rows": 2,
+                                        "placeholder": "Santri mukim dari berbagai daerah di Indonesia",
+                                        "new_lines": "",
+                                        "parent_repeater": "field_makhadane_hero_funfacts"
+                                    }
+                                ]
                             }
                         ],
                         "min": "",
