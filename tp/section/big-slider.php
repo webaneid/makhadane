@@ -46,32 +46,13 @@ $makhadane_hero_post_query = new WP_Query(
 	array(
 		'post_type'           => 'post',
 		'post_status'         => 'publish',
-		'posts_per_page'      => 1,
-		'orderby'             => 'rand',
+		'posts_per_page'      => 3,
+		'orderby'             => 'date',
+		'order'               => 'DESC',
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,
-		'date_query'          => array(
-			array(
-				'after'     => '1 month ago',
-				'inclusive' => true,
-			),
-		),
 	)
 );
-
-if ( ! $makhadane_hero_post_query->have_posts() ) {
-	$makhadane_hero_post_query = new WP_Query(
-		array(
-			'post_type'           => 'post',
-			'post_status'         => 'publish',
-			'posts_per_page'      => 1,
-			'orderby'             => 'date',
-			'order'               => 'DESC',
-			'ignore_sticky_posts' => true,
-			'no_found_rows'       => true,
-		)
-	);
-}
 
 $makhadane_has_funfacts = ! empty( $makhadane_funfacts );
 $makhadane_has_post     = $makhadane_hero_post_query->have_posts();
@@ -205,37 +186,36 @@ if ( $makhadane_has_dock ) {
 						</div>
 					<?php endif; ?>
 
-					<?php
-					if ( $makhadane_has_post ) :
-						while ( $makhadane_hero_post_query->have_posts() ) :
-							$makhadane_hero_post_query->the_post();
-							$makhadane_post_id    = get_the_ID();
-							$makhadane_post_title = get_the_title();
-							$makhadane_post_desc  = wp_trim_words( wp_strip_all_tags( get_the_excerpt() ), 14, '...' );
-							$makhadane_thumb_url  = get_the_post_thumbnail_url( $makhadane_post_id, 'thumbnail' );
-							if ( ! $makhadane_thumb_url && function_exists( 'ane_dummy_thumbnail' ) ) {
-								$makhadane_thumb_url = ane_dummy_thumbnail();
-							}
-							?>
-							<a class="home-hero-post-card" href="<?php the_permalink(); ?>">
-								<?php if ( ! empty( $makhadane_thumb_url ) ) : ?>
-									<div class="home-hero-post-media">
-										<img src="<?php echo esc_url( (string) $makhadane_thumb_url ); ?>" width="96" height="96" alt="<?php echo esc_attr( $makhadane_post_title ); ?>" loading="lazy" decoding="async">
-									</div>
-								<?php endif; ?>
-								<div class="home-hero-post-content">
-									<span class="home-hero-post-kicker"><?php esc_html_e( 'Berita Terbaru', 'makhadane' ); ?></span>
-									<h3 class="home-hero-post-title"><?php echo esc_html( $makhadane_post_title ); ?></h3>
-									<?php if ( '' !== $makhadane_post_desc ) : ?>
-										<p class="home-hero-post-excerpt"><?php echo esc_html( $makhadane_post_desc ); ?></p>
-									<?php endif; ?>
-								</div>
-							</a>
+					<?php if ( $makhadane_has_post ) : ?>
+						<div class="home-hero-posts-stack">
 							<?php
-						endwhile;
-						wp_reset_postdata();
-					endif;
-					?>
+							$makhadane_post_idx   = 0;
+							$makhadane_card_slots = array( 'is-front', 'is-left', 'is-right' );
+							while ( $makhadane_hero_post_query->have_posts() ) :
+								$makhadane_hero_post_query->the_post();
+								$makhadane_post_id    = get_the_ID();
+								$makhadane_post_title = get_the_title();
+								$makhadane_thumb_url  = get_the_post_thumbnail_url( $makhadane_post_id, 'medium' );
+								if ( ! $makhadane_thumb_url && function_exists( 'ane_dummy_thumbnail' ) ) {
+									$makhadane_thumb_url = ane_dummy_thumbnail();
+								}
+								$makhadane_slot_cls = $makhadane_card_slots[ $makhadane_post_idx ] ?? 'is-right';
+								?>
+								<a class="home-hero-post-card <?php echo esc_attr( $makhadane_slot_cls ); ?>" href="<?php the_permalink(); ?>">
+									<?php if ( ! empty( $makhadane_thumb_url ) ) : ?>
+										<div class="home-hero-post-media">
+											<img src="<?php echo esc_url( (string) $makhadane_thumb_url ); ?>" width="180" height="140" alt="<?php echo esc_attr( $makhadane_post_title ); ?>" loading="lazy" decoding="async">
+										</div>
+									<?php endif; ?>
+									<h3 class="home-hero-post-title"><?php echo esc_html( $makhadane_post_title ); ?></h3>
+								</a>
+								<?php
+								++$makhadane_post_idx;
+							endwhile;
+							wp_reset_postdata();
+							?>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
