@@ -65,7 +65,7 @@ if ( '' !== $makhadane_bg ) :
 
 					<?php if ( '' !== $makhadane_l_url && '' !== $makhadane_l_txt ) : ?>
 						<div class="cta-action">
-							<a href="<?php echo esc_url( $makhadane_l_url ); ?>" class="btn btn-alternatif cta-btn"<?php echo '_blank' === $makhadane_l_tgt ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+							<a href="<?php echo esc_url( $makhadane_l_url ); ?>" class="btn btn-primary cta-btn"<?php echo '_blank' === $makhadane_l_tgt ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
 								<span><?php echo esc_html( $makhadane_l_txt ); ?></span>
 								<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
 							</a>
@@ -74,6 +74,11 @@ if ( '' !== $makhadane_bg ) :
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="cta-curve-mask" aria-hidden="true">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 76" preserveAspectRatio="none" focusable="false">
+			<path d="M 0 76 L 0 70 L 580 70 C 642 70 662 6 720 6 C 778 6 798 70 860 70 L 1440 70 L 1440 76 Z"></path>
+		</svg>
 	</div>
 </section>
 <?php endif; ?>
