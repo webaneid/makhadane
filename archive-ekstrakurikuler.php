@@ -70,7 +70,7 @@ if ( is_array( $makhadane_bgimg_data ) && ! empty( $makhadane_bgimg_data['sizes'
 								<span class="ekskul-masonry-arrow" aria-hidden="true">
 									<?php
 									if ( function_exists( 'makhadane_icon' ) ) {
-										echo wp_kses_post( makhadane_icon( 'chevron-right' ) );
+										echo wp_kses_post( makhadane_icon( 'arrow-up-right' ) );
 									}
 									?>
 								</span>

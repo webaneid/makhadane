@@ -6559,14 +6559,20 @@ select:after {
   box-shadow: 0 4px 12px rgba(var(--ane-warna-gelap-rgb), 0.12);
   transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
 }
+.ekskul-masonry-arrow .ane-icon,
 .ekskul-masonry-arrow svg {
-  width: 15px;
-  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+  vertical-align: 0;
 }
 .ekskul-masonry-card:hover .ekskul-masonry-arrow {
   background: var(--ane-warna-utama);
   color: var(--ane-warna-putih);
-  transform: translateX(2px);
+  transform: translate(1px, -1px);
 }
 .ekskul-masonry-body {
   padding: 20px 22px 22px;
