@@ -2693,6 +2693,29 @@
                         "display": "block",
                         "sub_fields": [
                             {
+                                "key": "field_makhadane_cta_design",
+                                "label": "Model Tampilan CTA",
+                                "name": "ane_cta_design",
+                                "aria-label": "",
+                                "type": "button_group",
+                                "instructions": "Design 1: Banner full-width glassmorphism. Design 2: Split clean dengan gambar 4:5 di kanan & 2 tombol.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "design-1": "Design 1 (Glass Banner)",
+                                    "design-2": "Design 2 (Clean Split 4:5)"
+                                },
+                                "default_value": "design-1",
+                                "return_format": "value",
+                                "allow_null": 0,
+                                "layout": "horizontal"
+                            },
+                            {
                                 "key": "field_62b92dcdf0db0",
                                 "label": "Judul Utama",
                                 "name": "custom_title",
@@ -2754,7 +2777,7 @@
                             },
                             {
                                 "key": "field_5e3e5b9be3a54",
-                                "label": "Link Selengkapnya",
+                                "label": "Link Selengkapnya (Tombol 1)",
                                 "name": "ane_link",
                                 "aria-label": "",
                                 "type": "link",
@@ -2762,7 +2785,23 @@
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
-                                    "width": "",
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "array"
+                            },
+                            {
+                                "key": "field_makhadane_cta_link_2",
+                                "label": "Tombol Kedua (Opsional)",
+                                "name": "ane_link_secondary",
+                                "aria-label": "",
+                                "type": "link",
+                                "instructions": "Opsional. Ditampilkan di samping Tombol 1.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
                                     "class": "",
                                     "id": ""
                                 },
