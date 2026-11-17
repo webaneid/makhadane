@@ -110,10 +110,7 @@ $makhadane_recent_posts = new WP_Query(
 		</div>
 
 		<div class="news-featured-latest">
-			<div class="news-featured-latest-head">
-				<span class="news-featured-live-dot" aria-hidden="true"></span>
-				<h2><?php esc_html_e( 'Berita Terkini', 'makhadane' ); ?></h2>
-			</div>
+			<h2 class="widget-title ane-title"><?php esc_html_e( 'Berita Terkini', 'makhadane' ); ?></h2>
 
 			<?php if ( $makhadane_recent_posts->have_posts() ) : ?>
 				<ol class="news-featured-list">
