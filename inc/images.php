@@ -291,12 +291,12 @@ function ane_get_featured_image_kotak() {
 
 	if ( has_post_thumbnail() ) {
 		$thumb_id   = (int) get_post_thumbnail_id();
-		$thumb_img  = wp_get_attachment_image_src( $thumb_id, 'thumbnail' );
+		$thumb_img  = wp_get_attachment_image_src( $thumb_id, 'kotak' );
 		$img_url    = ( is_array( $thumb_img ) && ! empty( $thumb_img[0] ) ) ? esc_url( (string) $thumb_img[0] ) : esc_url( ane_dummy_kotak() );
 		$img_w      = ( is_array( $thumb_img ) && ! empty( $thumb_img[1] ) ) ? (int) $thumb_img[1] : 400;
-		$img_h      = ( is_array( $thumb_img ) && ! empty( $thumb_img[2] ) ) ? (int) $thumb_img[2] : 225;
-		$img_srcset = (string) wp_get_attachment_image_srcset( $thumb_id, 'thumbnail' );
-		$srcset_str = '' !== $img_srcset ? ' srcset="' . esc_attr( $img_srcset ) . '" sizes="(max-width: 767px) 86px, 98px"' : '';
+		$img_h      = ( is_array( $thumb_img ) && ! empty( $thumb_img[2] ) ) ? (int) $thumb_img[2] : 400;
+		$img_srcset = (string) wp_get_attachment_image_srcset( $thumb_id, 'kotak' );
+		$srcset_str = '' !== $img_srcset ? ' srcset="' . esc_attr( $img_srcset ) . '" sizes="(max-width: 767px) 76px, 88px"' : '';
 		$img_alt    = ane_get_image_title();
 
 		printf(
@@ -310,14 +310,14 @@ function ane_get_featured_image_kotak() {
 		);
 	} elseif ( $kotak_image_url ) {
 		printf(
-			'<a href="%1$s" itemprop="url" aria-label="%3$s"><figure class="ane-image"><img src="%2$s" width="400" height="225" alt="%3$s" itemprop="image" loading="lazy" decoding="async" /></figure></a>',
+			'<a href="%1$s" itemprop="url" aria-label="%3$s"><figure class="ane-image"><img src="%2$s" width="400" height="400" alt="%3$s" itemprop="image" loading="lazy" decoding="async" /></figure></a>',
 			esc_url( (string) get_permalink() ),
 			esc_url( $kotak_image_url ),
 			esc_attr( get_the_title() )
 		);
 	} else {
 		printf(
-			'<a href="%1$s" itemprop="url" aria-label="%3$s"><figure class="ane-image"><img src="%2$s" width="400" height="225" alt="%3$s" itemprop="image" loading="lazy" decoding="async" /></figure></a>',
+			'<a href="%1$s" itemprop="url" aria-label="%3$s"><figure class="ane-image"><img src="%2$s" width="400" height="400" alt="%3$s" itemprop="image" loading="lazy" decoding="async" /></figure></a>',
 			esc_url( (string) get_permalink() ),
 			esc_url( ane_dummy_kotak() ),
 			esc_attr( get_the_title() )
