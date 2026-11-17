@@ -1830,7 +1830,7 @@
                     "layout_5dde3995ef188": {
                         "key": "layout_5dde3995ef188",
                         "name": "news_columns",
-                        "label": "Blog 4 - Tiga Kolom Layout",
+                        "label": "Blog 4 - Dua Kolom Layout",
                         "display": "block",
                         "sub_fields": [
                             {
@@ -1849,7 +1849,7 @@
                                 },
                                 "collapsed": "",
                                 "min": 0,
-                                "max": 3,
+                                "max": 2,
                                 "layout": "table",
                                 "button_label": "Tambah Kolom",
                                 "rows_per_page": 20,
