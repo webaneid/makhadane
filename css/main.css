@@ -2384,25 +2384,41 @@ select:after {
 }
 .testimoni-slider .owl-nav {
   position: absolute;
-  bottom: 14px;
+  bottom: 16px;
   right: 174px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   z-index: 4;
 }
 .testimoni-slider .owl-nav button.owl-prev,
 .testimoni-slider .owl-nav button.owl-next {
+  position: static;
+  inset: auto;
+  margin: 0;
   width: 42px;
   height: 42px;
   border-radius: var(--ane-radius-md, 10px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 0;
   background: var(--ane-warna-utama);
   color: var(--ane-warna-putih);
   box-shadow: 0 8px 20px rgba(var(--ane-warna-utama-rgb), 0.28);
   transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.testimoni-slider .owl-nav button.owl-prev i,
+.testimoni-slider .owl-nav button.owl-next i {
+  background: transparent;
+  color: inherit;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .testimoni-slider .owl-nav button.owl-prev:hover,
 .testimoni-slider .owl-nav button.owl-next:hover {
