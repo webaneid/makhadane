@@ -6257,43 +6257,26 @@ select:after {
   }
 }
 
+.ane-arsip-testimoni {
+  background: var(--ane-warna-terang);
+  padding-bottom: 60px;
+  margin-bottom: 0;
+}
 .ane-arsip-testimoni .entry-content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
-  align-items: inherit;
+  display: block;
+  column-count: 3;
+  column-gap: 22px;
 }
-.ane-arsip-testimoni .entry-content .ane-konten-testimoni {
-  width: calc(25% - 12px);
-  margin-right: 15px;
-  margin-bottom: 15px;
-}
-.ane-arsip-testimoni .entry-content .ane-konten-testimoni:nth-child(4n+4) {
-  margin-right: 0;
-}
-@media (min-width: 768px) and (max-width: 1024px) {
-  .ane-arsip-testimoni {
-    padding: 0 15px;
-  }
-  .ane-arsip-testimoni .entry-content .ane-konten-testimoni {
-    width: calc(50% - 8px);
-    margin-right: 15px;
-    margin-bottom: 15px;
-  }
-  .ane-arsip-testimoni .entry-content .ane-konten-testimoni:nth-child(2n+2) {
-    margin-right: 0;
+@media (max-width: 1024px) {
+  .ane-arsip-testimoni .entry-content {
+    column-count: 2;
+    column-gap: 18px;
   }
 }
 @media (max-width: 767px) {
-  .ane-arsip-testimoni .entry-content .ane-konten-testimoni {
-    width: 90%;
-    margin: auto;
-    margin-bottom: 15px;
-  }
-  .ane-arsip-testimoni .entry-content .ane-konten-testimoni:nth-child(4n+4) {
-    margin: 15px;
+  .ane-arsip-testimoni .entry-content {
+    column-count: 1;
+    padding: 0 15px;
   }
 }
 
@@ -6519,109 +6502,74 @@ select:after {
 }
 
 .ane-konten-testimoni {
+  display: inline-block;
   width: 100%;
+  break-inside: avoid;
   position: relative;
-  display: block;
-  padding: 90px 30px 30px 30px;
-  border-radius: 5px;
-  margin-bottom: 30px;
-  background-color: var(--ane-warna-putih);
-  border: 1px solid var(--ane-warna-terang);
-  overflow: hidden;
-}
-.ane-konten-testimoni::before {
-  content: "\201C";
-  font-family: Georgia, serif;
-  color: var(--ane-warna-terang);
-  font-style: normal;
-  font-size: 56px;
-  line-height: 1;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  display: block;
-  width: 55px;
-  height: 55px;
-  background-color: var(--ane-warna-utama);
-  padding: 10px;
-  border-radius: 0 0 65px 0;
-  line-height: 47px;
-  padding-left: 15px;
-}
-.ane-konten-testimoni::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 30px;
-  z-index: 1;
-  display: block;
-  width: 5px;
-  height: 65px;
-  background-color: var(--ane-warna-utama);
+  padding: 8px 8px 16px;
+  border-radius: var(--ane-radius-lg, 20px);
+  margin: 0 0 22px;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.045);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.05);
 }
 .ane-konten-testimoni .entry-header {
   width: 100%;
-  margin: auto;
   position: relative;
-  overflow: hidden;
-  margin-bottom: 30px;
+  background: var(--ane-warna-putih);
+  border-radius: calc(var(--ane-radius-lg, 20px) - 6px);
+  padding: 24px 22px;
+  margin: 0 0 14px;
+  box-shadow: 0 6px 18px rgba(var(--ane-warna-gelap-rgb), 0.06);
 }
 .ane-konten-testimoni .entry-header p {
-  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ane-warna-gelap);
+  margin: 0;
 }
 .ane-konten-testimoni .post-content {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
-  align-content: center;
-  align-content: center;
+  gap: 12px;
+  padding: 0 12px;
 }
 .ane-konten-testimoni .post-content .ane-image {
-  width: 60px;
-  height: 60px;
-  border-radius: 3px 15px 3px 15px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 0;
-  margin-right: 15px;
-  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  flex-shrink: 0;
+  margin: 0;
+  border: 2px solid var(--ane-warna-putih);
 }
-@media (max-width: 767px) {
-  .ane-konten-testimoni .post-content .ane-image {
-    width: 45px;
-    height: 45px;
-    margin-right: 10px;
-  }
+.ane-konten-testimoni .post-content .ane-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ane-konten-testimoni .post-content .orangnya {
+  min-width: 0;
+  flex: 1;
 }
 .ane-konten-testimoni .post-content .orangnya h2 {
-  font-size: 20px;
+  font-size: 0.9375rem;
   font-weight: 700;
-  letter-spacing: -0.6px;
-  margin-bottom: 0;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin: 0 0 2px;
   color: var(--ane-warna-gelap);
-}
-@media (max-width: 767px) {
-  .ane-konten-testimoni .post-content .orangnya h2 {
-    font-family: 17px;
-  }
 }
 .ane-konten-testimoni .post-content .orangnya h2 a {
   color: var(--ane-warna-gelap);
 }
 .ane-konten-testimoni .post-content .orangnya p {
-  margin-bottom: 0;
-  font-size: 14px;
+  margin: 0;
+  font-size: 0.8125rem;
   font-weight: 500;
-  line-height: 1;
-}
-@media (max-width: 767px) {
-  .ane-konten-testimoni .entry-header .ane-image {
-    width: 40%;
-  }
-  .ane-konten-testimoni .post-content {
-    width: 100%;
-  }
+  line-height: 1.35;
+  color: rgba(var(--ane-warna-text-rgb), 0.68);
 }
 .konten-terkait-v2 {
   margin-bottom: 40px;

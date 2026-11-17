@@ -18,15 +18,15 @@ $jabatan   = get_field( 'ane_jabatan' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'ane-konten-testimoni' ); ?>>
-	<header class="entry-header">
-		<?php if ( $testimoni ) : ?>
-			<p><?php echo esc_html( (string) $testimoni ); ?></p>
-		<?php endif; ?>
-	</header>
+	<?php if ( $testimoni ) : ?>
+		<header class="entry-header">
+			<p>&ldquo;<?php echo esc_html( (string) $testimoni ); ?>&rdquo;</p>
+		</header>
+	<?php endif; ?>
 
 	<div class="post-content">
 		<div class="ane-image">
-			<img src="<?php echo esc_url( (string) $photo ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
+			<img src="<?php echo esc_url( (string) $photo ); ?>" width="46" height="46" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" decoding="async">
 		</div>
 
 		<div class="orangnya">
