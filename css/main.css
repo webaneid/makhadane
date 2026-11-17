@@ -2176,25 +2176,25 @@ select:after {
   flex: 1;
   min-width: 0;
 }
-.cta-copy .cta-kicker {
+.cta-copy.ane-text h2.cta-kicker {
   gap: 8px;
   background: rgba(var(--ane-warna-putih-rgb), 0.14);
   border-color: rgba(var(--ane-warna-putih-rgb), 0.26);
   color: var(--ane-warna-putih);
 }
-.cta-copy .cta-kicker svg {
+.cta-copy.ane-text h2.cta-kicker svg {
   width: 15px;
   height: 15px;
   color: var(--ane-warna-alternatif);
 }
-.cta-copy .section-tagline {
+.cta-copy.ane-text h3.section-tagline {
   color: var(--ane-warna-putih);
 }
-.cta-copy .section-tagline span {
+.cta-copy.ane-text h3.section-tagline span {
   color: var(--ane-warna-alternatif);
 }
-.cta-copy .section-description {
-  color: rgba(var(--ane-warna-putih-rgb), 0.88);
+.cta-copy.ane-text p.section-description {
+  color: rgba(var(--ane-warna-putih-rgb), 0.9);
   max-width: 620px;
 }
 .cta-action {
