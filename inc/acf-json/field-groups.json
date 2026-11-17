@@ -1716,6 +1716,58 @@
                                 "prepend": "",
                                 "append": "",
                                 "maxlength": ""
+                            },
+                            {
+                                "key": "field_makhadane_blog_sliding_desain",
+                                "label": "Desain Sliding",
+                                "name": "desain_sliding",
+                                "aria-label": "",
+                                "type": "select",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "simple": "Simple (Carousel)",
+                                    "modern": "Modern (Showcase Glass)"
+                                },
+                                "default_value": "simple",
+                                "return_format": "value",
+                                "multiple": 0,
+                                "allow_null": 0,
+                                "ui": 0,
+                                "ajax": 0,
+                                "placeholder": ""
+                            },
+                            {
+                                "key": "field_makhadane_blog_sliding_bg",
+                                "label": "Warna Background (Mode Modern)",
+                                "name": "warna_background",
+                                "aria-label": "",
+                                "type": "select",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "utama": "Warna Utama",
+                                    "gelap": "Gelap Editorial"
+                                },
+                                "default_value": "utama",
+                                "return_format": "value",
+                                "multiple": 0,
+                                "allow_null": 0,
+                                "ui": 0,
+                                "ajax": 0,
+                                "placeholder": ""
                             }
                         ],
                         "min": "",
