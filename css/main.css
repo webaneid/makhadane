@@ -2055,13 +2055,6 @@ select:after {
   width: calc(60% - 40px);
   margin-left: 40px;
 }
-.landing-page .ane-col-2 .ane-item {
-  width: calc(50% - 40px);
-  margin-right: 80px;
-}
-.landing-page .ane-col-2 .ane-item:nth-child(2n+2) {
-  margin-right: 0;
-}
 .landing-page .ane-home-gallery {
   display: block;
   width: 100%;
@@ -6931,43 +6924,191 @@ select:after {
   display: none;
 }
 
-.ane-page-kontak .kontak-konten {
-  display: block;
+.ane-page-kontak {
+  background: var(--ane-warna-putih);
+  margin-bottom: 0;
+}
+.ane-page-kontak .entry-header {
+  min-height: clamp(220px, 26vw, 300px);
+  padding: clamp(72px, 10vw, 106px) 15px clamp(36px, 5vw, 52px);
+}
+.ane-page-kontak .kontak-header-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 720px;
+}
+.ane-page-kontak .kontak-header-inner h1 {
+  margin: 0 0 10px;
+  padding: 0;
+}
+.ane-page-kontak .kontak-header-sub {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.55;
+  color: rgba(var(--ane-warna-putih-rgb), 0.88);
+}
+.ane-page-kontak .kontak-wrap {
+  padding-top: clamp(28px, 4vw, 44px);
+  padding-bottom: clamp(48px, 6vw, 76px);
+}
+.ane-page-kontak .kontak-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.ane-page-kontak .kontak-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px;
+  background: var(--ane-warna-putih);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(var(--ane-warna-gelap-rgb), 0.045);
+}
+.ane-page-kontak .kontak-info-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--ane-warna-utama-rgb), 0.1);
+  color: var(--ane-warna-utama);
+}
+.ane-page-kontak .kontak-info-icon .ane-icon,
+.ane-page-kontak .kontak-info-icon svg {
+  width: 20px;
+  height: 20px;
+  vertical-align: 0;
+}
+.ane-page-kontak .kontak-info-body {
+  flex: 1;
+  min-width: 0;
+}
+.ane-page-kontak .kontak-info-body h2 {
+  margin: 0 0 5px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ane-warna-gelap);
+}
+.ane-page-kontak .kontak-info-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(var(--ane-warna-text-rgb), 0.8);
+  word-break: break-word;
+}
+.ane-page-kontak .kontak-info-body a {
+  color: var(--ane-warna-utama);
+  font-weight: 600;
+  text-decoration: none;
+}
+.ane-page-kontak .kontak-info-body a:hover {
+  text-decoration: underline;
+}
+.ane-page-kontak .kontak-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.ane-page-kontak .kontak-form-card,
+.ane-page-kontak .kontak-cs-card {
+  background: var(--ane-warna-putih);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 24px rgba(var(--ane-warna-gelap-rgb), 0.045);
+}
+.ane-page-kontak .kontak-form-body input[type="text"],
+.ane-page-kontak .kontak-form-body input[type="email"],
+.ane-page-kontak .kontak-form-body input[type="tel"],
+.ane-page-kontak .kontak-form-body textarea,
+.ane-page-kontak .kontak-form-body select {
   width: 100%;
-  height: auto;
-  margin-bottom: 31px;
-  background-color: var(--ane-warna-putih);
-  border-bottom: 2px solid var(--ane-warna-utama);
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: rgba(var(--ane-warna-gelap-rgb), 0.2) 0px 2px 8px 0px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.14);
+  background: var(--ane-warna-putih);
+  color: var(--ane-warna-gelap);
+  font-size: 0.92rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.ane-page-kontak .kontak-konten .alamat p,
-.ane-page-kontak .kontak-konten .alamat h3 {
-  font-size: 15px;
-  line-height: 1.2;
-  margin-bottom: 5px;
+.ane-page-kontak .kontak-form-body input[type="text"]:focus,
+.ane-page-kontak .kontak-form-body input[type="email"]:focus,
+.ane-page-kontak .kontak-form-body input[type="tel"]:focus,
+.ane-page-kontak .kontak-form-body textarea:focus,
+.ane-page-kontak .kontak-form-body select:focus {
+  outline: none;
+  border-color: var(--ane-warna-utama);
+  box-shadow: 0 0 0 3px rgba(var(--ane-warna-utama-rgb), 0.12);
 }
-.ane-page-kontak .kontak-konten .kontak {
-  display: block;
-  width: 100%;
-  height: auto;
+.ane-page-kontak .kontak-form-body input[type="submit"],
+.ane-page-kontak .kontak-form-body button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--ane-warna-utama);
+  color: var(--ane-warna-putih);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.ane-page-kontak .kontak-konten .kontak p {
-  font-size: 16px;
-  line-height: 1.2;
-  margin-bottom: 5px;
+.ane-page-kontak .kontak-form-body input[type="submit"]:hover,
+.ane-page-kontak .kontak-form-body button[type="submit"]:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+.ane-page-kontak .kontak-side-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.ane-page-kontak .kontak-map {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  box-shadow: 0 6px 24px rgba(var(--ane-warna-gelap-rgb), 0.045);
 }
 .ane-page-kontak .acf-map {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: rgba(var(--ane-warna-gelap-rgb), 0.2) 0px 2px 8px 0px;
-  border: 1px solid var(--ane-warna-putih);
-  padding-bottom: 10px;
+  width: 100%;
+  min-height: 320px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+.ane-page-kontak .kontak-cs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 960px) {
+  .ane-page-kontak .kontak-main-grid {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 767px) {
-  .ane-page-kontak .text-right {
-    text-align: left !important;
+  .ane-page-kontak .kontak-wrap {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .ane-page-kontak .kontak-form-card,
+  .ane-page-kontak .kontak-cs-card {
+    padding: 18px;
   }
 }
 
@@ -8241,75 +8382,6 @@ h2.widget-title.ane-title::after,
 .floating-chat-agent:hover .floating-chat-agent-arrow {
   color: var(--ane-warna-utama);
   transform: translateX(2px);
-}
-ul.ane-cs-mobile {
-  display: none;
-}
-@media (max-width: 767px) {
-  ul.ane-cs-mobile {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 100%;
-    position: relative;
-    margin-bottom: 20px;
-  }
-  ul.ane-cs-mobile .body-pilihan {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  ul.ane-cs-mobile .body-pilihan h4 {
-    font-size: 18px;
-    line-height: 1.3;
-    margin-bottom: 0;
-  }
-  ul.ane-cs-mobile li {
-    cursor: pointer;
-    font-size: 15px;
-    line-height: 1.3;
-    font-style: italic;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-bottom: 10px;
-    align-items: center;
-    background-color: var(--ane-warna-terang);
-    border-radius: 5px;
-    padding: 8px;
-  }
-  ul.ane-cs-mobile li img {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
-    border-radius: 5px;
-  }
-  ul.ane-cs-mobile li p {
-    font-size: 15px;
-    font-weight: 600;
-    font-style: normal;
-    text-align: left;
-  }
-  ul.ane-cs-mobile li p span {
-    display: block;
-    width: 100%;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--ane-warna-utama);
-  }
-  ul.ane-cs-mobile li:last-child {
-    margin-bottom: 0;
-  }
-  ul.ane-cs-mobile li a {
-    color: var(--ane-warna-gelap);
-    text-align: left;
-  }
-  ul.ane-cs-mobile li a:hover {
-    color: var(--ane-warna-utama);
-  }
-  ul.ane-cs-mobile li:hover {
-    background: var(--ane-warna-terang);
-  }
 }
 
 .ane-footer {
