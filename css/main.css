@@ -1266,23 +1266,31 @@ select:after {
   width: 100%;
   padding: 0;
 }
-.share-this .social-share-buttons {
+.share-this .social-share-buttons,
+.ane-content .social-share-buttons {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px 12px;
+  gap: 10px 14px;
   width: 100%;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
+  padding: 12px 16px;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.035);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  border-radius: 14px;
   position: relative;
 }
-.share-this .social-share-buttons .share-label {
+.share-this .social-share-buttons .share-label,
+.ane-content .social-share-buttons .share-label {
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(var(--ane-warna-text-rgb), 0.65);
+  color: var(--ane-warna-gelap);
 }
-.share-this .social-share-buttons ul {
+.share-this .social-share-buttons ul,
+.ane-content .social-share-buttons ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1291,34 +1299,43 @@ select:after {
   padding: 0;
   margin: 0;
 }
-.share-this .social-share-buttons ul li {
+.share-this .social-share-buttons ul li,
+.ane-content .social-share-buttons ul li {
   padding: 0;
   margin: 0;
   line-height: 1;
   list-style: none;
 }
+.share-this .social-share-buttons ul li::before,
+.ane-content .social-share-buttons ul li::before {
+  content: none;
+  display: none;
+}
 .share-this .social-share-buttons ul li a,
-.share-this .social-share-buttons ul li button.copy-url {
+.share-this .social-share-buttons ul li button.copy-url,
+.ane-content .social-share-buttons ul li a,
+.ane-content .social-share-buttons ul li button.copy-url {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  height: 38px;
-  min-width: 38px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.1);
-  background: var(--ane-warna-putih);
-  color: var(--ane-warna-gelap);
+  height: 36px;
+  min-width: 36px;
+  padding: 0 11px;
+  border-radius: 10px;
+  border: 0;
+  color: var(--ane-warna-putih);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(var(--ane-warna-gelap-rgb), 0.04);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(var(--ane-warna-gelap-rgb), 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 .share-this .social-share-buttons ul li .ane-icon,
-.share-this .social-share-buttons ul li svg {
+.share-this .social-share-buttons ul li svg,
+.ane-content .social-share-buttons ul li .ane-icon,
+.ane-content .social-share-buttons ul li svg {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1326,48 +1343,54 @@ select:after {
   height: 16px;
   vertical-align: 0;
 }
-.share-this .social-share-buttons ul li a.whatsapp:hover {
+.share-this .social-share-buttons ul li a.whatsapp,
+.ane-content .social-share-buttons ul li a.whatsapp {
   background-color: #16a34a;
-  border-color: #16a34a;
-  color: var(--ane-warna-putih);
-  transform: translateY(-1px);
 }
-.share-this .social-share-buttons ul li a.twitter-x:hover {
+.share-this .social-share-buttons ul li a.twitter-x,
+.ane-content .social-share-buttons ul li a.twitter-x {
   background-color: #111827;
-  border-color: #111827;
-  color: var(--ane-warna-putih);
-  transform: translateY(-1px);
 }
-.share-this .social-share-buttons ul li a.facebook:hover {
+.share-this .social-share-buttons ul li a.facebook,
+.ane-content .social-share-buttons ul li a.facebook {
   background-color: #1877f2;
-  border-color: #1877f2;
-  color: var(--ane-warna-putih);
-  transform: translateY(-1px);
 }
-.share-this .social-share-buttons ul li a.linkedin:hover {
+.share-this .social-share-buttons ul li a.linkedin,
+.ane-content .social-share-buttons ul li a.linkedin {
   background-color: #0a66c2;
-  border-color: #0a66c2;
-  color: var(--ane-warna-putih);
-  transform: translateY(-1px);
 }
-.share-this .social-share-buttons ul li button.copy-url:hover,
-.share-this .social-share-buttons ul li button.copy-url.is-copied {
+.share-this .social-share-buttons ul li button.copy-url,
+.ane-content .social-share-buttons ul li button.copy-url {
   background-color: var(--ane-warna-utama);
-  border-color: var(--ane-warna-utama);
+}
+.share-this .social-share-buttons ul li a:hover,
+.share-this .social-share-buttons ul li button.copy-url:hover,
+.ane-content .social-share-buttons ul li a:hover,
+.ane-content .social-share-buttons ul li button.copy-url:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(var(--ane-warna-gelap-rgb), 0.18);
+  filter: brightness(1.06);
   color: var(--ane-warna-putih);
-  transform: translateY(-1px);
 }
-.share-this .social-share-buttons ul li button.copy-url .copy-icon-done {
+.share-this .social-share-buttons ul li button.copy-url.is-copied,
+.ane-content .social-share-buttons ul li button.copy-url.is-copied {
+  background-color: #16a34a;
+}
+.share-this .social-share-buttons ul li button.copy-url .copy-icon-done,
+.ane-content .social-share-buttons ul li button.copy-url .copy-icon-done {
   display: none;
 }
-.share-this .social-share-buttons ul li button.copy-url.is-copied .copy-icon-default {
+.share-this .social-share-buttons ul li button.copy-url.is-copied .copy-icon-default,
+.ane-content .social-share-buttons ul li button.copy-url.is-copied .copy-icon-default {
   display: none;
 }
-.share-this .social-share-buttons ul li button.copy-url.is-copied .copy-icon-done {
+.share-this .social-share-buttons ul li button.copy-url.is-copied .copy-icon-done,
+.ane-content .social-share-buttons ul li button.copy-url.is-copied .copy-icon-done {
   display: inline-flex;
 }
 @media (max-width: 767px) {
-  .share-this .social-share-buttons {
+  .share-this .social-share-buttons,
+  .ane-content .social-share-buttons {
     position: fixed;
     left: 12px;
     right: 12px;
@@ -1381,27 +1404,33 @@ select:after {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.1);
     border-radius: 16px;
-    box-shadow: 0 12px 32px rgba(var(--ane-warna-gelap-rgb), 0.16);
+    box-shadow: 0 12px 32px rgba(var(--ane-warna-gelap-rgb), 0.18);
   }
-  .share-this .social-share-buttons .share-label {
+  .share-this .social-share-buttons .share-label,
+  .ane-content .social-share-buttons .share-label {
     display: none;
   }
-  .share-this .social-share-buttons ul {
+  .share-this .social-share-buttons ul,
+  .ane-content .social-share-buttons ul {
     width: 100%;
     flex-wrap: nowrap;
     gap: 6px;
   }
-  .share-this .social-share-buttons ul li {
+  .share-this .social-share-buttons ul li,
+  .ane-content .social-share-buttons ul li {
     flex: 1;
   }
   .share-this .social-share-buttons ul li a,
-  .share-this .social-share-buttons ul li button.copy-url {
+  .share-this .social-share-buttons ul li button.copy-url,
+  .ane-content .social-share-buttons ul li a,
+  .ane-content .social-share-buttons ul li button.copy-url {
     width: 100%;
     height: 40px;
     padding: 0 8px;
     border-radius: 10px;
   }
-  .share-this .social-share-buttons ul li button.copy-url .copy-label {
+  .share-this .social-share-buttons ul li button.copy-url .copy-label,
+  .ane-content .social-share-buttons ul li button.copy-url .copy-label {
     display: none;
   }
 }
