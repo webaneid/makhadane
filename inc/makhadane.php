@@ -869,11 +869,25 @@ function ane_related_post() {
 		return;
 	}
 
-	echo '<h2>' . esc_html__( 'Related Posts', 'makhadane' ) . '</h2>';
+	echo '<h2 class="widget-title ane-title">' . esc_html__( 'Related Posts', 'makhadane' ) . '</h2>';
 
+	$counter = 0;
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		get_template_part( 'tp/content', 'list' );
+		if ( 0 === $counter ) {
+			echo '<div class="terkait-newest-lead">';
+			get_template_part( 'tp/content', 'klasik' );
+			echo '</div>';
+			if ( $query->post_count > 1 ) {
+				echo '<div class="terkait-newest-list">';
+			}
+		} else {
+			get_template_part( 'tp/content', 'list' );
+		}
+		++$counter;
+	}
+	if ( $counter > 1 ) {
+		echo '</div>';
 	}
 
 	wp_reset_postdata();
@@ -899,15 +913,26 @@ function ane_newest_posts() {
 		return;
 	}
 
-	echo '<h2>' . esc_html__( 'Newest Posts', 'makhadane' ) . '</h2>';
-	echo '<div class="isi-konten">';
+	echo '<h2 class="widget-title ane-title">' . esc_html__( 'Newest Posts', 'makhadane' ) . '</h2>';
 
+	$counter = 0;
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		get_template_part( 'tp/content', 'list' );
+		if ( 0 === $counter ) {
+			echo '<div class="terkait-newest-lead">';
+			get_template_part( 'tp/content', 'klasik' );
+			echo '</div>';
+			if ( $query->post_count > 1 ) {
+				echo '<div class="terkait-newest-list">';
+			}
+		} else {
+			get_template_part( 'tp/content', 'list' );
+		}
+		++$counter;
 	}
-
-	echo '</div>';
+	if ( $counter > 1 ) {
+		echo '</div>';
+	}
 
 	wp_reset_postdata();
 }

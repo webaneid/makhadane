@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.Security.EscapeOutput.OutputNotEscaped
+
 get_header();
 ane_set_views( get_the_ID() );
 ?>
@@ -130,13 +132,9 @@ ane_set_views( get_the_ID() );
 					<div class="post-nav"><?php echo ane_prev_next_post(); ?></div>
 
 					<div class="terkait-newest">
-						<div class="ane-col-55">
-							<div class="ane-kiri">
-								<div class="related-post"><?php echo ane_related_post(); ?></div>
-							</div>
-							<div class="ane-kanan">
-								<div class="newest-post"><?php echo ane_newest_posts(); ?></div>
-							</div>
+						<div class="terkait-newest-grid">
+							<div class="related-post"><?php ane_related_post(); ?></div>
+							<div class="newest-post"><?php ane_newest_posts(); ?></div>
 						</div>
 					</div>
 
