@@ -3007,6 +3007,26 @@
                                 "maxlength": ""
                             },
                             {
+                                "key": "field_makhadane_news1_tagline",
+                                "label": "Tagline",
+                                "name": "ane_subtitle",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "Tagline utama section (bisa gunakan <span>kata</span> untuk highlight warna tema).",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
                                 "key": "field_62b773eecbab7",
                                 "label": "Deskripsi",
                                 "name": "ane_deskripsi",
@@ -3067,6 +3087,26 @@
                                 "aria-label": "",
                                 "type": "text",
                                 "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_makhadane_news2_tagline",
+                                "label": "Tagline",
+                                "name": "ane_subtitle",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "Tagline utama section (bisa gunakan <span>kata</span> untuk highlight warna tema).",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {

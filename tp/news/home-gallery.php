@@ -10,59 +10,88 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
 
-$homekategori = get_sub_field( 'pilih_kategori' );
-$judul        = get_sub_field( 'ane_title' );
-
-// Cek apakah kategori ada sebelum mengakses propertinya
-if ( ! $homekategori || ! isset( $homekategori->term_id, $homekategori->name ) ) {
-	return; // Menghindari error jika kategori tidak ada
+$makhadane_kategori = get_sub_field( 'pilih_kategori' );
+if ( ! $makhadane_kategori || ! isset( $makhadane_kategori->term_id, $makhadane_kategori->name ) ) {
+	return;
 }
 
-$category_id   = $homekategori->term_id;
-$category_name = esc_html( $homekategori->name );
-$category_link = esc_url( get_category_link( $category_id ) );
+$makhadane_cat_id    = (int) $makhadane_kategori->term_id;
+$makhadane_cat_name  = (string) $makhadane_kategori->name;
+$makhadane_cat_link  = get_category_link( $makhadane_cat_id );
+$makhadane_judul     = trim( wp_strip_all_tags( (string) get_sub_field( 'ane_title' ) ) );
+$makhadane_tagline   = trim( (string) get_sub_field( 'ane_subtitle' ) );
+$makhadane_deskripsi = trim( wp_strip_all_tags( (string) get_sub_field( 'ane_deskripsi' ) ) );
+
+$makhadane_gal_query = new WP_Query(
+	array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'cat'                 => $makhadane_cat_id,
+		'posts_per_page'      => 8,
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
+	)
+);
 ?>
 <section class="ane-home-gallery gp">
 	<div class="ane-container">
-		<div class="ane-text">
-			<a href="<?php echo $category_link; ?>" rel="noopener noreferrer">
-				<h2 class="section-title"><?php echo ! empty( $judul ) ? wp_kses_post( $judul ) : $category_name; ?></h2>
-			</a>
+		<div class="news-section-header">
+			<div class="news-header-copy ane-text">
+				<h2 class="section-title">
+					<?php echo '' !== $makhadane_judul ? esc_html( $makhadane_judul ) : esc_html( $makhadane_cat_name ); ?>
+				</h2>
 
-			<?php
-			$deskripsi = get_sub_field( 'ane_deskripsi' );
-			if ( ! empty( $deskripsi ) ) {
-				echo '<p>' . esc_html( $deskripsi ) . '</p>';
-			}
-			?>
+				<?php if ( '' !== $makhadane_tagline ) : ?>
+					<h3 class="section-tagline"><?php echo wp_kses_post( $makhadane_tagline ); ?></h3>
+				<?php endif; ?>
 
-			<div class="lainnya">
-				<a href="<?php echo $category_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $category_name ); ?>">
-					<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
-				</a>
+				<?php if ( '' !== $makhadane_deskripsi ) : ?>
+					<p class="section-description"><?php echo esc_html( $makhadane_deskripsi ); ?></p>
+				<?php endif; ?>
 			</div>
-		</div>
-		
-		<div class="owl-carousel dot-style2" id="home-sliding">
-			<?php
-			$query_args = array(
-				'post_type'      => 'post',
-				'cat'            => $category_id, // Gunakan term_id langsung
-				'posts_per_page' => 8,
-				'no_found_rows'  => true, // Optimasi query
-			);
-			$the_query  = new WP_Query( $query_args );
 
-			if ( $the_query->have_posts() ) :
-				while ( $the_query->have_posts() ) :
-					$the_query->the_post();
-					get_template_part( 'tp/content', 'overlay' );
+			<?php if ( ! is_wp_error( $makhadane_cat_link ) && ! empty( $makhadane_cat_link ) ) : ?>
+				<a class="news-all-link" href="<?php echo esc_url( (string) $makhadane_cat_link ); ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $makhadane_cat_name ); ?>">
+					<span><?php esc_html_e( 'Lihat Semua', 'makhadane' ); ?></span>
+					<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
+				</a>
+			<?php endif; ?>
+		</div>
+
+		<?php if ( $makhadane_gal_query->have_posts() ) : ?>
+			<div class="owl-carousel dot-style2" id="home-sliding">
+				<?php
+				while ( $makhadane_gal_query->have_posts() ) :
+					$makhadane_gal_query->the_post();
+					$makhadane_pid       = get_the_ID();
+					$makhadane_ptitle    = get_the_title();
+					$makhadane_pdate     = get_the_date();
+					$makhadane_thumb_url = get_the_post_thumbnail_url( $makhadane_pid, 'medium_large' );
+					if ( ! $makhadane_thumb_url && function_exists( 'ane_dummy_thumbnail' ) ) {
+						$makhadane_thumb_url = ane_dummy_thumbnail();
+					}
+					?>
+					<a class="home-news-card" href="<?php the_permalink(); ?>">
+						<?php if ( ! empty( $makhadane_thumb_url ) ) : ?>
+							<div class="home-news-card-media">
+								<img src="<?php echo esc_url( (string) $makhadane_thumb_url ); ?>" width="480" height="300" alt="<?php echo esc_attr( $makhadane_ptitle ); ?>" loading="lazy" decoding="async">
+							</div>
+						<?php endif; ?>
+						<div class="home-news-card-body">
+							<div class="home-news-meta">
+								<span class="home-news-cat"><?php echo esc_html( $makhadane_cat_name ); ?></span>
+								<span class="home-news-date"><?php echo esc_html( $makhadane_pdate ); ?></span>
+							</div>
+							<h4 class="home-news-card-title"><?php echo esc_html( $makhadane_ptitle ); ?></h4>
+						</div>
+					</a>
+					<?php
 				endwhile;
 				wp_reset_postdata();
-			endif;
-			?>
-		</div>
-	</div><!-- container end-->
+				?>
+			</div>
+		<?php endif; ?>
+	</div>
 </section>
