@@ -5739,36 +5739,6 @@ select:after {
 .ane-konten-lis-title h2 a:hover {
   color: var(--ane-warna-utama);
 }
-.ane-konten-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.ane-konten-nav .entry-header {
-  width: calc(30% - 7.5px);
-  margin-right: 15px;
-}
-.ane-konten-nav .entry-header .ane-image {
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 0;
-}
-.ane-konten-nav .entry-content {
-  width: calc(70% - 7.5px);
-  padding: 0;
-}
-.ane-konten-nav .entry-content a {
-  color: var(--ane-warna-gelap);
-  line-height: 1.2;
-  font-weight: 700;
-  font-size: 17px;
-  margin-bottom: 0;
-  margin-top: 0;
-  letter-spacing: -0.3px;
-  display: flex;
-}
-
 /* ==========================================================================
    [09] Rich Article Content & Gutenberg Blocks (.ane-content)
    ========================================================================== */
@@ -6069,39 +6039,115 @@ select:after {
 .ane-content .post-nav {
   display: block;
   width: 100%;
-  height: auto;
-  margin-bottom: 30px;
+  margin: 32px 0;
 }
-@media (max-width: 767px) {
-  .ane-content .post-nav {
-    max-width: none;
-    width: auto;
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -15px;
-    margin-right: -15px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 3px solid rgba(var(--ane-warna-gelap-rgb), 0.07);
-    text-align: left;
-  }
+.post-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
-.ane-content .post-nav span {
-  color: var(--ane-warna-gelap);
+.post-nav-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--ane-warna-putih);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 6px 24px rgba(var(--ane-warna-gelap-rgb), 0.045);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.post-nav-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--ane-warna-utama-rgb), 0.28);
+  box-shadow: 0 12px 28px rgba(var(--ane-warna-gelap-rgb), 0.09);
+}
+.post-nav-next {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.post-nav-thumb {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.05);
+}
+.post-nav-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  line-height: 1.2rem;
+  transition: transform 0.35s ease;
 }
-@media (max-width: 767px) {
-  .ane-content .post-nav span {
+.post-nav-card:hover .post-nav-thumb img {
+  transform: scale(1.06);
+}
+.post-nav-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.post-nav-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ane-warna-utama);
+  line-height: 1.2;
+}
+.post-nav-next .post-nav-label {
+  justify-content: flex-end;
+}
+.post-nav-label .ane-icon,
+.post-nav-label svg {
+  width: 13px;
+  height: 13px;
+  vertical-align: 0;
+}
+.post-nav-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  color: var(--ane-warna-gelap);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+.post-nav-card:hover .post-nav-title {
+  color: var(--ane-warna-utama);
+}
+@media (max-width: 640px) {
+  .ane-content .post-nav {
+    margin: 24px 0;
+  }
+  .post-nav-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .post-nav-next {
+    flex-direction: row;
     text-align: left;
   }
-}
-.ane-content .post-nav span i {
-  font-size: 12px;
-  line-height: 1.2rem;
+  .post-nav-next .post-nav-label {
+    justify-content: flex-start;
+  }
+  .post-nav-thumb {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+  }
 }
 .ane-content blockquote {
   margin: 28px 0;

@@ -934,6 +934,10 @@ function ane_prev_next_post() {
 			: ane_dummy_kotak();
 	}
 
+	if ( ! $prev_post && ! $next_post ) {
+		return '';
+	}
+
 	if ( $next_post ) {
 		$next_img = has_post_thumbnail( $next_post )
 			? get_the_post_thumbnail_url( $next_post, 'kotak' )
@@ -942,53 +946,39 @@ function ane_prev_next_post() {
 
 	ob_start();
 	?>
-	<div class="ane-col-55 mplr">
+	<nav class="post-nav-grid" aria-label="<?php esc_attr_e( 'Navigasi Artikel', 'makhadane' ); ?>">
 		<?php if ( $prev_post ) : ?>
-			<div class="ane-kiri">
-				<div class="nav-header-prev">
-					<span><?php echo wp_kses_post( makhadane_icon( 'chevron-left' ) ); ?> <?php esc_html_e( 'Prev Post', 'makhadane' ); ?></span>
-				</div>
-				<article class="ane-konten-nav">
-					<div class="entry-header">
-						<a href="<?php echo esc_url( get_permalink( $prev_post ) ); ?>">
-							<div class="ane-image">
-								<img src="<?php echo esc_url( $prev_img ); ?>" alt="<?php echo esc_attr( get_the_title( $prev_post ) ); ?>" loading="lazy">
-							</div>
-						</a>
-					</div>
-					<div class="entry-content">
-						<a href="<?php echo esc_url( get_permalink( $prev_post ) ); ?>">
-							<?php echo esc_html( get_the_title( $prev_post ) ); ?>
-						</a>
-					</div>
-				</article>
-			</div>
+			<a class="post-nav-card post-nav-prev" href="<?php echo esc_url( (string) get_permalink( $prev_post ) ); ?>">
+				<span class="post-nav-thumb">
+					<img src="<?php echo esc_url( (string) $prev_img ); ?>" width="72" height="72" alt="<?php echo esc_attr( get_the_title( $prev_post ) ); ?>" loading="lazy" decoding="async">
+				</span>
+				<span class="post-nav-body">
+					<span class="post-nav-label">
+						<?php echo wp_kses_post( makhadane_icon( 'chevron-left' ) ); ?>
+						<span><?php esc_html_e( 'Sebelumnya', 'makhadane' ); ?></span>
+					</span>
+					<span class="post-nav-title"><?php echo esc_html( get_the_title( $prev_post ) ); ?></span>
+				</span>
+			</a>
 		<?php endif; ?>
 
 		<?php if ( $next_post ) : ?>
-			<div class="ane-kanan">
-				<div class="nav-header-prev text-right">
-					<span><?php esc_html_e( 'Next Post', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?></span>
-				</div>
-				<article class="ane-konten-nav nav-next">
-					<div class="entry-header">
-						<a href="<?php echo esc_url( get_permalink( $next_post ) ); ?>">
-							<div class="ane-image">
-								<img src="<?php echo esc_url( $next_img ); ?>" alt="<?php echo esc_attr( get_the_title( $next_post ) ); ?>" loading="lazy">
-							</div>
-						</a>
-					</div>
-					<div class="entry-content">
-						<a href="<?php echo esc_url( get_permalink( $next_post ) ); ?>">
-							<?php echo esc_html( get_the_title( $next_post ) ); ?>
-						</a>
-					</div>
-				</article>
-			</div>
+			<a class="post-nav-card post-nav-next" href="<?php echo esc_url( (string) get_permalink( $next_post ) ); ?>">
+				<span class="post-nav-thumb">
+					<img src="<?php echo esc_url( (string) $next_img ); ?>" width="72" height="72" alt="<?php echo esc_attr( get_the_title( $next_post ) ); ?>" loading="lazy" decoding="async">
+				</span>
+				<span class="post-nav-body">
+					<span class="post-nav-label">
+						<span><?php esc_html_e( 'Berikutnya', 'makhadane' ); ?></span>
+						<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
+					</span>
+					<span class="post-nav-title"><?php echo esc_html( get_the_title( $next_post ) ); ?></span>
+				</span>
+			</a>
 		<?php endif; ?>
-	</div>
+	</nav>
 	<?php
-	return ob_get_clean();
+	return (string) ob_get_clean();
 }
 
 /**
