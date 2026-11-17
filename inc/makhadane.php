@@ -1574,25 +1574,19 @@ function ane_display_breadcrumbs() {
 /**
  * Get designed by attribution links
  *
- * Returns footer attribution for Yakaafi Foundation and Webane Indonesia.
+ * Returns footer attribution for Webane Indonesia.
  *
  * @since 4.1.1
- * @return string HTML output with attribution links
+ * @return string HTML output with attribution link
  */
 function ane_get_designed_by() {
-	$yakaafi_url = 'https://yakaafi.com/';
-	$webane_url  = 'https://webane.com/';
+	$webane_url = 'https://webane.com/';
 
 	return sprintf(
 		'| %s',
 		sprintf(
-			__( 'Wakaf digital %1$s, kolaborasi dengan %2$s', 'makhadane' ),
-			sprintf(
-				'<a id="klik-yakaafi" href="%s" target="_blank" rel="noopener noreferrer" title="%s">%s</a>',
-				esc_url( $yakaafi_url ),
-				esc_attr__( 'Yakaafi - Yayasan Amal Wakaf Indonesia', 'makhadane' ),
-				esc_html__( 'Yakaafi Foundation', 'makhadane' )
-			),
+			/* translators: %s: Webane Indonesia link */
+			__( 'Designed with love by %s', 'makhadane' ),
 			sprintf(
 				'<a id="klik-webane" href="%s" target="_blank" rel="noopener noreferrer" title="%s">%s</a>',
 				esc_url( $webane_url ),
