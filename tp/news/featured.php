@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $makhadane_featured_posts = new WP_Query(
 	array(
 		'post_type'           => 'post',
-		'posts_per_page'      => 5,
+		'posts_per_page'      => 3,
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,
@@ -26,7 +26,7 @@ if ( ! $makhadane_featured_posts->have_posts() ) {
 	$makhadane_featured_posts = new WP_Query(
 		array(
 			'post_type'           => 'post',
-			'posts_per_page'      => 5,
+			'posts_per_page'      => 3,
 			'post_status'         => 'publish',
 			'ignore_sticky_posts' => true,
 			'no_found_rows'       => true,
@@ -37,7 +37,7 @@ if ( ! $makhadane_featured_posts->have_posts() ) {
 $makhadane_recent_posts = new WP_Query(
 	array(
 		'post_type'           => 'post',
-		'posts_per_page'      => 3,
+		'posts_per_page'      => 5,
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,
