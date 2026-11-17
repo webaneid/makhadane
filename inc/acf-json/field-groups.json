@@ -2864,6 +2864,26 @@
                                 "maxlength": ""
                             },
                             {
+                                "key": "field_makhadane_guru_tagline",
+                                "label": "Tagline",
+                                "name": "ane_subtitle",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "Tagline utama section (bisa gunakan <span>kata</span> untuk highlight warna tema).",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
                                 "key": "field_5e3ed103c9d97",
                                 "label": "Deskripsi",
                                 "name": "ane_deskripsi",

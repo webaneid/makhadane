@@ -2509,21 +2509,134 @@ select:after {
 .landing-page .ane-home-guru {
   display: block;
   width: 100%;
-  height: auto;
+  background: var(--ane-warna-putih);
 }
-@media (max-width: 767px) {
-  .landing-page .ane-home-guru {
-    padding-top: 20px;
+.guru-header.ane-text {
+  max-width: 760px;
+  margin: 0 auto clamp(32px, 4.5vw, 52px);
+  text-align: center;
+}
+.guru-header.ane-text h2.section-title {
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.guru-header.ane-text p.section-description {
+  max-width: 620px;
+  margin: 0 auto;
+}
+.guru-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+.guru-hero-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ane-radius-lg, 20px);
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.05);
+  box-shadow: 0 14px 36px rgba(var(--ane-warna-gelap-rgb), 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.guru-hero-card:nth-child(even) {
+  margin-top: 34px;
+}
+.guru-hero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px rgba(var(--ane-warna-gelap-rgb), 0.14);
+}
+.guru-hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(var(--ane-warna-putih-rgb), 0) 44%, rgba(var(--ane-warna-putih-rgb), 0.92) 82%, var(--ane-warna-putih) 100%);
+  pointer-events: none;
+}
+.guru-hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.guru-hero-card:hover .guru-hero-photo {
+  transform: scale(1.04);
+}
+.guru-hero-info {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 20px 20px 18px;
+  text-align: left;
+}
+.guru-hero-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ane-warna-gelap);
+  margin: 0 0 3px;
+}
+.guru-hero-role {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: rgba(var(--ane-warna-text-rgb), 0.72);
+  margin: 0;
+}
+.guru-footer {
+  margin-top: clamp(30px, 4vw, 44px);
+  text-align: center;
+}
+.guru-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-weight: 600;
+}
+.guru-all-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+.guru-all-btn:hover svg {
+  transform: translateX(3px);
+}
+@media (max-width: 1024px) {
+  .guru-hero-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .guru-hero-card:nth-child(even) {
+    margin-top: 24px;
   }
 }
-.landing-page .ane-home-guru .ane-konten-guru {
-  margin-bottom: 0;
-}
-.landing-page .ane-home-guru .ane-konten-guru .entry-header {
-  margin-bottom: 0;
-}
-.landing-page .ane-home-guru .ane-konten-guru .entry-header:before {
-  background: transparent;
+@media (max-width: 767px) {
+  .guru-hero-grid {
+    gap: 12px;
+  }
+  .guru-hero-card {
+    border-radius: 16px;
+  }
+  .guru-hero-card:nth-child(even) {
+    margin-top: 16px;
+  }
+  .guru-hero-info {
+    padding: 14px 12px 12px;
+  }
+  .guru-hero-name {
+    font-size: 0.9375rem;
+  }
 }
 .landing-page .ane-home-news {
   display: block;
