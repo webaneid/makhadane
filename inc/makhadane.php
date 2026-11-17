@@ -1310,50 +1310,61 @@ function ane_author_info_box( $content ) {
 		return $content;
 	}
 
-	$display_name = get_the_author_meta( 'display_name', $post->post_author );
-
+	$author_id    = (int) $post->post_author;
+	$display_name = get_the_author_meta( 'display_name', $author_id );
 	if ( empty( $display_name ) ) {
-		$display_name = get_the_author_meta( 'nickname', $post->post_author );
+		$display_name = get_the_author_meta( 'nickname', $author_id );
 	}
 
-	$user_description = get_the_author_meta( 'user_description', $post->post_author );
-	$user_website     = get_the_author_meta( 'url', $post->post_author );
-	$user_posts       = get_author_posts_url( get_the_author_meta( 'ID', $post->post_author ) );
+	$user_description = trim( (string) get_the_author_meta( 'user_description', $author_id ) );
+	$user_website     = trim( (string) get_the_author_meta( 'url', $author_id ) );
+	$user_posts       = get_author_posts_url( $author_id );
+	$avatar_html      = get_avatar(
+		get_the_author_meta( 'user_email', $author_id ),
+		88,
+		'',
+		(string) $display_name,
+		array( 'class' => 'avatar' )
+	);
 
-	$author_details = '';
+	$author_details  = '<div class="author_bio_avatar">' . wp_kses_post( (string) $avatar_html ) . '</div>';
+	$author_details .= '<div class="author_bio_content">';
+	$author_details .= '<span class="author_bio_kicker">' . esc_html__( 'Ditulis oleh', 'makhadane' ) . '</span>';
 
 	if ( ! empty( $display_name ) ) {
 		$author_details .= sprintf(
-			'<h2 class="author_name">%s %s</h2>',
-			esc_html__( 'Written By:', 'makhadane' ),
-			esc_html( $display_name )
+			'<h2 class="author_name"><a href="%1$s">%2$s</a></h2>',
+			esc_url( $user_posts ),
+			esc_html( (string) $display_name )
 		);
 	}
 
-	if ( ! empty( $user_description ) ) {
+	if ( '' !== $user_description ) {
 		$author_details .= sprintf(
-			'<div class="author_details">%s%s</div>',
-			get_avatar( get_the_author_meta( 'user_email' ), 90 ),
+			'<p class="author_details">%s</p>',
 			nl2br( esc_html( $user_description ) )
 		);
 	}
 
+	$arrow_icon      = function_exists( 'makhadane_icon' ) ? makhadane_icon( 'arrow-up-right' ) : '';
+	$author_details .= '<div class="author_links">';
 	$author_details .= sprintf(
-		'<div class="author_links"><a href="%s">%s %s</a>',
+		'<a class="author_link_pill" href="%1$s"><span>%2$s</span>%3$s</a>',
 		esc_url( $user_posts ),
-		esc_html( $display_name ),
-		esc_html__( 'Posts', 'makhadane' )
+		esc_html__( 'Semua Artikel', 'makhadane' ),
+		wp_kses_post( $arrow_icon )
 	);
 
-	if ( ! empty( $user_website ) ) {
+	if ( '' !== $user_website ) {
 		$author_details .= sprintf(
-			' | <a href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a></div>',
+			'<a class="author_link_pill" href="%1$s" target="_blank" rel="nofollow noopener noreferrer"><span>%2$s</span>%3$s</a>',
 			esc_url( $user_website ),
-			esc_html__( 'Website', 'makhadane' )
+			esc_html__( 'Website', 'makhadane' ),
+			wp_kses_post( $arrow_icon )
 		);
-	} else {
-		$author_details .= '</div>';
 	}
+
+	$author_details .= '</div></div>';
 
 	$content .= '<footer class="author_bio_section">' . $author_details . '</footer>';
 
