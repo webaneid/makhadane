@@ -8389,7 +8389,6 @@ h2.widget-title.ane-title::after,
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;
   background-color: var(--ane-warna-gelap);
   background-image: radial-gradient(circle at 14% 20%, rgba(var(--ane-warna-utama-rgb), 0.42) 0%, transparent 48%), radial-gradient(circle at 86% 78%, rgba(var(--ane-warna-alternatif-rgb), 0.22) 0%, transparent 45%), linear-gradient(155deg, var(--ane-warna-gelap) 0%, rgba(var(--ane-warna-utama-rgb), 0.22) 100%);
 }
@@ -8426,6 +8425,7 @@ h2.widget-title.ane-title::after,
   transform: translateX(-50%);
   width: 72px;
   height: 72px;
+  z-index: 6;
   border-radius: 50%;
   border: 0;
   padding: 0;
