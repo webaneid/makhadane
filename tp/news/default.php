@@ -30,15 +30,19 @@ $query = new WP_Query(
 ?>
 <section class="ane-news-default ane-blog-section">
 	<div class="ane-col-column">
-		<!-- Section Title -->
-		<div class="section-title">
-			<div class="section-title-item">
-				<a href="<?php echo $category_link; ?>">
-					<h2><?php echo esc_html( ! empty( $judul ) ? $judul : $category_name ); ?></h2>
-				</a>
+		<div class="blog-section-head">
+			<div class="blog-section-title-wrap">
+				<span class="blog-section-marker" aria-hidden="true"></span>
+				<h2>
+					<a href="<?php echo $category_link; ?>">
+						<?php echo esc_html( ! empty( $judul ) ? $judul : $category_name ); ?>
+					</a>
+				</h2>
 			</div>
-			<a class="lainnya" href="<?php echo $category_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
-				<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
+			<span class="blog-section-line" aria-hidden="true"></span>
+			<a class="blog-section-more" href="<?php echo $category_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
+				<span><?php esc_html_e( 'Lihat Semua', 'makhadane' ); ?></span>
+				<span class="blog-section-more-icon" aria-hidden="true"><?php echo wp_kses_post( makhadane_icon( 'arrow-up-right' ) ); ?></span>
 			</a>
 		</div>
 

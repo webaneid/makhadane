@@ -25,16 +25,19 @@ if ( $homekategori && ! empty( $homekategori->term_id ) ) {
 <section class="ane-news-sliding ane-blog-section">
 	<div class="ane-col-column">
 		<?php if ( ! empty( $category_link ) ) : ?>
-			<div class="section-title">
-				<div class="section-title-item">
-					<?php if ( ! empty( $judul ) ) : ?>
-						<a href="<?php echo esc_url( $category_link ); ?>"><h2><?php echo esc_html( $judul ); ?></h2></a>
-					<?php else : ?>
-						<a href="<?php echo esc_url( $category_link ); ?>"><h2><?php echo $category_name; ?></h2></a>
-					<?php endif; ?>
+			<div class="blog-section-head">
+				<div class="blog-section-title-wrap">
+					<span class="blog-section-marker" aria-hidden="true"></span>
+					<h2>
+						<a href="<?php echo esc_url( $category_link ); ?>">
+							<?php echo ! empty( $judul ) ? esc_html( $judul ) : $category_name; ?>
+						</a>
+					</h2>
 				</div>
-				<a class="lainnya" href="<?php echo esc_url( $category_link ); ?>">
-					<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
+				<span class="blog-section-line" aria-hidden="true"></span>
+				<a class="blog-section-more" href="<?php echo esc_url( $category_link ); ?>">
+					<span><?php esc_html_e( 'Lihat Semua', 'makhadane' ); ?></span>
+					<span class="blog-section-more-icon" aria-hidden="true"><?php echo wp_kses_post( makhadane_icon( 'arrow-up-right' ) ); ?></span>
 				</a>
 			</div>
 		<?php endif; ?>

@@ -30,15 +30,19 @@ $query = new WP_Query(
 ?>
 <section class="ane-news-classic ane-blog-section">
 	<div class="ane-col-column">
-		<!-- Judul Kategori -->
-		<div class="section-title">
-			<div class="section-title-item">
-				<a href="<?php echo $kategori_url; ?>" <?php echo ( $kategori_url !== '#' ) ? 'rel="noopener noreferrer"' : ''; ?>>
-					<h2><?php echo esc_html( ! empty( $judul ) ? $judul : $kategori_nama ); ?></h2>
-				</a>
+		<div class="blog-section-head">
+			<div class="blog-section-title-wrap">
+				<span class="blog-section-marker" aria-hidden="true"></span>
+				<h2>
+					<a href="<?php echo $kategori_url; ?>" <?php echo ( $kategori_url !== '#' ) ? 'rel="noopener noreferrer"' : ''; ?>>
+						<?php echo esc_html( ! empty( $judul ) ? $judul : $kategori_nama ); ?>
+					</a>
+				</h2>
 			</div>
-			<a class="lainnya" href="<?php echo $kategori_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $kategori_nama ); ?>">
-				<?php esc_html_e( 'View All', 'makhadane' ); ?> <?php echo wp_kses_post( makhadane_icon( 'chevron-right-alt-2' ) ); ?>
+			<span class="blog-section-line" aria-hidden="true"></span>
+			<a class="blog-section-more" href="<?php echo $kategori_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $kategori_nama ); ?>">
+				<span><?php esc_html_e( 'Lihat Semua', 'makhadane' ); ?></span>
+				<span class="blog-section-more-icon" aria-hidden="true"><?php echo wp_kses_post( makhadane_icon( 'arrow-up-right' ) ); ?></span>
 			</a>
 		</div>
 
