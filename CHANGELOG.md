@@ -1,3 +1,9 @@
+## [4.2.1](https://github.com/webaneid/makhadane/compare/v4.2.0...v4.2.1) (2026-11-17)
+
+### Bug Fixes
+
+* **hero:** remove missing animate.css fadeOut/fadeIn options causing stacked slides ([0a56ba9](https://github.com/webaneid/makhadane/commit/0a56ba9f5a3aeba636c33e44e2b22aa3250cf778))
+
 ## [4.2.0](https://github.com/webaneid/makhadane/compare/v4.1.3...v4.2.0) (2026-11-16)
 
 ### Features
