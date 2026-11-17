@@ -2191,21 +2191,29 @@ select:after {
   }
 }
 @media (max-width: 767px) {
+  .landing-page .ane-home-ekstrakurikuler .ane-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .ekstra-bento-pair {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
-  .ekstra-bento-pair:nth-child(3) .ekstra-bento-media,
-  .ekstra-bento-pair:nth-child(4) .ekstra-bento-media,
-  .ekstra-bento-pair:nth-child(3) .ekstra-bento-card,
-  .ekstra-bento-pair:nth-child(4) .ekstra-bento-card {
-    order: 0;
-  }
-  .ekstra-bento-media {
-    aspect-ratio: 16 / 10;
+  .ekstra-bento-media,
+  .ekstra-bento-card {
+    aspect-ratio: 1 / 1;
   }
   .ekstra-bento-card {
-    aspect-ratio: auto;
-    padding: 20px 18px;
+    padding: 14px;
+  }
+  .ekstra-bento-title {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  .ekstra-bento-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    -webkit-line-clamp: 3;
   }
 }
 .landing-page .home-cta {
@@ -2595,6 +2603,27 @@ select:after {
   }
 }
 @media (max-width: 767px) {
+  .landing-page .ane-home-testimoni .ane-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .testimoni-slider {
+    position: relative;
+  }
+  .testimoni-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 24px;
+    width: 40px;
+    pointer-events: none;
+    z-index: 3;
+    background: linear-gradient(90deg, transparent 0%, rgba(var(--ane-warna-putih-rgb), 0.85) 100%);
+  }
+  .landing-page .ane-home-testimoni.is-terang .testimoni-slider::after {
+    background: linear-gradient(90deg, transparent 0%, var(--ane-warna-terang) 100%);
+  }
   .testimoni-slider .owl-stage-outer {
     padding: 8px 0 20px;
   }
@@ -3495,6 +3524,10 @@ select:after {
   }
 }
 @media (max-width: 767px) {
+  .landing-page .image-below-text .ane-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .ibt-showcase {
     aspect-ratio: 16 / 10;
     border-radius: 16px;
@@ -3629,6 +3662,10 @@ select:after {
   transition: width 0.2s ease-out;
 }
 @media (max-width: 767px) {
+  .landing-page .about-us .ane-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   .about-us-gallery-track {
     gap: 12px;
     padding: 0 15px;
@@ -5102,12 +5139,12 @@ select:after {
     margin-top: 12px;
   }
   .home-slider .home-slider-dock .ane-container {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .home-slider .home-slider-dock-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 12px;
   }
   .home-slider .home-hero-funfacts-wrap {
     display: grid;
@@ -5117,21 +5154,32 @@ select:after {
   }
   .home-slider .home-hero-funfact-pill {
     width: 100%;
-    padding: 6px 12px 6px 6px;
+    min-width: 0;
+    padding: 8px 10px 8px 8px;
+    gap: 8px;
     animation: none !important;
     background: var(--ane-warna-gelap);
   }
   .home-slider .home-hero-funfact-icon {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
   }
   .home-slider .home-hero-funfact-icon .ane-icon,
   .home-slider .home-hero-funfact-icon svg {
     width: 16px;
     height: 16px;
   }
+  .home-slider .home-hero-funfact-text {
+    min-width: 0;
+  }
   .home-slider .home-hero-funfact-value {
-    font-size: 1.05rem;
+    font-size: 1rem;
+  }
+  .home-slider .home-hero-funfact-title {
+    font-size: 0.72rem;
+    line-height: 1.2;
+    white-space: normal;
   }
   .home-slider .home-hero-posts-stack {
     height: auto;

@@ -289,7 +289,7 @@
 							'<i class="ane-icon" aria-hidden="true"><svg class="ane-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" focusable="false"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg></i>'
 						],
 						responsive: {
-							0: { items: 1, stagePadding: 0, dots: true, nav: false },
+							0: { items: 1, stagePadding: 28, margin: 14, dots: true, nav: false },
 							768: { items: 1, stagePadding: 70, dots: false, nav: true },
 							1200: { items: 1, stagePadding: 150, dots: false, nav: true }
 						}
