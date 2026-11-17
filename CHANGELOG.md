@@ -1,3 +1,27 @@
+## [4.3.0](https://github.com/webaneid/makhadane/compare/v4.2.1...v4.3.0) (2026-11-17)
+
+### Features
+
+* **cta:** add Design 2 clean split 4:5 layout with secondary button ([8feaa06](https://github.com/webaneid/makhadane/commit/8feaa06afabb1db0872c820bd3559bad514f0322))
+* **cta:** use primary button and add hero-style bottom curve mask ([692d68d](https://github.com/webaneid/makhadane/commit/692d68dd21cf1ada1dc20716dcfd47bb2645a9e6))
+* **section:** add top and bottom curve masks to image-below-text utama ([5a5f3eb](https://github.com/webaneid/makhadane/commit/5a5f3eb03aa9bb59866b3bd2ce13ec2accc3a8d1))
+* **widget:** adopt 3 post-widget designs from newsane with makhadane title ([dd6d94b](https://github.com/webaneid/makhadane/commit/dd6d94bc28929fe1537cd2fa7fb09f31a8c87072))
+
+### Bug Fixes
+
+* **cta:** increase selector specificity so home-cta text renders white ([0e9e965](https://github.com/webaneid/makhadane/commit/0e9e965c5782554d61d0f1fa53b3647c55672845))
+* **ekstrakurikuler:** use centered arrow-up-right icon in masonry badge ([89834ea](https://github.com/webaneid/makhadane/commit/89834ea3e8acd6edd7856dfd1813caca0c8ad043))
+* **footer:** remove overflow hidden so scroll-to-top circle is not clipped ([6984613](https://github.com/webaneid/makhadane/commit/69846135f3ef472724e8b81d991e3022abdeaf45))
+* **mobile:** center hero funfacts and preserve fanned stacked post cards on mobile ([5f7ab13](https://github.com/webaneid/makhadane/commit/5f7ab13f5e70dae0ac0c5ad894d1ba2dda68b889))
+* **mobile:** keep curve mask arch roundness proportional on mobile ([4861f66](https://github.com/webaneid/makhadane/commit/4861f6635bab0fea3836518ac088b959f8b65f18))
+* **news:** balance featured slider height with 3 recent posts ([b85b09b](https://github.com/webaneid/makhadane/commit/b85b09b7139d3dea0cbb256f1218cd9bd061e6a0))
+* **news:** keep 5 recent posts and match overlay slider to 3 items ([3863390](https://github.com/webaneid/makhadane/commit/3863390ddc83f8e1d97de66aa99dd59155a983fc))
+* **news:** set explicit 400px slider height and remove stretched list gap ([d565727](https://github.com/webaneid/makhadane/commit/d5657274485f31a63580ccdc5fef8e021be8ebad))
+* **share:** remove inherited .ane-content list bullets and boost desktop button contrast ([7e5a0eb](https://github.com/webaneid/makhadane/commit/7e5a0eb76f673335a2420aef5be5f95fc6d11dfa))
+* **testimoni:** keep nav arrow icon white on hover ([2f2052e](https://github.com/webaneid/makhadane/commit/2f2052e59f3775e492dab5fd9c775138e53b93f9))
+* **testimoni:** reset global owl-nav absolute positioning on testimoni slider arrows ([59a1713](https://github.com/webaneid/makhadane/commit/59a1713919c9b19ab95ec5829da1e5b4259c0c04))
+* **typography:** replace global -1.45px heading letter-spacing with -0.02em ([c3240e9](https://github.com/webaneid/makhadane/commit/c3240e96182119c7af8ec0127a84fb2f2c756949))
+
 ## [4.2.1](https://github.com/webaneid/makhadane/compare/v4.2.0...v4.2.1) (2026-11-17)
 
 ### Bug Fixes
