@@ -1995,100 +1995,140 @@ select:after {
 .landing-page .ane-home-ekstrakurikuler {
   display: block;
   width: 100%;
-  height: auto;
+  background: var(--ane-warna-putih);
 }
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-col-row {
-  flex-wrap: wrap;
-  padding: 0 5px;
-}
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay {
-  width: calc(50% - 5px);
-  position: relative;
-  margin-right: 10px;
-  margin-bottom: 10px;
+.ekstra-header {
+  max-width: 780px;
+  margin: 0 auto clamp(30px, 4vw, 46px);
   text-align: center;
 }
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay {
-    width: calc(50% - 3px);
-    margin-right: 5px;
-    margin-bottom: 5px;
-  }
+.ekstra-header .section-description {
+  max-width: 640px;
+  margin: 0 auto;
 }
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(1) {
-  border-radius: 4px 60px 4px 60px;
+.ekstra-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.ekstra-bento-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+.ekstra-bento-media,
+.ekstra-bento-card {
+  border-radius: 14px;
+  aspect-ratio: 1 / 0.92;
   overflow: hidden;
 }
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(1) {
-    border-radius: 4px 40px 4px 40px;
-  }
+.ekstra-bento-media {
+  background: rgba(var(--ane-warna-gelap-rgb), 0.05);
 }
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(2) {
-  border-radius: 60px 4px 60px 4px;
-  overflow: hidden;
+.ekstra-bento-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
 }
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(2) {
-    border-radius: 40px 4px 40px 4px;
-  }
+.ekstra-bento-pair:hover .ekstra-bento-media img {
+  transform: scale(1.05);
 }
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(3) {
-  border-radius: 60px 4px 60px 4px;
-  overflow: hidden;
+.ekstra-bento-card {
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(3) {
-    border-radius: 40px 4px 40px 4px;
-  }
+.ekstra-bento-pair:hover .ekstra-bento-card {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(var(--ane-warna-gelap-rgb), 0.1);
 }
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(4) {
-  border-radius: 4px 60px 4px 60px;
-  overflow: hidden;
-}
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(4) {
-    border-radius: 4px 40px 4px 40px;
-  }
-}
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay:nth-child(2n+2) {
-  margin-right: 0px;
-}
-.landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay .entry-header {
-  margin-bottom: 0;
-}
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay .entry-header {
-    height: 180px;
-  }
-}
-@media (max-width: 767px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-col-46 .ane-kanan .ane-konten-overlay .entry-header .post-content h2 {
-    font-size: 17px;
-  }
-}
-.landing-page .ane-home-ekstrakurikuler .ane-konten-overlay {
-  margin-bottom: 0;
-}
-.landing-page .ane-home-ekstrakurikuler .ane-konten-overlay .entry-header {
-  height: 280px;
-}
-.landing-page .ane-home-ekstrakurikuler .ane-konten-overlay .entry-header .post-content h2 {
-  font-size: 23px;
+.ekstra-bento-title {
+  font-size: 1.125rem;
   font-weight: 700;
-  letter-spacing: -0.6px;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ane-warna-gelap);
+  margin: 0 0 10px;
+}
+.ekstra-bento-desc {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(var(--ane-warna-text-rgb), 0.78);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ekstra-bento-pair:nth-child(1) .ekstra-bento-card,
+.ekstra-bento-pair:nth-child(4) .ekstra-bento-card {
+  background: var(--ane-warna-utama);
+}
+.ekstra-bento-pair:nth-child(1) .ekstra-bento-title,
+.ekstra-bento-pair:nth-child(4) .ekstra-bento-title {
+  color: var(--ane-warna-putih);
+}
+.ekstra-bento-pair:nth-child(1) .ekstra-bento-desc,
+.ekstra-bento-pair:nth-child(4) .ekstra-bento-desc {
+  color: rgba(var(--ane-warna-putih-rgb), 0.9);
+}
+.ekstra-bento-pair:nth-child(3) .ekstra-bento-media,
+.ekstra-bento-pair:nth-child(4) .ekstra-bento-media {
+  order: 2;
+}
+.ekstra-bento-pair:nth-child(3) .ekstra-bento-card,
+.ekstra-bento-pair:nth-child(4) .ekstra-bento-card {
+  order: 1;
+}
+.ekstra-footer {
+  margin-top: clamp(28px, 3.5vw, 40px);
   text-align: center;
 }
-@media (min-width: 768px) and (max-width: 1024px) {
-  .landing-page .ane-home-ekstrakurikuler .ane-konten-overlay .entry-header {
-    height: 200px;
+.ekstra-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-weight: 600;
+}
+.ekstra-all-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+.ekstra-all-btn:hover svg {
+  transform: translateX(3px);
+}
+@media (max-width: 1024px) {
+  .ekstra-bento-grid {
+    grid-template-columns: 1fr;
   }
-  .landing-page .ane-home-ekstrakurikuler .ane-konten-overlay .entry-header .post-content {
-    padding: 50px 15px 15px 15px;
+}
+@media (max-width: 767px) {
+  .ekstra-bento-pair {
+    grid-template-columns: 1fr;
   }
-  .landing-page .ane-home-ekstrakurikuler .ane-konten-overlay .entry-header .post-content h2 {
-    font-size: 18px;
-    line-height: 1.2;
+  .ekstra-bento-pair:nth-child(3) .ekstra-bento-media,
+  .ekstra-bento-pair:nth-child(4) .ekstra-bento-media,
+  .ekstra-bento-pair:nth-child(3) .ekstra-bento-card,
+  .ekstra-bento-pair:nth-child(4) .ekstra-bento-card {
+    order: 0;
+  }
+  .ekstra-bento-media {
+    aspect-ratio: 16 / 10;
+  }
+  .ekstra-bento-card {
+    aspect-ratio: auto;
+    padding: 20px 18px;
   }
 }
 .landing-page .home-cta {
