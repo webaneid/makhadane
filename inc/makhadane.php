@@ -1056,20 +1056,32 @@ function ane_social_share() {
 		return '';
 	}
 
-	$title     = get_the_title( $post_id );
-	$permalink = get_permalink( $post_id );
-	$excerpt   = get_the_excerpt( $post_id );
+	$title     = wp_strip_all_tags( (string) get_the_title( $post_id ) );
+	$permalink = (string) get_permalink( $post_id );
+	$excerpt   = trim( wp_strip_all_tags( (string) get_the_excerpt( $post_id ) ) );
+
+	if ( '' === $excerpt ) {
+		$excerpt = trim( wp_trim_words( wp_strip_all_tags( (string) get_post_field( 'post_content', $post_id ) ), 24, '...' ) );
+	}
+
+	$share_parts = array( $title );
+	if ( '' !== $excerpt ) {
+		$share_parts[] = $excerpt;
+	}
+	$share_parts[] = __( 'Baca selengkapnya:', 'makhadane' ) . "\n" . $permalink;
+	$share_text    = implode( "\n\n", $share_parts );
 
 	$share_links = array(
+		'whatsapp'  => 'https://api.whatsapp.com/send?text=' . rawurlencode( $share_text ),
+		'twitter-x' => 'https://twitter.com/intent/tweet?text=' . rawurlencode( $share_text ),
 		'facebook'  => 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $permalink ),
-		'twitter-x' => 'https://twitter.com/intent/tweet?text=' . rawurlencode( $title ) . '&url=' . rawurlencode( $permalink ),
-		'whatsapp'  => 'https://api.whatsapp.com/send?text=' . rawurlencode( $title . "\n\n" . $excerpt . "\n\n" . $permalink ),
 		'linkedin'  => 'https://www.linkedin.com/shareArticle?mini=true&url=' . rawurlencode( $permalink ) . '&title=' . rawurlencode( $title ),
 	);
 
 	ob_start();
 	?>
 	<div class="social-share-buttons mt-20">
+		<span class="share-label"><?php esc_html_e( 'Bagikan:', 'makhadane' ); ?></span>
 		<ul>
 			<?php foreach ( $share_links as $network => $url ) : ?>
 				<li>
@@ -1078,10 +1090,17 @@ function ane_social_share() {
 					</a>
 				</li>
 			<?php endforeach; ?>
+			<li>
+				<button type="button" class="copy-url" data-copy-text="<?php echo esc_attr( $share_text ); ?>" aria-label="<?php esc_attr_e( 'Salin tautan dan ringkasan', 'makhadane' ); ?>">
+					<span class="copy-icon-default"><?php echo wp_kses_post( makhadane_icon( 'link' ) ); ?></span>
+					<span class="copy-icon-done"><?php echo wp_kses_post( makhadane_icon( 'check' ) ); ?></span>
+					<span class="copy-label"><?php esc_html_e( 'Salin', 'makhadane' ); ?></span>
+				</button>
+			</li>
 		</ul>
 	</div>
 	<?php
-	return ob_get_clean();
+	return (string) ob_get_clean();
 }
 /**
  * Display social media links from ACF options

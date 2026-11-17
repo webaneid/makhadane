@@ -661,5 +661,43 @@
 				renderGallery();
 			}
 		}
+
+		/* Social Share Copy URL (.social-share-buttons .copy-url) */
+		$(document).on('click', '.social-share-buttons .copy-url', function () {
+			var $btn = $(this);
+			var text = $btn.attr('data-copy-text') || window.location.href;
+			var markCopied = function () {
+				$btn.addClass('is-copied');
+				var prevTimer = $btn.data('copyTimer');
+				if (prevTimer) {
+					clearTimeout(prevTimer);
+				}
+				var timer = setTimeout(function () {
+					$btn.removeClass('is-copied');
+				}, 2000);
+				$btn.data('copyTimer', timer);
+			};
+
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				navigator.clipboard.writeText(text).then(markCopied).catch(function () {
+					markCopied();
+				});
+			} else {
+				var ta = document.createElement('textarea');
+				ta.value = text;
+				ta.setAttribute('readonly', '');
+				ta.style.position = 'fixed';
+				ta.style.left = '-9999px';
+				document.body.appendChild(ta);
+				ta.select();
+				try {
+					document.execCommand('copy');
+				} catch (err) {
+					// Abaikan jika gagal.
+				}
+				document.body.removeChild(ta);
+				markCopied();
+			}
+		});
 	});
 })(jQuery);
