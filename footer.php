@@ -119,29 +119,31 @@ if ( esc_attr( get_field( 'ane_cs_aktif', 'option' ) ) ) :
 	<div class="chat">
 		<div class="header">
 			<?php
-			$cs_title = get_field( 'ane_cs_label', 'option' );
-			if ( ! empty( $cs_title ) ) :
+			$makhadane_cs_title = get_field( 'ane_cs_label', 'option' );
+			if ( ! empty( $makhadane_cs_title ) ) :
 				?>
-				<span class="tombol"><?php echo esc_html( $cs_title ); ?></span>
+				<span class="tombol"><?php echo esc_html( (string) $makhadane_cs_title ); ?></span>
+			<?php else : ?>
+				<span class="tombol"><?php esc_html_e( 'Layanan Informasi', 'makhadane' ); ?></span>
 			<?php endif; ?>
-			<div class="ane-close">
+			<button type="button" class="ane-close" aria-label="<?php esc_attr_e( 'Tutup chat', 'makhadane' ); ?>">
 				<?php echo wp_kses_post( makhadane_icon( 'tutup' ) ); ?>
-			</div>
+			</button>
 		</div>
 		<div class="mesej">
-			<div class="mesej-header">
-				<?php
-				$msg = get_field( 'ane_cs_welcome', 'option' );
-				if ( ! empty( $msg ) ) :
-					?>
-					<p><?php echo esc_html( $msg ); ?></p>
-				<?php endif; ?>
-			</div>
+			<?php
+			$makhadane_cs_msg = get_field( 'ane_cs_welcome', 'option' );
+			if ( ! empty( $makhadane_cs_msg ) ) :
+				?>
+				<div class="mesej-header">
+					<p><?php echo esc_html( (string) $makhadane_cs_msg ); ?></p>
+				</div>
+			<?php endif; ?>
 
 			<div class="mesej-box">
-				<input type="text" id="waMessage" class="wa-input" placeholder="Ketik pesan...">
+				<input type="text" id="waMessage" class="wa-input" placeholder="<?php esc_attr_e( 'Ketik pesan...', 'makhadane' ); ?>">
 				<button type="button" class="wa-button" id="sendWaButton" aria-label="<?php esc_attr_e( 'Kirim WhatsApp', 'makhadane' ); ?>">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-send">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<path d="M10 14l11 -11"></path>
 						<path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
 					</svg>
@@ -149,39 +151,37 @@ if ( esc_attr( get_field( 'ane_cs_aktif', 'option' ) ) ) :
 			</div>
 
 			<?php if ( have_rows( 'ane_cs', 'option' ) ) : ?>
-			<ul class="text-box">
 				<div class="body-pilihan">
-					<h4><?php esc_html_e( 'Atau Chat langsung dengan Admin kami', 'makhadane' ); ?></h4>
+					<h4><?php esc_html_e( 'Atau chat langsung dengan admin', 'makhadane' ); ?></h4>
 				</div>
-
-				<?php
-				while ( have_rows( 'ane_cs', 'option' ) ) :
-					the_row();
-					$wa = get_sub_field( 'ane_whatsapp' );
-					?>
-					<li>
-						<?php
-						$image = get_sub_field( 'ane_image' );
-						$nama  = get_sub_field( 'ane_nama' );
-						$area  = get_sub_field( 'ane_area' );
-
-						if ( $image ) :
-							$size  = 'kotak';
-							$thumb = $image['sizes'][ $size ];
-							if ( ! empty( $thumb ) ) :
-								?>
-								<img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( $nama ); ?>">
-								<?php
-							endif;
-						endif;
+				<ul class="text-box">
+					<?php
+					while ( have_rows( 'ane_cs', 'option' ) ) :
+						the_row();
+						$makhadane_wa    = (string) get_sub_field( 'ane_whatsapp' );
+						$makhadane_image = get_sub_field( 'ane_image' );
+						$makhadane_nama  = (string) get_sub_field( 'ane_nama' );
+						$makhadane_area  = (string) get_sub_field( 'ane_area' );
+						$makhadane_thumb = ( is_array( $makhadane_image ) && ! empty( $makhadane_image['sizes']['kotak'] ) ) ? (string) $makhadane_image['sizes']['kotak'] : '';
 						?>
-						<a href="https://wa.me/<?php echo esc_attr( $wa ); ?>" target="_blank" rel="noopener noreferrer">
-							<span><?php echo esc_html( $nama ); ?></span><br/>
-							<?php echo esc_html( $area ); ?>
-						</a>
-					</li>
-				<?php endwhile; ?>
-			</ul>
+						<li>
+							<a class="floating-chat-agent" href="https://wa.me/<?php echo esc_attr( $makhadane_wa ); ?>" target="_blank" rel="noopener noreferrer">
+								<?php if ( '' !== $makhadane_thumb ) : ?>
+									<img src="<?php echo esc_url( $makhadane_thumb ); ?>" width="42" height="42" alt="<?php echo esc_attr( $makhadane_nama ); ?>" loading="lazy" decoding="async">
+								<?php endif; ?>
+								<span class="floating-chat-agent-info">
+									<strong><?php echo esc_html( $makhadane_nama ); ?></strong>
+									<?php if ( '' !== $makhadane_area ) : ?>
+										<span><?php echo esc_html( $makhadane_area ); ?></span>
+									<?php endif; ?>
+								</span>
+								<span class="floating-chat-agent-arrow" aria-hidden="true">
+									<?php echo wp_kses_post( makhadane_icon( 'chevron-right' ) ); ?>
+								</span>
+							</a>
+						</li>
+					<?php endwhile; ?>
+				</ul>
 			<?php endif; ?>
 		</div>
 	</div>
