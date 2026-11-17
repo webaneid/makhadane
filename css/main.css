@@ -445,7 +445,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--ane-warna-gelap);
   line-height: 1.223;
-  letter-spacing: -1.45px;
+  letter-spacing: -0.02em;
 }
 
 h1 {
