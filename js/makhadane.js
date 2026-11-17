@@ -241,8 +241,7 @@
 						nav: false,
 						autoplay: true,
 						autoplayTimeout: 7000,
-						animateOut: 'fadeOut',
-						animateIn: 'fadeIn',
+						smartSpeed: 700,
 						items: 1
 					});
 				applyOwlAriaLabels($bigSlider);
