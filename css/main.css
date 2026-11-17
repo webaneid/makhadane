@@ -2423,6 +2423,7 @@ select:after {
 .testimoni-slider .owl-nav button.owl-prev:hover,
 .testimoni-slider .owl-nav button.owl-next:hover {
   background: var(--ane-warna-gelap);
+  color: var(--ane-warna-putih);
   transform: translateY(-1px);
 }
 .testimoni-slider .owl-nav svg {
