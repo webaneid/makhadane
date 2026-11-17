@@ -2402,8 +2402,16 @@ select:after {
   .landing-page .home-cta .ane-calltoaction {
     padding-bottom: 32px;
   }
+  .cta-curve-mask {
+    overflow: hidden;
+  }
   .cta-curve-mask svg {
+    width: 210%;
+    min-width: 760px;
     height: 44px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .cta-glass-card {
     border-radius: 18px;
@@ -3334,9 +3342,21 @@ select:after {
     padding-top: 72px;
     padding-bottom: 72px;
   }
+  .ibt-curve-top,
+  .ibt-curve-bottom {
+    overflow: hidden;
+  }
   .ibt-curve-top svg,
   .ibt-curve-bottom svg {
+    width: 210%;
+    min-width: 760px;
     height: 44px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ibt-curve-top svg {
+    transform: translateX(-50%) scaleY(-1);
   }
 }
 .ibt-header.ane-text {
@@ -8702,8 +8722,16 @@ h2.widget-title.ane-title::after,
   .ane-footer {
     padding-bottom: 65px;
   }
+  .ane-footer .footer-curve-top {
+    overflow-x: hidden;
+  }
   .ane-footer .footer-curve-svg {
+    width: 210%;
+    min-width: 760px;
     height: 48px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) scaleY(-1);
   }
   .ane-footer .footer-scroll-top-btn {
     width: 48px;
