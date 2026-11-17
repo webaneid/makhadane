@@ -590,6 +590,14 @@
 			});
 		}
 
+		/* Footer Top Scroll-to-Top Button (.footer-scroll-top-btn) */
+		var footerScrollBtn = document.querySelector('.footer-scroll-top-btn');
+		if (footerScrollBtn) {
+			footerScrollBtn.addEventListener('click', function () {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		}
+
 		/* About Us Gallery Scroll Drift & Arrow Controls (.about-us) */
 		var aboutSection = document.querySelector('.about-us');
 		if (aboutSection) {

@@ -21,11 +21,23 @@ if ( $group && isset( $group['company_name'] ) ) {
 }
 ?>
 <footer id="footer" class="ane-footer">
+	<div class="footer-curve-top">
+		<svg class="footer-curve-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 76" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+			<path d="M 0 76 L 0 70 L 580 70 C 642 70 662 6 720 6 C 778 6 798 70 860 70 L 1440 70 L 1440 76 Z"></path>
+		</svg>
+		<button type="button" class="footer-scroll-top-btn" aria-label="<?php esc_attr_e( 'Kembali ke atas', 'makhadane' ); ?>">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+				<path d="M12 19V5"></path>
+				<path d="M6.5 10.5 12 5l5.5 5.5"></path>
+			</svg>
+		</button>
+	</div>
+
 	<h2 class="screen-reader-text"><?php esc_html_e( 'Informasi Situs', 'makhadane' ); ?></h2>
 	<div class="atas">
-		<div class="ane-container mplr">
-			<div class="ane-atas">
-				<div class="kiri">
+		<div class="ane-container footer-inner">
+			<div class="footer-brand-bar">
+				<div class="footer-brand-logo">
 					<?php
 					$logoimg = get_theme_mod( 'logo', get_template_directory_uri() . '/img/logo-makhadane.png' );
 					if ( has_custom_logo() ) {
@@ -35,7 +47,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 					}
 					?>
 				</div>
-				<div class="kanan">
+				<div class="footer-brand-social">
 					<?php
 					if ( function_exists( 'ane_sosial_media' ) ) {
 						ane_sosial_media();
@@ -43,44 +55,40 @@ if ( $group && isset( $group['company_name'] ) ) {
 					?>
 				</div>
 			</div>
-			<div class="ane-col-row">
-				<div class="ane-item">
-					<div class="isi">
-						<div class="footer-content">
-							<?php
-							if ( function_exists( 'ane_about_company' ) ) {
-								ane_about_company();
-							}
-							?>
-						</div>
-					</div>
-				</div>
 
-				<div class="ane-item">
-					<div class="isi-v2">
-						<h3><?php esc_html_e( 'Shortcut Links', 'makhadane' ); ?></h3>
+			<div class="footer-main-grid">
+				<div class="footer-about-card">
+					<div class="footer-content">
 						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'menufooter',
-								'container_id'   => 'footer-menu',
-								'container'      => 'div',
-								'fallback_cb'    => 'wp_page_menu',
-								'depth'          => 4,
-							)
-						);
-						?>
-					</div>
-				</div>
-				<div class="ane-item">
-					<div class="isi-v2">
-						<h3><?php esc_html_e( 'Contact Us', 'makhadane' ); ?></h3>
-						<?php
-						if ( function_exists( 'ane_contact_info' ) ) {
-							ane_contact_info();
+						if ( function_exists( 'ane_about_company' ) ) {
+							ane_about_company();
 						}
 						?>
 					</div>
+				</div>
+
+				<div class="footer-col">
+					<h3><?php esc_html_e( 'Shortcut Links', 'makhadane' ); ?></h3>
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menufooter',
+							'container_id'   => 'footer-menu',
+							'container'      => 'div',
+							'fallback_cb'    => 'wp_page_menu',
+							'depth'          => 4,
+						)
+					);
+					?>
+				</div>
+
+				<div class="footer-col">
+					<h3><?php esc_html_e( 'Contact Us', 'makhadane' ); ?></h3>
+					<?php
+					if ( function_exists( 'ane_contact_info' ) ) {
+						ane_contact_info();
+					}
+					?>
 				</div>
 			</div>
 		</div>
@@ -88,7 +96,7 @@ if ( $group && isset( $group['company_name'] ) ) {
 
 	<div class="bawah">
 		<div class="ane-container">
-			<div class="isi mplr">
+			<div class="footer-copy">
 				<?php
 				$copyright_year = function_exists( 'ane_get_copyright_year' ) ? ane_get_copyright_year() : '&copy; ' . gmdate( 'Y' );
 				$designed_by    = function_exists( 'ane_get_designed_by' ) ? ane_get_designed_by() : '';
