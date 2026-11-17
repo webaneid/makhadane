@@ -1,3 +1,9 @@
+## [4.3.1](https://github.com/webaneid/makhadane/compare/v4.3.0...v4.3.1) (2026-11-17)
+
+### Bug Fixes
+
+* **footer:** release updated Webane Indonesia footer attribution ([b75c64c](https://github.com/webaneid/makhadane/commit/b75c64c2b0203cc9f4fedd6761616464bed65347))
+
 ## [4.3.0](https://github.com/webaneid/makhadane/compare/v4.2.1...v4.3.0) (2026-11-17)
 
 ### Features
