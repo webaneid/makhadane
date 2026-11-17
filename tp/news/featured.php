@@ -1,6 +1,6 @@
 <?php
 /**
- * Featured News Layout Template Part
+ * Featured News Layout Template Part (1 Hero + 2 Sub-Featured + 5 Latest Digest)
  *
  * @package makhadane
  * @since 4.1.1
@@ -46,18 +46,67 @@ $makhadane_recent_posts = new WP_Query(
 ?>
 <section class="ane-news-featured ane-blog-section">
 	<div class="news-featured-grid">
-		<div class="news-featured-slider">
-			<?php if ( $makhadane_featured_posts->have_posts() ) : ?>
-				<div class="home-big-slider owl-carousel">
-					<?php
-					while ( $makhadane_featured_posts->have_posts() ) :
-						$makhadane_featured_posts->the_post();
-						get_template_part( 'tp/content', 'overlay' );
-					endwhile;
-					wp_reset_postdata();
+		<div class="news-featured-main">
+			<?php
+			if ( $makhadane_featured_posts->have_posts() ) :
+				$makhadane_f_idx = 0;
+				while ( $makhadane_featured_posts->have_posts() ) :
+					$makhadane_featured_posts->the_post();
+					++$makhadane_f_idx;
+					$makhadane_f_id    = get_the_ID();
+					$makhadane_f_title = get_the_title();
+					$makhadane_f_cats  = get_the_category( $makhadane_f_id );
+					$makhadane_f_cat   = ! empty( $makhadane_f_cats ) ? $makhadane_f_cats[0]->name : '';
+					$makhadane_f_img   = get_the_post_thumbnail_url( $makhadane_f_id, 1 === $makhadane_f_idx ? 'large' : 'medium_large' );
+					if ( ! $makhadane_f_img && function_exists( 'ane_dummy_thumbnail' ) ) {
+						$makhadane_f_img = ane_dummy_thumbnail();
+					}
+
+					if ( 1 === $makhadane_f_idx ) :
+						?>
+						<a class="news-featured-hero" href="<?php the_permalink(); ?>">
+							<?php if ( ! empty( $makhadane_f_img ) ) : ?>
+								<img src="<?php echo esc_url( (string) $makhadane_f_img ); ?>" alt="<?php echo esc_attr( $makhadane_f_title ); ?>" fetchpriority="high" decoding="async">
+							<?php endif; ?>
+							<div class="news-featured-hero-body">
+								<?php if ( '' !== $makhadane_f_cat ) : ?>
+									<span class="news-featured-hero-cat"><?php echo esc_html( $makhadane_f_cat ); ?></span>
+								<?php endif; ?>
+								<h2 class="news-featured-hero-title"><?php echo esc_html( $makhadane_f_title ); ?></h2>
+								<time class="news-featured-hero-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+									<?php echo esc_html( get_the_date() ); ?>
+								</time>
+							</div>
+						</a>
+						<div class="news-featured-subgrid">
+					<?php else : ?>
+						<a class="news-featured-subcard" href="<?php the_permalink(); ?>">
+							<div class="news-featured-submedia">
+								<?php if ( ! empty( $makhadane_f_img ) ) : ?>
+									<img src="<?php echo esc_url( (string) $makhadane_f_img ); ?>" alt="<?php echo esc_attr( $makhadane_f_title ); ?>" loading="lazy" decoding="async">
+								<?php endif; ?>
+							</div>
+							<div class="news-featured-subbody">
+								<?php if ( '' !== $makhadane_f_cat ) : ?>
+									<span class="news-featured-cat"><?php echo esc_html( $makhadane_f_cat ); ?></span>
+								<?php endif; ?>
+								<h3 class="news-featured-subtitle"><?php echo esc_html( $makhadane_f_title ); ?></h3>
+								<time class="news-featured-date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+									<?php echo esc_html( get_the_date() ); ?>
+								</time>
+							</div>
+						</a>
+						<?php
+					endif;
+				endwhile;
+				if ( $makhadane_f_idx >= 1 ) :
 					?>
-				</div>
-			<?php endif; ?>
+					</div>
+					<?php
+				endif;
+				wp_reset_postdata();
+			endif;
+			?>
 		</div>
 
 		<div class="news-featured-latest">
@@ -96,7 +145,7 @@ $makhadane_recent_posts = new WP_Query(
 								</div>
 								<?php if ( ! empty( $makhadane_thumb_url ) ) : ?>
 									<div class="news-featured-thumb">
-										<img src="<?php echo esc_url( (string) $makhadane_thumb_url ); ?>" width="72" height="72" alt="<?php echo esc_attr( $makhadane_post_title ); ?>" loading="lazy" decoding="async">
+										<img src="<?php echo esc_url( (string) $makhadane_thumb_url ); ?>" width="54" height="54" alt="<?php echo esc_attr( $makhadane_post_title ); ?>" loading="lazy" decoding="async">
 									</div>
 								<?php endif; ?>
 							</a>
