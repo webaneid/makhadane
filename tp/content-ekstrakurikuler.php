@@ -15,5 +15,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="post-content">
 		<?php ane_get_title(); ?>
 	</div>
-	</header>
 </article>
