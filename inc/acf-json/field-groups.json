@@ -2876,11 +2876,11 @@
                             },
                             {
                                 "key": "field_5e3ea4c68b486",
-                                "label": "Deskripsi",
+                                "label": "Tagline",
                                 "name": "ane_deskripsi",
                                 "aria-label": "",
                                 "type": "text",
-                                "instructions": "Keep Short, bro!",
+                                "instructions": "Tagline utama section (bisa gunakan <span>kata</span> untuk highlight warna tema).",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
@@ -2893,6 +2893,49 @@
                                 "prepend": "",
                                 "append": "",
                                 "maxlength": ""
+                            },
+                            {
+                                "key": "field_makhadane_testimoni_sub",
+                                "label": "Keterangan Singkat (Opsional)",
+                                "name": "ane_testimoni_sub",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "Teks kecil di bawah Tagline (opsional).",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "60",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_makhadane_testimoni_bg",
+                                "label": "Background Section",
+                                "name": "ane_testimoni_bg",
+                                "aria-label": "",
+                                "type": "button_group",
+                                "instructions": "Pilih warna background section: Terang atau Putih.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "40",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "terang": "Terang",
+                                    "white": "Putih"
+                                },
+                                "default_value": "terang",
+                                "return_format": "value",
+                                "allow_null": 0,
+                                "layout": "horizontal"
                             }
                         ],
                         "min": "",
