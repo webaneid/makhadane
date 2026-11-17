@@ -4092,6 +4092,15 @@ select:after {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   margin-bottom: 0;
   align-items: stretch;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.ane-page-blog .ane-news-sliding.news-sliding-modern .sliding-modern-hero .ane-konten-klasik:hover,
+.ane-page-blog .ane-news-sliding.news-sliding-modern .sliding-glass-card .ane-konten-klasik:hover {
+  transform: none;
+  box-shadow: none;
 }
 .ane-page-blog .ane-news-sliding.news-sliding-modern .sliding-modern-hero .ane-konten-klasik .entry-header {
   margin: 0;
@@ -4186,6 +4195,10 @@ select:after {
 }
 .ane-page-blog .ane-news-sliding.news-sliding-modern .sliding-glass-card .ane-konten-klasik {
   margin-bottom: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 .ane-page-blog .ane-news-sliding.news-sliding-modern .sliding-glass-card .ane-konten-klasik .entry-header {
   margin-bottom: 0;
@@ -4244,29 +4257,39 @@ select:after {
 .ane-page-blog .ane-news-classic {
   display: block;
   width: 100%;
-  height: auto;
-  margin-bottom: 80px;
+}
+.ane-page-blog .ane-news-classic .ane-col-atas {
+  margin-bottom: 18px;
 }
 .ane-page-blog .ane-news-classic .ane-col-atas .ane-konten-klasik {
-  margin-bottom: 20px;
+  margin-bottom: 0;
+}
+.ane-page-blog .ane-news-classic .ane-col-atas .ane-konten-klasik .post-content h2,
+.ane-page-blog .ane-news-classic .ane-col-atas .ane-konten-klasik .post-content h3 {
+  font-size: 1.2rem;
 }
 .ane-page-blog .ane-news-classic .ane-col-row {
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 .ane-page-blog .ane-news-classic .ane-col-row .ane-konten-klasik {
-  width: calc(50% - 10px);
-  margin-right: 20px;
-  margin-bottom: 20px;
+  width: 100%;
+  margin: 0;
 }
-.ane-page-blog .ane-news-classic .ane-col-row .ane-konten-klasik:nth-child(2n+2) {
-  margin-right: 0;
-}
-.ane-page-blog .ane-news-classic .ane-col-row .ane-konten-klasik h3 {
-  font-size: 20.81px;
-  letter-spacing: -0.3px;
-}
-.ane-page-blog .ane-news-classic .ane-col-row .ane-konten-klasik p {
+.ane-page-blog .ane-news-classic .ane-col-row .ane-konten-klasik .post-content p {
   display: none;
+}
+@media (max-width: 767px) {
+  .ane-page-blog .ane-news-classic {
+    padding: 0 15px;
+  }
+}
+@media (max-width: 640px) {
+  .ane-page-blog .ane-news-classic .ane-col-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 .ane-page-blog .ane-news-column {
   display: block;
@@ -5490,41 +5513,81 @@ select:after {
 }
 
 .ane-konten-klasik {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: auto;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
+  background: var(--ane-warna-putih);
+  border: 1px solid rgba(var(--ane-warna-gelap-rgb), 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(var(--ane-warna-gelap-rgb), 0.045);
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+.ane-konten-klasik:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--ane-warna-utama-rgb), 0.26);
+  box-shadow: 0 14px 32px rgba(var(--ane-warna-gelap-rgb), 0.09);
 }
 .ane-konten-klasik .entry-header {
-  margin-bottom: 21px;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: rgba(var(--ane-warna-gelap-rgb), 0.05);
 }
-.ane-konten-klasik .entry-header a {
+.ane-konten-klasik .entry-header a,
+.ane-konten-klasik .entry-header .ane-image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  margin: 0;
 }
 .ane-konten-klasik .entry-header img {
-  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.ane-konten-klasik:hover .entry-header img {
+  transform: scale(1.04);
 }
 .ane-konten-klasik .post-content {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: auto;
+  padding: 16px 18px 18px;
 }
 .ane-konten-klasik .post-content h3,
 .ane-konten-klasik .post-content h2 {
-  margin-bottom: 15px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.36;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
 }
 .ane-konten-klasik .post-content h3 a,
 .ane-konten-klasik .post-content h2 a {
-  color: var(--ane-warna-gelap-rgb);
+  color: var(--ane-warna-gelap);
+  transition: color 0.2s ease;
 }
 .ane-konten-klasik .post-content h3 a:hover,
-.ane-konten-klasik .post-content h2 a:hover {
+.ane-konten-klasik .post-content h2 a:hover,
+.ane-konten-klasik:hover .post-content h3 a,
+.ane-konten-klasik:hover .post-content h2 a {
   color: var(--ane-warna-utama);
 }
 .ane-konten-klasik .post-content p {
-  margin-top: 15px;
+  margin: 10px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(var(--ane-warna-text-rgb), 0.78);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .ane-konten-lis {

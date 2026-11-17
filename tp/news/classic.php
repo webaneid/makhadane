@@ -10,72 +10,69 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals, WordPress.WP.GlobalVariablesOverride.Prohibited, WordPress.WP.I18n.MissingTranslatorsComment, WordPress.Security.EscapeOutput.OutputNotEscaped
+$makhadane_homekategori  = get_sub_field( 'pilih_kategori' );
+$makhadane_judul         = trim( (string) get_sub_field( 'custom_title' ) );
+$makhadane_kategori_id   = ( is_object( $makhadane_homekategori ) && isset( $makhadane_homekategori->term_id ) ) ? (int) $makhadane_homekategori->term_id : 0;
+$makhadane_kategori_nama = ( is_object( $makhadane_homekategori ) && isset( $makhadane_homekategori->name ) ) ? (string) $makhadane_homekategori->name : '';
+$makhadane_kategori_url  = $makhadane_kategori_id ? (string) get_category_link( $makhadane_kategori_id ) : '#';
+$makhadane_heading       = '' !== $makhadane_judul ? $makhadane_judul : $makhadane_kategori_nama;
 
-$homekategori  = get_sub_field( 'pilih_kategori' );
-$judul         = get_sub_field( 'custom_title' );
-$kategori_id   = $homekategori->term_id ?? 0;
-$kategori_nama = esc_html( $homekategori->name ?? '' );
-$kategori_url  = $kategori_id ? esc_url( get_category_link( $kategori_id ) ) : '#';
-
-// Ambil 5 post sekaligus (1 utama + 4 berikutnya)
-$query = new WP_Query(
+$makhadane_query = new WP_Query(
 	array(
-		'post_type'      => 'post',
-		'cat'            => $kategori_id,
-		'posts_per_page' => 5,
-		'no_found_rows'  => true, // Optimasi query
+		'post_type'           => 'post',
+		'cat'                 => $makhadane_kategori_id,
+		'posts_per_page'      => 5,
+		'post_status'         => 'publish',
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
 	)
 );
 ?>
 <section class="ane-news-classic ane-blog-section">
-	<div class="ane-col-column">
+	<?php if ( '' !== $makhadane_heading ) : ?>
 		<div class="blog-section-head">
 			<div class="blog-section-title-wrap">
 				<span class="blog-section-marker" aria-hidden="true"></span>
 				<h2>
-					<a href="<?php echo $kategori_url; ?>" <?php echo ( $kategori_url !== '#' ) ? 'rel="noopener noreferrer"' : ''; ?>>
-						<?php echo esc_html( ! empty( $judul ) ? $judul : $kategori_nama ); ?>
+					<a href="<?php echo esc_url( $makhadane_kategori_url ); ?>"<?php echo ( '#' !== $makhadane_kategori_url ) ? ' rel="noopener noreferrer"' : ''; ?>>
+						<?php echo esc_html( $makhadane_heading ); ?>
 					</a>
 				</h2>
 			</div>
 			<span class="blog-section-line" aria-hidden="true"></span>
-			<a class="blog-section-more" href="<?php echo $kategori_url; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $kategori_nama ); ?>">
+			<a class="blog-section-more" href="<?php echo esc_url( $makhadane_kategori_url ); ?>" aria-label="<?php echo esc_attr( __( 'View All Posts in ', 'makhadane' ) . $makhadane_kategori_nama ); ?>">
 				<span><?php esc_html_e( 'Lihat Semua', 'makhadane' ); ?></span>
 				<span class="blog-section-more-icon" aria-hidden="true"><?php echo wp_kses_post( makhadane_icon( 'arrow-up-right' ) ); ?></span>
 			</a>
 		</div>
+	<?php endif; ?>
 
-		<?php if ( $query->have_posts() ) : ?>
-		<div class="ane-col-column">
-			<?php $counter = 0; ?>
-			<?php
-			while ( $query->have_posts() ) :
-				$query->the_post();
+	<?php if ( $makhadane_query->have_posts() ) : ?>
+		<?php
+		$makhadane_counter = 0;
+		while ( $makhadane_query->have_posts() ) :
+			$makhadane_query->the_post();
+			++$makhadane_counter;
+
+			if ( 1 === $makhadane_counter ) :
 				?>
-				<?php if ( $counter === 0 ) : ?>
-					<div class="ane-col-atas">
-						<?php get_template_part( 'tp/content', 'klasik' ); ?>
-					</div>
-				<?php else : ?>
-					<?php
-					if ( $counter === 1 ) {
-						echo '<div class="ane-col-row">';}
-					?>
-						<?php get_template_part( 'tp/content', 'klasik' ); ?>
-					<?php
-					if ( $counter === 4 ) {
-						echo '</div>';}
-					?>
+				<div class="ane-col-atas">
+					<?php get_template_part( 'tp/content', 'klasik' ); ?>
+				</div>
+				<?php if ( $makhadane_query->post_count > 1 ) : ?>
+					<div class="ane-col-row">
 				<?php endif; ?>
-				<?php ++$counter; ?>
-			<?php endwhile; ?>
-			<?php
-			if ( $counter > 1 ) {
-				echo '</div>';}
+			<?php else : ?>
+				<?php get_template_part( 'tp/content', 'klasik' ); ?>
+				<?php
+			endif;
+		endwhile;
+		if ( $makhadane_counter > 1 ) :
 			?>
-		</div>
-		<?php endif; ?>
-		
-		<?php wp_reset_postdata(); ?>
+			</div>
+			<?php
+		endif;
+		wp_reset_postdata();
+		?>
+	<?php endif; ?>
 </section>
