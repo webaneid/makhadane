@@ -43,6 +43,13 @@ if ( have_rows( 'ane_repeater' ) ) {
 }
 ?>
 <section class="image-below-text gp <?php echo esc_attr( $makhadane_bg_class ); ?>">
+	<?php if ( 'utama' === $makhadane_bg_class ) : ?>
+		<div class="ibt-curve-top" aria-hidden="true">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 76" preserveAspectRatio="none" focusable="false">
+				<path d="M 0 76 L 0 70 L 580 70 C 642 70 662 6 720 6 C 778 6 798 70 860 70 L 1440 70 L 1440 76 Z"></path>
+			</svg>
+		</div>
+	<?php endif; ?>
 	<div class="ane-container">
 		<?php if ( '' !== $makhadane_title || '' !== $makhadane_subtitle || '' !== $makhadane_desc ) : ?>
 			<div class="ibt-header ane-text">
@@ -105,4 +112,11 @@ if ( have_rows( 'ane_repeater' ) ) {
 			</div>
 		<?php endif; ?>
 	</div>
+	<?php if ( 'utama' === $makhadane_bg_class ) : ?>
+		<div class="ibt-curve-bottom" aria-hidden="true">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 76" preserveAspectRatio="none" focusable="false">
+				<path d="M 0 76 L 0 70 L 580 70 C 642 70 662 6 720 6 C 778 6 798 70 860 70 L 1440 70 L 1440 76 Z"></path>
+			</svg>
+		</div>
+	<?php endif; ?>
 </section>
