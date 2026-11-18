@@ -526,6 +526,12 @@ function ane_output_page_schema() {
 	// Get schema type from ACF field (default: WebPage)
 	$schema_type = get_field( 'ane_page_schema_type', $page_id ) ?: 'WebPage';
 
+	// Nilai meta tidak dijamin berasal dari dropdown ACF; validasi dengan whitelist saat output.
+	$allowed_schema_types = array( 'WebPage', 'AboutPage', 'ContactPage', 'FAQPage', 'ProfilePage', 'CollectionPage', 'ItemPage', 'SearchResultsPage' );
+	if ( ! is_string( $schema_type ) || ! in_array( $schema_type, $allowed_schema_types, true ) ) {
+		$schema_type = 'WebPage';
+	}
+
 	// Get page data
 	$title          = get_the_title();
 	$description    = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 55 );

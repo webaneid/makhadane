@@ -214,8 +214,18 @@ add_filter( 'themes_api', 'makhadane_updater_info', 20, 3 );
  * @return array<string, mixed>
  */
 function makhadane_updater_auth_header( $args, $url ) {
-	$is_api    = false !== strpos( $url, 'api.github.com/repos/' . MAKHADANE_UPDATER_REPO . '/' );
-	$is_github = false !== strpos( $url, 'github.com/' . MAKHADANE_UPDATER_REPO . '/' );
+	$parts  = wp_parse_url( $url );
+	$scheme = isset( $parts['scheme'] ) ? strtolower( (string) $parts['scheme'] ) : '';
+	$host   = isset( $parts['host'] ) ? strtolower( (string) $parts['host'] ) : '';
+	$path   = isset( $parts['path'] ) ? (string) $parts['path'] : '';
+
+	if ( 'https' !== $scheme ) {
+		return $args;
+	}
+
+	// Host harus persis api.github.com / github.com, bukan sekadar memuat string repo.
+	$is_api    = 'api.github.com' === $host && 0 === strpos( $path, '/repos/' . MAKHADANE_UPDATER_REPO . '/' );
+	$is_github = 'github.com' === $host && 0 === strpos( $path, '/' . MAKHADANE_UPDATER_REPO . '/' );
 
 	if ( ! $is_api && ! $is_github ) {
 		return $args;

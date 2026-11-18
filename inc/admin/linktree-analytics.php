@@ -91,6 +91,26 @@ function ane_linktree_analytics_assets( $hook ) {
 add_action( 'admin_enqueue_scripts', 'ane_linktree_analytics_assets' );
 
 /**
+ * Tambahkan SRI (integrity + crossorigin) pada Chart.js dari CDN.
+ *
+ * @param string $tag    Tag <script> hasil render.
+ * @param string $handle Handle script.
+ * @return string
+ */
+function makhadane_chartjs_sri( $tag, $handle ) {
+	if ( 'chart-js' !== $handle || false !== strpos( $tag, 'integrity=' ) ) {
+		return $tag;
+	}
+
+	return str_replace(
+		' src=',
+		' integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g" crossorigin="anonymous" src=',
+		$tag
+	);
+}
+add_filter( 'script_loader_tag', 'makhadane_chartjs_sri', 10, 2 );
+
+/**
  * Render Linktree Analytics dashboard page.
  */
 function ane_render_linktree_analytics_page() {

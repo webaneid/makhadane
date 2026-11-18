@@ -188,12 +188,32 @@ function ane_track_linktree_click() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'ane_linktree_clicks';
 
+	// Batasi laju per IP: nonce ikut ter-cache bersama halaman, jadi bukan proteksi utama.
+	$remote_ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	$rate_key   = 'makhadane_lt_rate_' . md5( $remote_ip );
+	$rate_count = (int) get_transient( $rate_key );
+	if ( $rate_count >= 30 ) {
+		wp_send_json_error( array( 'message' => 'Too many requests' ), 429 );
+	}
+	set_transient( $rate_key, $rate_count + 1, MINUTE_IN_SECONDS );
+
 	// Get data from AJAX request
-	$link_type  = isset( $_POST['link_type'] ) ? sanitize_text_field( wp_unslash( $_POST['link_type'] ) ) : '';
+	$link_type  = isset( $_POST['link_type'] ) ? sanitize_key( wp_unslash( $_POST['link_type'] ) ) : '';
 	$link_label = isset( $_POST['link_label'] ) ? sanitize_text_field( wp_unslash( $_POST['link_label'] ) ) : '';
 	$link_url   = isset( $_POST['link_url'] ) ? esc_url_raw( wp_unslash( $_POST['link_url'] ) ) : '';
 	$referrer   = isset( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
 	$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
+
+	// Whitelist jenis link (sesuai pilihan ACF `ane_jenislink` + fallback JS).
+	if ( ! in_array( $link_type, array( 'whatsapp', 'website', 'tiktok', 'telegram', 'custom' ), true ) ) {
+		wp_send_json_error( array( 'message' => 'Invalid link type' ), 400 );
+	}
+
+	// Potong sesuai panjang kolom tabel.
+	$link_label = mb_substr( $link_label, 0, 255 );
+	$link_url   = substr( $link_url, 0, 500 );
+	$referrer   = substr( $referrer, 0, 500 );
+	$user_agent = mb_substr( $user_agent, 0, 500 );
 
 	// Detect platform and device
 	$referrer_platform = ane_detect_referrer_platform( $referrer );

@@ -1817,15 +1817,35 @@ function ane_set_views( $post_id = 0 ) {
 
 	$ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 	$count_key  = 'musi_views';
-	$view_key   = 'viewed_' . $post_id . '_' . md5( $ip_address );
 
-	if ( false === get_transient( $view_key ) ) {
-		$count = (int) get_post_meta( $post_id, $count_key, true );
-		++$count;
-		update_post_meta( $post_id, $count_key, $count );
+	// Satu transient per IP (bukan per IP x post) agar tabel options tidak membengkak.
+	$view_key = 'makhadane_views_' . md5( $ip_address );
+	$seen     = get_transient( $view_key );
+	$seen     = is_array( $seen ) ? $seen : array();
+	$now      = time();
 
-		set_transient( $view_key, time(), HOUR_IN_SECONDS );
+	// Buang entri yang sudah lewat 1 jam.
+	foreach ( $seen as $seen_id => $seen_time ) {
+		if ( ( $now - (int) $seen_time ) >= HOUR_IN_SECONDS ) {
+			unset( $seen[ $seen_id ] );
+		}
 	}
+
+	if ( isset( $seen[ $post_id ] ) ) {
+		return;
+	}
+
+	$count = (int) get_post_meta( $post_id, $count_key, true );
+	++$count;
+	update_post_meta( $post_id, $count_key, $count );
+
+	// Batasi ukuran daftar per IP; yang tertua dibuang lebih dulu.
+	$seen[ $post_id ] = $now;
+	if ( count( $seen ) > 100 ) {
+		asort( $seen );
+		$seen = array_slice( $seen, -100, null, true );
+	}
+	set_transient( $view_key, $seen, HOUR_IN_SECONDS );
 }
 
 /**
