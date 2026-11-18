@@ -1213,12 +1213,12 @@
                 "selected": 0
             },
             {
-                "key": "field_66368d5fdf13e",
-                "label": "Google Tagmanager Hader",
-                "name": "ane_ga_header",
+                "key": "field_makhadane_trk_gsc",
+                "label": "Google Search Console Verification",
+                "name": "makhadane_gsc_verification",
                 "aria-label": "",
-                "type": "textarea",
-                "instructions": "Copy dan paste script untuk header dari google tag manager disini",
+                "type": "text",
+                "instructions": "Isi kode verifikasi \"HTML tag\" dari Google Search Console — boleh kodenya saja atau seluruh tag <meta>. Theme mencetaknya otomatis di <head>. Dapatkan di https://search.google.com/search-console",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1228,17 +1228,18 @@
                 },
                 "default_value": "",
                 "maxlength": "",
-                "rows": "",
-                "placeholder": "<!-- Google Tag Manager -->         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);         })(window,document,'script','dataLayer','GTM-CONTOHSAJA');</script>     <!-- End Google Tag Manager -->",
-                "new_lines": ""
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: abc123XYZ_kode_verifikasi",
+                "prepend": "",
+                "append": ""
             },
             {
-                "key": "field_66368f5dadc0c",
-                "label": "Google Tagmanager Footer",
-                "name": "ane_ga_footer",
+                "key": "field_makhadane_trk_gtm",
+                "label": "Google Tag Manager (Container ID)",
+                "name": "makhadane_gtm_id",
                 "aria-label": "",
-                "type": "textarea",
-                "instructions": "Copas bagian footer isi dari google tag manager",
+                "type": "text",
+                "instructions": "Isi Container ID (diawali GTM-). Theme otomatis memasang skrip GTM di <head> dan <noscript> tepat setelah <body>. Jangan tempel snippet mentah.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1248,17 +1249,18 @@
                 },
                 "default_value": "",
                 "maxlength": "",
-                "rows": "",
-                "placeholder": "<!-- Google Tag Manager (noscript) --> <noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-EDITDISINI\" height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->",
-                "new_lines": ""
+                "allow_in_bindings": 0,
+                "placeholder": "GTM-XXXXXXX",
+                "prepend": "",
+                "append": ""
             },
             {
-                "key": "field_66369105b14a8",
-                "label": "Google Search Console Meta",
-                "name": "ane_sc_header",
+                "key": "field_makhadane_trk_ga4",
+                "label": "Google Analytics 4 (Measurement ID)",
+                "name": "makhadane_ga4_id",
                 "aria-label": "",
-                "type": "textarea",
-                "instructions": "copy dan paste google site verification meta name: dapatkan melalui:\r\nhttps://search.google.com/search-console",
+                "type": "text",
+                "instructions": "Isi Measurement ID (diawali G-). Kosongkan bila Analytics sudah dipasang lewat Google Tag Manager agar tidak terhitung dua kali.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1268,9 +1270,91 @@
                 },
                 "default_value": "",
                 "maxlength": "",
-                "rows": "",
-                "placeholder": "<meta name=\"google-site-verification\" content=\"B1J8HfzndaR9br_GkUXi1Q5fLbjH6hqrLDk4RO_AKTI\" />",
-                "new_lines": ""
+                "allow_in_bindings": 0,
+                "placeholder": "G-XXXXXXXXXX",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_makhadane_trk_tab_yandex",
+                "label": "Yandex & Bing",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0,
+                "selected": 0
+            },
+            {
+                "key": "field_makhadane_trk_yandex_verify",
+                "label": "Yandex Webmaster Verification",
+                "name": "makhadane_yandex_verification",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Isi kode verifikasi dari Yandex Webmaster — boleh kodenya saja atau seluruh tag <meta name=\"yandex-verification\">.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: 1fa477a7ff934bf1",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_makhadane_trk_yandex_metrica",
+                "label": "Yandex Metrica (Counter ID)",
+                "name": "makhadane_yandex_metrica_id",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Isi nomor counter Yandex Metrica (angka). Rekaman sesi (Webvisor) tidak diaktifkan demi privasi dan performa.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: 12345678",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_makhadane_trk_bing",
+                "label": "Bing Webmaster Verification",
+                "name": "makhadane_bing_verification",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Opsional. Kode verifikasi dari Bing Webmaster Tools (msvalidate.01) — boleh kodenya saja atau seluruh tag <meta>.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: 1234567890ABCDEF",
+                "prepend": "",
+                "append": ""
             },
             {
                 "key": "field_66369fc5957d6",
@@ -1291,12 +1375,12 @@
                 "selected": 0
             },
             {
-                "key": "field_66369fd3957d7",
-                "label": "Meta Pixel Script",
-                "name": "ane_metapixel_header",
+                "key": "field_makhadane_trk_fb_pixel",
+                "label": "Meta / Facebook Pixel ID",
+                "name": "makhadane_fb_pixel_id",
                 "aria-label": "",
-                "type": "textarea",
-                "instructions": "",
+                "type": "text",
+                "instructions": "Isi deretan angka Pixel ID untuk melacak konversi iklan Meta.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1306,16 +1390,38 @@
                 },
                 "default_value": "",
                 "maxlength": "",
-                "rows": "",
-                "placeholder": "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1515151515151515158'); fbq('track', 'PageView'); </script> <noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=1515151515151515158&ev=PageView&noscript=1\" /></noscript> <!-- End Meta Pixel Code -->",
-                "new_lines": ""
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: 123456789012345",
+                "prepend": "",
+                "append": ""
             },
             {
-                "key": "field_6636a5a4bc2cf",
-                "label": "Meta SDK Script",
-                "name": "ane_metasdk_body",
+                "key": "field_makhadane_trk_fb_domain",
+                "label": "Meta / Facebook Domain Verification",
+                "name": "makhadane_fb_domain_verify",
                 "aria-label": "",
-                "type": "textarea",
+                "type": "text",
+                "instructions": "Opsional. Kode verifikasi domain dari Meta Business Suite — boleh kodenya saja atau seluruh tag <meta name=\"facebook-domain-verification\">.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: abc123xyz...",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_makhadane_trk_tab_tiktok",
+                "label": "TikTok",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1324,11 +1430,30 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "<script>\r\n  window.fbAsyncInit = function() {\r\n    FB.init({\r\n      appId      : '352619118625171',\r\n      xfbml      : true,\r\n      version    : 'v19.0'\r\n    });\r\n    FB.AppEvents.logPageView();\r\n  };\r\n\r\n  (function(d, s, id){\r\n     var js, fjs = d.getElementsByTagName(s)[0];\r\n     if (d.getElementById(id)) {return;}\r\n     js = d.createElement(s); js.id = id;\r\n     js.src = \"https://connect.facebook.net/en_US/sdk.js\";\r\n     fjs.parentNode.insertBefore(js, fjs);\r\n   }(document, 'script', 'facebook-jssdk'));\r\n</script>",
+                "placement": "top",
+                "endpoint": 0,
+                "selected": 0
+            },
+            {
+                "key": "field_makhadane_trk_tiktok",
+                "label": "TikTok Pixel ID",
+                "name": "makhadane_tiktok_pixel_id",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Opsional. Isi TikTok Pixel ID bila menjalankan iklan di TikTok Ads.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
                 "maxlength": "",
-                "rows": "",
-                "placeholder": "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1515151515151515158'); fbq('track', 'PageView'); </script> <noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=1515151515151515158&ev=PageView&noscript=1\" /></noscript> <!-- End Meta Pixel Code -->",
-                "new_lines": ""
+                "allow_in_bindings": 0,
+                "placeholder": "Contoh: CXXXXXXXXXXXXXXXXXXX",
+                "prepend": "",
+                "append": ""
             }
         ],
         "location": [
@@ -1349,7 +1474,8 @@
         "active": true,
         "description": "",
         "show_in_rest": 0,
-        "display_title": ""
+        "display_title": "",
+        "modified": 0
     },
     {
         "key": "group_5e3ea26047ae8",

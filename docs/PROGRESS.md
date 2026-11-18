@@ -17,3 +17,4 @@
 | 09 | Audit, pembersihan dead CSS (`0 dead CSS rules`), & penghapusan folder `scss/` | Done | `phases/phase-09-pembersihan-dan-deduplikasi-css.md` |
 | 10 | Bundling & importer ACF JSON (`inc/acf-importer.php`) + verifikasi `composer dist:check` | Done | `phases/phase-10-acf-json-importer.md` |
 | 11 | Penerapan Standar `webane-pagespeed-cwv` (Preload LCP, Zero-CLS Slider, Async CSS, Defer JS, & Aksesibilitas 100) | Done | `phases/phase-11-standar-pagespeed-cwv.md` |
+| 12 | Tracking berbasis ID (GTM/GA4/Pixel/verifikasi) menggantikan script mentah di `ane-general-setting` + migrasi sekali jalan | Done | `phases/phase-12-tracking-berbasis-id.md` |

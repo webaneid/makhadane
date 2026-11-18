@@ -178,10 +178,10 @@
 - **Masalah:** Di balik Cloudflare/reverse proxy, `REMOTE_ADDR` adalah IP proxy: semua pengunjung berbagi satu jatah dedupe view (1×/jam/post) dan satu jatah rate limit Linktree (30/menit).
 - **Catatan:** `X-Forwarded-For` / `CF-Connecting-IP` **tidak** dipakai karena bisa dipalsukan. Solusi yang aman butuh daftar proxy tepercaya (mis. konstanta di `wp-config.php`) → putuskan lewat ADR sebelum dikerjakan.
 
-### GAP-29 — 🔵 Info: Field Tracking Scripts Melewati `unfiltered_html` di Multisite — ⏳ Open
-- **Lokasi:** [inc/tracking-scripts.php](inc/tracking-scripts.php); field `ane_ga_header`, `ane_ga_footer`, `ane_sc_header`, `ane_metapixel_header`, `ane_metasdk_body` (halaman `ane-general-setting`, capability `manage_options`).
-- **Masalah:** Output sengaja mentah (kode GTM/Pixel). Di instalasi tunggal ini aman. Di **multisite**, admin per-situs tidak punya `unfiltered_html` namun tetap bisa menyuntik JS lewat field ini.
-- **Catatan:** Hanya relevan bila ada pelanggan multisite. Perbaikan: batasi output/simpan bila `current_user_can( 'unfiltered_html' )`.
+### GAP-29 — 🟠 Medium: Field Tracking Scripts Dicetak Mentah (Stored XSS via Option) — ✅ Fixed (Fase 12)
+- **Lokasi:** [inc/tracking-scripts.php](inc/tracking-scripts.php); field lama `ane_ga_header`, `ane_ga_footer`, `ane_sc_header`, `ane_metapixel_header`, `ane_metasdk_body` (halaman `ane-general-setting`).
+- **Masalah:** Textarea berisi script mentah dicetak ke seluruh halaman publik; admin yang disusupi (atau multisite tanpa `unfiltered_html`) bisa menyuntik JS arbitrer. `ane_metasdk_body` juga membawa `default_value` App ID Facebook tertanam.
+- **Status Fix (Fase 12, ADR-0005):** Diganti isian ID/kode saja (regex ketat, sanitasi saat simpan & baca), snippet resmi dicetak hanya bila terisi. Isian lama dimigrasi sekali ke ID lalu dihapus.
 
 ### GAP-30 — 🟡 Medium: Baseline `composer lint` Masih Merah — ⏳ Open
 - **Lokasi:** 31 file, antara lain [inc/seo.php](inc/seo.php) (41 error + 1 warning: fungsi tanpa prefix `makhadane_`), `category.php`, `taxonomy-pelajaran.php`, `tp/content-page.php`, `tp/section/content.php`, `tp/mobile/kategori.php`.
