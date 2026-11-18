@@ -141,3 +141,49 @@
 ### GAP-22 — 🔵 Low: Format Kode Belum Sesuai WPCS — ✅ Fixed (Fase 04)
 - **Lokasi:** Seluruh codebase PHP.
 - **Status Fix (Fase 04):** Dijalankan `composer lint:fix` (`phpcbf`) yang memperbaiki 2.537 pelanggaran format WPCS pada 64 file PHP secara otomatis.
+
+---
+
+## E. Audit Security 2026-11-19
+
+> Audit manual atas seluruh `*.php` (superglobal, AJAX, `$wpdb`, updater,
+> output escaping, tracking scripts). Perbaikan dikerjakan dalam satu commit
+> `fix(security): …`.
+
+### GAP-23 — 🟡 Medium: Token GitHub Updater Bisa Terkirim ke Host Lain — ✅ Fixed
+- **Lokasi:** [inc/updater.php](inc/updater.php) (`makhadane_updater_auth_header()`)
+- **Masalah:** Filter `http_request_args` mencocokkan URL dengan `strpos()`, sehingga URL apa pun yang *memuat* `github.com/webaneid/makhadane/` (mis. `https://evil.tld/?x=github.com/webaneid/makhadane/`) ikut dikirimi header `Authorization`.
+- **Status Fix:** URL di-parse dengan `wp_parse_url()`; token hanya dikirim bila skema `https`, host persis `api.github.com` / `github.com`, dan path diawali repo yang dikonfigurasi.
+
+### GAP-24 — 🟠 Low-Medium: AJAX Publik Klik Linktree Tanpa Whitelist & Batas — ✅ Fixed
+- **Lokasi:** [inc/admin/linktree-core.php](inc/admin/linktree-core.php) (`ane_track_linktree_click()`)
+- **Masalah:** Handler `nopriv` menulis ke DB tiap request; nonce ikut ter-cache bersama halaman sehingga bot bisa membanjiri tabel. `link_type` tidak di-whitelist dan panjang field tidak dibatasi.
+- **Status Fix:** Whitelist `link_type` (`whatsapp`, `website`, `tiktok`, `telegram`, `custom`), field dipotong sesuai panjang kolom, rate limit 30 request/menit per IP (transient `makhadane_lt_rate_*`).
+
+### GAP-25 — 🔵 Low: Chart.js dari CDN Tanpa SRI — ✅ Fixed
+- **Lokasi:** [inc/admin/linktree-analytics.php](inc/admin/linktree-analytics.php)
+- **Status Fix:** Filter `script_loader_tag` menambahkan `integrity` (SHA-384) + `crossorigin="anonymous"` untuk `chart.js@4.4.0`. **Saat versi Chart.js dinaikkan, hash wajib dihitung ulang.**
+
+### GAP-26 — 🔵 Low: View Counter Membuat 1 Transient per IP × Post — ✅ Fixed
+- **Lokasi:** [inc/makhadane.php](inc/makhadane.php) (`ane_set_views()`)
+- **Status Fix:** Satu transient per IP (`makhadane_views_*`) berisi daftar `post_id => waktu`, entri kedaluwarsa dibuang, maksimum 100 entri per IP.
+
+### GAP-27 — 🔵 Low: `$schema_type` Dicetak ke Komentar HTML Tanpa Validasi — ✅ Fixed
+- **Lokasi:** [inc/seo.php](inc/seo.php) (`ane_output_page_schema()`)
+- **Masalah:** Nilai meta bisa ditulis di luar dropdown ACF (Custom Fields, XML-RPC); nilai berisi `-->` keluar dari komentar HTML → stored XSS oleh user setingkat editor.
+- **Status Fix:** Nilai dicocokkan dengan whitelist 8 tipe schema, fallback `WebPage`.
+
+### GAP-28 — 🔵 Low: `REMOTE_ADDR` di Belakang Proxy/CDN — ⏳ Open
+- **Lokasi:** `ane_set_views()` ([inc/makhadane.php](inc/makhadane.php)), `ane_track_linktree_click()` ([inc/admin/linktree-core.php](inc/admin/linktree-core.php))
+- **Masalah:** Di balik Cloudflare/reverse proxy, `REMOTE_ADDR` adalah IP proxy: semua pengunjung berbagi satu jatah dedupe view (1×/jam/post) dan satu jatah rate limit Linktree (30/menit).
+- **Catatan:** `X-Forwarded-For` / `CF-Connecting-IP` **tidak** dipakai karena bisa dipalsukan. Solusi yang aman butuh daftar proxy tepercaya (mis. konstanta di `wp-config.php`) → putuskan lewat ADR sebelum dikerjakan.
+
+### GAP-29 — 🔵 Info: Field Tracking Scripts Melewati `unfiltered_html` di Multisite — ⏳ Open
+- **Lokasi:** [inc/tracking-scripts.php](inc/tracking-scripts.php); field `ane_ga_header`, `ane_ga_footer`, `ane_sc_header`, `ane_metapixel_header`, `ane_metasdk_body` (halaman `ane-general-setting`, capability `manage_options`).
+- **Masalah:** Output sengaja mentah (kode GTM/Pixel). Di instalasi tunggal ini aman. Di **multisite**, admin per-situs tidak punya `unfiltered_html` namun tetap bisa menyuntik JS lewat field ini.
+- **Catatan:** Hanya relevan bila ada pelanggan multisite. Perbaikan: batasi output/simpan bila `current_user_can( 'unfiltered_html' )`.
+
+### GAP-30 — 🟡 Medium: Baseline `composer lint` Masih Merah — ⏳ Open
+- **Lokasi:** 31 file, antara lain [inc/seo.php](inc/seo.php) (41 error + 1 warning: fungsi tanpa prefix `makhadane_`), `category.php`, `taxonomy-pelajaran.php`, `tp/content-page.php`, `tp/section/content.php`, `tp/mobile/kategori.php`.
+- **Masalah:** Pelanggaran lama yang belum tercatat di baseline PHPCS; jumlah di `inc/seo.php` sama sebelum dan sesudah audit ini (tidak ada pelanggaran baru dari perubahan audit).
+- **Catatan:** Kerjakan per file saat file tersebut disentuh, atau jadikan fase tersendiri.
