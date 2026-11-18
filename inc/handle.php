@@ -1,6 +1,6 @@
 <?php
 /**
- * Comment and script handling utilities.
+ * Script handling utilities (komentar: lihat inc/comments-control.php).
  *
  * @package makhadane
  */
@@ -8,18 +8,6 @@
 defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals
-
-/**
- * Disable comment support in admin for posts and pages.
- *
- * @return void
- */
-function codesnippets_disable_comments() {
-	remove_post_type_support( 'post', 'comments' );
-	remove_post_type_support( 'page', 'comments' );
-	remove_menu_page( 'edit-comments.php' );
-}
-add_action( 'admin_init', 'codesnippets_disable_comments' );
 
 /**
  * Dequeue unused jQuery UI core style on front-end.

@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-11-19 — Spam Komentar Judol Walau Menu Komentar "Dimatikan"
+**Masalah:** Situs pelanggan tetap menerima spam komentar (judi online) padahal menu Komentar tidak terlihat dan theme tidak menampilkan form komentar.
+**Root cause:** `codesnippets_disable_comments` hanya menyembunyikan menu & dukungan editor di wp-admin. Status `comment_status = open` pada post tetap, sehingga `wp-comments-post.php`, REST API, XML-RPC, dan trackback tetap menerima komentar dari bot tanpa membuka halaman situs.
+**Fix:** Saklar ACF `makhadane_disable_comments` (default dimatikan) di `inc/comments-control.php` yang menutup semua jalur pengiriman (lihat ADR-0006).
+**Pencegahan:** "Menyembunyikan UI" bukan "menonaktifkan fitur". Untuk fitur yang bisa diserang, tutup di sisi server (filter `comments_open`/`pings_open`, blokir endpoint) dan uji dengan permintaan langsung (`curl` ke `wp-comments-post.php`, REST, XML-RPC), bukan hanya lewat tampilan.
+
+---
+
 ## 2026-11-19 — Audit Security Theme: Token Updater, AJAX Publik, SRI, Schema Output
 **Masalah:** Audit manual menemukan lima celah kecil–menengah: (1) token GitHub updater bisa terkirim ke host non-GitHub; (2) AJAX `nopriv` klik Linktree menulis ke DB tanpa whitelist/batas laju; (3) Chart.js dimuat dari CDN tanpa SRI; (4) dedupe view membuat 1 transient per IP × post; (5) `$schema_type` dari post meta dicetak ke komentar HTML tanpa validasi (bisa keluar komentar dengan `-->`).
 **Root cause:** (1) host URL dicocokkan dengan `strpos()` pada seluruh string URL, bukan di-parse; (2) nonce publik ikut ter-cache sehingga tidak bisa jadi proteksi, dan tidak ada validasi nilai; (3) aset CDN admin tidak melewati aturan §7 security; (4) key transient mengandung post ID; (5) mengira nilai meta pasti berasal dari dropdown ACF.

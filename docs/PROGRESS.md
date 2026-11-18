@@ -19,3 +19,4 @@
 | 11 | Penerapan Standar `webane-pagespeed-cwv` (Preload LCP, Zero-CLS Slider, Async CSS, Defer JS, & Aksesibilitas 100) | Done | `phases/phase-11-standar-pagespeed-cwv.md` |
 | 12 | Tracking berbasis ID (GTM/GA4/Pixel/verifikasi) menggantikan script mentah di `ane-general-setting` + migrasi sekali jalan | Done | `phases/phase-12-tracking-berbasis-id.md` |
 | 13 | Admin: header bawaan WP (hapus bar kustom, tombol New Post/Page, panel mobile) + icon outline untuk menu CPT | Done | `phases/phase-13-admin-header-dan-icon.md` |
+| 14 | Saklar "Matikan Komentar WordPress" total (form, REST, XML-RPC, trackback, feed, menu admin) | Done | `phases/phase-14-matikan-komentar.md` |
