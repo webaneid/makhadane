@@ -1,3 +1,10 @@
+## [4.4.0](https://github.com/webaneid/makhadane/compare/v4.3.2...v4.4.0) (2026-11-18)
+
+### Features
+
+* **comments:** add switch to disable WordPress comments entirely ([882bb27](https://github.com/webaneid/makhadane/commit/882bb27f541265b36e93fa42b5933b02570169b7))
+* **tracking:** replace raw script fields with ID-based integrations ([3df01bd](https://github.com/webaneid/makhadane/commit/3df01bd927248cf9593d16759bca0b885982e9f3))
+
 ## [4.3.2](https://github.com/webaneid/makhadane/compare/v4.3.1...v4.3.2) (2026-11-18)
 
 ### Bug Fixes
