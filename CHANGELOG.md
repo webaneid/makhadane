@@ -1,3 +1,9 @@
+## [4.3.2](https://github.com/webaneid/makhadane/compare/v4.3.1...v4.3.2) (2026-11-18)
+
+### Bug Fixes
+
+* **security:** harden updater, linktree tracking, view counter, and schema output ([aed7700](https://github.com/webaneid/makhadane/commit/aed7700337ddd1400fd8cf747c76f3d79c113cba))
+
 ## [4.3.1](https://github.com/webaneid/makhadane/compare/v4.3.0...v4.3.1) (2026-11-17)
 
 ### Bug Fixes
