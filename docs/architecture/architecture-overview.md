@@ -63,7 +63,7 @@ Indonesia.
 | `inc/admin/design-tokens.php` | Injeksi CSS variables `--ane-*` di `admin_head` dan enqueue `js/admin-animations.js`. |
 | `inc/admin/facebook-comments.php` | SDK Facebook Comments, field group lokal `group_ane_facebook_comments` (masih ber-text domain `'elemenane'`), dan `ane_load_facebook_comment()`. |
 | `inc/admin/footer-mobile-menu.php` | Bottom navigation bar di wp-admin mobile (`≤782px`). |
-| `inc/admin/header.php` | Enqueue `js/admin-header.js` dan kustomisasi admin bar. |
+| `inc/admin/header.php` | Admin bar memakai tampilan bawaan WP; hanya menyembunyikan admin bar di frontend untuk non-admin. |
 | `inc/admin/linktree-core.php` | Pembuatan tabel kustom `{$wpdb->prefix}ane_linktree_clicks` (di `admin_init` & `after_switch_theme`), endpoint AJAX `ane_track_linktree_click`, dan enqueue `js/linktree-tracking.js`. |
 | `inc/admin/linktree-analytics.php` | Submenu `ane-linktree-analytics` di bawah `ane-setup` untuk laporan klik Linktree. |
 | `inc/admin/menu.php` | Enqueue `js/admin-menu.js` dan urutan menu admin. |
@@ -134,4 +134,4 @@ Indonesia.
 ## 5. Aset Front-End & Admin (`css/`, `js/`, `scss/`, `fonts/`)
 - **CSS Front-End (`ane_load_css_and_js`):** `css/FontAne.css` (+ `fonts/FontAne.*` 256 KB), Google Fonts `Poppins`, Magnific Popup 1.1.0 (CDN, dimuat di semua halaman), OwlCarousel 2.2.1 CSS (CDN), dan `css/main.min.css` (versi hardcoded `'4.1.1'`).
 - **JS Front-End:** OwlCarousel 2.3.4 JS (CDN — versi tidak sinkron dengan CSS 2.2.1), Magnific Popup 1.1.0 JS (CDN), `js/makhadane.js`, `js/postviews-cache.js` (single post), `js/linktree-tracking.js` (halaman linktree), serta Google Maps JS API (dimuat di semua halaman dari `inc/acf.php`).
-- **CSS & JS Admin:** `css/admin.min.css` (121 KB), `js/admin-animations.js`, `js/admin-dashboard.js`, `js/admin-header.js`, `js/admin-linktree-analytics.js`, `js/admin-menu.js`, `js/admin-user.js`.
+- **CSS & JS Admin:** `css/admin.min.css` (~104 KB), `js/admin-animations.js`, `js/admin-dashboard.js`, `js/admin-linktree-analytics.js`, `js/admin-menu.js`, `js/admin-user.js`.
